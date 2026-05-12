@@ -54,9 +54,19 @@
     "currenciesAccepted": "COP",
     "paymentAccepted": "Cash, Credit Card",
     "openingHoursSpecification": [
-      {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday"], "opens": "18:00", "closes": "01:00"},
-      {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "18:00", "closes": "02:00"},
-      {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "17:00", "closes": "00:00"}
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday"],
+        "opens": "16:00",
+        "closes": "02:00",
+        "description": "Yakitori bar (Zona 1) only"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "16:00",
+        "closes": "02:00"
+      }
     ],
     "image": "https://el-sanatorio.com/images/og-image.jpg",
     "sameAs": ["https://www.instagram.com/elsanatorio.sm/"]
@@ -151,17 +161,17 @@
           <h3 class="hours-heading" style="margin-bottom: 1rem;">Horario de Atención</h3>
           <table class="hours-table" aria-label="Horarios de apertura">
             <tbody>
-              <tr class="closed"><td>Lunes</td><td>Cerrado / Closed</td></tr>
-              <tr class="closed"><td>Martes</td><td>Cerrado / Closed</td></tr>
-              <tr><td>Miércoles</td><td>6:00 PM – 1:00 AM</td></tr>
-              <tr><td>Jueves</td><td>6:00 PM – 1:00 AM</td></tr>
-              <tr class="highlight"><td>Viernes</td><td>6:00 PM – 2:00 AM</td></tr>
-              <tr class="highlight"><td>Sábado</td><td>6:00 PM – 2:00 AM</td></tr>
-              <tr><td>Domingo</td><td>5:00 PM – 12:00 AM</td></tr>
+              <tr><td>Lunes</td><td>Zona 1 solo · 4:00 PM – 2:00 AM</td></tr>
+              <tr><td>Martes</td><td>Zona 1 solo · 4:00 PM – 2:00 AM</td></tr>
+              <tr><td>Miércoles</td><td>4:00 PM – 2:00 AM · Todas las zonas</td></tr>
+              <tr><td>Jueves</td><td>4:00 PM – 2:00 AM · Todas las zonas</td></tr>
+              <tr class="highlight"><td>Viernes</td><td>4:00 PM – 2:00 AM · Todas las zonas</td></tr>
+              <tr class="highlight"><td>Sábado</td><td>4:00 PM – 2:00 AM · Todas las zonas</td></tr>
+              <tr><td>Domingo</td><td>4:00 PM – 2:00 AM · Todas las zonas</td></tr>
             </tbody>
           </table>
           <p class="mono" style="font-size: 0.72rem; color: var(--light-gray); margin-top: 1rem; letter-spacing: 0.08em;">
-            El laberinto: Miércoles – Domingo · Turnos: 7 PM / 8:30 PM / 10 PM<br>
+            Paciente 013 (horror): Miércoles – Domingo · Reservas por WhatsApp<br>
             Reservas recomendadas para fines de semana.
           </p>
         </div>
