@@ -20,3 +20,9 @@ npm-debug.log*
 
 # Claude Code worktrees (contain .git files pointing to local paths)
 .claude/
+
+# Internal audit/strategy docs — never deploy (publish dir = repo root)
+AUDIT*.md
+DEEP-AUDIT*.md
+SITE-AUDIT*.md
+FINAL-AUDIT*.md
