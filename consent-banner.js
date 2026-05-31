@@ -261,7 +261,7 @@
     var btnSave = document.createElement('button'); btnSave.className = 'mcb-btn mcb-btn-save'; btnSave.id = 'mcb-save-custom'; btnSave.type = 'button'; btnSave.textContent = 'Guardar preferencias';
     panel.appendChild(btnSave);
     var footerNote = document.createElement('p'); footerNote.className = 'mcb-footer-note';
-    footerNote.innerHTML = 'EL SANATORIO S.A.S. \u2014 NIT 901.862.977-7 \u2014 Calle 24 #3-99, Edificio Banco de Bogot\u00e1, Suite 1102, Level 11, Santa Marta, Magdalena, Colombia. Puedes cambiar tus preferencias en cualquier momento desde el pie de p\u00e1gina.';
+    footerNote.innerHTML = 'EL SANATORIO S.A.S. \u2014 NIT 901.862.977-7 \u2014 Calle 19 #4-23, Centro Hist\u00f3rico, Santa Marta, Magdalena, Colombia. Puedes cambiar tus preferencias en cualquier momento desde el pie de p\u00e1gina.';
     banner.appendChild(header); banner.appendChild(body); banner.appendChild(actions); banner.appendChild(panel); banner.appendChild(footerNote);
     overlay.appendChild(banner); document.body.appendChild(overlay);
   }
