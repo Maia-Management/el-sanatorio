@@ -1,0 +1,122 @@
+/**
+ * El Sanatorio — Cohesion v2 design tokens (CSS shim)
+ * Compiled from el-sanatorio-tokens.json + design-tokens-shared.json via
+ * tools/tokens-to-css.mjs on 2026-05-31.
+ *
+ * Vocab layer: C
+ * Family: Food Trio
+ * Domain: el-sanatorio.co
+ *
+ * STANDING RULES:
+ *  - §0.2 absolute (no AI / IA / bot / chatbot / robot / agent / agentic / agentes customer-facing)
+ *  - Wompi only customer-facing
+ *  - WhatsApp wa.me/19034598763 only customer-facing
+ *  - NIT 902.051.563-5 · Calle 19 #4-23 NAP · hours 4pm-2am
+ *
+ * STRATEGY:
+ *  Load this stylesheet BEFORE style.css. The :root block defines
+ *  Cohesion v2 canonical tokens. The back-compat alias block at the
+ *  bottom remaps existing style.css variable names onto the new
+ *  canonical values so 200+ downstream rules continue to work
+ *  without edits. The existing dark "hospital" cyberpunk aesthetic
+ *  is preserved because style.css re-declares its variables AFTER
+ *  this file in the cascade. Wave 4: lift overrides selectively to
+ *  bring canonical Food-Trio tokens forward where appropriate.
+ *
+ * PENDING (skipped by compiler):
+ *  - typography.z1_display_accent — yakitori condensed sans + brush
+ *  - typography.z3_distressed — distressed typewriter for case-file creative
+ */
+
+:root {
+  /* ───── canonical Cohesion v2 colors (per-brand) ───── */
+  --color-primary: #1A1614;
+  --color-secondary: #211C1C;
+  --color-tertiary: #E8E1D2;
+  --color-accent: #D9621E;
+  --color-background: #F2EBE0;
+  --color-surface: #E8E1D2;
+  --color-surface-elevated: #FFFFFF;
+  --color-text-primary: #1A1614;
+  --color-text-secondary: #3A2418;
+  --color-text-on-primary: #F2EBE0;
+
+  /* ───── canonical typography (per-brand families + shared scale) ───── */
+  --font-display-canonical: "Fraunces", Tiempos Headline, Domaine Display, Plantin, Georgia, serif;
+  --font-body-canonical: "Inter", Söhne, system-ui, sans-serif;
+  --text-h1: clamp(2rem, 4vw + 1rem, 3.5rem);
+  --text-h2: clamp(1.5rem, 2.5vw + 0.75rem, 2.5rem);
+  --text-h3: clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+
+  /* ───── shared base tokens ───── */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --space-11: 160px;
+  --space-12: 192px;
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.10), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.10), 0 4px 6px -4px rgba(15, 23, 42, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.10), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --transition-fast: 120ms ease-out;
+  --transition-base: 200ms ease-out;
+  --transition-slow: 300ms ease-in-out;
+  --transition-expressive: 400ms ease-in-out;
+  --bp-mobile: 375px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+  --bp-wide: 1440px;
+  --bp-ultra: 1920px;
+  --z-base: 0;
+  --z-elevated: 10;
+  --z-sticky: 100;
+  --z-nav: 1000;
+  --z-modal-backdrop: 1100;
+  --z-modal: 1200;
+  --z-toast: 1300;
+  --z-tooltip: 1400;
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1440px;
+  --container-prose: 65ch;
+  --grid-cols: 12;
+  --grid-gutter-mobile: 16px;
+  --grid-gutter-desktop: 80px;
+  --baseline-grid: 8px;
+  --border-0: 0px;
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-4: 4px;
+  --min-tap: 44px;
+  --stroke-default: 1.5px;
+  --stroke-bold: 2px;
+  --color-maia-teal: #1B7A8C;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+    --transition-expressive: 0ms;
+  }
+}
