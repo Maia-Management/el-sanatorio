@@ -1,0 +1,80 @@
+/* ============================================================================
+   Chuzo Tokyo — Cohesion v2 Tokens
+   ----------------------------------------------------------------------------
+   Source: THE RECORD folder/Cohesion v2/chuzo-tokyo-tokens.json
+   Reference: ART-DIRECTION-chuzo-tokyo-2026-05-31-PM.md (Z1 charcoal-ember palette)
+   Generated: 2026-06-01 (Phase 0 scaffold)
+   Vocab layer: C (Layer C — FULL §0.2 absolute ban customer-facing)
+   ----------------------------------------------------------------------------
+   Backward-compat alias chain: ct-* exposed as canonical Cohesion v2 tokens.
+   Cohesion v2 compiler output target. Pre-compiler raw scaffold pending the
+   official tokens-to-css.mjs run once tokens JSON is Andrew-stamped beyond
+   PENDING values; this file uses the published Z1 palette from
+   ART-DIRECTION §"Palette" line 9 directly.
+   ============================================================================ */
+
+:root {
+  /* --- Palette: El Sanatorio Z1 sub-palette (canonical Chuzo Tokyo) --- */
+  --ct-charcoal: #0F0D0B;
+  --ct-ember: #D9621E;
+  --ct-ash-cream: #EFE6D5;
+  --ct-soy-brown: #3A2418;
+
+  /* --- Sushi Pop accent layer (pop-art accents over Z1 charcoal) --- */
+  --ct-pop-magenta: #FF2D87;
+  --ct-pop-yellow: #FFD400;
+
+  /* --- Maia umbrella thread (footer lockup only) --- */
+  --ct-maia-teal: #1B7A8C;
+
+  /* --- Semantic role tokens --- */
+  --ct-bg: var(--ct-charcoal);
+  --ct-surface: #1A1814;            /* slight charcoal lift for cards */
+  --ct-surface-elevated: #221E18;
+  --ct-accent: var(--ct-ember);
+  --ct-highlight: var(--ct-ash-cream);
+  --ct-text-primary: var(--ct-ash-cream);
+  --ct-text-secondary: rgba(239, 230, 213, 0.72);
+  --ct-text-muted: rgba(239, 230, 213, 0.48);
+  --ct-text-on-ember: var(--ct-charcoal);
+  --ct-border: rgba(217, 98, 30, 0.22);
+  --ct-border-strong: var(--ct-ember);
+
+  /* --- Typography per ART-DIRECTION line 10 --- */
+  --ct-font-display: "Erica One", "Inter Display", system-ui, sans-serif;
+  --ct-font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ct-font-support: "Poppins", var(--ct-font-body);
+  --ct-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* --- Type scale (Cohesion v2) --- */
+  --ct-fs-h1: clamp(2.4rem, 5vw + 1rem, 4.4rem);
+  --ct-fs-h2: clamp(1.6rem, 2.6vw + 0.75rem, 2.6rem);
+  --ct-fs-h3: clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem);
+  --ct-fs-body: 1rem;
+  --ct-fs-small: 0.875rem;
+  --ct-fs-micro: 0.75rem;
+
+  /* --- Spacing scale --- */
+  --ct-space-1: 0.25rem;
+  --ct-space-2: 0.5rem;
+  --ct-space-3: 0.75rem;
+  --ct-space-4: 1rem;
+  --ct-space-5: 1.5rem;
+  --ct-space-6: 2rem;
+  --ct-space-7: 3rem;
+  --ct-space-8: 4rem;
+  --ct-space-9: 6rem;
+
+  /* --- Radii / shadows --- */
+  --ct-radius-sm: 4px;
+  --ct-radius-md: 8px;
+  --ct-radius-lg: 16px;
+  --ct-radius-pill: 999px;
+  --ct-shadow-ember: 0 0 32px rgba(217, 98, 30, 0.28);
+  --ct-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.48);
+
+  /* --- Backward-compat alias chain: legacy `chuzo-*` → canonical `ct-*` --- */
+  --chuzo-bg: var(--ct-bg);
+  --chuzo-accent: var(--ct-ember);
+  --chuzo-highlight: var(--ct-ash-cream);
+}

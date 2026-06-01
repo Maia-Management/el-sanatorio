@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <title>Chuzo Tokyo — Charcoal-grilled Yakitori inside El Sanatorio · Santa Marta</title>
+  <meta name="description" content="Chuzo Tokyo: charcoal-grilled yakitori inside El Sanatorio. Calle 19 #4-23, Centro Histórico, Santa Marta. Opening Thursday, 04 June." />
+  <meta name="keywords" content="chuzo tokyo, yakitori santa marta, el sanatorio, centro historico, charcoal grill, japanese skewers" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://el-sanatorio.com/en/chuzo-tokyo/" />
+  <link rel="alternate" hreflang="es-CO" href="https://el-sanatorio.com/chuzo-tokyo/" />
+  <link rel="alternate" hreflang="en" href="https://el-sanatorio.com/en/chuzo-tokyo/" />
+  <link rel="alternate" hreflang="x-default" href="https://el-sanatorio.com/chuzo-tokyo/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Chuzo Tokyo — Charcoal-grilled Yakitori · Santa Marta" />
+  <meta property="og:description" content="Charcoal-grilled yakitori inside El Sanatorio. Calle 19 #4-23, Centro Histórico. Opening Thu 04 Jun." />
+  <meta property="og:url" content="https://el-sanatorio.com/en/chuzo-tokyo/" />
+  <meta property="og:image" content="https://el-sanatorio.com/images/og-image.jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="El Sanatorio" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Chuzo Tokyo — Santa Marta" />
+  <meta name="twitter:description" content="Charcoal-grilled yakitori inside El Sanatorio. Calle 19 #4-23." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Erica+One&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" />
+
+  <!-- Cohesion v2 tokens -->
+  <link rel="stylesheet" href="/css/chuzo-tokyo-tokens.css?v=20260601" />
+
+  <!-- Consent banner (inherited from el-sanatorio parent) -->
+  <script src="/consent-banner.js?v=20260430d" defer></script>
+
+  <!-- JSON-LD: Restaurant child of El Sanatorio establishment -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Restaurant",
+        "@id": "https://el-sanatorio.com/chuzo-tokyo/#restaurant",
+        "name": "Chuzo Tokyo",
+        "description": "Charcoal-grilled yakitori inside El Sanatorio. Yakitori counter in Centro Histórico, Santa Marta.",
+        "url": "https://el-sanatorio.com/en/chuzo-tokyo/",
+        "telephone": "+19034598763",
+        "image": "https://el-sanatorio.com/images/og-image.jpg",
+        "servesCuisine": ["Yakitori", "Japanese", "Japanese-Caribbean"],
+        "priceRange": "$$",
+        "currenciesAccepted": "COP",
+        "paymentAccepted": "Wompi, Credit Card",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Calle 19 #4-23",
+          "addressLocality": "Santa Marta",
+          "addressRegion": "Magdalena",
+          "postalCode": "470001",
+          "addressCountry": "CO"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "11.2408",
+          "longitude": "-74.2110"
+        },
+        "hasMap": "https://maps.google.com/maps?q=Calle+19+%234-23+Santa+Marta+Colombia",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "16:00",
+            "closes": "02:00"
+          }
+        ],
+        "parentOrganization": {
+          "@type": "Organization",
+          "@id": "https://el-sanatorio.com/#establishment",
+          "name": "El Sanatorio"
+        },
+        "containedInPlace": {
+          "@type": "FoodEstablishment",
+          "@id": "https://el-sanatorio.com/#establishment",
+          "name": "El Sanatorio",
+          "url": "https://el-sanatorio.com/"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ----- Page-local styles (extends /css/chuzo-tokyo-tokens.css) ----- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--ct-font-body);
+      background: var(--ct-bg);
+      color: var(--ct-text-primary);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--ct-ember); text-decoration: none; }
+    a:hover, a:focus { text-decoration: underline; }
+    h1, h2, h3 { font-family: var(--ct-font-display); font-weight: 400; letter-spacing: 0.02em; line-height: 1.05; margin: 0 0 var(--ct-space-4); }
+    h1 { font-size: var(--ct-fs-h1); }
+    h2 { font-size: var(--ct-fs-h2); }
+    h3 { font-size: var(--ct-fs-h3); }
+    p { margin: 0 0 var(--ct-space-4); color: var(--ct-text-secondary); }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 var(--ct-space-5); }
+
+    /* ----- Header / parent link ----- */
+    .ct-bar {
+      padding: var(--ct-space-3) 0;
+      border-bottom: 1px solid var(--ct-border);
+      font-size: var(--ct-fs-small);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ct-text-muted);
+    }
+    .ct-bar a { color: var(--ct-text-secondary); }
+
+    /* ----- Hero ----- */
+    .hero {
+      position: relative;
+      padding: var(--ct-space-9) 0 var(--ct-space-8);
+      text-align: center;
+      background:
+        radial-gradient(60% 50% at 50% 32%, rgba(217, 98, 30, 0.22) 0%, transparent 70%),
+        linear-gradient(180deg, var(--ct-charcoal) 0%, #14110D 100%);
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; inset: auto 0 0 0; height: 60px;
+      background: linear-gradient(180deg, transparent 0%, var(--ct-charcoal) 100%);
+      pointer-events: none;
+    }
+    .hero__eyebrow {
+      display: inline-block;
+      font-family: var(--ct-font-support);
+      font-size: var(--ct-fs-micro);
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--ct-ember);
+      margin-bottom: var(--ct-space-5);
+      padding: var(--ct-space-2) var(--ct-space-4);
+      border: 1px solid var(--ct-border-strong);
+      border-radius: var(--ct-radius-pill);
+    }
+    .hero__wordmark {
+      font-family: var(--ct-font-display);
+      font-size: clamp(3rem, 9vw + 1rem, 7.5rem);
+      line-height: 0.95;
+      color: var(--ct-ash-cream);
+      margin: 0 0 var(--ct-space-4);
+      text-shadow: 0 0 28px rgba(217, 98, 30, 0.35);
+    }
+    .hero__tagline {
+      font-family: var(--ct-font-support);
+      font-size: clamp(1rem, 1.6vw + 0.4rem, 1.4rem);
+      color: var(--ct-text-secondary);
+      max-width: 38ch;
+      margin: 0 auto var(--ct-space-6);
+      letter-spacing: 0.04em;
+    }
+    .hero__brasa {
+      width: clamp(140px, 28vw, 240px);
+      height: clamp(70px, 14vw, 120px);
+      margin: 0 auto var(--ct-space-5);
+      display: block;
+    }
+    .hero__cta-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: var(--ct-space-3);
+      margin-top: var(--ct-space-5);
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--ct-space-2);
+      padding: var(--ct-space-3) var(--ct-space-5);
+      font-family: var(--ct-font-support);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: var(--ct-fs-small);
+      border-radius: var(--ct-radius-pill);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+    }
+    .btn--primary {
+      background: var(--ct-ember);
+      color: var(--ct-text-on-ember);
+      box-shadow: var(--ct-shadow-ember);
+    }
+    .btn--primary:hover { transform: translateY(-1px); text-decoration: none; }
+    .btn--ghost {
+      background: transparent;
+      color: var(--ct-ash-cream);
+      border-color: var(--ct-border-strong);
+    }
+    .btn--ghost:hover { background: rgba(217, 98, 30, 0.12); text-decoration: none; }
+
+    /* ----- Countdown ----- */
+    .countdown { margin-top: var(--ct-space-6); display: flex; justify-content: center; gap: var(--ct-space-4); flex-wrap: wrap; }
+    .countdown__unit {
+      min-width: 64px; padding: var(--ct-space-3) var(--ct-space-4);
+      border: 1px solid var(--ct-border); border-radius: var(--ct-radius-md);
+      background: rgba(58, 36, 24, 0.32); text-align: center;
+    }
+    .countdown__num { display: block; font-family: var(--ct-font-display); font-size: clamp(1.6rem, 3vw + 0.5rem, 2.4rem); color: var(--ct-ash-cream); line-height: 1; }
+    .countdown__label { display: block; font-family: var(--ct-font-support); font-size: var(--ct-fs-micro); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ct-text-muted); margin-top: var(--ct-space-2); }
+
+    /* ----- Section base ----- */
+    section.page { padding: var(--ct-space-8) 0; border-top: 1px solid var(--ct-border); }
+    .section__header { text-align: center; margin-bottom: var(--ct-space-7); }
+    .section__eyebrow { display: inline-block; font-family: var(--ct-font-support); font-size: var(--ct-fs-micro); letter-spacing: 0.32em; text-transform: uppercase; color: var(--ct-ember); margin-bottom: var(--ct-space-3); }
+
+    /* ----- Menu preview ----- */
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--ct-space-4); }
+    .menu-card {
+      padding: var(--ct-space-5); border: 1px solid var(--ct-border); border-radius: var(--ct-radius-lg);
+      background: var(--ct-surface); box-shadow: var(--ct-shadow-card);
+      transition: border-color 160ms ease, transform 160ms ease;
+    }
+    .menu-card:hover { border-color: var(--ct-border-strong); transform: translateY(-2px); }
+    .menu-card__name { font-family: var(--ct-font-display); font-size: var(--ct-fs-h3); color: var(--ct-ash-cream); margin-bottom: var(--ct-space-2); }
+    .menu-card__desc { font-size: var(--ct-fs-small); color: var(--ct-text-secondary); margin-bottom: var(--ct-space-4); }
+    .menu-card__price { font-family: var(--ct-font-display); font-size: 1.5rem; color: var(--ct-ember); }
+    .menu-card--featured { border-color: var(--ct-pop-magenta); background: linear-gradient(180deg, rgba(255, 45, 135, 0.06), var(--ct-surface)); }
+    .menu-card--featured .menu-card__price { color: var(--ct-pop-yellow); }
+    .menu-disclaimer { margin-top: var(--ct-space-5); font-size: var(--ct-fs-small); color: var(--ct-text-muted); text-align: center; }
+
+    /* ----- Dice teaser ----- */
+    .dice-block {
+      background: radial-gradient(50% 60% at 50% 50%, rgba(255, 212, 0, 0.10) 0%, transparent 65%), var(--ct-surface-elevated);
+      border-radius: var(--ct-radius-lg); padding: var(--ct-space-8) var(--ct-space-5); text-align: center;
+      border: 1px solid rgba(255, 212, 0, 0.18);
+    }
+    .dice-block h2 { color: var(--ct-pop-yellow); text-transform: uppercase; letter-spacing: 0.04em; }
+    .dice-block p { max-width: 48ch; margin: 0 auto var(--ct-space-4); }
+    .dice-block__tag { display: inline-block; font-family: var(--ct-font-support); font-size: var(--ct-fs-micro); letter-spacing: 0.24em; text-transform: uppercase; color: var(--ct-pop-magenta); padding: var(--ct-space-2) var(--ct-space-4); border: 1px solid var(--ct-pop-magenta); border-radius: var(--ct-radius-pill); margin-bottom: var(--ct-space-4); }
+
+    /* ----- NAP / visit ----- */
+    .nap { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--ct-space-5); margin-top: var(--ct-space-6); }
+    .nap__cell { padding: var(--ct-space-5); border: 1px solid var(--ct-border); border-radius: var(--ct-radius-md); background: var(--ct-surface); }
+    .nap__label { font-family: var(--ct-font-support); font-size: var(--ct-fs-micro); letter-spacing: 0.24em; text-transform: uppercase; color: var(--ct-ember); margin-bottom: var(--ct-space-3); }
+    .nap__value { color: var(--ct-ash-cream); font-size: 1.05rem; line-height: 1.5; }
+    .nap__value a { color: var(--ct-ash-cream); border-bottom: 1px dashed var(--ct-ember); padding-bottom: 1px; }
+    .nap__value a:hover { color: var(--ct-ember); text-decoration: none; }
+
+    /* ----- Wompi badge ----- */
+    .wompi-badge {
+      display: inline-flex; align-items: center; gap: var(--ct-space-2);
+      padding: var(--ct-space-2) var(--ct-space-4);
+      background: rgba(239, 230, 213, 0.06); border: 1px solid var(--ct-border);
+      border-radius: var(--ct-radius-pill);
+      font-family: var(--ct-font-support); font-size: var(--ct-fs-micro);
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--ct-text-secondary);
+      margin-top: var(--ct-space-4);
+    }
+    .wompi-badge::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ct-ember); box-shadow: 0 0 8px var(--ct-ember); }
+
+    /* ----- Footer ----- */
+    footer.ct-footer { padding: var(--ct-space-8) 0 var(--ct-space-6); border-top: 1px solid var(--ct-border); color: var(--ct-text-muted); font-size: var(--ct-fs-small); text-align: center; }
+    footer.ct-footer a { color: var(--ct-text-secondary); }
+    .ct-footer__lockup { font-family: var(--ct-font-support); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: var(--ct-space-3); color: var(--ct-maia-teal); }
+    .lang-switch { margin-top: var(--ct-space-3); font-size: var(--ct-fs-micro); letter-spacing: 0.18em; text-transform: uppercase; }
+
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; } }
+    @keyframes ember-pulse { 0%, 100% { opacity: 0.86; } 50% { opacity: 1; } }
+    .brasa-flame { animation: ember-pulse 2.4s ease-in-out infinite; transform-origin: center bottom; }
+  </style>
+</head>
+<body>
+
+<div class="ct-bar">
+  <div class="container">
+    <a href="/en/">← El Sanatorio · Calle 19 #4-23 · Santa Marta</a>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="ct-hero-title">
+  <div class="container">
+    <span class="hero__eyebrow">Thursday · 04 June 2026 · 16:00</span>
+
+    <svg class="hero__brasa" viewBox="0 0 240 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="120" cy="98" rx="105" ry="14" fill="#3A2418" opacity="0.85"/>
+      <ellipse cx="120" cy="96" rx="90" ry="10" fill="#D9621E" opacity="0.55"/>
+      <ellipse cx="120" cy="94" rx="70" ry="6" fill="#FFD400" opacity="0.30"/>
+      <g class="brasa-flame">
+        <path d="M70 96 Q60 60 80 40 Q75 70 92 90 Z" fill="#D9621E" opacity="0.88"/>
+        <path d="M118 96 Q100 50 128 18 Q120 60 140 92 Z" fill="#D9621E" opacity="0.95"/>
+        <path d="M170 96 Q160 64 180 46 Q175 72 190 92 Z" fill="#D9621E" opacity="0.85"/>
+        <path d="M120 90 Q112 64 126 42 Q122 66 134 86 Z" fill="#FFD400" opacity="0.55"/>
+      </g>
+    </svg>
+
+    <h1 id="ct-hero-title" class="hero__wordmark">CHUZO TOKYO</h1>
+    <p class="hero__tagline">Charcoal-grilled yakitori · Inside El Sanatorio</p>
+
+    <div class="hero__cta-row">
+      <a class="btn btn--primary" href="https://wa.me/19034598763" target="_blank" rel="noopener">Reserve on WhatsApp</a>
+      <a class="btn btn--ghost" href="#menu">See the menu</a>
+    </div>
+
+    <div class="countdown" id="ct-countdown" aria-live="polite">
+      <div class="countdown__unit"><span class="countdown__num" id="cd-d">--</span><span class="countdown__label">days</span></div>
+      <div class="countdown__unit"><span class="countdown__num" id="cd-h">--</span><span class="countdown__label">hours</span></div>
+      <div class="countdown__unit"><span class="countdown__num" id="cd-m">--</span><span class="countdown__label">min</span></div>
+      <div class="countdown__unit"><span class="countdown__num" id="cd-s">--</span><span class="countdown__label">sec</span></div>
+    </div>
+
+    <div class="wompi-badge" aria-label="Secure Wompi payment">Secure payment · Wompi</div>
+  </div>
+</section>
+
+<!-- MENU PREVIEW -->
+<section class="page" id="menu" aria-labelledby="menu-title">
+  <div class="container">
+    <header class="section__header">
+      <span class="section__eyebrow">Menu · launch</span>
+      <h2 id="menu-title">What we serve over the coals</h2>
+      <p style="max-width:52ch;margin:0 auto;">Yakitori canon: chicken and onion alternating, charcoal-seared, glazed with teriyaki. Salmon is always cooked, Japanese style. Never marinated.</p>
+    </header>
+
+    <div class="menu-grid">
+      <article class="menu-card">
+        <h3 class="menu-card__name">Chuzo</h3>
+        <p class="menu-card__desc">Single yakitori skewer · chicken &amp; onion alternating.</p>
+        <div class="menu-card__price">$9,500 COP</div>
+      </article>
+
+      <article class="menu-card menu-card--featured">
+        <h3 class="menu-card__name">Yakitori 3-pack</h3>
+        <p class="menu-card__desc">Three skewers over the coals · the full taste.</p>
+        <div class="menu-card__price">$26,600 COP</div>
+      </article>
+
+      <article class="menu-card">
+        <h3 class="menu-card__name">Rice Bowl</h3>
+        <p class="menu-card__desc">Rice, potato, beans, boiled egg, one chicken skewer.</p>
+        <div class="menu-card__price">$25,200 COP</div>
+      </article>
+
+      <article class="menu-card">
+        <h3 class="menu-card__name">Sushi roll</h3>
+        <p class="menu-card__desc">Mango Tango · Pollo Yoyó · Cerdo Gordo · Vaca Loca.</p>
+        <div class="menu-card__price">$23,900 COP</div>
+      </article>
+
+      <article class="menu-card menu-card--featured">
+        <h3 class="menu-card__name">Sushi roll · Salmón Patrón</h3>
+        <p class="menu-card__desc">Cooked salmon, Japanese style · the premium pick.</p>
+        <div class="menu-card__price">$25,900 COP</div>
+      </article>
+
+      <article class="menu-card menu-card--featured">
+        <h3 class="menu-card__name">BOX FIESTA</h3>
+        <p class="menu-card__desc">The big share box · five flavours for the table.</p>
+        <div class="menu-card__price">$95,000 COP</div>
+      </article>
+
+      <article class="menu-card">
+        <h3 class="menu-card__name">Cookie Doughnut</h3>
+        <p class="menu-card__desc">House-made · melted chocolate inside.</p>
+        <div class="menu-card__price">$16,500 COP</div>
+      </article>
+
+      <article class="menu-card">
+        <h3 class="menu-card__name">Chocoramo</h3>
+        <p class="menu-card__desc">Colombian classic · charcoal-finished version.</p>
+        <div class="menu-card__price">$10,500 COP</div>
+      </article>
+
+      <article class="menu-card">
+        <h3 class="menu-card__name">Drinks</h3>
+        <p class="menu-card__desc">Coke · Coke Zero · Water.</p>
+        <div class="menu-card__price">$6,000 COP</div>
+      </article>
+    </div>
+
+    <p class="menu-disclaimer">Prices in COP · VAT included · Digital payment via Wompi. Menu subject to grill availability.</p>
+  </div>
+</section>
+
+<!-- DICE TEASER -->
+<section class="page" aria-labelledby="dice-title">
+  <div class="container">
+    <div class="dice-block">
+      <span class="dice-block__tag">The house game</span>
+      <h2 id="dice-title">Roll the dice</h2>
+      <p>Scan the QR at your table. Roll on your phone. <strong style="color:var(--ct-pop-yellow);">If you roll snake eyes, the bill is on the house.</strong></p>
+      <p style="color:var(--ct-text-muted);font-size:var(--ct-fs-small);">House mechanic · in-venue only · no tricks, no fine print.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT / NAP -->
+<section class="page" id="visit" aria-labelledby="visit-title">
+  <div class="container">
+    <header class="section__header">
+      <span class="section__eyebrow">How to find us</span>
+      <h2 id="visit-title">We are inside El Sanatorio</h2>
+      <p style="max-width:52ch;margin:0 auto;">Yakitori counter in the Centro Histórico of Santa Marta. Same building, same door, same night.</p>
+    </header>
+
+    <div class="nap">
+      <div class="nap__cell">
+        <div class="nap__label">Address</div>
+        <div class="nap__value">
+          <a href="https://maps.google.com/maps?q=Calle+19+%234-23+Santa+Marta+Colombia" target="_blank" rel="noopener">
+            Calle 19 #4-23<br>Centro Histórico<br>Santa Marta, Magdalena
+          </a>
+        </div>
+      </div>
+      <div class="nap__cell">
+        <div class="nap__label">WhatsApp</div>
+        <div class="nap__value">
+          <a href="https://wa.me/19034598763" target="_blank" rel="noopener">wa.me/19034598763</a>
+        </div>
+      </div>
+      <div class="nap__cell">
+        <div class="nap__label">Hours · launch</div>
+        <div class="nap__value">
+          Thu · Fri · Sat · Sun<br>16:00 — 02:00
+        </div>
+      </div>
+      <div class="nap__cell">
+        <div class="nap__label">Payment</div>
+        <div class="nap__value">
+          Wompi · card · QR<br><span style="color:var(--ct-text-muted);font-size:var(--ct-fs-small);">Digital payment only for now.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ct-footer">
+  <div class="container">
+    <div class="ct-footer__lockup">Chuzo Tokyo · El Sanatorio · Santa Marta</div>
+    <p>&copy; 2026 · El Sanatorio S.A.S. · NIT 901.862.977-7 · All rights reserved.</p>
+    <p><a href="/privacidad">Privacy</a> · <a href="/terminos">Terms</a> · <a href="/en/">Back to El Sanatorio</a></p>
+    <p class="lang-switch"><a href="/chuzo-tokyo/">Español →</a></p>
+  </div>
+</footer>
+
+<script>
+  // Launch countdown — Thursday 04 Jun 2026 16:00 COT (UTC-5)
+  (function () {
+    var target = new Date("2026-06-04T16:00:00-05:00").getTime();
+    var dEl = document.getElementById("cd-d");
+    var hEl = document.getElementById("cd-h");
+    var mEl = document.getElementById("cd-m");
+    var sEl = document.getElementById("cd-s");
+    function pad(n) { return n < 10 ? "0" + n : "" + n; }
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        if (dEl) dEl.textContent = "00";
+        if (hEl) hEl.textContent = "00";
+        if (mEl) mEl.textContent = "00";
+        if (sEl) sEl.textContent = "00";
+        return;
+      }
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      if (dEl) dEl.textContent = pad(d);
+      if (hEl) hEl.textContent = pad(h);
+      if (mEl) mEl.textContent = pad(m);
+      if (sEl) sEl.textContent = pad(s);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+</body>
+</html>
