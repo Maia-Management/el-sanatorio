@@ -120,3 +120,108 @@
     --transition-expressive: 0ms;
   }
 }
+
+/* =========================================================================
+   BROADER SHIM EXTENSION — 2026-06-01 PM
+   Per EL-SANATORIO-BRAND-APPLICATION-SETUP-GUIDE-2026-06-01-PM.md §5.2 + §5.4
+   Adds:
+     - Z1/Z2/Z3 zone sub-palette tokens
+     - Master palette short aliases (--bone / --ink / --bg-primary / --text-primary)
+     - Sub-brand magenta accent (Sushi Pop integration)
+     - Backward-compat aliases (--bg / --text / --accent — prevent 200+ rule regressions)
+     - Zone scoping rules (.zone-z1 / .zone-z2 / .zone-z3)
+     - Typography wiring (Fraunces display / Inter body) for body + headings
+   ========================================================================= */
+
+:root {
+  /* ──── Master palette short aliases (setup guide §5.2 contract) ──── */
+  --bone:                #F2EBE0;
+  --ink:                 #1A1614;
+  --bg-primary:          var(--bone);
+  --text-primary:        var(--ink);
+  --surface:             var(--bone);
+
+  /* ──── Z1 — Yakitori Bar (charcoal / ember / soy-brown) ──── */
+  --z1-charcoal:         #0F0D0B;
+  --z1-ember:            #D9621E;
+  --z1-ember-light:      #F08543;
+  --z1-cream-ash:        #EFE6D5;
+  --z1-ash-cream:        #EFE6D5;     /* alias for token JSON name */
+  --z1-deep-brown:       #3A2418;
+  --z1-soy-brown:        #3A2418;     /* alias for token JSON name */
+
+  /* ──── Z2 — Interior Bar & Lounge (apothecary deep-bottle / copper / oxblood) ──── */
+  --z2-deep-bottle:      #1F3A2E;
+  --z2-bone:             #EEE6D2;
+  --z2-copper:           #A66A3A;
+  --z2-oxblood:          #5E1A1A;
+
+  /* ──── Z3 — Paciente 013 (clinical / ER-red / chart-ink) ──── */
+  --z3-clinical:         #F5F4EF;     /* off-white clinical surface */
+  --z3-clinical-pale:    #C8D3CB;     /* institutional pale green wash */
+  --z3-clinical-white:   #F5F4EF;     /* alias for token JSON name */
+  --z3-er-red:           #B91C1C;
+  --z3-chart-ink:        #0B0B0B;
+
+  /* ──── Sub-brand accent — Sushi Pop magenta (cross-promo only) ──── */
+  --magenta:             #FF2D87;
+
+  /* ──── Semantic tokens (consumed by zone scoping) ──── */
+  --color-bg:            var(--bone);
+  --color-text:          var(--ink);
+  --color-text-on-primary: var(--bone);
+
+  /* ──── Backward-compat aliases (prevent regression of existing rules) ──── */
+  --bg:                  var(--color-bg);
+  --text:                var(--color-text);
+  --accent:              var(--color-accent);
+}
+
+/* ──── Zone scoping (apply by adding .zone-z1 / .zone-z2 / .zone-z3 to <body> or wrapper) ──── */
+.zone-z1 {
+  --color-bg:     var(--z1-charcoal);
+  --color-text:   var(--z1-cream-ash);
+  --color-accent: var(--z1-ember);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.zone-z2 {
+  --color-bg:     var(--z2-deep-bottle);
+  --color-text:   var(--z2-bone);
+  --color-accent: var(--z2-copper);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.zone-z3 {
+  --color-bg:     var(--z3-clinical);
+  --color-text:   var(--z3-chart-ink);
+  --color-accent: var(--z3-er-red);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* ──── Typography wiring (Fraunces display + Inter body) ──── */
+.cohesion-v2-type body,
+body.cohesion-v2-type {
+  font-family: var(--font-body-canonical);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cohesion-v2-type h1,
+.cohesion-v2-type h2,
+.cohesion-v2-type h3,
+.cohesion-v2-type h4,
+.cohesion-v2-type .display,
+body.cohesion-v2-type h1,
+body.cohesion-v2-type h2,
+body.cohesion-v2-type h3,
+body.cohesion-v2-type h4,
+body.cohesion-v2-type .display {
+  font-family: var(--font-display-canonical);
+  letter-spacing: 0.005em;
+  font-weight: 600;
+}
+
