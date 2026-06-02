@@ -40,10 +40,10 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
-  <!-- Fonts (Cohesion v2 — Cinzel display per task brief + Inter body) -->
+  <!-- Fonts (Cohesion v2 — Fraunces display per BIBLE-el-sanatorio-v2 §5 + tokens canon + Inter body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" />
 
   <!-- El Sanatorio base styles + Chuzo Tokyo tokens -->
   <link rel="stylesheet" href="/css/style.css?v=20260601-menu" />
@@ -176,7 +176,7 @@
     /* ========================================================================
        Menu page · Z1 charcoal-ember palette
        Builds on /css/style.css (El Sanatorio base) + chuzo-tokyo-tokens.css
-       Display = Cinzel · Body = Inter · Mono = Share Tech Mono (file-card vibe)
+       Display = Fraunces · Body = Inter · Mono = Share Tech Mono (file-card vibe)
        ======================================================================== */
     :root {
       --menu-bg: #0F0D0B;           /* Z1 charcoal */
@@ -205,7 +205,7 @@
       -webkit-font-smoothing: antialiased;
     }
     body.menu-page h1, body.menu-page h2, body.menu-page h3,
-    .menu-display { font-family: "Cinzel", Georgia, "Times New Roman", serif; letter-spacing: 0.06em; line-height: 1.15; }
+    .menu-display { font-family: "Fraunces", Georgia, "Times New Roman", serif; letter-spacing: 0; line-height: 1.15; }
     .menu-mono { font-family: "Share Tech Mono", Consolas, monospace; letter-spacing: 0.1em; }
 
     /* ── NAV (light wrap so style.css nav works, but ensure tokens fall back) ── */
@@ -223,7 +223,7 @@
     }
     .menu-nav__logo { text-decoration: none; color: var(--menu-cream); display: flex; flex-direction: column; line-height: 1.1; }
     .menu-nav__logo-num { font-family: "Share Tech Mono", monospace; font-size: 0.65rem; color: var(--menu-ember); letter-spacing: 0.2em; }
-    .menu-nav__logo-name { font-family: "Cinzel", serif; font-size: 1.05rem; letter-spacing: 0.15em; }
+    .menu-nav__logo-name { font-family: "Fraunces", serif; font-size: 1.05rem; letter-spacing: 0.15em; }
     .menu-nav__cta {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--menu-ember); color: var(--menu-bg);
@@ -292,7 +292,7 @@
       padding: 12px 24px;
       background: var(--menu-ember); color: var(--menu-bg);
       border: 0; border-radius: 4px;
-      font-family: "Cinzel", serif;
+      font-family: "Fraunces", serif;
       font-size: 0.88rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
@@ -303,7 +303,7 @@
       padding: 12px 24px;
       background: transparent; color: var(--menu-cream);
       border: 1px solid var(--menu-border-strong); border-radius: 4px;
-      font-family: "Cinzel", serif;
+      font-family: "Fraunces", serif;
       font-size: 0.88rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
       text-decoration: none;
       transition: all 0.2s;
@@ -424,7 +424,7 @@
     }
     .menu-item__body { min-width: 0; }
     .menu-item__name {
-      font-family: "Cinzel", serif;
+      font-family: "Fraunces", serif;
       font-size: 1.15rem;
       letter-spacing: 0.04em;
       color: var(--menu-cream);
@@ -445,7 +445,7 @@
       margin: 0;
     }
     .menu-item__price {
-      font-family: "Cinzel", serif;
+      font-family: "Fraunces", serif;
       font-size: 1.05rem;
       color: var(--menu-ember);
       letter-spacing: 0.06em;
@@ -507,7 +507,7 @@
       margin-bottom: 10px;
     }
     .sub-brand-card__name {
-      font-family: "Cinzel", serif;
+      font-family: "Fraunces", serif;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
       color: var(--menu-cream);
       margin: 0 0 6px;
@@ -542,7 +542,7 @@
     }
     .dice-teaser__icon { font-size: 2.4rem; margin-bottom: 10px; }
     .dice-teaser__title {
-      font-family: "Cinzel", serif;
+      font-family: "Fraunces", serif;
       font-size: 1.4rem;
       color: var(--menu-ember);
       letter-spacing: 0.1em;
@@ -594,7 +594,7 @@
       gap: 36px;
     }
     .menu-footer__logo {
-      font-family: "Cinzel", serif;
+      font-family: "Fraunces", serif;
       font-size: 1.2rem;
       letter-spacing: 0.15em;
       color: var(--menu-cream);
@@ -613,7 +613,7 @@
       color: var(--menu-text-dim);
     }
     .menu-footer__col-title {
-      font-family: "Cinzel", serif;
+      font-family: "Fraunces", serif;
       font-size: 0.9rem; letter-spacing: 0.12em;
       color: var(--menu-cream);
       margin: 0 0 14px;

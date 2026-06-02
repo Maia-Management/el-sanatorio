@@ -38,7 +38,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" />
 
   <link rel="stylesheet" href="/css/style.css?v=20260601-menu" />
   <link rel="stylesheet" href="/css/chuzo-tokyo-tokens.css?v=20260601" />
@@ -182,14 +182,14 @@
     }
     *, *::before, *::after { box-sizing: border-box; }
     body.menu-page { background: var(--menu-bg); color: var(--menu-text); font-family: "Inter", system-ui, sans-serif; line-height: 1.6; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-    body.menu-page h1, body.menu-page h2, body.menu-page h3, .menu-display { font-family: "Cinzel", Georgia, "Times New Roman", serif; letter-spacing: 0.06em; line-height: 1.15; }
+    body.menu-page h1, body.menu-page h2, body.menu-page h3, .menu-display { font-family: "Fraunces", Georgia, "Times New Roman", serif; letter-spacing: 0; line-height: 1.15; }
     .menu-mono { font-family: "Share Tech Mono", Consolas, monospace; letter-spacing: 0.1em; }
 
     nav.menu-nav { position: sticky; top: 0; z-index: 100; background: rgba(15,13,11,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--menu-border); }
     .menu-nav__inner { max-width: 1200px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .menu-nav__logo { text-decoration: none; color: var(--menu-cream); display: flex; flex-direction: column; line-height: 1.1; }
     .menu-nav__logo-num { font-family: "Share Tech Mono", monospace; font-size: 0.65rem; color: var(--menu-ember); letter-spacing: 0.2em; }
-    .menu-nav__logo-name { font-family: "Cinzel", serif; font-size: 1.05rem; letter-spacing: 0.15em; }
+    .menu-nav__logo-name { font-family: "Fraunces", serif; font-size: 1.05rem; letter-spacing: 0.15em; }
     .menu-nav__cta { display: inline-flex; align-items: center; gap: 8px; background: var(--menu-ember); color: var(--menu-bg); padding: 9px 18px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s; }
     .menu-nav__cta:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(217,98,30,0.4); }
     .menu-nav__lang { color: var(--menu-text-dim); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.12em; padding: 6px 12px; border: 1px solid var(--menu-border); border-radius: 999px; transition: all 0.2s; }
@@ -205,9 +205,9 @@
     .menu-hero__meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; font-family: "Share Tech Mono", monospace; font-size: 0.72rem; letter-spacing: 0.14em; color: var(--menu-text-dim); text-transform: uppercase; margin-bottom: 28px; }
     .menu-hero__meta strong { color: var(--menu-ember); font-weight: 400; }
     .menu-hero__cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-    .btn-ember { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--menu-ember); color: var(--menu-bg); border: 0; border-radius: 4px; font-family: "Cinzel", serif; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-ember { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--menu-ember); color: var(--menu-bg); border: 0; border-radius: 4px; font-family: "Fraunces", serif; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
     .btn-ember:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(217,98,30,0.42); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: transparent; color: var(--menu-cream); border: 1px solid var(--menu-border-strong); border-radius: 4px; font-family: "Cinzel", serif; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: transparent; color: var(--menu-cream); border: 1px solid var(--menu-border-strong); border-radius: 4px; font-family: "Fraunces", serif; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
     .btn-ghost:hover { color: var(--menu-ember); border-color: var(--menu-ember); background: rgba(217,98,30,0.05); }
 
     .patient-card { max-width: 760px; margin: 36px auto 0; background: var(--menu-card); border: 1px solid var(--menu-border); border-radius: 6px; padding: 22px 24px; backdrop-filter: blur(8px); }
@@ -235,10 +235,10 @@
     .menu-item:hover { border-color: var(--menu-border-strong); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
     .menu-item__num { font-family: "Share Tech Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; color: var(--menu-ember); background: rgba(217,98,30,0.08); border: 1px solid var(--menu-border); padding: 4px 9px; border-radius: 4px; white-space: nowrap; }
     .menu-item__body { min-width: 0; }
-    .menu-item__name { font-family: "Cinzel", serif; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--menu-cream); margin: 0 0 6px; }
+    .menu-item__name { font-family: "Fraunces", serif; font-size: 1.15rem; letter-spacing: 0.04em; color: var(--menu-cream); margin: 0 0 6px; }
     .menu-item__desc { font-size: 0.94rem; color: var(--menu-text-dim); margin: 0 0 8px; line-height: 1.55; }
     .menu-item__prescription { font-family: "Share Tech Mono", monospace; font-size: 0.7rem; color: var(--menu-text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin: 0; }
-    .menu-item__price { font-family: "Cinzel", serif; font-size: 1.05rem; color: var(--menu-ember); letter-spacing: 0.06em; white-space: nowrap; align-self: start; }
+    .menu-item__price { font-family: "Fraunces", serif; font-size: 1.05rem; color: var(--menu-ember); letter-spacing: 0.06em; white-space: nowrap; align-self: start; }
     .menu-item__price.highlight { color: var(--menu-bg); background: var(--menu-ember); padding: 4px 12px; border-radius: 4px; }
     .menu-item__price.pending { font-size: 0.72rem; font-family: "Share Tech Mono", monospace; color: var(--menu-crimson); letter-spacing: 0.1em; text-transform: uppercase; }
     .badge-tag { display: inline-block; font-family: "Share Tech Mono", monospace; font-size: 0.58rem; letter-spacing: 0.18em; color: var(--menu-bg); background: var(--menu-ember); padding: 2px 8px; border-radius: 3px; vertical-align: middle; margin-left: 8px; text-transform: uppercase; }
@@ -253,14 +253,14 @@
 
     .sub-brand-card { background: radial-gradient(ellipse at top right, rgba(217,98,30,0.22) 0%, transparent 60%), linear-gradient(135deg, var(--menu-brown) 0%, var(--menu-bg) 100%); border: 1px solid var(--menu-border-strong); border-radius: 12px; padding: 28px; margin: 0 0 28px; position: relative; overflow: hidden; }
     .sub-brand-card__label { font-family: "Share Tech Mono", monospace; font-size: 0.7rem; letter-spacing: 0.22em; color: var(--menu-ember); text-transform: uppercase; margin-bottom: 10px; }
-    .sub-brand-card__name { font-family: "Cinzel", serif; font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--menu-cream); margin: 0 0 6px; letter-spacing: 0.06em; }
+    .sub-brand-card__name { font-family: "Fraunces", serif; font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--menu-cream); margin: 0 0 6px; letter-spacing: 0.06em; }
     .sub-brand-card__tagline { color: var(--menu-text-dim); font-style: italic; font-family: Georgia, serif; margin: 0 0 14px; max-width: 580px; }
     .sub-brand-card__cta { display: inline-flex; align-items: center; gap: 8px; font-family: "Share Tech Mono", monospace; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--menu-ember); text-decoration: none; padding: 8px 14px; border: 1px solid var(--menu-border-strong); border-radius: 4px; transition: all 0.2s; }
     .sub-brand-card__cta:hover { background: var(--menu-ember); color: var(--menu-bg); }
 
     .dice-teaser { max-width: 760px; margin: 24px auto 56px; background: linear-gradient(135deg, var(--menu-brown) 0%, var(--menu-bg) 100%); border: 1px solid var(--menu-border-strong); border-radius: 8px; padding: 28px 26px; text-align: center; position: relative; }
     .dice-teaser__icon { font-size: 2.4rem; margin-bottom: 10px; }
-    .dice-teaser__title { font-family: "Cinzel", serif; font-size: 1.4rem; color: var(--menu-ember); letter-spacing: 0.1em; margin: 0 0 12px; }
+    .dice-teaser__title { font-family: "Fraunces", serif; font-size: 1.4rem; color: var(--menu-ember); letter-spacing: 0.1em; margin: 0 0 12px; }
     .dice-teaser__text { color: var(--menu-cream); font-family: Georgia, serif; font-style: italic; font-size: 1.04rem; line-height: 1.6; max-width: 540px; margin: 0 auto; }
     .dice-teaser__fine { margin-top: 14px; font-family: "Share Tech Mono", monospace; font-size: 0.62rem; letter-spacing: 0.14em; color: var(--menu-text-muted); text-transform: uppercase; }
 
@@ -270,10 +270,10 @@
 
     .menu-footer { background: #0a0907; border-top: 1px solid var(--menu-border); padding: 56px 20px 32px; color: var(--menu-text-dim); }
     .menu-footer__inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 36px; }
-    .menu-footer__logo { font-family: "Cinzel", serif; font-size: 1.2rem; letter-spacing: 0.15em; color: var(--menu-cream); margin: 0 0 6px; }
+    .menu-footer__logo { font-family: "Fraunces", serif; font-size: 1.2rem; letter-spacing: 0.15em; color: var(--menu-cream); margin: 0 0 6px; }
     .menu-footer__tagline { font-family: Georgia, serif; font-style: italic; color: var(--menu-ember); margin: 0 0 16px; }
     .menu-footer address { font-style: normal; font-family: "Share Tech Mono", monospace; font-size: 0.78rem; line-height: 1.8; color: var(--menu-text-dim); }
-    .menu-footer__col-title { font-family: "Cinzel", serif; font-size: 0.9rem; letter-spacing: 0.12em; color: var(--menu-cream); margin: 0 0 14px; }
+    .menu-footer__col-title { font-family: "Fraunces", serif; font-size: 0.9rem; letter-spacing: 0.12em; color: var(--menu-cream); margin: 0 0 14px; }
     .menu-footer ul { list-style: none; padding: 0; margin: 0; }
     .menu-footer li { margin: 8px 0; }
     .menu-footer a { color: var(--menu-text-dim); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
