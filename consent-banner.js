@@ -54,10 +54,16 @@
     },
     google: {
       analyticsId: 'G-JZGDBW5K7Q',
-      adsId: '',
-      conversionSendTo: ''
-    }
+      // TODO(Andrew): provision a DEDICATED El Sanatorio Google Ads id + conversion action.
+      // Do NOT reuse AW-17992921547 (shared by mapana/juno — would cross-contaminate data).
+      adsId: 'AW-XXXXXXXXXX',
+      conversionSendTo: 'AW-XXXXXXXXXX/yyyy'
+    },
+    // TODO(Andrew): real Meta/Instagram Pixel id. Placeholder stays dormant until set.
+    metaPixelId: 'XXXXXXXXXXXXXXX'
   };
+
+  function isPlaceholder(v) { return !v || v.indexOf('XXXX') !== -1; }
 
   /* ── 1. DATAAYER / GTAG BOOTSTRAP ── */
   window.dataLayer = window.dataLayer || [];
@@ -112,7 +118,7 @@
     configuredAds: false,
     sentThankYouConversion: false,
     shouldSendThankYouConversion: function () {
-      return /\/thank-you(?:\.html)?\/?$/.test(window.location.pathname || '');
+      return /\/gracias(?:\.html)?\/?$/.test(window.location.pathname || '');
     },
     load: function (prefs) {
       if (!prefs || (!prefs.analytics && !prefs.ads)) return;
@@ -131,12 +137,12 @@
         window.gtag('config', CONFIG.google.analyticsId);
       }
 
-      if (prefs.ads && CONFIG.google.adsId && !GoogleTags.configuredAds) {
+      if (prefs.ads && CONFIG.google.adsId && !isPlaceholder(CONFIG.google.adsId) && !GoogleTags.configuredAds) {
         GoogleTags.configuredAds = true;
         window.gtag('config', CONFIG.google.adsId);
       }
 
-      if (prefs.ads && CONFIG.google.conversionSendTo && GoogleTags.shouldSendThankYouConversion() && !GoogleTags.sentThankYouConversion) {
+      if (prefs.ads && CONFIG.google.conversionSendTo && !isPlaceholder(CONFIG.google.conversionSendTo) && GoogleTags.shouldSendThankYouConversion() && !GoogleTags.sentThankYouConversion) {
         GoogleTags.sentThankYouConversion = true;
         window.gtag('event', 'conversion', { 'send_to': CONFIG.google.conversionSendTo });
       }
@@ -163,6 +169,7 @@
         'consent_timestamp':           new Date().getTime()
       });
       GoogleTags.load(prefs);
+      loadMetaPixel(prefs.ads);
       ConsentDispatcher._dispatchFbq(prefs.ads);
     },
     _dispatchFbq: function (granted) {
@@ -175,6 +182,29 @@
       tryFbq();
     }
   };
+
+  /* ── 3b. META PIXEL (consent-gated; dormant until real id) ── */
+  function loadMetaPixel(adsGranted) {
+    if (!adsGranted || isPlaceholder(CONFIG.metaPixelId) || window.__esPixelLoaded) return;
+    window.__esPixelLoaded = true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/es_LA/fbevents.js');
+    window.fbq('consent','grant'); window.fbq('init', CONFIG.metaPixelId); window.fbq('track','PageView');
+  }
+
+  /* ── 3c. CONVERSION EVENTS (delegated; harmless before tags are live) ── */
+  document.addEventListener('submit', function () {
+    try { window.gtag('event','generate_lead',{event_category:'lead'}); } catch(e){}
+    try { if (typeof window.fbq==='function') window.fbq('track','Lead'); } catch(e){}
+    if (CONFIG.google.conversionSendTo && !isPlaceholder(CONFIG.google.conversionSendTo)) {
+      try { window.gtag('event','conversion',{ send_to: CONFIG.google.conversionSendTo }); } catch(e){}
+    }
+  }, true);
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"]') : null;
+    if (!a) return;
+    try { window.gtag('event','whatsapp_click',{event_category:'lead'}); } catch(e){}
+    try { if (typeof window.fbq==='function') window.fbq('track','Contact'); } catch(e){}
+  }, true);
 
   /* ── 4. RESTORE RETURNING USER ── */
   var _existingConsent = Storage.load();
