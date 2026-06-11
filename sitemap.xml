@@ -43,6 +43,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://el-sanatorio.com/tools/prescripcion/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://el-sanatorio.com/tours</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>

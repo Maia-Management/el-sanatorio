@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <script src="/consent-banner.js?v=20260430d" defer></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tu Prescripción | Diagnóstico de Cóctel — El Sanatorio, Santa Marta</title>
+  <meta name="description" content="Evaluación de admisión: cinco preguntas y el Doctor de turno te receta tu Prescripción — el cóctel de El Sanatorio que tu cuadro clínico exige." />
+  <meta property="og:title" content="Tu Prescripción — Diagnóstico de Cóctel | El Sanatorio" />
+  <meta property="og:description" content="No vendemos cócteles — los recetamos. Responde la evaluación de admisión y recibe tu diagnóstico." />
+  <meta property="og:url" content="https://el-sanatorio.com/tools/prescripcion/" />
+  <meta property="og:image" content="https://el-sanatorio.com/images/og-image.jpg" />
+  <meta property="og:image:alt" content="El Sanatorio — Venue gastronómico y experiencia de terror en Santa Marta" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@MaiaGroupCO" />
+  <meta name="twitter:image" content="https://el-sanatorio.com/images/og-image.jpg" />
+  <link rel="canonical" href="https://el-sanatorio.com/tools/prescripcion/" />
+  <link rel="stylesheet" href="/css/style.css?v=20260430d" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <style>
+    .rx-hero {
+      min-height: auto;
+      padding: calc(var(--nav-h) + 4rem) 24px 2.5rem;
+      background:
+        radial-gradient(80% 60% at 50% 0%, rgba(220, 20, 60, 0.12), transparent 70%),
+        var(--black);
+      text-align: center;
+    }
+    .rx-hero h1 { color: var(--white); font-size: clamp(2.2rem, 6.5vw, 4.6rem); line-height: 1.04; margin-bottom: 1rem; }
+    .rx-hero p { max-width: 640px; margin: 0 auto; color: var(--off-white); }
+    .rx-hero .hero__cross { margin-bottom: 1rem; }
+
+    .rx-shell { padding: 2.5rem 0 5rem; background: var(--black); }
+    .rx-panel { max-width: 720px; margin: 0 auto; background: var(--panel-bg); border: 1px solid var(--border); position: relative; }
+    .rx-panel:before { content: ""; background: linear-gradient(90deg, var(--crimson), transparent); opacity: .4; height: 1px; position: absolute; top: 0; left: 0; right: 0; }
+    .rx-panel__header { background: var(--border); display: flex; justify-content: space-between; align-items: center; padding: 14px 22px; }
+    .rx-panel__title { font-family: var(--font-mono); letter-spacing: .3em; text-transform: uppercase; color: var(--off-white); font-size: .7rem; }
+    .rx-panel__ref { font-family: var(--font-mono); color: var(--crimson); letter-spacing: .15em; font-size: .62rem; }
+    .rx-panel__body { padding: 2rem 22px 2.5rem; }
+    @media (min-width: 600px) { .rx-panel__body { padding: 2.5rem 3rem 3rem; } }
+
+    .rx-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.75rem; }
+    .rx-progress__label { font-family: var(--font-mono); color: var(--gray); letter-spacing: .2em; font-size: .62rem; text-transform: uppercase; white-space: nowrap; }
+    .rx-progress__bar { flex: 1; height: 2px; background: var(--border); position: relative; }
+    .rx-progress__fill { position: absolute; inset: 0 auto 0 0; background: var(--crimson); width: 0%; transition: width .35s ease; }
+
+    .rx-q { font-family: var(--font-type); letter-spacing: .08em; text-transform: uppercase; color: var(--white); font-size: clamp(1.05rem, 2.6vw, 1.4rem); margin-bottom: .5rem; }
+    .rx-q-sub { font-family: var(--font-fell); font-style: italic; color: var(--gray); font-size: .88rem; margin-bottom: 1.5rem; }
+
+    .rx-options { display: flex; flex-direction: column; gap: .65rem; }
+    .rx-opt { display: flex; align-items: baseline; gap: .9rem; text-align: left; background: var(--black); border: 1px solid var(--border-mid); color: var(--off-white); font-family: var(--font-fell); font-size: .95rem; line-height: 1.55; padding: 14px 16px; min-height: 44px; cursor: pointer; transition: all .2s; width: 100%; }
+    .rx-opt:hover, .rx-opt:focus-visible { border-color: var(--crimson); background: #dc143c0d; }
+    .rx-opt__key { font-family: var(--font-mono); color: var(--crimson); font-size: .68rem; letter-spacing: .1em; flex-shrink: 0; }
+
+    .rx-processing { text-align: center; padding: 3rem 0 2rem; display: none; }
+    .rx-processing .blink { font-family: var(--font-mono); color: var(--green-bright); letter-spacing: .25em; font-size: .8rem; text-transform: uppercase; }
+
+    .rx-result { display: none; }
+    .rx-result__stamp { font-family: var(--font-mono); color: var(--gray); letter-spacing: .25em; text-transform: uppercase; font-size: .6rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .rx-result__rx { font-family: var(--font-serif); color: var(--crimson); font-size: 3rem; line-height: 1; float: right; margin-left: 1rem; }
+    .rx-result__dx { font-family: var(--font-mono); color: var(--crimson); letter-spacing: .3em; text-transform: uppercase; font-size: .65rem; margin-bottom: .5rem; }
+    .rx-result__name { font-family: var(--font-type); letter-spacing: .12em; text-transform: uppercase; color: var(--white); font-size: clamp(1.6rem, 5vw, 2.6rem); margin-bottom: 1rem; }
+    .rx-result__name .cocktail-tag { vertical-align: middle; }
+    .rx-result__desc { font-family: var(--font-fell); color: var(--off-white); font-size: 1rem; line-height: 1.8; margin-bottom: 1rem; }
+    .rx-result__quote { font-family: var(--font-mono); color: var(--gold); font-style: italic; letter-spacing: .05em; font-size: .78rem; border-left: 2px solid var(--gold); padding-left: 1rem; margin-bottom: 1.75rem; }
+    .rx-result__dosis { border: 1px dashed var(--border-bright); padding: 1rem 1.25rem; margin-bottom: 2rem; }
+    .rx-result__dosis p { font-family: var(--font-mono); color: var(--light-gray); font-size: .72rem; letter-spacing: .08em; line-height: 1.9; }
+    .rx-result__ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .rx-again { margin-top: 1.5rem; }
+    .rx-again button { background: none; border: none; cursor: pointer; font-family: var(--font-mono); color: var(--gray); letter-spacing: .2em; text-transform: uppercase; font-size: .62rem; text-decoration: underline; text-underline-offset: 4px; padding: 8px 0; min-height: 44px; }
+    .rx-again button:hover { color: var(--crimson); }
+
+    .rx-disclaimer { max-width: 720px; margin: 1.5rem auto 0; padding: 0 22px; }
+    .rx-disclaimer p { font-family: var(--font-mono); color: var(--gray); font-size: .62rem; letter-spacing: .08em; line-height: 1.9; text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Navegación principal">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">
+      <span class="nav__logo-num">PACIENTE 013</span>
+      <span class="nav__logo-name">EL SANATORIO</span>
+    </a>
+    <div class="nav__monitor" aria-hidden="true">
+      <svg viewBox="0 0 300 36" preserveAspectRatio="none">
+        <path class="ekg-line" d="M 0,18 L 30,18 L 45,12 L 60,27 L 66,0 L 75,34 L 90,18 L 120,18 L 135,12 L 150,27 L 156,0 L 165,34 L 180,18 L 300,18" />
+      </svg>
+    </div>
+    <ul class="nav__links" role="list">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/menu" class="active">Menú</a></li>
+      <li><a href="/experience">Experiencia</a></li>
+      <li><a href="/events">Eventos</a></li>
+      <li><a href="/tours">Tours</a></li>
+      <li><a href="/historia">Historia</a></li>
+      <li><a href="/contact">Contacto</a></li>
+      <li><a href="/tools/booking-calendar/">Reservar</a></li>
+    </ul>
+    <button type="button" class="nav__toggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav__mobile-menu" role="navigation">
+  <a href="/">Inicio</a>
+  <a href="/menu">Menú</a>
+  <a href="/experience">Experiencia</a>
+  <a href="/events">Eventos</a>
+  <a href="/tours">Tours</a>
+  <a href="/historia">Historia</a>
+  <a href="/contact">Contacto</a>
+  <a href="/tools/booking-calendar/">Reservar</a>
+</div>
+
+<!-- ── Hero ────────────────────────────────────────────────────── -->
+<header class="rx-hero">
+  <p class="hero__cross" aria-hidden="true">+ + +</p>
+  <h1>Tu Prescripción</h1>
+  <p>Aquí no se pide un cóctel. Se describe el cuadro clínico y el Doctor de turno receta.
+  Cinco preguntas. Un diagnóstico. <em>El establecimiento no se responsabiliza por efectos secundarios.</em></p>
+</header>
+
+<!-- ── Quiz ────────────────────────────────────────────────────── -->
+<main class="rx-shell">
+  <div class="container">
+    <div class="rx-panel">
+      <div class="rx-panel__header">
+        <span class="rx-panel__title">Evaluación de admisión — Barra</span>
+        <span class="rx-panel__ref" id="rx-patient">EXP. Nº ----</span>
+      </div>
+      <div class="rx-panel__body">
+
+        <div id="rx-quiz">
+          <div class="rx-progress">
+            <span class="rx-progress__label" id="rx-progress-label">Pregunta 1 / 5</span>
+            <div class="rx-progress__bar"><div class="rx-progress__fill" id="rx-progress-fill"></div></div>
+          </div>
+          <h2 class="rx-q" id="rx-question"></h2>
+          <p class="rx-q-sub" id="rx-question-sub"></p>
+          <div class="rx-options" id="rx-options" role="group" aria-labelledby="rx-question"></div>
+        </div>
+
+        <div class="rx-processing" id="rx-processing" aria-live="polite">
+          <p class="blink">Procesando diagnóstico…</p>
+        </div>
+
+        <div class="rx-result" id="rx-result" aria-live="polite">
+          <div class="rx-result__stamp">
+            <span id="rx-result-exp">EXPEDIENTE Nº ----</span>
+            <span id="rx-result-fecha"></span>
+          </div>
+          <span class="rx-result__rx" aria-hidden="true">℞</span>
+          <p class="rx-result__dx">Diagnóstico — Sección B</p>
+          <h2 class="rx-result__name" id="rx-result-name"></h2>
+          <p class="rx-result__desc" id="rx-result-desc"></p>
+          <p class="rx-result__quote" id="rx-result-quote"></p>
+          <div class="rx-result__dosis">
+            <p>POSOLOGÍA: una dosis, en barra, bajo supervisión del personal.<br>
+            VÍA DE ADMINISTRACIÓN: oral. PRESENTAR ESTE DIAGNÓSTICO EN BARRA.<br>
+            INTERACCIONES: combina bien con yakitori de la Sección A.</p>
+          </div>
+          <div class="rx-result__ctas">
+            <a class="btn btn--red" href="https://wa.me/19034598763?text=Hola%2C%20el%20Doctor%20me%20recet%C3%B3%20una%20Prescripci%C3%B3n%20en%20El%20Sanatorio%20y%20quiero%20reservar" target="_blank" rel="noopener noreferrer">Reservar tratamiento</a>
+            <a class="btn btn--white" href="/menu#cocktails">Ver Prescripciones</a>
+          </div>
+          <div class="rx-again">
+            <button type="button" id="rx-again-btn">Repetir evaluación — el cuadro cambió</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="rx-disclaimer">
+      <p>EL SANATORIO S.A.S. · NIT 902.051.563-5 · Calle 19 #4-23, Centro Histórico, Santa Marta.<br>
+      El exceso de alcohol es perjudicial para la salud. Prohibido el expendio de bebidas embriagantes a menores de edad.</p>
+    </div>
+  </div>
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__bottom" style="padding-top:0;">
+      <p class="footer__copy">© 2026 El Sanatorio — Santa Marta, Colombia. Todos los derechos reservados. | <a href="/privacy" style="color:inherit;text-decoration:underline;">Privacidad</a> | <a href="/terms" style="color:inherit;text-decoration:underline;">Términos</a> | <button type="button" onclick="if(window.MaiaConsent)window.MaiaConsent.reopenBanner();" style="color:inherit;background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline;">Gestionar cookies</button></p>
+      <p class="footer__patient">PACIENTE 013 — DESCONOCIDA — ACTIVA</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js?v=20260430d" defer></script>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Las 8 Prescripciones — Sección B del menú. Sin precios (pendiente Andrew). */
+  var COCKTAILS = {
+    morfina:     { name: 'La Morfina', tag: null,
+                   desc: 'Ron oscuro, maracuyá fresco, carbón activado, lima. Oscuro. Dulce. Adictivo por definición.',
+                   quote: '"Para el dolor que no tiene cura."' },
+    paracetamol: { name: 'El Paracetamol', tag: null,
+                   desc: 'Vodka, flor de saúco, pepino, tónica. Limpio. Preciso. Efectivo en dosis moderadas.',
+                   quote: '"Efectivo en dosis moderadas. Puede causar dependencia."' },
+    transfusion: { name: 'La Transfusión', tag: 'FIRMA',
+                   desc: 'Tequila, hibisco, naranja sanguina, enjuague de mezcal. Rojo. Vivo. Tipo O universal.',
+                   quote: '"Tipo O universal. Analizar grupo antes de administrar."' },
+    dosisletal:  { name: 'Dosis Letal', tag: null,
+                   desc: 'Triple medida de ron, jengibre, lima, ginger beer. No apto para menores ni cobardes.',
+                   quote: '"Requiere firma de consentimiento informado."' },
+    suero:       { name: 'Suero', tag: null,
+                   desc: 'Gin botánico, agua de coco, menta, borde de sal marina. Hidratación terapéutica. El primero que recomienda la enfermería.',
+                   quote: '"Hidratación terapéutica. Seguro para pacientes nuevos."' },
+    anestesia:   { name: 'La Anestesia', tag: null,
+                   desc: 'Mezcal, amaro, bitter de chocolate, expresión de naranja. Se administra antes del procedimiento. Sin retorno.',
+                   quote: '"Administrar antes del procedimiento. No conducir maquinaria."' },
+    sangre:      { name: 'Sangre de Paciente', tag: null,
+                   desc: 'Reducción de vino tinto, brandy, jarabe especiado. Tipo desconocido. Siempre hay suficiente.',
+                   quote: '"Tipo desconocido. Procedencia: Sala 7. No preguntar."' },
+    receta:      { name: 'La Receta', tag: 'CON PRESCRIPCIÓN',
+                   desc: 'Whisky, miel de acacia, limón, tomillo fresco. Solo con receta médica. El Doctor decide quién la merece.',
+                   quote: '"Solo con prescripción médica. Disponibilidad limitada."' }
+  };
+
+  /* Desempate: firma de la casa primero */
+  var TIE_ORDER = ['transfusion', 'morfina', 'anestesia', 'sangre', 'receta', 'dosisletal', 'suero', 'paracetamol'];
+
+  var QUESTIONS = [
+    {
+      q: 'Motivo de ingreso',
+      sub: 'Sea honesto. El historial es confidencial — más o menos.',
+      opts: [
+        { t: 'Un dolor que no se quita con nada.', w: { morfina: 3, anestesia: 1 } },
+        { t: 'Celebración: el paciente sobrevivió otra semana.', w: { transfusion: 3, dosisletal: 1 } },
+        { t: 'Observación de rutina. Primera visita al pabellón.', w: { suero: 3, paracetamol: 2 } },
+        { t: 'No recuerdo cómo llegué aquí.', w: { sangre: 3, anestesia: 1 } }
+      ]
+    },
+    {
+      q: 'Tolerancia declarada',
+      sub: 'La enfermería ajustará la dosis según su respuesta.',
+      opts: [
+        { t: 'Baja. Paciente delicado, tratar con cuidado.', w: { suero: 2, paracetamol: 2 } },
+        { t: 'Media. Dosis estándar, sin heroísmos.', w: { receta: 2, paracetamol: 1, transfusion: 1 } },
+        { t: 'Alta. Historial clínico extenso y documentado.', w: { anestesia: 2, morfina: 1, sangre: 1 } },
+        { t: 'Tráigame el consentimiento informado. Yo firmo.', w: { dosisletal: 3 } }
+      ]
+    },
+    {
+      q: 'Síntomas de sabor',
+      sub: '¿Qué pide el organismo esta noche?',
+      opts: [
+        { t: 'Dulce y oscuro, casi clandestino.', w: { morfina: 3, sangre: 1 } },
+        { t: 'Fresco, limpio, vegetal. Algo que perdone.', w: { paracetamol: 3, suero: 2 } },
+        { t: 'Amargo, herbal, con humo.', w: { anestesia: 3, receta: 1 } },
+        { t: 'Ácido, frutal, intenso. Que se sienta vivo.', w: { transfusion: 3, dosisletal: 1 } }
+      ]
+    },
+    {
+      q: 'Temperamento observado',
+      sub: 'Anotación del personal de turno.',
+      opts: [
+        { t: 'Tranquilo. Coopera con la enfermería.', w: { suero: 2, receta: 1, paracetamol: 1 } },
+        { t: 'Teatral. Exige espectáculo en cada procedimiento.', w: { transfusion: 2, sangre: 1 } },
+        { t: 'Clásico. No negocia con modas.', w: { receta: 3, morfina: 1 } },
+        { t: 'Impredecible. Mantener bajo vigilancia.', w: { dosisletal: 2, anestesia: 1, sangre: 1 } }
+      ]
+    },
+    {
+      q: 'Historial clínico',
+      sub: 'Base etílica de confianza del paciente.',
+      opts: [
+        { t: 'Ron. De familia caribeña.', w: { morfina: 2, dosisletal: 2 } },
+        { t: 'Gin o vodka. Procedimientos limpios.', w: { suero: 2, paracetamol: 2 } },
+        { t: 'Tequila o mezcal. Cicatrices con historia.', w: { transfusion: 2, anestesia: 2 } },
+        { t: 'Whisky o vino. Tratamientos de larga duración.', w: { receta: 2, sangre: 2 } }
+      ]
+    }
+  ];
+
+  var state = { step: 0, scores: {} };
+  var patientNo = 'EXP. Nº 0' + (Math.floor(Math.random() * 900) + 100);
+
+  var elQuiz = document.getElementById('rx-quiz');
+  var elProcessing = document.getElementById('rx-processing');
+  var elResult = document.getElementById('rx-result');
+  var elQ = document.getElementById('rx-question');
+  var elSub = document.getElementById('rx-question-sub');
+  var elOpts = document.getElementById('rx-options');
+  var elLabel = document.getElementById('rx-progress-label');
+  var elFill = document.getElementById('rx-progress-fill');
+
+  document.getElementById('rx-patient').textContent = patientNo;
+
+  function reset() {
+    state.step = 0;
+    state.scores = {};
+    Object.keys(COCKTAILS).forEach(function (k) { state.scores[k] = 0; });
+    elResult.style.display = 'none';
+    elProcessing.style.display = 'none';
+    elQuiz.style.display = 'block';
+    render();
+  }
+
+  function render() {
+    var q = QUESTIONS[state.step];
+    elLabel.textContent = 'Pregunta ' + (state.step + 1) + ' / ' + QUESTIONS.length;
+    elFill.style.width = ((state.step) / QUESTIONS.length * 100) + '%';
+    elQ.textContent = q.q;
+    elSub.textContent = q.sub;
+    elOpts.innerHTML = '';
+    var keys = ['A', 'B', 'C', 'D'];
+    q.opts.forEach(function (opt, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'rx-opt';
+      var k = document.createElement('span');
+      k.className = 'rx-opt__key';
+      k.textContent = keys[i] + ' —';
+      b.appendChild(k);
+      b.appendChild(document.createTextNode(' ' + opt.t));
+      b.addEventListener('click', function () { answer(opt.w); });
+      elOpts.appendChild(b);
+    });
+  }
+
+  function answer(weights) {
+    Object.keys(weights).forEach(function (k) { state.scores[k] += weights[k]; });
+    state.step += 1;
+    if (state.step < QUESTIONS.length) { render(); }
+    else { finish(); }
+  }
+
+  function finish() {
+    elQuiz.style.display = 'none';
+    elProcessing.style.display = 'block';
+    var winner = TIE_ORDER[0], best = -1;
+    TIE_ORDER.forEach(function (k) {
+      if (state.scores[k] > best) { best = state.scores[k]; winner = k; }
+    });
+    setTimeout(function () {
+      elProcessing.style.display = 'none';
+      showResult(winner);
+    }, 1400);
+  }
+
+  function showResult(key) {
+    var c = COCKTAILS[key];
+    document.getElementById('rx-result-exp').textContent = 'EXPEDIENTE ' + patientNo;
+    var d = new Date();
+    var pad = function (n) { return n < 10 ? '0' + n : n; };
+    document.getElementById('rx-result-fecha').textContent = pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear();
+    var nameEl = document.getElementById('rx-result-name');
+    nameEl.textContent = c.name;
+    if (c.tag) {
+      var tag = document.createElement('span');
+      tag.className = 'cocktail-tag';
+      tag.textContent = c.tag;
+      nameEl.appendChild(document.createTextNode(' '));
+      nameEl.appendChild(tag);
+    }
+    document.getElementById('rx-result-desc').textContent = c.desc;
+    document.getElementById('rx-result-quote').textContent = c.quote;
+    elResult.style.display = 'block';
+  }
+
+  document.getElementById('rx-again-btn').addEventListener('click', reset);
+  reset();
+})();
+</script>
+
+</body>
+</html>
