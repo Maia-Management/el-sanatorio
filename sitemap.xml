@@ -47,6 +47,18 @@
     <lastmod>2026-06-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="es-CO" href="https://el-sanatorio.com/tools/prescripcion/"/>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="https://el-sanatorio.com/en/tools/prescripcion/"/>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="https://el-sanatorio.com/tools/prescripcion/"/>
+  </url>
+  <url>
+    <loc>https://el-sanatorio.com/en/tools/prescripcion/</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="es-CO" href="https://el-sanatorio.com/tools/prescripcion/"/>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="https://el-sanatorio.com/en/tools/prescripcion/"/>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="https://el-sanatorio.com/tools/prescripcion/"/>
   </url>
   <url>
     <loc>https://el-sanatorio.com/tours</loc>
