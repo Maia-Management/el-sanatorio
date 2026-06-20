@@ -1,7 +1,58 @@
+# ============================================================================
+# El Sanatorio POS chain proxies — 2026-06-20
+# ============================================================================
+# The POS chain (PWAs + Netlify Functions) lives in the maia-management repo
+# at /vert/restaurant/sanatorio/{pos,pay,kitchen,floor,dice}/ and
+# /.netlify/functions/sanatorio-*. We proxy from el-sanatorio.com (this
+# site) to maia-management.com so staff QR codes + customer URLs can use
+# the el-sanatorio.com domain (e.g. https://el-sanatorio.com/pay/<order_id>).
+#
+# Proxy status 200 means the URL stays on el-sanatorio.com in the address
+# bar; behind the scenes Netlify fetches from maia-management.com.
+#
+# CRITICAL: when adding new POS routes, add them BEFORE the marketing-site
+# redirects below — Netlify processes the first match.
+# ============================================================================
+/pos                            https://maia-management.com/vert/restaurant/sanatorio/pos/  200
+/pos/                           https://maia-management.com/vert/restaurant/sanatorio/pos/  200
+/pos/*                          https://maia-management.com/vert/restaurant/sanatorio/pos/:splat  200
+/pay/:order_id                  https://maia-management.com/vert/restaurant/sanatorio/pay/?order_id=:order_id  200
+/pay/:order_id/wompi            https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout?order_id=:order_id  200
+/dice                           https://maia-management.com/vert/restaurant/sanatorio/dice/  200
+/dice/                          https://maia-management.com/vert/restaurant/sanatorio/dice/  200
+/dice/:order_id                 https://maia-management.com/vert/restaurant/sanatorio/dice/?order_id=:order_id  200
+/kitchen                        https://maia-management.com/vert/restaurant/sanatorio/kitchen/  200
+/kitchen/                       https://maia-management.com/vert/restaurant/sanatorio/kitchen/  200
+/floor                          https://maia-management.com/vert/restaurant/sanatorio/floor/  200
+/floor/                         https://maia-management.com/vert/restaurant/sanatorio/floor/  200
+/wompi-webhook                  https://maia-management.com/.netlify/functions/sanatorio-wompi-webhook  200
+
+# Sanatorio POS API endpoints (used by the PWAs above)
+/api/sanatorio-create-order            https://maia-management.com/.netlify/functions/sanatorio-create-order  200
+/api/sanatorio-print-ticket            https://maia-management.com/.netlify/functions/sanatorio-print-ticket  200
+/api/sanatorio-order-status            https://maia-management.com/.netlify/functions/sanatorio-order-status  200
+/api/sanatorio-update-order-status     https://maia-management.com/.netlify/functions/sanatorio-update-order-status  200
+/api/sanatorio-mark-paid-cash          https://maia-management.com/.netlify/functions/sanatorio-mark-paid-cash  200
+/api/sanatorio-dice-roll               https://maia-management.com/.netlify/functions/sanatorio-dice-roll  200
+/api/sanatorio-dice-claim              https://maia-management.com/.netlify/functions/sanatorio-dice-claim  200
+/api/sanatorio-dashboard-feed          https://maia-management.com/.netlify/functions/sanatorio-dashboard-feed  200
+/api/sanatorio-wompi-checkout          https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout  200
+/api/sanatorio-wompi-webhook           https://maia-management.com/.netlify/functions/sanatorio-wompi-webhook  200
+
+# ============================================================================
+# Marketing-site redirects (pre-existing)
+# ============================================================================
 /privacy       /privacidad.html                                  301
 /terms         /terminos.html                                    301
 /admisiones    /audicion                                         301
 /waitlist      /audicion#aviso                                   301
+/patient-013       /patient-013.html       200
+/patient-013/      /patient-013.html       301
+/paciente-013      /patient-013.html       301
+/aviso-cuarentena  /aviso-cuarentena.html  200
+/aviso-cuarentena/ /aviso-cuarentena.html  301
+/cuarentena        /aviso-cuarentena.html  301
+/reportar          /aviso-cuarentena.html  301
 /reserva       /contact.html                                     301
 /booking       /contact.html                                     301
 /carta         /menu.html                                        301
