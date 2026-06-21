@@ -845,6 +845,163 @@ button { cursor: pointer; font: inherit; color: inherit; background: transparent
 }
 .hz-research__link__title::after { content: ' ↗'; color: var(--hz-amber); opacity: 0.7; font-weight: 400; }
 
+/* ─────────────────────────────────────────────────────────────────── */
+/* Guestbook — "Cuéntanos qué encontraste" form                       */
+/* ─────────────────────────────────────────────────────────────────── */
+.hz-guestbook {
+  background: linear-gradient(180deg, rgba(10, 6, 3, 0.55) 0%, rgba(26, 17, 8, 0.85) 100%);
+  padding: 12vh clamp(20px, 5vw, 60px);
+  margin-top: 6vh;
+  border-top: 1px solid rgba(200, 132, 58, 0.18);
+  position: relative;
+}
+.hz-guestbook__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.hz-guestbook__crest {
+  font-family: var(--hz-type);
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--hz-amber);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 18px;
+}
+.hz-guestbook__title {
+  font-family: var(--hz-news);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(28px, 4.5vw, 44px);
+  color: var(--hz-paper);
+  text-align: center;
+  margin: 0 0 18px;
+  line-height: 1.15;
+}
+.hz-guestbook__lede {
+  font-family: var(--hz-body);
+  font-size: 15px;
+  color: var(--hz-paper-aged);
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 42px;
+  line-height: 1.6;
+}
+.hz-guestbook__form {
+  display: flex; flex-direction: column;
+  gap: 22px;
+  background: var(--hz-paper);
+  color: var(--hz-ink);
+  padding: clamp(28px, 5vw, 48px) clamp(22px, 4vw, 42px);
+  position: relative;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 30px 80px -20px rgba(0,0,0,0.85);
+}
+.hz-guestbook__form::before {
+  /* paper grain on the form card */
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 30% 18% at 12% 8%, rgba(155, 107, 61, 0.16) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 15% at 92% 88%, rgba(155, 107, 61, 0.12) 0%, transparent 70%),
+    repeating-linear-gradient(115deg, rgba(155, 107, 61, 0.025) 0 2px, transparent 2px 5px);
+  mix-blend-mode: multiply;
+}
+.hz-guestbook__form > * { position: relative; z-index: 1; }
+.hz-guestbook__row {
+  display: flex; flex-direction: column;
+  gap: 6px;
+}
+.hz-guestbook__row label {
+  font-family: var(--hz-type);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--hz-ink);
+  text-transform: uppercase;
+}
+.hz-guestbook__opt {
+  font-family: var(--hz-body);
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--hz-ink-dim);
+  text-transform: none;
+  margin-left: 4px;
+}
+.hz-guestbook__form input[type="text"],
+.hz-guestbook__form input[type="email"],
+.hz-guestbook__form textarea {
+  font-family: var(--hz-type);
+  font-size: 15px;
+  color: var(--hz-ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid rgba(91, 65, 40, 0.6);
+  padding: 8px 2px;
+  letter-spacing: 0.01em;
+  width: 100%;
+  resize: vertical;
+  line-height: 1.5;
+}
+.hz-guestbook__form input::placeholder,
+.hz-guestbook__form textarea::placeholder {
+  color: var(--hz-ink-faint);
+  font-style: italic;
+}
+.hz-guestbook__form input:focus,
+.hz-guestbook__form textarea:focus {
+  outline: none;
+  border-bottom-color: var(--hz-stamp-red);
+}
+.hz-guestbook__form textarea {
+  min-height: 140px;
+  border: 1.5px solid rgba(91, 65, 40, 0.45);
+  padding: 12px;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.hz-guestbook__form textarea:focus {
+  border-color: var(--hz-stamp-red);
+}
+.hz-guestbook__submit {
+  margin-top: 6px;
+  align-self: flex-start;
+  padding: 14px 28px;
+  font-family: var(--hz-type);
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--hz-paper);
+  background: var(--hz-ink);
+  border: 0;
+  cursor: pointer;
+  transition: background 220ms ease-out, transform 220ms ease-out;
+}
+.hz-guestbook__submit:hover {
+  background: var(--hz-stamp-red);
+  transform: translateY(-1px);
+}
+.hz-guestbook__submit:focus-visible {
+  outline: 2px solid var(--hz-amber);
+  outline-offset: 3px;
+}
+.hz-guestbook__legal {
+  font-family: var(--hz-body);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--hz-ink-dim);
+  margin: 6px 0 0;
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .hz-guestbook { padding: 8vh 18px; }
+  .hz-guestbook__form { padding: 28px 20px; }
+  .hz-guestbook__submit { width: 100%; text-align: center; align-self: stretch; }
+}
+
 /* footer */
 .hz-foot {
   text-align: center;
