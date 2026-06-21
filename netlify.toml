@@ -127,6 +127,46 @@
   status = 301
   force = true
 
+# ============================================================================
+# EL HALLAZGO — recovered-documents chronicle (2026-06-21)
+# Primary URL: /el-hallazgo  ·  Aliases: /chronicle, /cronica
+# Source file: /el-hallazgo.html  (static)
+# ============================================================================
+[[redirects]]
+  from = "/el-hallazgo"
+  to = "/el-hallazgo.html"
+  status = 200
+
+[[redirects]]
+  from = "/el-hallazgo.html"
+  to = "/el-hallazgo"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/chronicle"
+  to = "/el-hallazgo"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cronica"
+  to = "/el-hallazgo"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/crónica"
+  to = "/el-hallazgo"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hallazgo"
+  to = "/el-hallazgo"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/experiencia"
   to = "/experience"
