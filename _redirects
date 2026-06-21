@@ -60,3 +60,8 @@
 /horario       /contact.html                                     301
 /faq           /experience.html                                  301
 /empleo        https://maia-recruitment.com/candidates           301!
+
+# === Cinematic v2 fallback ===
+/legacy   /index-legacy.html   200
+/legacy/  /index-legacy.html   200
+
