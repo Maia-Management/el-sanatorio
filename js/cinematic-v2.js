@@ -1,5 +1,5 @@
 ﻿/* ===========================================================================
-   El Sanatorio â€” Cinematic v2 orchestration
+   El Sanatorio — Cinematic v2 orchestration
    2026-06-21
    Loads: GSAP + ScrollTrigger, Lenis smooth scroll, Three.js film-grain
    shader, ambient sound (Howler), cursor spotlight, reveal animations,
@@ -7,7 +7,7 @@
    Family Pass calculator, booking estimator, Hortensia chat widget.
 
    All third-party libs are loaded via CDN in index.html. This module is
-   plain ES2022 â€” no build step, no bundler. Targets modern Evergreen
+   plain ES2022 — no build step, no bundler. Targets modern Evergreen
    browsers (Chrome/Safari/Firefox 2024+). Reduced-motion users get a
    static-friendly fallback per the @media (prefers-reduced-motion) block
    in cinematic-v2.css.
@@ -120,7 +120,7 @@
 
         void main() {
           vec2 uv = vUv;
-          // 16mm grain â€” animated noise, with temporal lock at ~24fps
+          // 16mm grain — animated noise, with temporal lock at ~24fps
           float frame = floor(uTime * 24.0);
           float n = hash(uv * uResolution.xy * 0.5 + frame * 0.7);
           float grain = (n - 0.5) * uIntensity;
@@ -184,7 +184,7 @@
      ------------------------------------------------------------------ */
   function initScrollReveals() {
     if (!window.gsap || !window.ScrollTrigger) {
-      // graceful fallback â€” IntersectionObserver
+      // graceful fallback — IntersectionObserver
       const obs = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -248,7 +248,7 @@
   }
 
   /* ------------------------------------------------------------------
-     5. AMBIENT SOUND (Howler) â€” opt-in
+     5. AMBIENT SOUND (Howler) — opt-in
      ------------------------------------------------------------------ */
   function initSound() {
     const toggle = document.querySelector('.sound-toggle');
@@ -260,7 +260,7 @@
     toggle.addEventListener('click', () => {
       if (!sound && window.Howl) {
         sound = new Howl({
-          // ambient hospital corridor murmur â€” base64 silence by default;
+          // ambient hospital corridor murmur — base64 silence by default;
           // when Andrew commissions the audio, drop file into /audio/ambient-asilo.mp3
           src: ['/audio/ambient-asilo.mp3', '/audio/ambient-asilo.ogg'],
           loop: true, volume: 0.35, html5: true,
@@ -276,34 +276,34 @@
   }
 
   /* ------------------------------------------------------------------
-     6. CUIDADORES â€” current week categorÃ­a (12-week rotation)
+     6. CUIDADORES — current week categoría (12-week rotation)
      Source: PROGRAMA-CUIDADORES-SANTA-MARTA-2026-06-21.md Â§2
      ------------------------------------------------------------------ */
   const CUIDADORES_ROTATION = [
-    { startISO: '2026-06-24', wed: 'Maestros',    sun: 'Madres Cabeza de Familia',     code: 'MAESTRO-SM',  copy: 'Para los profes que aguantan el aÃ±o entero corrigiendo a media luz â€” esta noche es de ustedes.' },
-    { startISO: '2026-07-01', wed: 'Enfermeras',  sun: 'Adultos Mayores 65+',          code: 'ENFE-SM',     copy: 'Las que cuidan a Santa Marta todo el aÃ±o. Una noche, dÃ©jenos cuidarlas a ustedes.' },
-    { startISO: '2026-07-08', wed: 'Bomberos',    sun: 'Personas con Discapacidad',    code: 'BOMBERO-SM',  copy: 'Bomberos voluntarios y oficiales â€” los que corren cuando todos huyen. Una noche con nosotros.' },
-    { startISO: '2026-07-15', wed: 'PolicÃ­a Nacional', sun: 'Madres Cabeza de Familia', code: 'POLI-SM',    copy: 'Comando Magdalena â€” una noche tranquila con los tuyos. Te la mereces.' },
-    { startISO: '2026-07-22', wed: 'MÃ©dicos',     sun: 'Adultos Mayores 65+',          code: 'MEDICO-SM',   copy: 'A los mÃ©dicos y mÃ©dicas de Santa Marta â€” bajen la bata un rato.' },
-    { startISO: '2026-07-29', wed: 'Militares (Armada)', sun: 'Maestros',              code: 'ARMADA-SM',   copy: 'Marinos de la Armada Nacional â€” nos cuidan el mar. Esta noche les pagamos un poco para atrÃ¡s.' },
-    { startISO: '2026-08-05', wed: 'Trabajadores de la Salud', sun: 'Madres Cabeza de Familia', code: 'SALUD-SM', copy: 'Auxiliares, terapeutas, tÃ©cnicos â€” lo que ustedes sostienen no se ve en la TV, pero nosotros lo vemos.' },
+    { startISO: '2026-06-24', wed: 'Maestros',    sun: 'Madres Cabeza de Familia',     code: 'MAESTRO-SM',  copy: 'Para los profes que aguantan el año entero corrigiendo a media luz — esta noche es de ustedes.' },
+    { startISO: '2026-07-01', wed: 'Enfermeras',  sun: 'Adultos Mayores 65+',          code: 'ENFE-SM',     copy: 'Las que cuidan a Santa Marta todo el año. Una noche, déjenos cuidarlas a ustedes.' },
+    { startISO: '2026-07-08', wed: 'Bomberos',    sun: 'Personas con Discapacidad',    code: 'BOMBERO-SM',  copy: 'Bomberos voluntarios y oficiales — los que corren cuando todos huyen. Una noche con nosotros.' },
+    { startISO: '2026-07-15', wed: 'Policía Nacional', sun: 'Madres Cabeza de Familia', code: 'POLI-SM',    copy: 'Comando Magdalena — una noche tranquila con los tuyos. Te la mereces.' },
+    { startISO: '2026-07-22', wed: 'Médicos',     sun: 'Adultos Mayores 65+',          code: 'MEDICO-SM',   copy: 'A los médicos y médicas de Santa Marta — bajen la bata un rato.' },
+    { startISO: '2026-07-29', wed: 'Militares (Armada)', sun: 'Maestros',              code: 'ARMADA-SM',   copy: 'Marinos de la Armada Nacional — nos cuidan el mar. Esta noche les pagamos un poco para atrás.' },
+    { startISO: '2026-08-05', wed: 'Trabajadores de la Salud', sun: 'Madres Cabeza de Familia', code: 'SALUD-SM', copy: 'Auxiliares, terapeutas, técnicos — lo que ustedes sostienen no se ve en la TV, pero nosotros lo vemos.' },
     { startISO: '2026-08-12', wed: 'Maestros',    sun: 'Adultos Mayores 65+',          code: 'MAESTRO2-SM', copy: 'Segunda vuelta: profes, esta semana es para ustedes y los suyos.' },
-    { startISO: '2026-08-19', wed: 'Enfermeras',  sun: 'Personas con Discapacidad',    code: 'ENFE2-SM',    copy: 'Enfermeras del TÃ³rax, del Prado, del General â€” vuelvan, esta noche estÃ¡ apartada.' },
-    { startISO: '2026-08-26', wed: 'Primeros Respondientes (Bomberos + PolicÃ­a)', sun: 'Madres Cabeza de Familia', code: '1ROS-SM', copy: 'Bomberos y PolicÃ­a juntos â€” los hÃ©roes en uniforme. Una mesa larga.' },
-    { startISO: '2026-09-02', wed: 'MÃ©dicos',     sun: 'Adultos Mayores 65+',          code: 'MEDICO2-SM',  copy: 'Segunda vuelta mÃ©dica â€” guardia de 36 horas merece descanso de 3.' },
-    { startISO: '2026-09-09', wed: 'Militares (Armada)', sun: 'Personas con Discapacidad + Cuidadores', code: 'ARMADA2-SM', copy: 'Armada Nacional â€” segunda noche del puerto, esta semana abrimos para ustedes.' },
+    { startISO: '2026-08-19', wed: 'Enfermeras',  sun: 'Personas con Discapacidad',    code: 'ENFE2-SM',    copy: 'Enfermeras del Tórax, del Prado, del General — vuelvan, esta noche está apartada.' },
+    { startISO: '2026-08-26', wed: 'Primeros Respondientes (Bomberos + Policía)', sun: 'Madres Cabeza de Familia', code: '1ROS-SM', copy: 'Bomberos y Policía juntos — los héroes en uniforme. Una mesa larga.' },
+    { startISO: '2026-09-02', wed: 'Médicos',     sun: 'Adultos Mayores 65+',          code: 'MEDICO2-SM',  copy: 'Segunda vuelta médica — guardia de 36 horas merece descanso de 3.' },
+    { startISO: '2026-09-09', wed: 'Militares (Armada)', sun: 'Personas con Discapacidad + Cuidadores', code: 'ARMADA2-SM', copy: 'Armada Nacional — segunda noche del puerto, esta semana abrimos para ustedes.' },
   ];
   const FAMILY_PASS_CATEGORIES = [
     { value: 'maestros',     label: 'Maestro / Profesor',           id: 'Carnet del Magisterio / del colegio' },
     { value: 'enfermeras',   label: 'Enfermera / Enfermero',         id: 'Tarjeta COMENAL / carnet hospitalario' },
     { value: 'bomberos',     label: 'Bombero (voluntario u oficial)',id: 'Carnet del Cuerpo de Bomberos' },
-    { value: 'policia',      label: 'PolicÃ­a Nacional',              id: 'Carnet de la PolicÃ­a Nacional' },
-    { value: 'medicos',      label: 'MÃ©dico (general o especialista)',id: 'Tarjeta MinSalud / carnet hospitalario' },
-    { value: 'militares',    label: 'Militar (Armada / EjÃ©rcito / FAC)', id: 'Carnet militar vigente' },
-    { value: 'madres',       label: 'Madre Cabeza de Familia',       id: 'RUV / Sec. de la Mujer / carta del pÃ¡rroco' },
-    { value: 'mayores',      label: 'Adulto Mayor (65+)',            id: 'CÃ©dula (edad â‰¥65)' },
+    { value: 'policia',      label: 'Policía Nacional',              id: 'Carnet de la Policía Nacional' },
+    { value: 'medicos',      label: 'Médico (general o especialista)',id: 'Tarjeta MinSalud / carnet hospitalario' },
+    { value: 'militares',    label: 'Militar (Armada / Ejército / FAC)', id: 'Carnet militar vigente' },
+    { value: 'madres',       label: 'Madre Cabeza de Familia',       id: 'RUV / Sec. de la Mujer / carta del párroco' },
+    { value: 'mayores',      label: 'Adulto Mayor (65+)',            id: 'Cédula (edad â‰¥65)' },
     { value: 'discapacidad', label: 'Persona con Discapacidad',      id: 'Carnet RLCPD' },
-    { value: 'salud',        label: 'Trabajador de la Salud (aux./tÃ©c.)', id: 'Carnet hospitalario' },
+    { value: 'salud',        label: 'Trabajador de la Salud (aux./téc.)', id: 'Carnet hospitalario' },
     { value: 'ninguno',      label: 'Ninguna de las anteriores',     id: null }
   ];
 
@@ -325,7 +325,7 @@
 
   function fmtSpanishDate(d) {
     const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-    const days = ['domingo','lunes','martes','miÃ©rcoles','jueves','viernes','sÃ¡bado'];
+    const days = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
     return `${days[d.getDay()]} ${d.getDate()} de ${months[d.getMonth()]}`;
   }
 
@@ -335,7 +335,7 @@
     const elMeta = document.querySelector('[data-cuidadores-meta]');
     const elCopy = document.querySelector('[data-cuidadores-copy]');
     if (elCat) elCat.textContent = wk.wed;
-    if (elMeta) elMeta.textContent = `MiÃ©rcoles Â· ${fmtSpanishDate(wk.nextWed)} Â· Domingo: ${wk.sun}`;
+    if (elMeta) elMeta.textContent = `Miércoles · ${fmtSpanishDate(wk.nextWed)} · Domingo: ${wk.sun}`;
     if (elCopy) elCopy.textContent = wk.copy;
 
     // populate Family Pass select
@@ -368,23 +368,23 @@
 
       if (!cat || cat === 'ninguno') {
         result.classList.add('is-ineligible');
-        result.innerHTML = `El 2 por 1 de Cuidadores no aplica en tu caso â€” pero la entrada estÃ¡ndar son <strong>$50.000 COP</strong> por persona, mesa para todos. <br><br>Te dejo el chat de Hortensia para reservar.`;
+        result.innerHTML = `El 2 por 1 de Cuidadores no aplica en tu caso — pero la entrada estándar son <strong>$50.000 COP</strong> por persona, mesa para todos. <br><br>Te dejo el chat de Hortensia para reservar.`;
         return;
       }
       if (size < 4 || size % 2 !== 0 || size > 8) {
         result.classList.add('is-ineligible');
-        result.innerHTML = `El Programa Cuidadores es <strong>2 por 1</strong> â€” aplica desde 4 personas y en pares (4, 6 u 8). Ajusta el grupo y la casa los recibe.`;
+        result.innerHTML = `El Programa Cuidadores es <strong>2 por 1</strong> — aplica desde 4 personas y en pares (4, 6 u 8). Ajusta el grupo y la casa los recibe.`;
         return;
       }
       const totalStd = size * TIER_PRICES.standard;
       const totalPass = (size / 2) * TIER_PRICES.standard; // pay for half the group (2 por 1)
       const savings = totalStd - totalPass;
       const msg = encodeURIComponent(
-        `Hola, soy ${categoryObj.label} de Santa Marta. Vi lo del Programa Cuidadores y quiero reservar 2 por 1 para ${size} personas â€” pagamos ${size/2}, entramos ${size}. Â¿CÃ³mo hago?`
+        `Hola, soy ${categoryObj.label} de Santa Marta. Vi lo del Programa Cuidadores y quiero reservar 2 por 1 para ${size} personas — pagamos ${size/2}, entramos ${size}. ¿Cómo hago?`
       );
       result.classList.add('is-eligible');
       result.innerHTML = `
-        <strong>Â¡Califican!</strong> Programa Cuidadores Â· <em>${categoryObj.label}</em> Â· <strong>2 por 1</strong> para ${size} personas.<br><br>
+        <strong>¡Califican!</strong> Programa Cuidadores · <em>${categoryObj.label}</em> · <strong>2 por 1</strong> para ${size} personas.<br><br>
         Pagan <strong>${size/2}</strong>, entran <strong>${size}</strong>. Total cubierto: <strong>$${totalPass.toLocaleString('es-CO')} COP</strong> (frente a $${totalStd.toLocaleString('es-CO')} general).<br>
         Ahorran <strong>$${savings.toLocaleString('es-CO')} COP</strong>. Comida y cocteles a precio normal. Trae ${categoryObj.id} vigente a la entrada.
         <br><a class="fpc__cta" href="${WA_BASE}?text=${msg}" target="_blank" rel="noopener">Reservar por WhatsApp</a>
@@ -393,29 +393,29 @@
   }
 
   /* ------------------------------------------------------------------
-     8. PATIENT ID GENERATOR (Section 4 â€” Programa Ficha del Paciente)
+     8. PATIENT ID GENERATOR (Section 4 — Programa Ficha del Paciente)
      ------------------------------------------------------------------ */
   const PATIENT_ARCHETYPES = {
-    'AÃ': { name: 'El Cantador Hilario', sobriquet: 'El Proyector Humano', dx: 'Cree que Norm Lewis le canta a travÃ©s de la pared. Tratamiento: subirle el brillo.' },
-    'B':  { name: 'Don Bellasrio',       sobriquet: 'El TelÃ©grafo',        dx: 'EnvÃ­a mensajes Morse al puerto con los dientes. Tratamiento: ticker-tape diario.' },
-    'C':  { name: 'Carmela la Costurera', sobriquet: 'La Mano Firme',      dx: 'Insiste en coser todo dos veces. Tratamiento: hilo de algodÃ³n abundante.' },
-    'D':  { name: 'Don Aldo',            sobriquet: 'El Ciudadano',        dx: 'Habla con la pared del jardÃ­n. La pared responde. Tratamiento: mediar con paciencia.' },
-    'E':  { name: 'Eulalia',             sobriquet: 'La que Vio',          dx: 'Ve lo que viene maÃ±ana. Tratamiento: ignorar lo que ya no se puede evitar.' },
-    'F':  { name: 'FermÃ­n',              sobriquet: 'El Cuentista',        dx: 'Recuerda cosas que no pasaron. Y a veces pasan. Tratamiento: anotar todo.' },
-    'G':  { name: 'Genoveva',            sobriquet: 'La Encendedora',      dx: 'Prende fÃ³sforos para hablar con los muertos. Tratamiento: cerillas hÃºmedas.' },
-    'H':  { name: 'Don Hilario',         sobriquet: 'El Proyector Humano', dx: 'Cree proyectar pelÃ­culas con la cara. Tratamiento: pasarle el trapo de la lente.' },
-    'IJ': { name: 'JoaquÃ­n',             sobriquet: 'El CronÃ³metro',       dx: 'Sabe quÃ© hora es sin reloj. Y nunca se equivoca. Tratamiento: respetarle el ritmo.' },
-    'K':  { name: 'KÃ¡trina',             sobriquet: 'La Sombra',           dx: 'Camina sin hacer ruido. A veces aparece dos veces. Tratamiento: ofrecerle siempre dos sillas.' },
-    'L':  { name: 'Lupita',              sobriquet: 'La Cocinera',         dx: 'Cocina platos que nadie pidiÃ³. Todos saben buenos. Tratamiento: agradecer.' },
+    'AÁ': { name: 'El Cantador Hilario', sobriquet: 'El Proyector Humano', dx: 'Cree que Norm Lewis le canta a través de la pared. Tratamiento: subirle el brillo.' },
+    'B':  { name: 'Don Bellasrio',       sobriquet: 'El Telégrafo',        dx: 'Envía mensajes Morse al puerto con los dientes. Tratamiento: ticker-tape diario.' },
+    'C':  { name: 'Carmela la Costurera', sobriquet: 'La Mano Firme',      dx: 'Insiste en coser todo dos veces. Tratamiento: hilo de algodón abundante.' },
+    'D':  { name: 'Don Aldo',            sobriquet: 'El Ciudadano',        dx: 'Habla con la pared del jardín. La pared responde. Tratamiento: mediar con paciencia.' },
+    'E':  { name: 'Eulalia',             sobriquet: 'La que Vio',          dx: 'Ve lo que viene mañana. Tratamiento: ignorar lo que ya no se puede evitar.' },
+    'F':  { name: 'Fermín',              sobriquet: 'El Cuentista',        dx: 'Recuerda cosas que no pasaron. Y a veces pasan. Tratamiento: anotar todo.' },
+    'G':  { name: 'Genoveva',            sobriquet: 'La Encendedora',      dx: 'Prende fósforos para hablar con los muertos. Tratamiento: cerillas húmedas.' },
+    'H':  { name: 'Don Hilario',         sobriquet: 'El Proyector Humano', dx: 'Cree proyectar películas con la cara. Tratamiento: pasarle el trapo de la lente.' },
+    'IJ': { name: 'Joaquín',             sobriquet: 'El Cronómetro',       dx: 'Sabe qué hora es sin reloj. Y nunca se equivoca. Tratamiento: respetarle el ritmo.' },
+    'K':  { name: 'Kátrina',             sobriquet: 'La Sombra',           dx: 'Camina sin hacer ruido. A veces aparece dos veces. Tratamiento: ofrecerle siempre dos sillas.' },
+    'L':  { name: 'Lupita',              sobriquet: 'La Cocinera',         dx: 'Cocina platos que nadie pidió. Todos saben buenos. Tratamiento: agradecer.' },
     'M':  { name: 'Micaela',             sobriquet: 'La Modista del Pus',  dx: 'Cose miembros perdidos por la noche. Muy tranquila. Tratamiento: dejarla.' },
-    'N':  { name: 'La NiÃ±a Marta',       sobriquet: 'La AcompaÃ±ante',      dx: 'Tiene 8 aÃ±os desde 1957. No envejece. Tratamiento: traerle dulces.' },
-    'OÃ‘': { name: 'Olga',                sobriquet: 'La Profesora',        dx: 'Da clases de cosas que nunca enseÃ±Ã³. Los alumnos sÃ­ aprenden. Tratamiento: tomar nota.' },
-    'P':  { name: 'DoÃ±a Pilar',          sobriquet: 'La Recepcionista',    dx: 'Lleva 23 aÃ±os en el turno noche. Conoce a todos. Tratamiento: ningÃºn cambio.' },
-    'QR': { name: 'Rosa',                sobriquet: 'La Tejedora',         dx: 'Teje una bufanda que no termina. Tratamiento: comprarle mÃ¡s lana.' },
-    'S':  { name: 'Soledad',             sobriquet: 'La Silenciosa',       dx: 'Habla solo en sueÃ±os. Y predice. Tratamiento: una almohada nueva.' },
-    'T':  { name: 'TobÃ­as',              sobriquet: 'El Coleccionista',    dx: 'Guarda cucharas debajo de la cama. 247 hasta ahora. Tratamiento: no contar.' },
+    'N':  { name: 'La Niña Marta',       sobriquet: 'La Acompañante',      dx: 'Tiene 8 años desde 1957. No envejece. Tratamiento: traerle dulces.' },
+    'OÃ‘': { name: 'Olga',                sobriquet: 'La Profesora',        dx: 'Da clases de cosas que nunca enseñó. Los alumnos sí aprenden. Tratamiento: tomar nota.' },
+    'P':  { name: 'Doña Pilar',          sobriquet: 'La Recepcionista',    dx: 'Lleva 23 años en el turno noche. Conoce a todos. Tratamiento: ningún cambio.' },
+    'QR': { name: 'Rosa',                sobriquet: 'La Tejedora',         dx: 'Teje una bufanda que no termina. Tratamiento: comprarle más lana.' },
+    'S':  { name: 'Soledad',             sobriquet: 'La Silenciosa',       dx: 'Habla solo en sueños. Y predice. Tratamiento: una almohada nueva.' },
+    'T':  { name: 'Tobías',              sobriquet: 'El Coleccionista',    dx: 'Guarda cucharas debajo de la cama. 247 hasta ahora. Tratamiento: no contar.' },
     'UV': { name: 'Ãšrsula',              sobriquet: 'La que Reza',         dx: 'Reza a los santos que no existen. Le funciona. Tratamiento: encomendarse.' },
-    'WXYZ': { name: 'Yolanda',           sobriquet: 'La Ãšltima',           dx: 'Es la Ãºltima que llegÃ³ al pabellÃ³n. Nunca habla. Tratamiento: esperarla.' }
+    'WXYZ': { name: 'Yolanda',           sobriquet: 'La Ãšltima',           dx: 'Es la última que llegó al pabellón. Nunca habla. Tratamiento: esperarla.' }
   };
 
   function pickArchetype(name) {
@@ -443,7 +443,7 @@
       card.querySelector('[data-ficha-sobriquet]').textContent = arc.sobriquet;
       card.querySelector('[data-ficha-ingreso]').textContent = fmtSpanishDate(new Date());
       card.querySelector('[data-ficha-dx]').textContent = arc.dx;
-      const shareTxt = encodeURIComponent(`Mi ficha de paciente en El Sanatorio dice que soy "${arc.name} â€” ${arc.sobriquet}". ðŸ¥ Reserva la tuya: https://el-sanatorio.com`);
+      const shareTxt = encodeURIComponent(`Mi ficha de paciente en El Sanatorio dice que soy "${arc.name} — ${arc.sobriquet}". ðŸ¥ Reserva la tuya: https://el-sanatorio.com`);
       card.querySelector('[data-ficha-share]').href = `${WA_BASE}?text=${shareTxt}`;
       card.classList.add('is-visible');
       // smooth scroll to card
@@ -472,12 +472,12 @@
       const deposit = Math.round(total * 0.5);
       const balance = total - deposit;
       totalEl.textContent = `$${total.toLocaleString('es-CO')} COP`;
-      depEl.textContent = `DepÃ³sito 50%: $${deposit.toLocaleString('es-CO')}`;
+      depEl.textContent = `Depósito 50%: $${deposit.toLocaleString('es-CO')}`;
       balEl.textContent = `Saldo en la noche: $${balance.toLocaleString('es-CO')}`;
 
-      const tierLabel = tier.value === 'vip' ? "Director's Cut VIP" : 'Entrada EstÃ¡ndar';
+      const tierLabel = tier.value === 'vip' ? "Director's Cut VIP" : 'Entrada Estándar';
       const msg = encodeURIComponent(
-        `Hola Hortensia, quisiera reservar El Sanatorio: ${n} personas, ${tierLabel} ($${t.toLocaleString('es-CO')}/p). Total estimado $${total.toLocaleString('es-CO')} COP. Â¿Para quÃ© noche tenemos cupo?`
+        `Hola Hortensia, quisiera reservar El Sanatorio: ${n} personas, ${tierLabel} ($${t.toLocaleString('es-CO')}/p). Total estimado $${total.toLocaleString('es-CO')} COP. ¿Para qué noche tenemos cupo?`
       );
       waBtn.href = `${WA_BASE}?text=${msg}`;
       // Route through Hortensia (WhatsApp) so she creates a real booking + UUID order_id
@@ -511,7 +511,7 @@
       if ([0, 4, 5, 6].includes(dow)) nights.push(d);
     }
 
-    // try to fetch live availability (Supabase via Netlify Function) â€” graceful fallback
+    // try to fetch live availability (Supabase via Netlify Function) — graceful fallback
     let busy = new Set();
     try {
       const res = await fetch('/.netlify/functions/sanatorio-availability', { headers: { Accept: 'application/json' } });
@@ -521,7 +521,7 @@
       }
     } catch (_) { /* offline fallback OK */ }
 
-    const dayLabels = { 0: 'Dom', 4: 'Jue', 5: 'Vie', 6: 'SÃ¡b' };
+    const dayLabels = { 0: 'Dom', 4: 'Jue', 5: 'Vie', 6: 'Sáb' };
     grid.querySelector('.availability__nights')?.remove();
     if (loadEl) loadEl.remove();
 
@@ -538,7 +538,7 @@
       btn.title = isBusy ? 'Cupo completo' : `Reservar ${fmtSpanishDate(d)}`;
       btn.addEventListener('click', () => {
         if (isBusy) return;
-        const msg = encodeURIComponent(`Hola Hortensia, quiero reservar para el ${fmtSpanishDate(d)}. Â¿Hay cupo?`);
+        const msg = encodeURIComponent(`Hola Hortensia, quiero reservar para el ${fmtSpanishDate(d)}. ¿Hay cupo?`);
         window.open(`${WA_BASE}?text=${msg}`, '_blank', 'noopener');
       });
       wrap.appendChild(btn);
@@ -558,7 +558,7 @@
     video.addEventListener('canplay', () => projection.classList.add('is-loaded'), { once: true });
     video.addEventListener('error', () => {
       // keep placeholder
-      console.info('[Sanatorio] Dr. Silvio hero clip not yet commissioned â€” using Ektachrome placeholder.');
+      console.info('[Sanatorio] Dr. Silvio hero clip not yet commissioned — using Ektachrome placeholder.');
     });
   }
 
@@ -589,7 +589,7 @@
     initAvailability();
     initProjector();
 
-    // visual layer â€” last, so DOM is stable
+    // visual layer — last, so DOM is stable
     initCursor();
     initGrain();
     initLenis();
