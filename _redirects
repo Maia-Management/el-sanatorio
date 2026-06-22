@@ -40,6 +40,19 @@
 /api/sanatorio-wompi-webhook           https://maia-management.com/.netlify/functions/sanatorio-wompi-webhook  200
 
 # ============================================================================
+# QR menu clean URLs (2026-06-21) — match the spec at /menu/chuzo, /menu/bar,
+# /menu/tickets without trailing slash. The /menu/ index keeps serving the
+# canonical full expediente with a quick-jump picker at the top.
+# ============================================================================
+/menu/chuzo        /menu/chuzo/index.html    200
+/menu/bar          /menu/bar/index.html      200
+/menu/tickets      /menu/tickets/index.html  200
+/qr                /menu/                    301
+/qr/chuzo          /menu/chuzo               301
+/qr/bar            /menu/bar                 301
+/qr/tickets        /menu/tickets             301
+
+# ============================================================================
 # Marketing-site redirects (pre-existing)
 # ============================================================================
 /privacy       /privacidad.html                                  301
@@ -55,8 +68,8 @@
 /reportar          /aviso-cuarentena.html  301
 /reserva       /contact.html                                     301
 /booking       /contact.html                                     301
-/carta         /menu.html                                        301
-/bebidas       /menu.html                                        301
+/carta         /menu/                                            301
+/bebidas       /menu/bar                                         301
 /horario       /contact.html                                     301
 /faq           /experience.html                                  301
 /empleo        https://maia-recruitment.com/candidates           301!

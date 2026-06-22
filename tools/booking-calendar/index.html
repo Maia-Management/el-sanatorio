@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Calendario de Reservas | El Sanatorio</title>
-  <meta name="description" content="Consulta disponibilidad para Patio, Laboratorio y Casa del Terror en El Sanatorio y solicita tu reserva por WhatsApp.">
+  <meta name="description" content="Consulta disponibilidad para Bar, Patio, Calle y Laberinto en El Sanatorio (aforo 22–28) y solicita tu reserva por WhatsApp.">
 <meta property="og:title" content="Reserva tu evento — El Sanatorio">
   <link rel="canonical" href="https://el-sanatorio.com/tools/booking-calendar/">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -41,7 +41,7 @@
 
     .zone-tabs {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1px;
       margin-bottom: 1.25rem;
       border: 1px solid var(--border);
@@ -410,9 +410,10 @@
       </section>
 
       <div class="zone-tabs" role="tablist" aria-label="Zonas de reserva">
-        <button class="zone-tab" type="button" role="tab" aria-selected="true" data-zone="Patio"><strong>Patio</strong>Capacidad 30</button>
-        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Laboratorio"><strong>Laboratorio</strong>Capacidad 15</button>
-        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Casa del Terror"><strong>Casa del Terror</strong>Capacidad 20</button>
+        <button class="zone-tab" type="button" role="tab" aria-selected="true" data-zone="Bar"><strong>Bar (Admisiones)</strong>Cap. 10</button>
+        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Patio"><strong>Patio</strong>Cap. 8</button>
+        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Calle"><strong>Calle</strong>Cap. 4</button>
+        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Laberinto"><strong>Laberinto</strong>Cap. 8</button>
       </div>
 
       <div class="booking-grid">
@@ -450,13 +451,14 @@
         </label>
         <label>Zona
           <select id="booking-zone">
+            <option>Bar</option>
             <option>Patio</option>
-            <option>Laboratorio</option>
-            <option>Casa del Terror</option>
+            <option>Calle</option>
+            <option>Laberinto</option>
           </select>
         </label>
         <label>Personas
-          <input id="guest-count" type="number" min="1" max="30" value="2" required>
+          <input id="guest-count" type="number" min="1" max="28" value="2" required>
         </label>
         <input id="booking-date" type="hidden">
         <input id="booking-time" type="hidden">
@@ -470,12 +472,14 @@
 
   <script>
     const zones = {
-      Patio: { capacity: 30 },
-      Laboratorio: { capacity: 15 },
-      "Casa del Terror": { capacity: 20 }
+      Bar: { capacity: 10 },
+      Patio: { capacity: 8 },
+      Calle: { capacity: 4 },
+      Laberinto: { capacity: 8 }
     };
+    // Aforo público objetivo 22–28 según la noche.
 
-    let activeZone = "Patio";
+    let activeZone = "Bar";
     let calendar;
     let allEvents = [];
     let currentCardEvents = [];
@@ -491,9 +495,10 @@
 
     function detectZone(event) {
       const haystack = `${event.summary || ""} ${event.location || ""} ${event.description || ""}`.toLowerCase();
-      if (haystack.includes("laboratorio")) return "Laboratorio";
-      if (haystack.includes("terror") || haystack.includes("paciente") || haystack.includes("casa")) return "Casa del Terror";
-      return "Patio";
+      if (haystack.includes("laberinto") || haystack.includes("terror") || haystack.includes("paciente") || haystack.includes("casa")) return "Laberinto";
+      if (haystack.includes("calle") || haystack.includes("street") || haystack.includes("acera")) return "Calle";
+      if (haystack.includes("patio")) return "Patio";
+      return "Bar";
     }
 
     function dateFromEvent(event) {

@@ -37,26 +37,52 @@ const FALLBACK_REPLIES = {
   greeting: [
     "Aló cariño, soy Hortensia. Cuéntame, ¿reservación para cuántos y para qué noche?",
     "Buenas mi amor, Doña Pilar al teléfono. Disculpa la demora — Don Hilario está dando pelea otra vez. Cuéntame.",
-    "Aló querido, qué bueno que escribió. ¿En qué le ayudo?"
+    "Aló querido, qué bueno que escribió. ¿En qué le ayudo?",
+    "Aló mi vida, Hortensia al habla. Don Silvio está pasando ronda, déjeme apuntarle yo. ¿Qué necesita?",
+    "Hola cariño, qué bueno oírlo. La casa está cordial esta semana — ¿reserva, info del menú, o vienen por la experiencia?",
+    "Aló, Sanatorio buenas. Aquí Doña Pilar — la enfermera vieja, no la nueva. Cuénteme con calma.",
+    "Buenas mi amor. Antes que se me olvide: jueves a domingo abrimos. ¿En qué le ayudo?",
+    "Aló querida, le contesto desde admisiones. Don Hilario me tiene el escritorio lleno de fichas — usted dirá."
   ],
   party_size: [
-    "¿Cuántas personitas serían? Si son más de 5 califican para Family Pass — descuento de Cuidadores si alguno trabaja de maestro, enfermera, bombero.",
+    "¿Cuántas personitas serían? Si vienen de a 4, 6 u 8 (siempre en pares) y alguno trabaja de maestro, enfermera, bombero o así, la casa los recibe 2 por 1 con el Programa Cuidadores.",
     "¿Para cuántos vamos? Le aviso que las mesas para más de 6 las separamos al fondo, donde se ve el patio.",
-    "¿Cuántos vienen? Ojo que las sillas de ruedas de afuera siempre las ocupan los enamorados, así que mejor reservar."
+    "¿Cuántos vienen? Ojo que las sillas de ruedas de afuera siempre las ocupan los enamorados, así que mejor reservar.",
+    "¿Para cuántos pacientes apunto, mi amor? La casa tiene aforo de 22 a 28 — íntimo, así de a poco mejor.",
+    "¿Cuántitos serían? Para grupos privados de 8 a 12 reservamos zona bar o patio en exclusivo.",
+    "¿Cuántos vienen, cariño? Si trabajan en lo que cuida (salud, educación, fuerza pública, mayores 65+) y van en pares, les hacemos 2 por 1.",
+    "¿Cuántas personitas? Una cosita: la cocina cierra 11:30pm, entonces si son muchos los acomodo más temprano.",
+    "¿Para cuántos? Si son más de 12, mejor llámeme directo al WhatsApp para mirar privatización del aforo completo."
   ],
   time: [
     "¿A qué hora les acomoda? Le aviso, las 8pm es la hora del show de Don Hilario.",
     "¿Qué noche pensaban? Jueves a domingo, de 6pm a medianoche. Las 7:30pm es la hora favorita de Dr. Silvio.",
-    "Para qué fecha quieren venir, mi amor? Tenemos jueves, viernes, sábado y domingo."
+    "Para qué fecha quieren venir, mi amor? Tenemos jueves, viernes, sábado y domingo.",
+    "¿Qué horario les funciona? De 6pm a 8pm entran familias con menores acompañados; de 8pm a 1am ya solo mayores de 16.",
+    "Dígame fecha tentativa querido — el calendario me lo abre Don Silvio y a veces el lunes ya no queda jueves.",
+    "¿Qué día tenían en mente? Le adelanto: noches de Cuidadores son miércoles y domingo (aunque abrimos jueves a domingo al público).",
+    "¿A qué hora caben? El bar abre 6pm, la cocina cierra 11:30pm, y la barra cierra 1am. Hay tiempo de sobra.",
+    "¿Para cuándo, mi vida? Si es para fin de semana de quincena, mejor confirmemos rápido — se llena."
   ],
   closing: [
     "Listo cariño, déjame el número de teléfono y el nombre y te envío el linkecito para confirmar con el 50% de depósito. El saldo lo cobra la mesera en la noche.",
-    "Perfecto, todo anotado. ¿Me confirmas un teléfono donde te llegue WhatsApp así te mando el link de pago?"
+    "Perfecto, todo anotado. ¿Me confirmas un teléfono donde te llegue WhatsApp así te mando el link de pago?",
+    "Listo mi amor, le mando el link de Wompi por WhatsApp — 50% de depósito apartamento, el saldo lo paga en la noche con la mesera.",
+    "Cerrando: nombre completo, teléfono, y le envío el link de pago. La reserva queda cuando entra el 50%.",
+    "Anotado todo, querido. Apenas confirme el depósito le mandamos la ficha del paciente para enseñarla en la puerta.",
+    "Ya casi cariño — deme el nombre y celular para mandarle el link. Si el depósito no entra en 12 horas la mesa se libera, así que pendiente.",
+    "Listo mi vida, voy a apuntarlo. Le aviso: el depósito es 50% y se devuelve si cancela con 48 horas de antelación.",
+    "Perfecto. ¿Le mando el link por aquí mismo o le confirmo por WhatsApp al +1 903 459 8763 — usted dirá cuál le queda más a la mano?"
   ],
   default: [
     "Cuéntame mejor mi amor, ¿es para reservar, para preguntar por el menú, o por una ocasión especial?",
     "Disculpa, no te seguí — ¿es reservación, cumpleaños, o algo más?",
-    "A ver querido, dime más — Dr. Silvio dice que las preguntas claras se contestan rápido."
+    "A ver querido, dime más — Dr. Silvio dice que las preguntas claras se contestan rápido.",
+    "Espéreme tantito mi vida, no le entendí. ¿Reserva, info, o algo más específico?",
+    "Mmm cariño, deme un poco más de contexto — ¿reservación, evento privado, audición, prensa, o algo distinto?",
+    "Discúlpeme querido, Don Hilario me distrajo con el proyector. Repita despacito por favor — ¿en qué le ayudo?",
+    "Cuénteme con calma mi amor: ¿es por admisión normal, por Cuidadores, por evento privado, o por el menú?",
+    "A ver, vamos por partes — ¿qué necesita exactamente? Si es algo muy técnico mejor le paso a doña Luz."
   ]
 };
 
@@ -135,7 +161,7 @@ CONTEXTO DEL VENUE:
 - Pacientes ficticios que mencionas con afecto: Don Hilario (cree que su cara proyecta a Norm Lewis), Don Bellasrio (manda mensajes Morse al puerto), Micaela (cose miembros sueltos), Don Aldo (habla con la pared), Doña Eulalia (predice mañana).
 - Precio entrada estándar: $50.000 COP por persona. VIP "Director's Cut": $75.000.
 - Depósito 50% para confirmar reserva, saldo en la noche.
-- Programa Cuidadores Santa Marta: si traes 5+ personas y uno es maestro/enfermera/bombero/policía/médico/militar/madre cabeza/adulto mayor 65+/discapacidad/auxiliar de salud, todos entran al 50% off cubierto (comida y trago a precio normal). Miércoles y domingo. Carnet vigente a la entrada.
+- Programa Cuidadores Santa Marta: si vienen de a 4, 6 u 8 personas (siempre en pares) y uno es maestro/enfermera/bombero/policía/médico/militar/madre cabeza/adulto mayor 65+/discapacidad/auxiliar de salud, la entrada es 2 por 1 — pagan la mitad del grupo, entran todos. Comida y trago a precio normal. Miércoles y domingo. Carnet vigente a la entrada.
 
 TU PERSONALIDAD:
 - Caribeña cálida, "mi amor", "cariño", "querido/a". Costeña pero educada.
