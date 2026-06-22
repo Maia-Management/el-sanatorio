@@ -67,7 +67,7 @@ const FALLBACK_REPLIES = {
   closing: [
     "Listo cariño, déjame el número de teléfono y el nombre y te envío el linkecito para confirmar con el 50% de depósito. El saldo lo cobra la mesera en la noche.",
     "Perfecto, todo anotado. ¿Me confirmas un teléfono donde te llegue WhatsApp así te mando el link de pago?",
-    "Listo mi amor, le mando el link de Wompi por WhatsApp — 50% de depósito apartamento, el saldo lo paga en la noche con la mesera.",
+    "Listo mi amor, le mando el link de Wompi por WhatsApp — 50% de depósito aparta la mesa, el saldo lo paga en la noche con la mesera.",
     "Cerrando: nombre completo, teléfono, y le envío el link de pago. La reserva queda cuando entra el 50%.",
     "Anotado todo, querido. Apenas confirme el depósito le mandamos la ficha del paciente para enseñarla en la puerta.",
     "Ya casi cariño — deme el nombre y celular para mandarle el link. Si el depósito no entra en 12 horas la mesa se libera, así que pendiente.",
@@ -86,8 +86,59 @@ const FALLBACK_REPLIES = {
   ]
 };
 
-const NAMES = ['Hortensia', 'Doña Pilar', 'Soledad', 'Carmela', 'Doña Inés', 'La Niña Marta', 'Doña Eulalia'];
+// Receptionist personas — distinct from patient personas (no name overlap with Don Hilario / Don Bellasrio / Micaela / Don Aldo / Doña Eulalia).
+const NAMES = ['Hortensia', 'Doña Pilar', 'Soledad', 'Carmela', 'Doña Inés', 'La Niña Marta', 'Doña Rosalba'];
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+/**
+ * Pick a least-used variation for a given stage from Supabase if env is set,
+ * otherwise fall back to a uniform random pick. Never throws — if Supabase is
+ * unreachable, slow, or returns nothing, we silently degrade to local random.
+ *
+ * Expected schema (best-effort):
+ *   el_sanatorio_bot_variations(id, stage text, variant text, used_count int)
+ *
+ * Behavior:
+ *  - Reads up to 24 least-used variants for the stage (asc by used_count).
+ *  - If any rows returned, picks one of the bottom 3 at random (avoids hot-spotting
+ *    a single least-used row when concurrent requests race).
+ *  - Best-effort PATCH bumps used_count for the picked variant. Failure is silent.
+ */
+async function pickVariationWeighted(stage, localFallback) {
+  const url = env('SUPABASE_URL');
+  const key = env('SUPABASE_SERVICE_ROLE') || env('SUPABASE_SERVICE_ROLE_KEY');
+  if (!url || !key) return pick(localFallback);
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 1500);
+  try {
+    const res = await fetch(
+      `${url}/rest/v1/el_sanatorio_bot_variations?stage=eq.${encodeURIComponent(stage)}&select=id,variant,used_count&order=used_count.asc&limit=24`,
+      { headers: { apikey: key, Authorization: `Bearer ${key}` }, signal: ctrl.signal }
+    );
+    if (!res.ok) return pick(localFallback);
+    const rows = await res.json();
+    if (!Array.isArray(rows) || rows.length === 0) return pick(localFallback);
+    const pool = rows.slice(0, Math.min(3, rows.length));
+    const chosen = pool[Math.floor(Math.random() * pool.length)];
+    if (chosen?.id != null) {
+      fetch(`${url}/rest/v1/el_sanatorio_bot_variations?id=eq.${chosen.id}`, {
+        method: 'PATCH',
+        headers: {
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify({ used_count: (chosen.used_count || 0) + 1 })
+      }).catch(() => {});
+    }
+    return chosen?.variant || pick(localFallback);
+  } catch {
+    return pick(localFallback);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 function newSessionId() {
   // simple uuidv4-ish (Math.random — fine for session correlation, NOT cryptography)
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
@@ -229,7 +280,7 @@ export default async (request) => {
     else if (/\b(cu[aá]ntos|cuanta|gente|personas|invitados|para\s+\d)/.test(lower)) bucket = 'party_size';
     else if (/\b(hora|noche|jueves|viernes|sabado|s[áa]bado|domingo|cuando|cu[aá]ndo)/.test(lower)) bucket = 'time';
     else if (/\b(pago|pagar|reserv|deposito|dep[óo]sito|confirmar|link)/.test(lower)) bucket = 'closing';
-    reply = pick(FALLBACK_REPLIES[bucket]);
+    reply = await pickVariationWeighted(bucket, FALLBACK_REPLIES[bucket]);
     if (escalation) {
       reply = "Ay mi amor, esto necesita que hable directamente con doña Luz o con Andrew, yo no me meto en esas cosas. Mejor escríbeles al WhatsApp y allí te atienden de una.";
     }
