@@ -1,0 +1,573 @@
+/* ============================================================================
+   QR Menu System · El Sanatorio
+   ----------------------------------------------------------------------------
+   Shared styles for the three QR-scannable menus:
+     /menu/chuzo   — Chuzo Tokyo (street, takeaway-first, warm ember)
+     /menu/bar     — Sanatorio Bar (theatrical, 1950s grain)
+     /menu/tickets — Sanatorio Tickets (admission sheet aesthetic)
+   ---------------------------------------------------------------------------
+   Theme is set on <body data-theme="chuzo|bar|tickets">.
+   Builds on /css/chuzo-tokyo-tokens.css + /css/style.css.
+   ============================================================================ */
+
+:root {
+  --qr-bg: #0F0D0B;
+  --qr-bg-deep: #0A0907;
+  --qr-cream: #EFE6D5;
+  --qr-cream-dim: rgba(239, 230, 213, 0.72);
+  --qr-cream-muted: rgba(239, 230, 213, 0.48);
+  --qr-border: rgba(217, 98, 30, 0.22);
+  --qr-border-strong: rgba(217, 98, 30, 0.5);
+  --qr-card: rgba(26, 24, 20, 0.85);
+  --qr-card-elevated: rgba(34, 30, 24, 0.92);
+  --qr-accent: #D9621E;                /* ember (chuzo default) */
+  --qr-accent-secondary: #FFD400;
+  --qr-crimson: #ff4d6d;
+  --qr-success: #25D366;
+  --qr-grain-opacity: 0.04;
+
+  --qr-font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --qr-font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --qr-font-mono: "Share Tech Mono", "IBM Plex Mono", Consolas, monospace;
+
+  --qr-radius-sm: 4px;
+  --qr-radius-md: 6px;
+  --qr-radius-lg: 12px;
+  --qr-radius-pill: 999px;
+}
+
+/* ── Theme: Chuzo Tokyo (street ember) ───────────────────────────── */
+body[data-theme="chuzo"] {
+  --qr-accent: #D9621E;
+  --qr-accent-secondary: #FFD400;
+  --qr-bg: #0F0D0B;
+  --qr-bg-deep: #14110D;
+}
+
+/* ── Theme: Sanatorio Bar (1950s film grain, crimson) ─────────────── */
+body[data-theme="bar"] {
+  --qr-accent: #B7372D;
+  --qr-accent-secondary: #D9621E;
+  --qr-bg: #0B0908;
+  --qr-bg-deep: #060504;
+  --qr-grain-opacity: 0.08;
+}
+
+/* ── Theme: Tickets (clinical paper aesthetic) ───────────────────── */
+body[data-theme="tickets"] {
+  --qr-accent: #1B7A8C;
+  --qr-accent-secondary: #D9621E;
+  --qr-bg: #0C0E10;
+  --qr-bg-deep: #07090B;
+  --qr-cream: #F0EAE0;
+}
+
+/* ── Reset / base ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; }
+
+body.qr-menu {
+  background: var(--qr-bg);
+  color: var(--qr-cream);
+  font-family: var(--qr-font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* Film-grain overlay (1950s feel for bar; subtle for the rest) */
+body.qr-menu::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  opacity: var(--qr-grain-opacity);
+  mix-blend-mode: overlay;
+}
+
+/* ── Top utility bar (sticky, ultra-compact) ─────────────────────── */
+.qr-top {
+  position: sticky; top: 0; z-index: 80;
+  background: color-mix(in srgb, var(--qr-bg) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--qr-border);
+}
+.qr-top__inner {
+  max-width: 920px; margin: 0 auto;
+  padding: 10px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.qr-top__brand {
+  display: flex; flex-direction: column; line-height: 1.1;
+  text-decoration: none;
+  color: var(--qr-cream);
+}
+.qr-top__brand-pre {
+  font-family: var(--qr-font-mono);
+  font-size: 0.58rem; letter-spacing: 0.22em;
+  color: var(--qr-accent);
+  text-transform: uppercase;
+}
+.qr-top__brand-name {
+  font-family: var(--qr-font-display);
+  font-size: 0.94rem; letter-spacing: 0.12em;
+}
+.qr-top__lang {
+  font-family: var(--qr-font-mono);
+  font-size: 0.62rem; letter-spacing: 0.18em;
+  color: var(--qr-cream-dim);
+  background: transparent;
+  border: 1px solid var(--qr-border);
+  border-radius: var(--qr-radius-pill);
+  padding: 5px 10px;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.qr-top__lang:hover { color: var(--qr-accent); border-color: var(--qr-accent); }
+.qr-top__sound {
+  background: transparent;
+  border: 1px solid var(--qr-border);
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  color: var(--qr-cream-dim);
+  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.qr-top__sound:hover { color: var(--qr-accent); border-color: var(--qr-accent); }
+
+/* ── Hero clip ───────────────────────────────────────────────────── */
+.qr-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(220px, 38vh, 360px);
+  overflow: hidden;
+  background: var(--qr-bg-deep);
+}
+.qr-hero__media {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.qr-hero__media.is-image { z-index: 1; }
+.qr-hero__media.is-video { z-index: 2; opacity: 0; transition: opacity 0.6s ease; }
+.qr-hero__media.is-video.loaded { opacity: 1; }
+.qr-hero__media-fallback {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(ellipse at 30% 35%, color-mix(in srgb, var(--qr-accent) 38%, transparent) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 70%, color-mix(in srgb, var(--qr-accent-secondary) 22%, transparent) 0%, transparent 60%),
+    var(--qr-bg-deep);
+}
+.qr-hero__overlay {
+  position: absolute; inset: 0; z-index: 3;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.0) 40%, color-mix(in srgb, var(--qr-bg) 96%, transparent) 100%);
+  pointer-events: none;
+}
+.qr-hero__caption {
+  position: absolute; inset: auto 0 0 0; z-index: 4;
+  padding: 18px 20px 22px;
+  text-align: left;
+}
+.qr-hero__eyebrow {
+  display: inline-block;
+  font-family: var(--qr-font-mono);
+  font-size: 0.6rem; letter-spacing: 0.28em;
+  color: var(--qr-accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--qr-border-strong);
+  border-radius: var(--qr-radius-sm);
+  background: color-mix(in srgb, var(--qr-bg) 50%, transparent);
+}
+.qr-hero__title {
+  font-family: var(--qr-font-display);
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  margin: 0 0 4px;
+  color: var(--qr-cream);
+  text-shadow: 0 1px 16px rgba(0,0,0,0.5);
+  line-height: 1.05;
+}
+.qr-hero__tagline {
+  font-family: Georgia, serif; font-style: italic;
+  font-size: 0.92rem;
+  color: var(--qr-cream-dim);
+  margin: 0;
+  max-width: 36ch;
+  line-height: 1.4;
+}
+
+/* ── Quick action bar (just under hero) ──────────────────────────── */
+.qr-actions {
+  position: relative; z-index: 5;
+  max-width: 920px; margin: -20px auto 0;
+  padding: 0 16px;
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.qr-action {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 12px 14px;
+  font-family: var(--qr-font-mono);
+  font-size: 0.66rem; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--qr-radius-md);
+  border: 1px solid var(--qr-border-strong);
+  background: var(--qr-card-elevated);
+  color: var(--qr-cream);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.qr-action:hover, .qr-action:focus-visible {
+  transform: translateY(-1px);
+  background: var(--qr-accent);
+  color: var(--qr-bg);
+  outline: none;
+}
+.qr-action--primary {
+  background: var(--qr-accent);
+  color: var(--qr-bg);
+  border-color: var(--qr-accent);
+}
+.qr-action--primary:hover { background: var(--qr-cream); color: var(--qr-bg); border-color: var(--qr-cream); }
+.qr-action__icon { width: 14px; height: 14px; }
+
+/* ── Section ─────────────────────────────────────────────────────── */
+main.qr-main { position: relative; z-index: 2; padding: 28px 0 80px; }
+.qr-container { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+
+.qr-section { margin: 30px 0 18px; scroll-margin-top: 70px; }
+.qr-section__header {
+  display: flex; align-items: baseline; gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--qr-border);
+}
+.qr-section__code {
+  font-family: var(--qr-font-mono);
+  font-size: 0.66rem; letter-spacing: 0.22em;
+  color: var(--qr-accent);
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--qr-border-strong);
+  border-radius: var(--qr-radius-sm);
+}
+.qr-section__title {
+  font-family: var(--qr-font-display);
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  margin: 0;
+  color: var(--qr-cream);
+  flex: 1;
+  letter-spacing: 0.02em;
+}
+.qr-section__intro {
+  margin: 12px 0 18px;
+  font-family: Georgia, serif; font-style: italic;
+  color: var(--qr-cream-dim);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  max-width: 60ch;
+}
+
+/* ── Item card ───────────────────────────────────────────────────── */
+.qr-items { display: grid; gap: 10px; }
+.qr-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+  padding: 14px 16px;
+  background: var(--qr-card);
+  border: 1px solid var(--qr-border);
+  border-radius: var(--qr-radius-md);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.qr-item:hover {
+  border-color: var(--qr-border-strong);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+.qr-item--highlight {
+  border-color: var(--qr-border-strong);
+  background: color-mix(in srgb, var(--qr-accent) 6%, var(--qr-card));
+}
+.qr-item__code {
+  font-family: var(--qr-font-mono);
+  font-size: 0.62rem; letter-spacing: 0.14em;
+  color: var(--qr-accent);
+  padding: 3px 7px;
+  background: color-mix(in srgb, var(--qr-accent) 10%, transparent);
+  border: 1px solid var(--qr-border);
+  border-radius: var(--qr-radius-sm);
+  white-space: nowrap;
+  align-self: start;
+}
+.qr-item__body { min-width: 0; }
+.qr-item__name {
+  font-family: var(--qr-font-display);
+  font-size: 1.04rem;
+  margin: 0 0 4px;
+  color: var(--qr-cream);
+  letter-spacing: 0.02em;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+}
+.qr-item__desc {
+  margin: 0 0 6px;
+  font-size: 0.86rem;
+  color: var(--qr-cream-dim);
+  line-height: 1.45;
+}
+.qr-item__ingredients {
+  font-family: var(--qr-font-mono);
+  font-size: 0.6rem; letter-spacing: 0.1em;
+  color: var(--qr-cream-muted);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.qr-item__prescription {
+  font-family: Georgia, serif; font-style: italic;
+  font-size: 0.78rem;
+  color: var(--qr-cream-muted);
+  margin: 0;
+}
+.qr-item__right {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+  align-self: stretch;
+}
+.qr-item__price {
+  font-family: var(--qr-font-display);
+  font-size: 1rem;
+  color: var(--qr-accent);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.qr-item__price--big { font-size: 1.12rem; }
+.qr-item__price--pill {
+  color: var(--qr-bg);
+  background: var(--qr-accent);
+  padding: 4px 10px;
+  border-radius: var(--qr-radius-sm);
+}
+.qr-item__order {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--qr-font-mono);
+  font-size: 0.58rem; letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid var(--qr-border-strong);
+  border-radius: var(--qr-radius-sm);
+  color: var(--qr-cream);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.qr-item__order:hover, .qr-item__order:focus-visible {
+  background: var(--qr-success);
+  border-color: var(--qr-success);
+  color: #fff;
+  outline: none;
+}
+.qr-item__order svg { width: 11px; height: 11px; }
+.qr-item__media {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: var(--qr-radius-md);
+  overflow: hidden;
+}
+.qr-item__media video {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.4) blur(2px);
+}
+.qr-item:hover .qr-item__media { opacity: 0.6; transition: opacity 0.6s; }
+
+/* Walk-away pill (Chuzo Tokyo only) */
+.qr-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--qr-font-mono);
+  font-size: 0.54rem; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  background: color-mix(in srgb, var(--qr-accent) 18%, transparent);
+  color: var(--qr-accent);
+  border: 1px solid var(--qr-border-strong);
+  border-radius: var(--qr-radius-pill);
+}
+.qr-pill--firma {
+  background: var(--qr-accent);
+  color: var(--qr-bg);
+  border-color: var(--qr-accent);
+}
+.qr-pill--big {
+  background: var(--qr-crimson);
+  color: #fff;
+  border-color: var(--qr-crimson);
+}
+
+/* Walking icon (used in Chuzo to indicate takeaway-friendly) */
+.qr-walk-icon {
+  width: 14px; height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+  color: var(--qr-accent);
+}
+
+/* ── Section divider ─────────────────────────────────────────────── */
+.qr-hr {
+  display: flex; align-items: center; gap: 12px;
+  margin: 28px 0;
+  color: var(--qr-cream-muted);
+}
+.qr-hr::before, .qr-hr::after { content: ""; flex: 1; height: 1px; background: var(--qr-border); }
+.qr-hr span {
+  font-family: var(--qr-font-mono);
+  font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ── Cross-link block (bottom of page) ───────────────────────────── */
+.qr-cross {
+  margin: 36px 0 20px;
+  display: grid; gap: 10px;
+}
+.qr-cross__link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px;
+  border: 1px solid var(--qr-border);
+  border-radius: var(--qr-radius-md);
+  text-decoration: none;
+  color: var(--qr-cream);
+  font-family: var(--qr-font-mono);
+  font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--qr-card);
+  transition: all 0.15s ease;
+}
+.qr-cross__link:hover {
+  border-color: var(--qr-accent);
+  color: var(--qr-accent);
+  transform: translateX(2px);
+}
+.qr-cross__arrow { color: var(--qr-accent); font-size: 1.1rem; }
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+.qr-foot {
+  margin: 40px 0 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--qr-border);
+  font-family: var(--qr-font-mono);
+  font-size: 0.6rem; letter-spacing: 0.12em;
+  color: var(--qr-cream-muted);
+  text-align: center;
+  line-height: 1.8;
+  text-transform: uppercase;
+}
+.qr-foot a { color: var(--qr-cream-dim); }
+.qr-foot__addr { font-style: normal; }
+.qr-foot__brand-line { color: var(--qr-accent); margin-top: 6px; }
+
+/* ── Floating WhatsApp (always reachable) ────────────────────────── */
+.qr-wa-float {
+  position: fixed; bottom: 18px; right: 18px;
+  width: 52px; height: 52px;
+  background: var(--qr-success);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  z-index: 99;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+.qr-wa-float:hover, .qr-wa-float:focus-visible {
+  transform: scale(1.08);
+  outline: none;
+}
+.qr-wa-float svg { width: 26px; height: 26px; fill: #fff; }
+
+/* ── Toast (order confirmation) ──────────────────────────────────── */
+.qr-toast {
+  position: fixed;
+  bottom: 88px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  padding: 12px 18px;
+  background: var(--qr-cream);
+  color: var(--qr-bg);
+  border-radius: var(--qr-radius-md);
+  font-family: var(--qr-font-mono);
+  font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 100;
+  pointer-events: none;
+}
+.qr-toast.shown {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  video[autoplay] { display: none; }
+  .qr-hero__media.is-video { display: none; }
+}
+
+/* ── Tickets-specific (hospital admission sheet aesthetic) ──────── */
+body[data-theme="tickets"] .qr-section__intro { color: var(--qr-cream-dim); }
+body[data-theme="tickets"] .qr-item {
+  border-style: dashed;
+}
+body[data-theme="tickets"] .qr-item__code {
+  background: color-mix(in srgb, var(--qr-accent) 12%, transparent);
+}
+
+/* ── Chuzo-specific: walking iconography ─────────────────────────── */
+body[data-theme="chuzo"] .qr-item__name { color: var(--qr-cream); }
+
+/* ── Bar-specific: vignette deepens ──────────────────────────────── */
+body[data-theme="bar"] .qr-hero {
+  background-image: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
+}
+
+/* ── Mobile tuning (≤480px) ──────────────────────────────────────── */
+@media (max-width: 480px) {
+  .qr-item { grid-template-columns: auto 1fr; }
+  .qr-item__right {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2px;
+  }
+  .qr-actions { flex-direction: column; }
+  .qr-action { flex: 1 1 auto; }
+}
+
+/* ── Print (the QR menu also makes a clean printable for staff) ── */
+@media print {
+  body.qr-menu { background: #fff; color: #000; }
+  .qr-top, .qr-actions, .qr-cross, .qr-wa-float, .qr-toast,
+  .qr-hero__media, .qr-hero__overlay { display: none !important; }
+  .qr-hero { height: auto; padding: 20px 0; border-bottom: 1px solid #000; }
+  .qr-hero__caption { position: static; padding: 0; }
+  .qr-hero__title { color: #000; }
+  .qr-item { background: #fff; color: #000; border-color: #000; page-break-inside: avoid; }
+}

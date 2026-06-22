@@ -1,0 +1,519 @@
+diff --git a/_redirects b/_redirects
+index ea4768a..2d4e772 100644
+--- a/_redirects
++++ b/_redirects
+@@ -39,6 +39,19 @@
+ /api/sanatorio-wompi-checkout          https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout  200
+ /api/sanatorio-wompi-webhook           https://maia-management.com/.netlify/functions/sanatorio-wompi-webhook  200
+ 
++# ============================================================================
++# QR menu clean URLs (2026-06-21) — match the spec at /menu/chuzo, /menu/bar,
++# /menu/tickets without trailing slash. The /menu/ index keeps serving the
++# canonical full expediente with a quick-jump picker at the top.
++# ============================================================================
++/menu/chuzo        /menu/chuzo/index.html    200
++/menu/bar          /menu/bar/index.html      200
++/menu/tickets      /menu/tickets/index.html  200
++/qr                /menu/                    301
++/qr/chuzo          /menu/chuzo               301
++/qr/bar            /menu/bar                 301
++/qr/tickets        /menu/tickets             301
++
+ # ============================================================================
+ # Marketing-site redirects (pre-existing)
+ # ============================================================================
+@@ -55,8 +68,8 @@
+ /reportar          /aviso-cuarentena.html  301
+ /reserva       /contact.html                                     301
+ /booking       /contact.html                                     301
+-/carta         /menu.html                                        301
+-/bebidas       /menu.html                                        301
++/carta         /menu/                                            301
++/bebidas       /menu/bar                                         301
+ /horario       /contact.html                                     301
+ /faq           /experience.html                                  301
+ /empleo        https://maia-recruitment.com/candidates           301!
+diff --git a/events.html b/events.html
+index 33be03a..9841503 100644
+--- a/events.html
++++ b/events.html
+@@ -5,7 +5,7 @@
+   <script src="/consent-banner.js?v=20260430d" defer></script>
+   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-  <meta name="description" content="Celebra tu evento privado en el bar de terror de Santa Marta. Yakitori, cócteles macabros y atmósfera de horror. Grupos desde 10 personas. Reserva ahora." />
++  <meta name="description" content="Celebra tu evento privado en el bar inmersivo de Santa Marta. Yakitori, cócteles macabros y atmósfera de horror. Aforo íntimo 22–28 personas. Reserva ahora." />
+   <meta name="robots" content="index, follow" />
+   <title>Eventos de Terror & Privados en Santa Marta | El Sanatorio</title>
+ 
+@@ -2018,16 +2018,16 @@
+ 
+           <div class="espacio-stats">
+             <div class="stat-card">
+-              <span class="stat-number">120</span>
+-              <span class="stat-label">Personas máx.</span>
++              <span class="stat-number">22–28</span>
++              <span class="stat-label">Aforo íntimo</span>
+             </div>
+             <div class="stat-card">
+-              <span class="stat-number">3</span>
+-              <span class="stat-label">Zonas privadas</span>
++              <span class="stat-number">4</span>
++              <span class="stat-label">Zonas (bar · patio · calle · laberinto)</span>
+             </div>
+             <div class="stat-card">
+-              <span class="stat-number">S.XVIII</span>
+-              <span class="stat-label">Edificio colonial</span>
++              <span class="stat-number">S.XX</span>
++              <span class="stat-label">Antiguo Hospital del Tórax</span>
+             </div>
+             <div class="stat-card">
+               <span class="stat-number">24h</span>
+@@ -2075,12 +2075,12 @@
+           <div class="package-capacity">
+             <span class="capacity-icon" aria-hidden="true">👥</span>
+             <span class="capacity-text">
+-              Hasta <strong>20 personas</strong> · Zona Cripta Baja
++              <strong>8 a 12 personas</strong> · Zona Bar o Patio reservada
+             </span>
+           </div>
+ 
+           <ul class="package-includes" aria-label="Incluye">
+-            <li>Reserva exclusiva de la Zona Cripta Baja (3 horas)</li>
++            <li>Zona Bar o Patio reservada en exclusivo (3 horas)</li>
+             <li>Bienvenida con shot de sake negro por persona</li>
+             <li>Mesa de yakitori compartida — 6 brochetas por persona</li>
+             <li>Cóctel de bienvenida temático (1 por persona)</li>
+@@ -2115,12 +2115,12 @@
+           <div class="package-capacity">
+             <span class="capacity-icon" aria-hidden="true">👥</span>
+             <span class="capacity-text">
+-              <strong>21 a 60 personas</strong> · Salón Principal + Terraza
++              <strong>14 a 20 personas</strong> · Bar + Patio + Calle (3 zonas)
+             </span>
+           </div>
+ 
+           <ul class="package-includes" aria-label="Incluye">
+-            <li>Reserva exclusiva del Salón Principal y Terraza (4 horas)</li>
++            <li>Reserva exclusiva de Bar + Patio + Calle (4 horas)</li>
+             <li>Cóctel de bienvenida personalizado + menú de degustación de sake</li>
+             <li>Menú yakitori de 5 tiempos — selección completa de brochetas</li>
+             <li>Barra de cócteles abierta temática (2 horas)</li>
+@@ -2157,12 +2157,12 @@
+           <div class="package-capacity">
+             <span class="capacity-icon" aria-hidden="true">👥</span>
+             <span class="capacity-text">
+-              <strong>61 a 120 personas</strong> · Todo el establecimiento
++              <strong>22 a 28 personas</strong> · 4 zonas (Bar · Patio · Calle · Laberinto) — aforo completo
+             </span>
+           </div>
+ 
+           <ul class="package-includes" aria-label="Incluye">
+-            <li>Toma completa y exclusiva del Sanatorio (5 horas + montaje)</li>
++            <li>Toma completa y exclusiva del Sanatorio — aforo 28 (5 horas + montaje)</li>
+             <li>Menú de degustación yakitori de selección de 7 tiempos</li>
+             <li>Barra abierta ilimitada — cócteles + sake + cerveza artesanal</li>
+             <li>Cóctel de autor creado exclusivamente para tu evento</li>
+@@ -2209,8 +2209,8 @@
+             Alquimia<br /><em>Líquida</em>
+           </h2>
+           <p class="section-subtitle">
+-            Nuestro bartender crea pociones diseñadas para alterar
+-            los sentidos. Cada trago lleva una historia oscura.
++            Andrew, el doctor de turno detrás de la barra, receta pociones
++            diseñadas para alterar los sentidos. Cada trago lleva una historia oscura.
+           </p>
+ 
+           <div class="cocktails-custom">
+@@ -2475,7 +2475,7 @@
+           <div class="stars" role="img" aria-label="5 de 5 estrellas"><span aria-hidden="true">★★★★★</span></div>
+           <p class="testimonial-text">
+             "Mi cumpleaños 30 en El Sanatorio fue la mejor decisión de mi vida.
+-            Escogimos el paquete Purgatorio para 45 personas. El yakitori
++            Escogimos el paquete Purgatorio para 18 personas. El yakitori
+             estaba en otro nivel, los cócteles eran una obra de arte y
+             la decoración nos transportó. Impresionante que esto exista
+             en el Caribe colombiano."
+@@ -2529,8 +2529,8 @@
+           <h3 class="faq-question">¿Con cuánta anticipación debo reservar?</h3>
+           <p class="faq-answer">
+             Recomendamos contactarnos con mínimo <strong>2 semanas de anticipación</strong>
+-            para eventos pequeños (hasta 20 personas) y al menos <strong>4 semanas</strong>
+-            para eventos medianos y grandes. Para eventos corporativos de alto nivel,
++            para grupos pequeños (hasta 12 personas) y al menos <strong>4 semanas</strong>
++            para la privatización completa del aforo (22–28). Para eventos corporativos de alto nivel,
+             un mes o más garantiza la mejor experiencia posible.
+           </p>
+         </div>
+@@ -2810,7 +2810,7 @@
+       {"@type": "LocationFeatureSpecification", "name": "Bar de Cócteles", "value": true},
+       {"@type": "LocationFeatureSpecification", "name": "Edificio Colonial", "value": true}
+     ],
+-    "maximumAttendeeCapacity": 120
++    "maximumAttendeeCapacity": 28
+   }
+   </script>
+ 
+diff --git a/experience.html b/experience.html
+index 59e59b2..6988420 100644
+--- a/experience.html
++++ b/experience.html
+@@ -23,7 +23,7 @@
+   <meta name="twitter:site"        content="@MaiaGroupCO" />
+   <meta name="twitter:creator"     content="@MaiaGroupCO" />
+   <meta name="twitter:title"       content="El Laberinto — Horror Experience | El Sanatorio" />
+-  <meta name="twitter:description" content="Los pisos superiores no fueron renovados. Grupos de máximo 8 personas. No todos salen por el mismo camino." />
++  <meta name="twitter:description" content="La zona restringida no fue renovada. Grupos de máximo 8 personas. No todos salen por el mismo camino." />
+   <meta name="twitter:image"       content="https://el-sanatorio.com/images/og-image.jpg" />
+ 
+   <!-- Canonical -->
+@@ -132,7 +132,7 @@
+ <div class="exp-hero">
+   <div class="container--sm text-center">
+     <div class="maze-warning" role="alert">⚠ ZONA RESTRINGIDA — ACCESO SOLO CON AUTORIZACIÓN</div>
+-    <div class="section-label" style="justify-content: center;"><span>Pisos Superiores</span></div>
++    <div class="section-label" style="justify-content: center;"><span>Zona Restringida</span></div>
+     <h1 class="section-title section-title--center neon-red" aria-label="El Laberinto: Escape Room de Horror en Santa Marta, Colombia" style="font-size: clamp(1.8rem, 5vw, 3.5rem); line-height: 1.2;">
+       El Laberinto<br>
+       <span style="font-size: 0.6em; color: var(--off-white); text-shadow: none;">La Experiencia de Horror</span>
+@@ -168,7 +168,7 @@
+       <div class="panel panel--red-accent">
+         <h3 class="hours-heading" style="margin-bottom: 0.75rem; color: var(--gold);">El Espacio</h3>
+         <p style="font-size: 0.9rem; color: var(--light-gray);">
+-          Los tres pisos superiores del edificio permanecen en su estado original —
++          Las salas restringidas del edificio permanecen en su estado original —
+           pasillos, celdas, sala de tratamientos, quirófano y zonas cuya función
+           el personal prefiere no especificar. La oscuridad es funcional, no decorativa.
+         </p>
+@@ -204,8 +204,9 @@
+         Esta experiencia contiene oscuridad total, efectos de sonido intensos, espacios reducidos,
+         escenas de contenido psicológico perturbador y actores en contacto físico moderado
+         (tocado de hombros, guía de brazo). No recomendada para personas con enfermedades cardíacas,
+-        claustrofobia severa, epilepsia fotosensible ni mujeres embarazadas. No se recomienda para
+-        menores de 15 años; menores entre 15 y 17 años deben ir acompañados de un adulto responsable.
++        claustrofobia severa, epilepsia fotosensible ni mujeres embarazadas. La ventana 6pm–8pm admite
++        acompañantes menores de 16; de 8pm a 1am solo entran mayores de 16 (no apto bajo ninguna
++        circunstancia para menores de 13). Adolescentes 13–16 deben ir acompañados de un adulto responsable.
+         <strong style="color: var(--crimson);">Una vez dentro, no hay salida anticipada sin escolta del personal.</strong>
+       </p>
+     </div>
+@@ -227,7 +228,7 @@
+         <p class="pricing-card__price">$45.000</p>
+         <p class="pricing-card__currency">COP por persona</p>
+         <div class="pricing-card__features">
+-          <p>Acceso a pisos superiores</p>
++          <p>Acceso a la zona restringida</p>
+           <p>Guía del personal</p>
+           <p>Seguro de experiencia</p>
+           <p>Sin consumición incluida</p>
+@@ -313,11 +314,11 @@
+       </div>
+       <div class="rule-item" role="listitem">
+         <span class="rule-item__num">06</span>
+-        <p class="rule-item__text">No se recomienda para menores de 15 años. Menores entre 15 y 17 años deben asistir con acompañante adulto. El establecimiento se reserva el derecho de denegar el ingreso bajo cualquier circunstancia.</p>
++        <p class="rule-item__text">No apto bajo ninguna circunstancia para menores de 13. La ventana 6pm–8pm admite acompañantes menores de 16. De 8pm a 1am solo entran mayores de 16. Adolescentes 13–16 deben asistir con acompañante adulto. El establecimiento se reserva el derecho de denegar el ingreso bajo cualquier circunstancia.</p>
+       </div>
+       <div class="rule-item" role="listitem">
+         <span class="rule-item__num">07</span>
+-        <p class="rule-item__text">Lo que sucede en los pisos superiores queda en los pisos superiores. El personal agradece la discreción con respecto a los detalles de la trama.</p>
++        <p class="rule-item__text">Lo que sucede en la zona restringida queda en la zona restringida. El personal agradece la discreción con respecto a los detalles de la trama.</p>
+       </div>
+       <div class="rule-item" role="listitem">
+         <span class="rule-item__num">08</span>
+@@ -354,7 +355,7 @@
+ 
+     <div class="form-panel fade-in-section">
+       <div class="form-panel__header">
+-        <span class="form-panel__title">FORMULARIO DE INGRESO — PISOS SUPERIORES</span>
++        <span class="form-panel__title">FORMULARIO DE INGRESO — ZONA RESTRINGIDA</span>
+         <span class="form-panel__ref">REF-XXXXX-013</span>
+       </div>
+ 
+diff --git a/index.html b/index.html
+index 50a28cd..166498f 100644
+--- a/index.html
++++ b/index.html
+@@ -265,7 +265,7 @@
+     <div class="section__inner">
+       <p class="section__eyebrow">PROGRAMA CUIDADORES SANTA MARTA</p>
+       <h2 class="section__title fade-in-up" id="cuidadores-title">Para <em>quienes cuidan</em> a Santa Marta.</h2>
+-      <p class="section__lede fade-in-up">Miércoles y domingo, la casa los espera. Maestros, enfermeras, bomberos, policía, médicos, militares, madres cabeza, adultos mayores 65+, discapacidad y auxiliares de salud — trae 5 personas y todos entran al 50% off cubierto. Ustedes nos cuidan, esta noche les pagamos un poco para atrás.</p>
++      <p class="section__lede fade-in-up">Miércoles y domingo, la casa los espera. Maestros, enfermeras, bomberos, policía, médicos, militares, madres cabeza, adultos mayores 65+, discapacidad y auxiliares de salud — desde 4 personitas, en pares, la casa los recibe <strong>2 por 1</strong>: pagan dos y entran cuatro, pagan tres y entran seis, pagan cuatro y entran ocho. Ustedes nos cuidan, esta noche les pagamos un poco para atrás.</p>
+ 
+       <div class="cuidadores__layout">
+         <article class="cuidadores__week-card fade-in-up">
+@@ -284,8 +284,8 @@
+             </select>
+           </div>
+           <div class="fpc__field">
+-            <label for="fpc-size">Personas en el grupo (5+)</label>
+-            <input id="fpc-size" type="number" min="1" max="20" step="1" value="6" data-fpc-size required />
++            <label for="fpc-size">Personas en el grupo (4, 6 u 8 — en pares)</label>
++            <input id="fpc-size" type="number" min="4" max="8" step="2" value="4" data-fpc-size required />
+           </div>
+           <button type="submit" class="fpc__cta" style="display:block;width:100%;text-align:center;margin:0;">Verificar elegibilidad</button>
+           <div class="fpc__result" data-fpc-result role="status" aria-live="polite"></div>
+@@ -422,7 +422,7 @@
+ 
+         <blockquote class="torax__quote fade-in-up">"El edificio cuidó cuando le tocó cuidar. Hoy, casi un siglo después, devuelve el favor a quienes hoy hacen lo que aquellas enfermeras hicieron por ella."</blockquote>
+ 
+-        <p class="fade-in-up">Por eso el Programa Cuidadores no se llama "noche del 2x1" ni "happy hour de los profes". Se llama Programa Cuidadores Santa Marta — porque la palabra que define a maestros, enfermeras, bomberos, policía, médicos, militares, madres cabeza de familia, adultos mayores que crían nietos, personas con discapacidad y sus cuidadores en casa, es la misma palabra: <em>cuidan</em>. Cuidan a Santa Marta. Cuidan al barrio. Cuidan a alguien.</p>
++        <p class="fade-in-up">Por eso, aunque la matemática del Programa Cuidadores es <em>2 por 1</em> — pagan dos y entran cuatro, en pares de 4, 6 u 8 — el Programa no se llama "happy hour de los profes". Se llama Programa Cuidadores Santa Marta, porque la palabra que define a maestros, enfermeras, bomberos, policía, médicos, militares, madres cabeza de familia, adultos mayores que crían nietos, personas con discapacidad y sus cuidadores en casa, es la misma palabra: <em>cuidan</em>. Cuidan a Santa Marta. Cuidan al barrio. Cuidan a alguien.</p>
+ 
+         <p class="fade-in-up">Si quieres saber más sobre Hospital del Tórax y La Bendita, <a href="/historia" style="color:var(--ek-amber);text-decoration:underline;">lee la historia completa →</a></p>
+       </div>
+diff --git a/js/cinematic-v2.js b/js/cinematic-v2.js
+index d7bd02f..92e12fa 100644
+--- a/js/cinematic-v2.js
++++ b/js/cinematic-v2.js
+@@ -371,23 +371,22 @@
+         result.innerHTML = `Aún sin Family Pass — pero la entrada estándar son <strong>$50.000 COP</strong> por persona, mesa para todos. <br><br>Te dejo el chat de Hortensia para reservar.`;
+         return;
+       }
+-      if (size < 5) {
++      if (size < 4 || size % 2 !== 0 || size > 8) {
+         result.classList.add('is-ineligible');
+-        result.innerHTML = `El Family Pass aplica desde <strong>5 personas</strong>. Trae a alguien más de tu familia y todos entran al 50%.`;
++        result.innerHTML = `El Family Pass es <strong>2 por 1</strong> — aplica desde 4 personas y en pares (4, 6 u 8). Ajusta el grupo y la casa los recibe.`;
+         return;
+       }
+       const totalStd = size * TIER_PRICES.standard;
+-      const totalPass = Math.round(totalStd * 0.5);
++      const totalPass = (size / 2) * TIER_PRICES.standard; // pay for half the group (2 por 1)
+       const savings = totalStd - totalPass;
+       const msg = encodeURIComponent(
+-        `Hola, soy ${categoryObj.label} de Santa Marta. Vi lo del Programa Cuidadores y quiero reservar Family Pass para ${size} personas. ¿Cómo hago?`
++        `Hola, soy ${categoryObj.label} de Santa Marta. Vi lo del Programa Cuidadores y quiero reservar Family Pass (2 por 1) para ${size} personas — pagamos ${size/2}, entramos ${size}. ¿Cómo hago?`
+       );
+       result.classList.add('is-eligible');
+       result.innerHTML = `
+-        <strong>¡Califican!</strong> Family Pass <em>${categoryObj.label}</em> + ${size} personas.<br><br>
+-        Total cubierto: <strong>$${totalPass.toLocaleString('es-CO')} COP</strong> (50% off de $${totalStd.toLocaleString('es-CO')}).
+-        Ahorras <strong>$${savings.toLocaleString('es-CO')} COP</strong>.<br>
+-        Comida y cocteles a precio normal. Trae ${categoryObj.id} vigente a la entrada.
++        <strong>¡Califican!</strong> Family Pass <em>${categoryObj.label}</em> · <strong>2 por 1</strong> para ${size} personas.<br><br>
++        Pagan <strong>${size/2}</strong>, entran <strong>${size}</strong>. Total cubierto: <strong>$${totalPass.toLocaleString('es-CO')} COP</strong> (frente a $${totalStd.toLocaleString('es-CO')} general).<br>
++        Ahorran <strong>$${savings.toLocaleString('es-CO')} COP</strong>. Comida y cocteles a precio normal. Trae ${categoryObj.id} vigente a la entrada.
+         <br><a class="fpc__cta" href="${WA_BASE}?text=${msg}" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+       `;
+     });
+diff --git a/menu/index.html b/menu/index.html
+index 615f3bc..9718978 100644
+--- a/menu/index.html
++++ b/menu/index.html
+@@ -741,6 +741,33 @@
+ <!-- ── MAIN MENU ── -->
+ <main class="menu-main">
+ 
++  <!-- ── QR Quick-Pick (2026-06-21, restored 2026-06-22 audit) ──
++       Surfaces the 3 QR-optimized menus when guests land on /menu
++       from a generic QR. Each card matches that menu's brand vibe.
++       Canonical: Cuidadores framed as "2 por 1", NOT "50% off".
++       ────────────────────────────────────────────────────────── -->
++  <section class="qr-quick-pick" aria-labelledby="qr-pick-title" style="max-width:920px;margin:0 auto 56px;">
++    <h2 id="qr-pick-title" style="font-family:'Fraunces',serif;font-size:1.4rem;letter-spacing:0.04em;color:var(--menu-cream);text-align:center;margin:0 0 14px;">¿Qué busca esta noche?</h2>
++    <p style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--menu-text-muted);text-align:center;margin:0 0 26px;">Tres cartas independientes · una hoja de admisión</p>
++    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
++      <a href="/menu/chuzo" style="display:block;padding:22px 20px;background:linear-gradient(135deg,#3A2418 0%,#0F0D0B 100%);border:1px solid var(--menu-border-strong);border-radius:8px;text-decoration:none;color:var(--menu-cream);transition:transform 0.2s, box-shadow 0.2s;">
++        <span style="display:block;font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;color:var(--menu-ember);text-transform:uppercase;margin-bottom:6px;">Counter de calle</span>
++        <span style="display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--menu-cream);margin-bottom:6px;">Chuzo Tokyo</span>
++        <span style="display:block;font-style:italic;font-family:Georgia,serif;color:var(--menu-text-dim);font-size:0.9rem;">Yakitori para caminar la Calle 19. Empacado en kraft.</span>
++      </a>
++      <a href="/menu/bar" style="display:block;padding:22px 20px;background:linear-gradient(135deg,#1B0B0B 0%,#0B0908 100%);border:1px solid #B7372D;border-radius:8px;text-decoration:none;color:var(--menu-cream);transition:transform 0.2s, box-shadow 0.2s;">
++        <span style="display:block;font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;color:#ff8585;text-transform:uppercase;margin-bottom:6px;">Barra del Doctor</span>
++        <span style="display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--menu-cream);margin-bottom:6px;">Prescripciones</span>
++        <span style="display:block;font-style:italic;font-family:Georgia,serif;color:var(--menu-text-dim);font-size:0.9rem;">Jeringas de la casa · cócteles de autor.</span>
++      </a>
++      <a href="/menu/tickets" style="display:block;padding:22px 20px;background:linear-gradient(135deg,#1B7A8C22 0%,#07090B 100%);border:1px dashed #1B7A8C;border-radius:8px;text-decoration:none;color:var(--menu-cream);transition:transform 0.2s, box-shadow 0.2s;">
++        <span style="display:block;font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;color:#3FAEC1;text-transform:uppercase;margin-bottom:6px;">Hospital del Tórax</span>
++        <span style="display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--menu-cream);margin-bottom:6px;">Admisiones</span>
++        <span style="display:block;font-style:italic;font-family:Georgia,serif;color:var(--menu-text-dim);font-size:0.9rem;">Pulsera, expediente, recorrido. Cuidadores Santa Marta · 2 por 1.</span>
++      </a>
++    </div>
++  </section>
++
+   <!-- ============================================================
+        SECTION A — CHUZO TOKYO (yakitori — canonical v4 stamped)
+        ============================================================ -->
+diff --git a/netlify/functions/hortensia-chat.mjs b/netlify/functions/hortensia-chat.mjs
+index 19b0711..2272245 100644
+--- a/netlify/functions/hortensia-chat.mjs
++++ b/netlify/functions/hortensia-chat.mjs
+@@ -37,26 +37,52 @@ const FALLBACK_REPLIES = {
+   greeting: [
+     "Aló cariño, soy Hortensia. Cuéntame, ¿reservación para cuántos y para qué noche?",
+     "Buenas mi amor, Doña Pilar al teléfono. Disculpa la demora — Don Hilario está dando pelea otra vez. Cuéntame.",
+-    "Aló querido, qué bueno que escribió. ¿En qué le ayudo?"
++    "Aló querido, qué bueno que escribió. ¿En qué le ayudo?",
++    "Aló mi vida, Hortensia al habla. Don Silvio está pasando ronda, déjeme apuntarle yo. ¿Qué necesita?",
++    "Hola cariño, qué bueno oírlo. La casa está cordial esta semana — ¿reserva, info del menú, o vienen por la experiencia?",
++    "Aló, Sanatorio buenas. Aquí Doña Pilar — la enfermera vieja, no la nueva. Cuénteme con calma.",
++    "Buenas mi amor. Antes que se me olvide: jueves a domingo abrimos. ¿En qué le ayudo?",
++    "Aló querida, le contesto desde admisiones. Don Hilario me tiene el escritorio lleno de fichas — usted dirá."
+   ],
+   party_size: [
+-    "¿Cuántas personitas serían? Si son más de 5 califican para Family Pass — descuento de Cuidadores si alguno trabaja de maestro, enfermera, bombero.",
++    "¿Cuántas personitas serían? Si vienen de a 4, 6 u 8 (siempre en pares) y alguno trabaja de maestro, enfermera, bombero o así, la casa los recibe 2 por 1 con el Programa Cuidadores.",
+     "¿Para cuántos vamos? Le aviso que las mesas para más de 6 las separamos al fondo, donde se ve el patio.",
+-    "¿Cuántos vienen? Ojo que las sillas de ruedas de afuera siempre las ocupan los enamorados, así que mejor reservar."
++    "¿Cuántos vienen? Ojo que las sillas de ruedas de afuera siempre las ocupan los enamorados, así que mejor reservar.",
++    "¿Para cuántos pacientes apunto, mi amor? La casa tiene aforo de 22 a 28 — íntimo, así de a poco mejor.",
++    "¿Cuántitos serían? Para grupos privados de 8 a 12 reservamos zona bar o patio en exclusivo.",
++    "¿Cuántos vienen, cariño? Si trabajan en lo que cuida (salud, educación, fuerza pública, mayores 65+) y van en pares, les hacemos 2 por 1.",
++    "¿Cuántas personitas? Una cosita: la cocina cierra 11:30pm, entonces si son muchos los acomodo más temprano.",
++    "¿Para cuántos? Si son más de 12, mejor llámeme directo al WhatsApp para mirar privatización del aforo completo."
+   ],
+   time: [
+     "¿A qué hora les acomoda? Le aviso, las 8pm es la hora del show de Don Hilario.",
+     "¿Qué noche pensaban? Jueves a domingo, de 6pm a medianoche. Las 7:30pm es la hora favorita de Dr. Silvio.",
+-    "Para qué fecha quieren venir, mi amor? Tenemos jueves, viernes, sábado y domingo."
++    "Para qué fecha quieren venir, mi amor? Tenemos jueves, viernes, sábado y domingo.",
++    "¿Qué horario les funciona? De 6pm a 8pm entran familias con menores acompañados; de 8pm a 1am ya solo mayores de 16.",
++    "Dígame fecha tentativa querido — el calendario me lo abre Don Silvio y a veces el lunes ya no queda jueves.",
++    "¿Qué día tenían en mente? Le adelanto: noches de Cuidadores son miércoles y domingo (aunque abrimos jueves a domingo al público).",
++    "¿A qué hora caben? El bar abre 6pm, la cocina cierra 11:30pm, y la barra cierra 1am. Hay tiempo de sobra.",
++    "¿Para cuándo, mi vida? Si es para fin de semana de quincena, mejor confirmemos rápido — se llena."
+   ],
+   closing: [
+     "Listo cariño, déjame el número de teléfono y el nombre y te envío el linkecito para confirmar con el 50% de depósito. El saldo lo cobra la mesera en la noche.",
+-    "Perfecto, todo anotado. ¿Me confirmas un teléfono donde te llegue WhatsApp así te mando el link de pago?"
++    "Perfecto, todo anotado. ¿Me confirmas un teléfono donde te llegue WhatsApp así te mando el link de pago?",
++    "Listo mi amor, le mando el link de Wompi por WhatsApp — 50% de depósito apartamento, el saldo lo paga en la noche con la mesera.",
++    "Cerrando: nombre completo, teléfono, y le envío el link de pago. La reserva queda cuando entra el 50%.",
++    "Anotado todo, querido. Apenas confirme el depósito le mandamos la ficha del paciente para enseñarla en la puerta.",
++    "Ya casi cariño — deme el nombre y celular para mandarle el link. Si el depósito no entra en 12 horas la mesa se libera, así que pendiente.",
++    "Listo mi vida, voy a apuntarlo. Le aviso: el depósito es 50% y se devuelve si cancela con 48 horas de antelación.",
++    "Perfecto. ¿Le mando el link por aquí mismo o le confirmo por WhatsApp al +1 903 459 8763 — usted dirá cuál le queda más a la mano?"
+   ],
+   default: [
+     "Cuéntame mejor mi amor, ¿es para reservar, para preguntar por el menú, o por una ocasión especial?",
+     "Disculpa, no te seguí — ¿es reservación, cumpleaños, o algo más?",
+-    "A ver querido, dime más — Dr. Silvio dice que las preguntas claras se contestan rápido."
++    "A ver querido, dime más — Dr. Silvio dice que las preguntas claras se contestan rápido.",
++    "Espéreme tantito mi vida, no le entendí. ¿Reserva, info, o algo más específico?",
++    "Mmm cariño, deme un poco más de contexto — ¿reservación, evento privado, audición, prensa, o algo distinto?",
++    "Discúlpeme querido, Don Hilario me distrajo con el proyector. Repita despacito por favor — ¿en qué le ayudo?",
++    "Cuénteme con calma mi amor: ¿es por admisión normal, por Cuidadores, por evento privado, o por el menú?",
++    "A ver, vamos por partes — ¿qué necesita exactamente? Si es algo muy técnico mejor le paso a doña Luz."
+   ]
+ };
+ 
+@@ -135,7 +161,7 @@ CONTEXTO DEL VENUE:
+ - Pacientes ficticios que mencionas con afecto: Don Hilario (cree que su cara proyecta a Norm Lewis), Don Bellasrio (manda mensajes Morse al puerto), Micaela (cose miembros sueltos), Don Aldo (habla con la pared), Doña Eulalia (predice mañana).
+ - Precio entrada estándar: $50.000 COP por persona. VIP "Director's Cut": $75.000.
+ - Depósito 50% para confirmar reserva, saldo en la noche.
+-- Programa Cuidadores Santa Marta: si traes 5+ personas y uno es maestro/enfermera/bombero/policía/médico/militar/madre cabeza/adulto mayor 65+/discapacidad/auxiliar de salud, todos entran al 50% off cubierto (comida y trago a precio normal). Miércoles y domingo. Carnet vigente a la entrada.
++- Programa Cuidadores Santa Marta: si vienen de a 4, 6 u 8 personas (siempre en pares) y uno es maestro/enfermera/bombero/policía/médico/militar/madre cabeza/adulto mayor 65+/discapacidad/auxiliar de salud, la entrada es 2 por 1 — pagan la mitad del grupo, entran todos. Comida y trago a precio normal. Miércoles y domingo. Carnet vigente a la entrada.
+ 
+ TU PERSONALIDAD:
+ - Caribeña cálida, "mi amor", "cariño", "querido/a". Costeña pero educada.
+diff --git a/package.json b/package.json
+index a54a0bf..5ff0afd 100644
+--- a/package.json
++++ b/package.json
+@@ -5,9 +5,17 @@
+   "type": "module",
+   "scripts": {
+     "build": "node -e \"console.log('static site build: no compile step')\"",
+-    "test": "node --test"
++    "test": "node --test",
++    "menu:optimize": "node scripts/optimize-menu-assets.mjs",
++    "menu:qr": "node scripts/generate-menu-qr.mjs",
++    "menu:check": "node --check scripts/optimize-menu-assets.mjs && node --check scripts/generate-menu-qr.mjs"
+   },
+   "dependencies": {
+     "googleapis": "^171.4.0"
++  },
++  "devDependencies": {
++    "qrcode": "^1.5.4",
++    "pdfkit": "^0.15.0",
++    "sharp": "^0.33.5"
+   }
+ }
+diff --git a/tools/booking-calendar/index.html b/tools/booking-calendar/index.html
+index 2c8a156..d91f548 100644
+--- a/tools/booking-calendar/index.html
++++ b/tools/booking-calendar/index.html
+@@ -4,7 +4,7 @@
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Calendario de Reservas | El Sanatorio</title>
+-  <meta name="description" content="Consulta disponibilidad para Patio, Laboratorio y Casa del Terror en El Sanatorio y solicita tu reserva por WhatsApp.">
++  <meta name="description" content="Consulta disponibilidad para Bar, Patio, Calle y Laberinto en El Sanatorio (aforo 22–28) y solicita tu reserva por WhatsApp.">
+ <meta property="og:title" content="Reserva tu evento — El Sanatorio">
+   <link rel="canonical" href="https://el-sanatorio.com/tools/booking-calendar/">
+   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+@@ -41,7 +41,7 @@
+ 
+     .zone-tabs {
+       display: grid;
+-      grid-template-columns: repeat(3, 1fr);
++      grid-template-columns: repeat(2, 1fr);
+       gap: 1px;
+       margin-bottom: 1.25rem;
+       border: 1px solid var(--border);
+@@ -410,9 +410,10 @@
+       </section>
+ 
+       <div class="zone-tabs" role="tablist" aria-label="Zonas de reserva">
+-        <button class="zone-tab" type="button" role="tab" aria-selected="true" data-zone="Patio"><strong>Patio</strong>Capacidad 30</button>
+-        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Laboratorio"><strong>Laboratorio</strong>Capacidad 15</button>
+-        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Casa del Terror"><strong>Casa del Terror</strong>Capacidad 20</button>
++        <button class="zone-tab" type="button" role="tab" aria-selected="true" data-zone="Bar"><strong>Bar (Admisiones)</strong>Cap. 10</button>
++        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Patio"><strong>Patio</strong>Cap. 8</button>
++        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Calle"><strong>Calle</strong>Cap. 4</button>
++        <button class="zone-tab" type="button" role="tab" aria-selected="false" data-zone="Laberinto"><strong>Laberinto</strong>Cap. 8</button>
+       </div>
+ 
+       <div class="booking-grid">
+@@ -450,13 +451,14 @@
+         </label>
+         <label>Zona
+           <select id="booking-zone">
++            <option>Bar</option>
+             <option>Patio</option>
+-            <option>Laboratorio</option>
+-            <option>Casa del Terror</option>
++            <option>Calle</option>
++            <option>Laberinto</option>
+           </select>
+         </label>
+         <label>Personas
+-          <input id="guest-count" type="number" min="1" max="30" value="2" required>
++          <input id="guest-count" type="number" min="1" max="28" value="2" required>
+         </label>
+         <input id="booking-date" type="hidden">
+         <input id="booking-time" type="hidden">
+@@ -470,12 +472,14 @@
+ 
+   <script>
+     const zones = {
+-      Patio: { capacity: 30 },
+-      Laboratorio: { capacity: 15 },
+-      "Casa del Terror": { capacity: 20 }
++      Bar: { capacity: 10 },
++      Patio: { capacity: 8 },
++      Calle: { capacity: 4 },
++      Laberinto: { capacity: 8 }
+     };
++    // Aforo público objetivo 22–28 según la noche.
+ 
+-    let activeZone = "Patio";
++    let activeZone = "Bar";
+     let calendar;
+     let allEvents = [];
+     let currentCardEvents = [];
+@@ -491,9 +495,10 @@
+ 
+     function detectZone(event) {
+       const haystack = `${event.summary || ""} ${event.location || ""} ${event.description || ""}`.toLowerCase();
+-      if (haystack.includes("laboratorio")) return "Laboratorio";
+-      if (haystack.includes("terror") || haystack.includes("paciente") || haystack.includes("casa")) return "Casa del Terror";
+-      return "Patio";
++      if (haystack.includes("laberinto") || haystack.includes("terror") || haystack.includes("paciente") || haystack.includes("casa")) return "Laberinto";
++      if (haystack.includes("calle") || haystack.includes("street") || haystack.includes("acera")) return "Calle";
++      if (haystack.includes("patio")) return "Patio";
++      return "Bar";
+     }
+ 
+     function dateFromEvent(event) {

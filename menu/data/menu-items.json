@@ -1,0 +1,492 @@
+{
+  "_meta": {
+    "version": "2026-06-21.1",
+    "stamped_by": "qr-menus-build-2026-06-21",
+    "currency": "COP",
+    "venue": {
+      "name": "El Sanatorio",
+      "legal_name": "EL SANATORIO S.A.S.",
+      "nit": "902.051.563-5",
+      "address": "Calle 19 #4-23, Centro Histórico, Santa Marta, Magdalena",
+      "whatsapp": "+19034598763",
+      "wa_link": "https://wa.me/19034598763",
+      "opens_at": "16:00",
+      "closes_at": "02:00",
+      "instagram": "https://instagram.com/elsanatorio.smr",
+      "site": "https://el-sanatorio.com"
+    },
+    "wa_order_template": "Hola Doctor, quiero pedir: {ORDER} — Total: COP {TOTAL}. ¿Confirmo y pago por Wompi?",
+    "wa_reserve_template": "Hola Doctor, quiero solicitar admisión: {TIER} para {QTY} pacientes. Fecha tentativa: ___."
+  },
+  "menus": {
+    "chuzo": {
+      "id": "chuzo",
+      "venue_label": "Chuzo Tokyo",
+      "subtitle": "Yakitori a la brasa · para llevar caminando",
+      "tagline_es": "Yakitori al carbón, en la mano, mientras camina la Calle 19.",
+      "tagline_en": "Charcoal yakitori, in your hand, walking Calle 19.",
+      "hero_clip": "/images/menu-clips/chuzo-walk-along-19.webm",
+      "hero_clip_mp4": "/images/menu-clips/chuzo-walk-along-19.mp4",
+      "hero_poster": "/images/sanatorio-yakitori-night.webp",
+      "ambient_audio": null,
+      "theme": "chuzo",
+      "show_price_default": true,
+      "cross_links": [
+        {"label": "¿Quiere la experiencia completa? Reserve admisión →", "href": "/menu/tickets"},
+        {"label": "Cócteles dentro del Sanatorio →", "href": "/menu/bar"}
+      ],
+      "sections": [
+        {
+          "code": "A",
+          "name_es": "A la brasa",
+          "name_en": "Over the coals",
+          "intro_es": "Carbón directo. Pollo y cebolla alternados. Salsa teriyaki de la casa. Pídalo para llevar — empacado en papel kraft para caminar.",
+          "intro_en": "Direct charcoal. Chicken and onion alternated. House teriyaki. Order to-go — wrapped in kraft paper to walk.",
+          "items": [
+            {
+              "code": "A-01",
+              "id": "yakitori-palito",
+              "name_es": "Yakitori · palito",
+              "name_en": "Yakitori · single skewer",
+              "desc_es": "Palito de pollo a la brasa con teriyaki de la casa. El que se come caminando.",
+              "desc_en": "Single charcoal-grilled chicken skewer with house teriyaki. The one you eat walking.",
+              "ingredients": "Pollo · Tare · Carbón",
+              "price": 9500,
+              "walkaway": true,
+              "badge": "PARA LLEVAR",
+              "clip": "/images/menu-clips/yakitori-palito.webm",
+              "poster": "/images/sanatorio-yakitori.webp"
+            },
+            {
+              "code": "A-02",
+              "id": "yakitori-3pack",
+              "name_es": "Pack de tres",
+              "name_en": "Three-pack",
+              "desc_es": "Tres palitos para la mesa o para la calle. La prescripción mínima recomendada.",
+              "desc_en": "Three skewers for the table or the street. The minimum recommended dose.",
+              "ingredients": "Pollo · Tare · Carbón",
+              "price": 26600,
+              "walkaway": true,
+              "badge": "FIRMA",
+              "highlight": true,
+              "clip": "/images/menu-clips/yakitori-3pack.webm",
+              "poster": "/images/sanatorio-yakitori.webp"
+            },
+            {
+              "code": "A-03",
+              "id": "rice-bowl",
+              "name_es": "Rice Bowl",
+              "name_en": "Rice Bowl",
+              "desc_es": "Arroz, papa, fríjoles, huevo cocido y un palito de yakitori. Se come sentado — necesita tenedor.",
+              "desc_en": "Rice, potato, beans, boiled egg, one yakitori skewer. Sit-down dish — fork required.",
+              "ingredients": "Arroz · Papa · Fríjoles · Huevo · Yakitori",
+              "price": 25200,
+              "walkaway": false,
+              "clip": "/images/menu-clips/rice-bowl.webm",
+              "poster": "/images/sanatorio-yakitori-night.webp"
+            }
+          ]
+        },
+        {
+          "code": "B",
+          "name_es": "Cocina compartida",
+          "name_en": "Shared kitchen",
+          "intro_es": "Lo mejor de Sushi Pop, desde la cocina del Sanatorio.",
+          "intro_en": "Sushi Pop's greatest hits, from the Sanatorio kitchen.",
+          "items": [
+            {
+              "code": "B-01",
+              "id": "los-5-pops",
+              "name_es": "Los 5 POPs · individual",
+              "name_en": "The 5 POPs · individual",
+              "desc_es": "Mango Tango · Pollo Yoyó · Cerdo Gordo · Vaca Loca · Salmón Patrón. Cuatro piezas por POP.",
+              "desc_en": "Mango Tango · Pollo Yoyó · Cerdo Gordo · Vaca Loca · Salmón Patrón. Four pieces per POP.",
+              "ingredients": "4 piezas · 5 sabores",
+              "price": 15900,
+              "walkaway": false,
+              "poster": "/images/sanatorio-yakitori-night.webp"
+            },
+            {
+              "code": "B-02",
+              "id": "sushi-roll",
+              "name_es": "Sushi Roll · individual",
+              "name_en": "Sushi Roll · individual",
+              "desc_es": "Roll completo del sabor que elija: Mango Tango · Pollo Yoyó · Cerdo Gordo · Vaca Loca.",
+              "desc_en": "Full roll of your choice: Mango Tango · Pollo Yoyó · Cerdo Gordo · Vaca Loca.",
+              "ingredients": "8 piezas · 4 sabores base",
+              "price": 23900,
+              "walkaway": false
+            },
+            {
+              "code": "B-03",
+              "id": "salmon-patron",
+              "name_es": "Sushi Roll · Salmón Patrón",
+              "name_en": "Sushi Roll · Salmón Patrón",
+              "desc_es": "Salmón cocido glaseado teriyaki. El especial del counter. Salmón Patrón es COCIDO — nunca crudo.",
+              "desc_en": "Cooked salmon, teriyaki glaze. The counter special. Always cooked — never raw.",
+              "ingredients": "8 piezas · Salmón cocido",
+              "price": 25900,
+              "walkaway": false,
+              "badge": "FIRMA",
+              "highlight": true
+            },
+            {
+              "code": "B-04",
+              "id": "box-fiesta",
+              "name_es": "BOX FIESTA",
+              "name_en": "BOX FIESTA",
+              "desc_es": "Cinco rolls a su elección. 50 piezas. Para la mesa grande.",
+              "desc_en": "Five rolls of your choice. 50 pieces. For the big table.",
+              "ingredients": "50 piezas · 5 rolls",
+              "price": 95000,
+              "walkaway": false,
+              "badge": "MESA GRANDE"
+            }
+          ]
+        },
+        {
+          "code": "C",
+          "name_es": "Postres",
+          "name_en": "Desserts",
+          "intro_es": "Caminan bien. Empacan mejor.",
+          "intro_en": "Easy to walk with. Easy to share.",
+          "items": [
+            {
+              "code": "C-01",
+              "id": "cookie-doughnut",
+              "name_es": "Cookie Doughnut",
+              "name_en": "Cookie Doughnut",
+              "desc_es": "Galleta de dona con chocolate derretido por dentro. Hecha en casa.",
+              "desc_en": "Donut-cookie with melted chocolate inside. House-made.",
+              "price": 16500,
+              "walkaway": true,
+              "badge": "PARA LLEVAR"
+            },
+            {
+              "code": "C-02",
+              "id": "chocoramo",
+              "name_es": "Chocoramo",
+              "name_en": "Chocoramo",
+              "desc_es": "El clásico colombiano. Bañado en chocolate.",
+              "desc_en": "The Colombian classic. Dipped in chocolate.",
+              "price": 10500,
+              "walkaway": true,
+              "badge": "PARA LLEVAR"
+            }
+          ]
+        },
+        {
+          "code": "D",
+          "name_es": "Bebidas",
+          "name_en": "Drinks",
+          "intro_es": "Para el camino. Todas a $6.000.",
+          "intro_en": "For the walk. All COP 6,000.",
+          "items": [
+            {"code": "D-01", "id": "coca-cola", "name_es": "Coca-Cola", "name_en": "Coca-Cola", "desc_es": "600ml. Frío.", "desc_en": "600ml. Cold.", "price": 6000, "walkaway": true},
+            {"code": "D-02", "id": "coca-cola-zero", "name_es": "Coca-Cola Sin Azúcar", "name_en": "Coke Zero", "desc_es": "600ml. Sin glucosa.", "desc_en": "600ml. Sugar-free.", "price": 6000, "walkaway": true},
+            {"code": "D-03", "id": "agua", "name_es": "Agua", "name_en": "Water", "desc_es": "Mineral 600ml.", "desc_en": "Mineral 600ml.", "price": 6000, "walkaway": true}
+          ]
+        }
+      ]
+    },
+    "bar": {
+      "id": "bar",
+      "venue_label": "El Sanatorio · Barra",
+      "subtitle": "Prescripciones de la barra · pacientes hospitalizados",
+      "tagline_es": "El Doctor de turno no vende cócteles — los receta.",
+      "tagline_en": "The Doctor on duty doesn't sell cocktails — he prescribes them.",
+      "hero_clip": "/images/menu-clips/bar-syringe-pull.webm",
+      "hero_clip_mp4": "/images/menu-clips/bar-syringe-pull.mp4",
+      "hero_poster": "/images/sanatorio-cocktails.webp",
+      "ambient_audio": null,
+      "theme": "bar",
+      "show_price_default": true,
+      "cross_links": [
+        {"label": "¿Solo un bocado rápido? Chuzo Tokyo en la calle →", "href": "/menu/chuzo"},
+        {"label": "Reservar admisión al Sanatorio →", "href": "/menu/tickets"}
+      ],
+      "sections": [
+        {
+          "code": "A",
+          "name_es": "Jeringa · Dosis del Sanatorio",
+          "name_en": "Syringe · Sanatorio dose",
+          "intro_es": "Tres mezclas de la casa servidas en jeringa quirúrgica. Andrew las hace detrás de la barra. Sin nombre comercial — sin etiqueta — sin pretensión.",
+          "intro_en": "Three house mixes served in surgical syringe. Made behind the bar. No brand. No label. No pretense.",
+          "items": [
+            {
+              "code": "S-01",
+              "id": "syringe-rojo",
+              "name_es": "Jeringa Roja",
+              "name_en": "Red Syringe",
+              "desc_es": "Tequila + hibisco + chile suave. Sabor a sangre dulce.",
+              "desc_en": "Tequila + hibiscus + mild chili. Tastes like sweet blood.",
+              "ingredients": "Tequila · Hibisco · Chile",
+              "price": 15000,
+              "walkaway": false,
+              "badge": "JERINGA",
+              "clip": "/images/menu-clips/syringe-rojo.webm",
+              "poster": "/images/sanatorio-cocktails.webp"
+            },
+            {
+              "code": "S-02",
+              "id": "syringe-verde",
+              "name_es": "Jeringa Verde",
+              "name_en": "Green Syringe",
+              "desc_es": "Gin + albahaca + lima. Antiséptico. Levanta al paciente.",
+              "desc_en": "Gin + basil + lime. Antiseptic. Wakes the patient.",
+              "ingredients": "Gin · Albahaca · Lima",
+              "price": 15000,
+              "walkaway": false,
+              "badge": "JERINGA",
+              "clip": "/images/menu-clips/syringe-verde.webm"
+            },
+            {
+              "code": "S-03",
+              "id": "syringe-negra",
+              "name_es": "Jeringa Negra",
+              "name_en": "Black Syringe",
+              "desc_es": "Ron oscuro + carbón activado + lima. La que no se olvida.",
+              "desc_en": "Dark rum + activated charcoal + lime. The unforgettable one.",
+              "ingredients": "Ron · Carbón · Lima",
+              "price": 17000,
+              "walkaway": false,
+              "badge": "FIRMA",
+              "highlight": true,
+              "clip": "/images/menu-clips/syringe-negra.webm"
+            }
+          ]
+        },
+        {
+          "code": "B",
+          "name_es": "Prescripciones",
+          "name_en": "Prescriptions",
+          "intro_es": "Cócteles de autor del Doctor de turno. Consumir según indicaciones. El establecimiento no se responsabiliza por efectos secundarios.",
+          "intro_en": "Author cocktails by the Doctor on duty. Drink as directed. House not responsible for side effects.",
+          "items": [
+            {
+              "code": "B-01",
+              "id": "la-morfina",
+              "name_es": "La Morfina",
+              "name_en": "La Morfina",
+              "desc_es": "Ron oscuro, maracuyá fresco, carbón activado, lima. Oscuro. Dulce. Adictivo por definición.",
+              "desc_en": "Dark rum, passion fruit, activated charcoal, lime. Dark. Sweet. Addictive by definition.",
+              "ingredients": "Ron oscuro · Maracuyá · Carbón · Lima",
+              "prescription": "Para el dolor que no tiene cura.",
+              "price": 24000,
+              "walkaway": false,
+              "clip": "/images/menu-clips/la-morfina.webm",
+              "poster": "/images/sanatorio-cocktails.webp"
+            },
+            {
+              "code": "B-02",
+              "id": "el-paracetamol",
+              "name_es": "El Paracetamol",
+              "name_en": "El Paracetamol",
+              "desc_es": "Vodka, flor de saúco, pepino, tónica. Limpio. Preciso.",
+              "desc_en": "Vodka, elderflower, cucumber, tonic. Clean. Precise.",
+              "ingredients": "Vodka · Saúco · Pepino · Tónica",
+              "prescription": "Efectivo en dosis moderadas. Puede causar dependencia.",
+              "price": 22000,
+              "walkaway": false
+            },
+            {
+              "code": "B-03",
+              "id": "la-transfusion",
+              "name_es": "La Transfusión",
+              "name_en": "La Transfusión",
+              "desc_es": "Tequila, hibisco, naranja sanguina, enjuague de mezcal. Rojo. Vivo. Tipo O universal.",
+              "desc_en": "Tequila, hibiscus, blood orange, mezcal rinse. Red. Alive. Type O universal.",
+              "ingredients": "Tequila · Hibisco · Sanguina · Mezcal",
+              "prescription": "Tipo O universal. Analizar grupo antes de administrar.",
+              "price": 26000,
+              "walkaway": false,
+              "badge": "FIRMA",
+              "highlight": true,
+              "clip": "/images/menu-clips/la-transfusion.webm"
+            },
+            {
+              "code": "B-04",
+              "id": "dosis-letal",
+              "name_es": "Dosis Letal",
+              "name_en": "Dosis Letal",
+              "desc_es": "Triple medida de ron, jengibre, lima, ginger beer. Firmar consentimiento.",
+              "desc_en": "Triple rum, ginger, lime, ginger beer. Sign consent.",
+              "ingredients": "Ron triple · Jengibre · Lima · Ginger beer",
+              "prescription": "Requiere firma de consentimiento informado.",
+              "price": 28000,
+              "walkaway": false
+            },
+            {
+              "code": "B-05",
+              "id": "suero",
+              "name_es": "Suero",
+              "name_en": "Suero",
+              "desc_es": "Gin botánico, agua de coco, menta, borde de sal marina. Hidratación terapéutica.",
+              "desc_en": "Botanical gin, coconut water, mint, sea salt rim. Therapeutic hydration.",
+              "ingredients": "Gin · Coco · Menta · Sal marina",
+              "prescription": "Hidratación terapéutica. Seguro para pacientes nuevos.",
+              "price": 23000,
+              "walkaway": false
+            },
+            {
+              "code": "B-06",
+              "id": "la-anestesia",
+              "name_es": "La Anestesia",
+              "name_en": "La Anestesia",
+              "desc_es": "Mezcal, amaro, bitter de chocolate, expresión de naranja.",
+              "desc_en": "Mezcal, amaro, chocolate bitter, orange peel.",
+              "ingredients": "Mezcal · Amaro · Chocolate · Naranja",
+              "prescription": "Administrar antes del procedimiento. No conducir maquinaria.",
+              "price": 27000,
+              "walkaway": false
+            },
+            {
+              "code": "B-07",
+              "id": "sangre-paciente",
+              "name_es": "Sangre de Paciente",
+              "name_en": "Patient's Blood",
+              "desc_es": "Reducción de vino tinto, brandy, jarabe especiado. Tipo desconocido.",
+              "desc_en": "Red wine reduction, brandy, spiced syrup. Unknown type.",
+              "ingredients": "Vino tinto reducido · Brandy · Jarabe",
+              "prescription": "Tipo desconocido. Procedencia: Sala 7. No preguntar.",
+              "price": 24000,
+              "walkaway": false
+            },
+            {
+              "code": "B-08",
+              "id": "la-receta",
+              "name_es": "La Receta",
+              "name_en": "La Receta",
+              "desc_es": "Whisky, miel de acacia, limón, tomillo fresco.",
+              "desc_en": "Whisky, acacia honey, lemon, fresh thyme.",
+              "ingredients": "Whisky · Miel · Limón · Tomillo",
+              "prescription": "Solo con prescripción médica. Disponibilidad limitada.",
+              "price": 25000,
+              "walkaway": false,
+              "badge": "CON PRESCRIPCIÓN"
+            }
+          ]
+        },
+        {
+          "code": "C",
+          "name_es": "Cervezas y sake",
+          "name_en": "Beer & sake",
+          "intro_es": "Para el tratamiento sostenido.",
+          "intro_en": "For sustained treatment.",
+          "items": [
+            {"code": "C-01", "id": "aguila", "name_es": "Aguila", "name_en": "Aguila", "desc_es": "Cerveza nacional. Fría.", "desc_en": "National lager. Cold.", "price": 8000, "walkaway": false},
+            {"code": "C-02", "id": "club-colombia", "name_es": "Club Colombia", "name_en": "Club Colombia", "desc_es": "Lager dorada. Fría.", "desc_en": "Golden lager. Cold.", "price": 9000, "walkaway": false},
+            {"code": "C-03", "id": "sake-canned", "name_es": "Sake en lata", "name_en": "Canned sake", "desc_es": "Sake japonés, lata 200ml. Servido frío.", "desc_en": "Japanese sake, 200ml can. Served cold.", "price": 14000, "walkaway": false, "badge": "JAPÓN"}
+          ]
+        },
+        {
+          "code": "D",
+          "name_es": "Rehidratación · Sin alcohol",
+          "name_en": "Hydration · Non-alcoholic",
+          "intro_es": "Para pacientes en recuperación o conductores.",
+          "intro_en": "For recovery patients or designated drivers.",
+          "items": [
+            {"code": "D-01", "id": "suero-fisiologico", "name_es": "Suero Fisiológico", "name_en": "Saline Drip", "desc_es": "Agua espumosa, pepino, lima, sal de carbón.", "desc_en": "Sparkling water, cucumber, lime, charcoal salt.", "price": 8000, "walkaway": false},
+            {"code": "D-02", "id": "plasma-fresco", "name_es": "Plasma Fresco", "name_en": "Fresh Plasma", "desc_es": "Jugo de frutas tropicales, jengibre, menta.", "desc_en": "Tropical juice, ginger, mint.", "price": 10000, "walkaway": false},
+            {"code": "D-03", "id": "glucosa-iv", "name_es": "Glucosa IV", "name_en": "IV Glucose", "desc_es": "Té de hibisco con panela, frío.", "desc_en": "Hibiscus tea with panela, cold.", "price": 9000, "walkaway": false},
+            {"code": "D-04", "id": "solucion-salina", "name_es": "Solución Salina", "name_en": "Saline Solution", "desc_es": "Agua mineral. pH balanceado.", "desc_en": "Mineral water. pH balanced.", "price": 5000, "walkaway": false}
+          ]
+        }
+      ]
+    },
+    "tickets": {
+      "id": "tickets",
+      "venue_label": "El Sanatorio · Admisiones",
+      "subtitle": "Hoja de admisión · Hospital del Tórax",
+      "tagline_es": "Cada paciente recibe pulsera, expediente y diagnóstico personalizado.",
+      "tagline_en": "Every patient gets a wristband, a file, and a personalized diagnosis.",
+      "hero_clip": "/images/menu-clips/tickets-arrival.webm",
+      "hero_clip_mp4": "/images/menu-clips/tickets-arrival.mp4",
+      "hero_poster": "/images/sanatorio-admisiones.webp",
+      "ambient_audio": null,
+      "theme": "tickets",
+      "show_price_default": true,
+      "cross_links": [
+        {"label": "¿Comer sin reservar? Chuzo Tokyo en la calle →", "href": "/menu/chuzo"},
+        {"label": "Ver la barra del Sanatorio →", "href": "/menu/bar"}
+      ],
+      "sections": [
+        {
+          "code": "T",
+          "name_es": "Niveles de admisión",
+          "name_en": "Admission tiers",
+          "intro_es": "Todas las admisiones incluyen pulsera de paciente, expediente personalizado y entrada al recorrido nocturno del Hospital.",
+          "intro_en": "All admissions include patient wristband, personal file, and entry to the nightly Hospital tour.",
+          "items": [
+            {
+              "code": "T-01",
+              "id": "standard",
+              "name_es": "Admisión General",
+              "name_en": "General Admission",
+              "desc_es": "Entrada estándar al Hospital del Tórax. Recorrido completo. Pulsera de paciente. Acceso a la barra.",
+              "desc_en": "Standard entry to Hospital del Tórax. Full tour. Patient wristband. Bar access.",
+              "ingredients": "Pulsera · Expediente · Tour completo · Acceso barra",
+              "price": 59000,
+              "walkaway": false,
+              "highlight": true,
+              "badge": "POPULAR"
+            },
+            {
+              "code": "T-02",
+              "id": "cuidadores",
+              "name_es": "Cuidadores · Santa Marta",
+              "name_en": "Local Pass · Santa Marta",
+              "desc_es": "2 por 1 para residentes de Santa Marta — en pares desde 4 personas (4, 6 u 8). Pagan dos, entran cuatro. Presentar cédula con dirección local en admisiones.",
+              "desc_en": "Two-for-one for Santa Marta residents — in pairs from 4 people (4, 6, or 8). Pay for two, four come in. Show ID with local address at admissions.",
+              "ingredients": "Cédula local · Grupo en pares (4/6/8) · Mismo tour completo",
+              "prescription": "Programa Cuidadores: la gente de la casa entra 2 por 1.",
+              "price": 29500,
+              "walkaway": false,
+              "badge": "DESCUENTO LOCAL",
+              "highlight": true
+            },
+            {
+              "code": "T-03",
+              "id": "vip",
+              "name_es": "VIP · Sala Privada",
+              "name_en": "VIP · Private Room",
+              "desc_es": "Mesa reservada en sala privada. Bienvenida con jeringa de la casa. Tour guiado por el Doctor.",
+              "desc_en": "Reserved table in private room. House syringe welcome. Doctor-led private tour.",
+              "ingredients": "Sala privada · Jeringa welcome · Tour guiado",
+              "price": 95000,
+              "walkaway": false,
+              "badge": "VIP"
+            },
+            {
+              "code": "T-04",
+              "id": "familia",
+              "name_es": "Pase Familia",
+              "name_en": "Family Pass",
+              "desc_es": "Cuatro admisiones generales con 25% de descuento sobre el total. Ideal para grupos.",
+              "desc_en": "Four general admissions, 25% off the total. Ideal for groups.",
+              "ingredients": "4 entradas · 25% descuento",
+              "price": 177000,
+              "walkaway": false,
+              "badge": "GRUPO"
+            },
+            {
+              "code": "T-05",
+              "id": "privado",
+              "name_es": "Sanatorio Privado",
+              "name_en": "Private Buyout",
+              "desc_es": "Cierre privado del Sanatorio para grupos de 12+. Cena del chef. Cócteles a discreción del Doctor. Reservar por WhatsApp.",
+              "desc_en": "Full venue buyout for groups of 12+. Chef dinner. Doctor's cocktails. Reserve via WhatsApp.",
+              "ingredients": "12+ pax · Cena · Bebidas · Doctor en persona",
+              "price": 1800000,
+              "price_display": "Desde COP 1.800.000",
+              "walkaway": false,
+              "badge": "PRIVATIZACIÓN",
+              "min_pax": 12,
+              "wa_template": "Hola Doctor, quiero solicitar privatización del Sanatorio para {QTY} pacientes en fecha ___."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "El Sanatorio · Menús",
+  "short_name": "Sanatorio Menú",
+  "description": "Menús de El Sanatorio, Chuzo Tokyo y admisiones. Pedido por WhatsApp, pago Wompi.",
+  "start_url": "/menu/",
+  "scope": "/menu/",
+  "display": "standalone",
+  "background_color": "#0F0D0B",
+  "theme_color": "#0F0D0B",
+  "lang": "es-CO",
+  "categories": ["food", "lifestyle"],
+  "orientation": "portrait",
+  "icons": [
+    {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"},
+    {"src": "/images/og-image.jpg", "sizes": "1200x630", "type": "image/jpeg", "purpose": "any"}
+  ],
+  "shortcuts": [
+    {"name": "Chuzo Tokyo", "url": "/menu/chuzo", "description": "Yakitori para caminar"},
+    {"name": "Barra del Sanatorio", "url": "/menu/bar", "description": "Cócteles y jeringas"},
+    {"name": "Admisiones", "url": "/menu/tickets", "description": "Reservar entrada"}
+  ]
+}
