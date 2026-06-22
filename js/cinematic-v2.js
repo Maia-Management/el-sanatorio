@@ -371,23 +371,22 @@
         result.innerHTML = `Aún sin Family Pass — pero la entrada estándar son <strong>$50.000 COP</strong> por persona, mesa para todos. <br><br>Te dejo el chat de Hortensia para reservar.`;
         return;
       }
-      if (size < 5) {
+      if (size < 4 || size % 2 !== 0 || size > 8) {
         result.classList.add('is-ineligible');
-        result.innerHTML = `El Family Pass aplica desde <strong>5 personas</strong>. Trae a alguien más de tu familia y todos entran al 50%.`;
+        result.innerHTML = `El Family Pass es <strong>2 por 1</strong> — aplica desde 4 personas y en pares (4, 6 u 8). Ajusta el grupo y la casa los recibe.`;
         return;
       }
       const totalStd = size * TIER_PRICES.standard;
-      const totalPass = Math.round(totalStd * 0.5);
+      const totalPass = (size / 2) * TIER_PRICES.standard; // pay for half the group (2 por 1)
       const savings = totalStd - totalPass;
       const msg = encodeURIComponent(
-        `Hola, soy ${categoryObj.label} de Santa Marta. Vi lo del Programa Cuidadores y quiero reservar Family Pass para ${size} personas. ¿Cómo hago?`
+        `Hola, soy ${categoryObj.label} de Santa Marta. Vi lo del Programa Cuidadores y quiero reservar Family Pass (2 por 1) para ${size} personas — pagamos ${size/2}, entramos ${size}. ¿Cómo hago?`
       );
       result.classList.add('is-eligible');
       result.innerHTML = `
-        <strong>¡Califican!</strong> Family Pass <em>${categoryObj.label}</em> + ${size} personas.<br><br>
-        Total cubierto: <strong>$${totalPass.toLocaleString('es-CO')} COP</strong> (50% off de $${totalStd.toLocaleString('es-CO')}).
-        Ahorras <strong>$${savings.toLocaleString('es-CO')} COP</strong>.<br>
-        Comida y cocteles a precio normal. Trae ${categoryObj.id} vigente a la entrada.
+        <strong>¡Califican!</strong> Family Pass <em>${categoryObj.label}</em> · <strong>2 por 1</strong> para ${size} personas.<br><br>
+        Pagan <strong>${size/2}</strong>, entran <strong>${size}</strong>. Total cubierto: <strong>$${totalPass.toLocaleString('es-CO')} COP</strong> (frente a $${totalStd.toLocaleString('es-CO')} general).<br>
+        Ahorran <strong>$${savings.toLocaleString('es-CO')} COP</strong>. Comida y cocteles a precio normal. Trae ${categoryObj.id} vigente a la entrada.
         <br><a class="fpc__cta" href="${WA_BASE}?text=${msg}" target="_blank" rel="noopener">Reservar por WhatsApp</a>
       `;
     });

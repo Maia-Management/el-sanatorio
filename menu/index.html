@@ -741,6 +741,33 @@
 <!-- ── MAIN MENU ── -->
 <main class="menu-main">
 
+  <!-- ── QR Quick-Pick (2026-06-21, restored 2026-06-22 audit) ──
+       Surfaces the 3 QR-optimized menus when guests land on /menu
+       from a generic QR. Each card matches that menu's brand vibe.
+       Canonical: Cuidadores framed as "2 por 1", NOT "50% off".
+       ────────────────────────────────────────────────────────── -->
+  <section class="qr-quick-pick" aria-labelledby="qr-pick-title" style="max-width:920px;margin:0 auto 56px;">
+    <h2 id="qr-pick-title" style="font-family:'Fraunces',serif;font-size:1.4rem;letter-spacing:0.04em;color:var(--menu-cream);text-align:center;margin:0 0 14px;">¿Qué busca esta noche?</h2>
+    <p style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--menu-text-muted);text-align:center;margin:0 0 26px;">Tres cartas independientes · una hoja de admisión</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+      <a href="/menu/chuzo" style="display:block;padding:22px 20px;background:linear-gradient(135deg,#3A2418 0%,#0F0D0B 100%);border:1px solid var(--menu-border-strong);border-radius:8px;text-decoration:none;color:var(--menu-cream);transition:transform 0.2s, box-shadow 0.2s;">
+        <span style="display:block;font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;color:var(--menu-ember);text-transform:uppercase;margin-bottom:6px;">Counter de calle</span>
+        <span style="display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--menu-cream);margin-bottom:6px;">Chuzo Tokyo</span>
+        <span style="display:block;font-style:italic;font-family:Georgia,serif;color:var(--menu-text-dim);font-size:0.9rem;">Yakitori para caminar la Calle 19. Empacado en kraft.</span>
+      </a>
+      <a href="/menu/bar" style="display:block;padding:22px 20px;background:linear-gradient(135deg,#1B0B0B 0%,#0B0908 100%);border:1px solid #B7372D;border-radius:8px;text-decoration:none;color:var(--menu-cream);transition:transform 0.2s, box-shadow 0.2s;">
+        <span style="display:block;font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;color:#ff8585;text-transform:uppercase;margin-bottom:6px;">Barra del Doctor</span>
+        <span style="display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--menu-cream);margin-bottom:6px;">Prescripciones</span>
+        <span style="display:block;font-style:italic;font-family:Georgia,serif;color:var(--menu-text-dim);font-size:0.9rem;">Jeringas de la casa · cócteles de autor.</span>
+      </a>
+      <a href="/menu/tickets" style="display:block;padding:22px 20px;background:linear-gradient(135deg,#1B7A8C22 0%,#07090B 100%);border:1px dashed #1B7A8C;border-radius:8px;text-decoration:none;color:var(--menu-cream);transition:transform 0.2s, box-shadow 0.2s;">
+        <span style="display:block;font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;color:#3FAEC1;text-transform:uppercase;margin-bottom:6px;">Hospital del Tórax</span>
+        <span style="display:block;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--menu-cream);margin-bottom:6px;">Admisiones</span>
+        <span style="display:block;font-style:italic;font-family:Georgia,serif;color:var(--menu-text-dim);font-size:0.9rem;">Pulsera, expediente, recorrido. Cuidadores Santa Marta · 2 por 1.</span>
+      </a>
+    </div>
+  </section>
+
   <!-- ============================================================
        SECTION A — CHUZO TOKYO (yakitori — canonical v4 stamped)
        ============================================================ -->
