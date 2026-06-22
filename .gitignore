@@ -26,3 +26,9 @@ AUDIT*.md
 DEEP-AUDIT*.md
 SITE-AUDIT*.md
 FINAL-AUDIT*.md
+
+# Backups
+*.bak-*
+*.bak
+index.html.bak-*
+.gitignore.audit-tmp
