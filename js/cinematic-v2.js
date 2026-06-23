@@ -1,4 +1,4 @@
-﻿/* ===========================================================================
+/* ===========================================================================
    El Sanatorio — Cinematic v2 orchestration
    2026-06-21
    Loads: GSAP + ScrollTrigger, Lenis smooth scroll, Three.js film-grain
@@ -502,11 +502,14 @@
     if (!grid) return;
     const loadEl = grid.querySelector('.availability__loading');
 
-    // Build next 14 valid nights (Thu/Fri/Sat/Sun)
+    // Build next 14 valid nights (Thu/Fri/Sat/Sun), floored at LAUNCH so
+    // pre-launch dates are never offered. Launch = Thu 2026-07-30.
+    const LAUNCH = new Date('2026-07-30T00:00:00');
     const nights = [];
     const today = new Date(); today.setHours(0,0,0,0);
-    for (let i = 0; i < 28 && nights.length < 12; i++) {
-      const d = new Date(today); d.setDate(today.getDate() + i);
+    const start = today > LAUNCH ? today : LAUNCH;
+    for (let i = 0; i < 60 && nights.length < 12; i++) {
+      const d = new Date(start); d.setDate(start.getDate() + i);
       const dow = d.getDay(); // 0 Sun, 4 Thu, 5 Fri, 6 Sat
       if ([0, 4, 5, 6].includes(dow)) nights.push(d);
     }
