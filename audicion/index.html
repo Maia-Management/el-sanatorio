@@ -484,7 +484,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 /* ============================================================
    FORM SUBMISSION
    Reads supabase config from window.SANATORIO_SUPABASE if present
-   (set via <script src="/audicion/config.js"></script> or env injection)
+   (set via <script src="/audicion/config.js"><\/script> or env injection)
    Falls back to a Netlify-Function relay at /.netlify/functions/audicion-submit
    ============================================================ */
 async function postLead(table, payload){
