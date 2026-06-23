@@ -277,7 +277,7 @@
 
   /* ------------------------------------------------------------------
      6. CUIDADORES — current week categoría (12-week rotation)
-     Source: PROGRAMA-CUIDADORES-SANTA-MARTA-2026-06-21.md Â§2
+     Source: PROGRAMA-CUIDADORES-SANTA-MARTA-2026-06-21.md §2
      ------------------------------------------------------------------ */
   const CUIDADORES_ROTATION = [
     { startISO: '2026-06-24', wed: 'Maestros',    sun: 'Madres Cabeza de Familia',     code: 'MAESTRO-SM',  copy: 'Para los profes que aguantan el año entero corrigiendo a media luz — esta noche es de ustedes.' },
@@ -301,7 +301,7 @@
     { value: 'medicos',      label: 'Médico (general o especialista)',id: 'Tarjeta MinSalud / carnet hospitalario' },
     { value: 'militares',    label: 'Militar (Armada / Ejército / FAC)', id: 'Carnet militar vigente' },
     { value: 'madres',       label: 'Madre Cabeza de Familia',       id: 'RUV / Sec. de la Mujer / carta del párroco' },
-    { value: 'mayores',      label: 'Adulto Mayor (65+)',            id: 'Cédula (edad â‰¥65)' },
+    { value: 'mayores',      label: 'Adulto Mayor (65+)',            id: 'Cédula (edad ≥65)' },
     { value: 'discapacidad', label: 'Persona con Discapacidad',      id: 'Carnet RLCPD' },
     { value: 'salud',        label: 'Trabajador de la Salud (aux./téc.)', id: 'Carnet hospitalario' },
     { value: 'ninguno',      label: 'Ninguna de las anteriores',     id: null }
@@ -409,17 +409,17 @@
     'L':  { name: 'Lupita',              sobriquet: 'La Cocinera',         dx: 'Cocina platos que nadie pidió. Todos saben buenos. Tratamiento: agradecer.' },
     'M':  { name: 'Micaela',             sobriquet: 'La Modista del Pus',  dx: 'Cose miembros perdidos por la noche. Muy tranquila. Tratamiento: dejarla.' },
     'N':  { name: 'La Niña Marta',       sobriquet: 'La Acompañante',      dx: 'Tiene 8 años desde 1957. No envejece. Tratamiento: traerle dulces.' },
-    'OÃ‘': { name: 'Olga',                sobriquet: 'La Profesora',        dx: 'Da clases de cosas que nunca enseñó. Los alumnos sí aprenden. Tratamiento: tomar nota.' },
+    'OÑ': { name: 'Olga',                sobriquet: 'La Profesora',        dx: 'Da clases de cosas que nunca enseñó. Los alumnos sí aprenden. Tratamiento: tomar nota.' },
     'P':  { name: 'Doña Pilar',          sobriquet: 'La Recepcionista',    dx: 'Lleva 23 años en el turno noche. Conoce a todos. Tratamiento: ningún cambio.' },
     'QR': { name: 'Rosa',                sobriquet: 'La Tejedora',         dx: 'Teje una bufanda que no termina. Tratamiento: comprarle más lana.' },
     'S':  { name: 'Soledad',             sobriquet: 'La Silenciosa',       dx: 'Habla solo en sueños. Y predice. Tratamiento: una almohada nueva.' },
     'T':  { name: 'Tobías',              sobriquet: 'El Coleccionista',    dx: 'Guarda cucharas debajo de la cama. 247 hasta ahora. Tratamiento: no contar.' },
-    'UV': { name: 'Ãšrsula',              sobriquet: 'La que Reza',         dx: 'Reza a los santos que no existen. Le funciona. Tratamiento: encomendarse.' },
-    'WXYZ': { name: 'Yolanda',           sobriquet: 'La Ãšltima',           dx: 'Es la última que llegó al pabellón. Nunca habla. Tratamiento: esperarla.' }
+    'UV': { name: 'Úrsula',              sobriquet: 'La que Reza',         dx: 'Reza a los santos que no existen. Le funciona. Tratamiento: encomendarse.' },
+    'WXYZ': { name: 'Yolanda',           sobriquet: 'La Última',           dx: 'Es la última que llegó al pabellón. Nunca habla. Tratamiento: esperarla.' }
   };
 
   function pickArchetype(name) {
-    const first = (name.trim().toUpperCase().normalize('NFD').replace(/[Ì€-Í¯]/g, '')[0]) || 'P';
+    const first = (name.trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '')[0]) || 'P';
     for (const k of Object.keys(PATIENT_ARCHETYPES)) {
       if (k.includes(first)) return PATIENT_ARCHETYPES[k];
     }
@@ -437,13 +437,13 @@
       const arc = pickArchetype(name);
       const card = document.querySelector('[data-ficha-card]');
       const num = String(Math.floor(13 + Math.random() * 386)).padStart(3, '0');
-      card.querySelector('[data-ficha-num]').textContent = `EXPEDIENTE NÂº SAN-${num}`;
+      card.querySelector('[data-ficha-num]').textContent = `EXPEDIENTE Nº SAN-${num}`;
       card.querySelector('[data-ficha-name]').textContent = arc.name;
       card.querySelector('[data-ficha-real]').textContent = name.toUpperCase();
       card.querySelector('[data-ficha-sobriquet]').textContent = arc.sobriquet;
       card.querySelector('[data-ficha-ingreso]').textContent = fmtSpanishDate(new Date());
       card.querySelector('[data-ficha-dx]').textContent = arc.dx;
-      const shareTxt = encodeURIComponent(`Mi ficha de paciente en El Sanatorio dice que soy "${arc.name} — ${arc.sobriquet}". ðŸ¥ Reserva la tuya: https://el-sanatorio.com`);
+      const shareTxt = encodeURIComponent(`Mi ficha de paciente en El Sanatorio dice que soy "${arc.name} — ${arc.sobriquet}". 🏥 Reserva la tuya: https://el-sanatorio.com`);
       card.querySelector('[data-ficha-share]').href = `${WA_BASE}?text=${shareTxt}`;
       card.classList.add('is-visible');
       // smooth scroll to card
