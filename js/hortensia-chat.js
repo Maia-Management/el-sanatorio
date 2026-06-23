@@ -17,7 +17,7 @@
   const STORAGE_KEY = 'sanatorio_hortensia_v1';   // sessionStorage allowed; we use in-memory only
 
   // Rotating name pool from the persona spec
-  const NAMES = ['Hortensia', 'Doña Pilar', 'Soledad', 'Carmela', 'Doña Inés', 'La Niña Marta', 'Doña Eulalia'];
+  const NAMES = ['Hortensia']; // 2026-06-23 Andrew locked: Hortensia is the only canonical persona for El Sanatorio + Chuzo Tokyo + La Farmacia chat. Rotating-name pool collapsed.
   // Pre-shipped greeting variations so the widget feels alive even before
   // the Netlify function is wired. Server-side returns these PLUS Gemini reply.
   const GREETINGS = [
