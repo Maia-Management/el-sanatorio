@@ -1,7 +1,7 @@
 /* ===========================================================================
  * QR Menu runtime · El Sanatorio
  * ---------------------------------------------------------------------------
- * Loaded by /menu/chuzo, /menu/bar, /menu/tickets.
+ * Loaded by /menu/chuzo, /menu/bar, /experience.
  * Adds: hero video safe-autoplay, WhatsApp pre-fill, sound toggle, language
  * toggle, cart accumulator, scan tracker (cookieless beacon, opt-in only).
  * No external deps. <8KB minified.
