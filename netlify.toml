@@ -262,3 +262,15 @@
   to = "/.netlify/functions/:splat"
   status = 200
   force = false
+
+# Pass-4 audit 2026-06-23: /tools/booking-calendar/ stub → /experience
+[[redirects]]
+  from = "/tools/booking-calendar"
+  to = "/experience"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/tools/booking-calendar/*"
+  to = "/experience"
+  status = 301
+  force = true
