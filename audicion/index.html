@@ -78,6 +78,9 @@
 </script>
 
 <style>
+    /* Spam honeypot — hidden from humans, filled by bots */
+    .hp-field { position: absolute !important; left: -9999px !important; opacity: 0 !important; pointer-events: none !important; height: 0 !important; width: 0 !important; }
+
 :root{
   --bone:#F2EBE0; --paper:#E8E1D2; --ash-cream:#EFE6D5;
   --ink:#1A1614; --warm-black:#211C1C; --charcoal:#0F0D0B; --soy:#3A2418;
@@ -297,6 +300,7 @@ footer{background:var(--charcoal);color:var(--ash-cream);padding:50px 0 30px}
     <p class="sub">Te avisamos antes que a nadie cuando se publiquen reservas. Una sola lista, sin reenvíos.</p>
 
     <form id="waitlistForm" autocomplete="on">
+      <div class="hp-field" aria-hidden="true"><label>Sitio web<input type="text" name="website" autocomplete="off" tabindex="-1"></label></div>
       <div class="row">
         <div>
           <label for="w-name">Nombre</label>
@@ -340,6 +344,7 @@ footer{background:var(--charcoal);color:var(--ash-cream);padding:50px 0 30px}
     <p class="sub">Completa este expediente. Te contactamos por WhatsApp para agendar audición presencial en Santa Marta dentro de los próximos 7 días.</p>
 
     <form id="auditionForm" autocomplete="on">
+      <div class="hp-field" aria-hidden="true"><label>Sitio web<input type="text" name="website" autocomplete="off" tabindex="-1"></label></div>
       <div class="row">
         <div>
           <label for="a-name">Nombre completo</label>
@@ -493,6 +498,9 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
    Falls back to a Netlify-Function relay at /.netlify/functions/audicion-submit
    ============================================================ */
 async function postLead(table, payload){
+  // Honeypot check — abort silently if filled
+  if (payload && payload.website) { console.info('[honeypot] skipped'); return true; }
+
   const cfg = window.SANATORIO_SUPABASE;
   if (cfg && cfg.url && cfg.anonKey){
     const r = await fetch(`${cfg.url}/rest/v1/${table}`, {

@@ -43,6 +43,8 @@ export default async (req) => {
   const { table, payload } = body || {};
   if (!ALLOWED_TABLES.has(table)) return new Response('Bad table', { status: 400 });
   if (!payload || typeof payload !== 'object') return new Response('Bad payload', { status: 400 });
+  // Server-side spam honeypot — bots fill the 'website' field; humans can't see it.
+  if (payload.website) return new Response(JSON.stringify({ ok: true, _spam: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 
   // Whitelist fields, coerce strings, cap lengths.
   const clean = {};
