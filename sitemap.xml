@@ -125,6 +125,9 @@
     <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="es-CO" href="https://el-sanatorio.com/la-farmacia/"/>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="https://el-sanatorio.com/en/la-farmacia/"/>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="https://el-sanatorio.com/la-farmacia/"/>
   </url>
   <url>
     <loc>https://el-sanatorio.com/en/</loc>
@@ -134,5 +137,14 @@
     <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="es-CO" href="https://el-sanatorio.com/"/>
     <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="https://el-sanatorio.com/en/"/>
     <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="https://el-sanatorio.com/"/>
+  </url>
+  <url>
+    <loc>https://el-sanatorio.com/en/la-farmacia/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="es-CO" href="https://el-sanatorio.com/la-farmacia/"/>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="en" href="https://el-sanatorio.com/en/la-farmacia/"/>
+    <xhtml:link xmlns:xhtml="http://www.w3.org/1999/xhtml" rel="alternate" hreflang="x-default" href="https://el-sanatorio.com/la-farmacia/"/>
   </url>
 </urlset>
