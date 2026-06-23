@@ -1,0 +1,12 @@
+{
+  "_comment": "Paste your Firebase web app config + VAPID public key here. Get them from console.firebase.google.com → Project Settings → General (firebase object) + Cloud Messaging (Web push certificate). The service worker fetches this at install and the client reads it via /js/push-fcm.js.",
+  "firebase": {
+    "apiKey": "REPLACE_ME",
+    "authDomain": "REPLACE_ME.firebaseapp.com",
+    "projectId": "REPLACE_ME",
+    "storageBucket": "REPLACE_ME.appspot.com",
+    "messagingSenderId": "REPLACE_ME",
+    "appId": "REPLACE_ME"
+  },
+  "vapidKey": "REPLACE_ME"
+}
