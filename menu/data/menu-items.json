@@ -32,8 +32,14 @@
       "theme": "chuzo",
       "show_price_default": true,
       "cross_links": [
-        {"label": "¿Quiere la experiencia completa? Reserve admisión →", "href": "/menu/tickets"},
-        {"label": "Cócteles dentro del Sanatorio →", "href": "/menu/bar"}
+        {
+          "label": "¿Quiere la experiencia completa? Reserve admisión →",
+          "href": "/menu/tickets"
+        },
+        {
+          "label": "Cócteles dentro del Sanatorio →",
+          "href": "/menu/bar"
+        }
       ],
       "sections": [
         {
@@ -182,9 +188,36 @@
           "intro_es": "Para el camino. Todas a $6.000.",
           "intro_en": "For the walk. All COP 6,000.",
           "items": [
-            {"code": "D-01", "id": "coca-cola", "name_es": "Coca-Cola", "name_en": "Coca-Cola", "desc_es": "600ml. Frío.", "desc_en": "600ml. Cold.", "price": 6000, "walkaway": true},
-            {"code": "D-02", "id": "coca-cola-zero", "name_es": "Coca-Cola Sin Azúcar", "name_en": "Coke Zero", "desc_es": "600ml. Sin glucosa.", "desc_en": "600ml. Sugar-free.", "price": 6000, "walkaway": true},
-            {"code": "D-03", "id": "agua", "name_es": "Agua", "name_en": "Water", "desc_es": "Mineral 600ml.", "desc_en": "Mineral 600ml.", "price": 6000, "walkaway": true}
+            {
+              "code": "D-01",
+              "id": "coca-cola",
+              "name_es": "Coca-Cola",
+              "name_en": "Coca-Cola",
+              "desc_es": "600ml. Frío.",
+              "desc_en": "600ml. Cold.",
+              "price": 6000,
+              "walkaway": true
+            },
+            {
+              "code": "D-02",
+              "id": "coca-cola-zero",
+              "name_es": "Coca-Cola Sin Azúcar",
+              "name_en": "Coke Zero",
+              "desc_es": "600ml. Sin glucosa.",
+              "desc_en": "600ml. Sugar-free.",
+              "price": 6000,
+              "walkaway": true
+            },
+            {
+              "code": "D-03",
+              "id": "agua",
+              "name_es": "Agua",
+              "name_en": "Water",
+              "desc_es": "Mineral 600ml.",
+              "desc_en": "Mineral 600ml.",
+              "price": 6000,
+              "walkaway": true
+            }
           ]
         }
       ]
@@ -202,8 +235,14 @@
       "theme": "bar",
       "show_price_default": true,
       "cross_links": [
-        {"label": "¿Solo un bocado rápido? Chuzo Tokyo en la calle →", "href": "/menu/chuzo"},
-        {"label": "Reservar admisión al Sanatorio →", "href": "/menu/tickets"}
+        {
+          "label": "¿Solo un bocado rápido? Chuzo Tokyo en la calle →",
+          "href": "/menu/chuzo"
+        },
+        {
+          "label": "Reservar admisión al Sanatorio →",
+          "href": "/menu/tickets"
+        }
       ],
       "sections": [
         {
@@ -374,9 +413,37 @@
           "intro_es": "Para el tratamiento sostenido.",
           "intro_en": "For sustained treatment.",
           "items": [
-            {"code": "C-01", "id": "aguila", "name_es": "Aguila", "name_en": "Aguila", "desc_es": "Cerveza nacional. Fría.", "desc_en": "National lager. Cold.", "price": 8000, "walkaway": false},
-            {"code": "C-02", "id": "club-colombia", "name_es": "Club Colombia", "name_en": "Club Colombia", "desc_es": "Lager dorada. Fría.", "desc_en": "Golden lager. Cold.", "price": 9000, "walkaway": false},
-            {"code": "C-03", "id": "sake-canned", "name_es": "Sake en lata", "name_en": "Canned sake", "desc_es": "Sake japonés, lata 200ml. Servido frío.", "desc_en": "Japanese sake, 200ml can. Served cold.", "price": 14000, "walkaway": false, "badge": "JAPÓN"}
+            {
+              "code": "C-01",
+              "id": "aguila",
+              "name_es": "Aguila",
+              "name_en": "Aguila",
+              "desc_es": "Cerveza nacional. Fría.",
+              "desc_en": "National lager. Cold.",
+              "price": 8000,
+              "walkaway": false
+            },
+            {
+              "code": "C-02",
+              "id": "club-colombia",
+              "name_es": "Club Colombia",
+              "name_en": "Club Colombia",
+              "desc_es": "Lager dorada. Fría.",
+              "desc_en": "Golden lager. Cold.",
+              "price": 9000,
+              "walkaway": false
+            },
+            {
+              "code": "C-03",
+              "id": "sake-canned",
+              "name_es": "Sake en lata",
+              "name_en": "Canned sake",
+              "desc_es": "Sake japonés, lata 200ml. Servido frío.",
+              "desc_en": "Japanese sake, 200ml can. Served cold.",
+              "price": 14000,
+              "walkaway": false,
+              "badge": "JAPÓN"
+            }
           ]
         },
         {
@@ -386,10 +453,46 @@
           "intro_es": "Para pacientes en recuperación o conductores.",
           "intro_en": "For recovery patients or designated drivers.",
           "items": [
-            {"code": "D-01", "id": "suero-fisiologico", "name_es": "Suero Fisiológico", "name_en": "Saline Drip", "desc_es": "Agua espumosa, pepino, lima, sal de carbón.", "desc_en": "Sparkling water, cucumber, lime, charcoal salt.", "price": 8000, "walkaway": false},
-            {"code": "D-02", "id": "plasma-fresco", "name_es": "Plasma Fresco", "name_en": "Fresh Plasma", "desc_es": "Jugo de frutas tropicales, jengibre, menta.", "desc_en": "Tropical juice, ginger, mint.", "price": 10000, "walkaway": false},
-            {"code": "D-03", "id": "glucosa-iv", "name_es": "Glucosa IV", "name_en": "IV Glucose", "desc_es": "Té de hibisco con panela, frío.", "desc_en": "Hibiscus tea with panela, cold.", "price": 9000, "walkaway": false},
-            {"code": "D-04", "id": "solucion-salina", "name_es": "Solución Salina", "name_en": "Saline Solution", "desc_es": "Agua mineral. pH balanceado.", "desc_en": "Mineral water. pH balanced.", "price": 5000, "walkaway": false}
+            {
+              "code": "D-01",
+              "id": "suero-fisiologico",
+              "name_es": "Suero Fisiológico",
+              "name_en": "Saline Drip",
+              "desc_es": "Agua espumosa, pepino, lima, sal de carbón.",
+              "desc_en": "Sparkling water, cucumber, lime, charcoal salt.",
+              "price": 8000,
+              "walkaway": false
+            },
+            {
+              "code": "D-02",
+              "id": "plasma-fresco",
+              "name_es": "Plasma Fresco",
+              "name_en": "Fresh Plasma",
+              "desc_es": "Jugo de frutas tropicales, jengibre, menta.",
+              "desc_en": "Tropical juice, ginger, mint.",
+              "price": 10000,
+              "walkaway": false
+            },
+            {
+              "code": "D-03",
+              "id": "glucosa-iv",
+              "name_es": "Glucosa IV",
+              "name_en": "IV Glucose",
+              "desc_es": "Té de hibisco con panela, frío.",
+              "desc_en": "Hibiscus tea with panela, cold.",
+              "price": 9000,
+              "walkaway": false
+            },
+            {
+              "code": "D-04",
+              "id": "solucion-salina",
+              "name_es": "Solución Salina",
+              "name_en": "Saline Solution",
+              "desc_es": "Agua mineral. pH balanceado.",
+              "desc_en": "Mineral water. pH balanced.",
+              "price": 5000,
+              "walkaway": false
+            }
           ]
         }
       ]
@@ -407,8 +510,14 @@
       "theme": "tickets",
       "show_price_default": true,
       "cross_links": [
-        {"label": "¿Comer sin reservar? Chuzo Tokyo en la calle →", "href": "/menu/chuzo"},
-        {"label": "Ver la barra del Sanatorio →", "href": "/menu/bar"}
+        {
+          "label": "¿Comer sin reservar? Chuzo Tokyo en la calle →",
+          "href": "/menu/chuzo"
+        },
+        {
+          "label": "Ver la barra del Sanatorio →",
+          "href": "/menu/bar"
+        }
       ],
       "sections": [
         {
@@ -444,18 +553,6 @@
               "walkaway": false,
               "badge": "2 POR 1",
               "highlight": true
-            },
-            {
-              "code": "T-03",
-              "id": "vip",
-              "name_es": "VIP · Sala Privada",
-              "name_en": "VIP · Private Room",
-              "desc_es": "Mesa reservada en sala privada. Bienvenida con jeringa de la casa. Tour guiado por el Doctor.",
-              "desc_en": "Reserved table in private room. House syringe welcome. Doctor-led private tour.",
-              "ingredients": "Sala privada · Jeringa welcome · Tour guiado",
-              "price": 95000,
-              "walkaway": false,
-              "badge": "VIP"
             },
             {
               "code": "T-04",
