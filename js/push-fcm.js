@@ -164,6 +164,9 @@
     const token = await getToken(messaging, { vapidKey: cfg.vapidKey, serviceWorkerRegistration: reg });
     if (!token) return;
 
+    // Optional soft phone capture (improves Vert opt-out + WA cross-channel)
+    const contactInfo = await askPhoneOptional();
+
     // Persist + POST
     const payload = {
       token,
@@ -172,6 +175,8 @@
       utm: readUtm(),
       ua: navigator.userAgent.slice(0, 200),
       tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      phone: contactInfo.phone || null,
+      name: contactInfo.name || null,
       created_at: new Date().toISOString(),
     };
     try {
@@ -234,5 +239,72 @@
       if (consentGiven()) clearInterval(poll);
     }, 2000);
     setTimeout(() => clearInterval(poll), 120_000);
+  }
+
+  // ──────────────────────────────────────────────────────────────────────
+  // Optional soft phone capture — appears after the user accepted push.
+  // Pure UI-side; resolves with { phone, name } or { phone: '', name: '' }.
+  // ──────────────────────────────────────────────────────────────────────
+  function askPhoneOptional() {
+    return new Promise((resolve) => {
+      const ENG = isEnglish ? {
+        title: 'One more thing — your phone (optional)',
+        body: 'If you give me your WhatsApp, Hortensia can also reach you there about last-minute openings. We never spam, and STOP works.',
+        ph_name: 'Your name',
+        ph_phone: '+57 300 000 0000',
+        skip: 'Skip',
+        save: 'Save',
+      } : {
+        title: 'Una cosita más — tu teléfono (opcional)',
+        body: 'Si me das tu WhatsApp, Hortensia también te puede avisar por ahí cuando se abren cupos. No spam, y PARAR funciona siempre.',
+        ph_name: 'Tu nombre',
+        ph_phone: '+57 300 000 0000',
+        skip: 'Saltar',
+        save: 'Guardar',
+      };
+      injectStyle();
+      const root = document.createElement('div');
+      root.className = 'hp-push';
+      root.innerHTML = `
+        <button class="hp-push__close" aria-label="cerrar" type="button">✕</button>
+        <p class="hp-push__title">${ENG.title}</p>
+        <p class="hp-push__body">${ENG.body}</p>
+        <div class="hp-push__field"><input class="hp-push__input" type="text" placeholder="${ENG.ph_name}" name="name" autocomplete="name" maxlength="80"></div>
+        <div class="hp-push__field"><input class="hp-push__input" type="tel" placeholder="${ENG.ph_phone}" name="phone" inputmode="tel" autocomplete="tel" maxlength="30"></div>
+        <div class="hp-push__row" style="margin-top:10px;">
+          <button class="hp-push__btn" type="button" data-skip>${ENG.skip}</button>
+          <button class="hp-push__btn hp-push__btn--primary" type="button" data-save>${ENG.save}</button>
+        </div>
+      `;
+      // Add small extra styles for the field inputs
+      if (!document.getElementById('hp-push-extra')) {
+        const ex = document.createElement('style');
+        ex.id = 'hp-push-extra';
+        ex.textContent = `
+          .hp-push__field { margin: 8px 0; }
+          .hp-push__input { width: 100%; padding: 9px 10px; background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(217,98,30,0.3); color: #efe3c8; border-radius: 4px;
+            font-family: inherit; font-size: 0.92rem; }
+          .hp-push__input:focus { outline: 2px solid rgba(217,98,30,0.6); }
+        `;
+        document.head.appendChild(ex);
+      }
+      document.body.appendChild(root);
+      requestAnimationFrame(() => root.classList.add('is-open'));
+      const finish = (result) => {
+        root.classList.remove('is-open');
+        setTimeout(() => root.remove(), 260);
+        resolve(result);
+      };
+      root.querySelector('[data-skip]').addEventListener('click', () => finish({ phone: '', name: '' }));
+      root.querySelector('.hp-push__close').addEventListener('click', () => finish({ phone: '', name: '' }));
+      root.querySelector('[data-save]').addEventListener('click', () => {
+        const phone = root.querySelector('input[name=phone]').value.trim();
+        const name = root.querySelector('input[name=name]').value.trim();
+        finish({ phone, name });
+      });
+      // Auto-skip after 25 sec of no interaction
+      setTimeout(() => finish({ phone: '', name: '' }), 25_000);
+    });
   }
 })();

@@ -1,3 +1,5 @@
+import { detectPhone, lookupCustomerContext, recordInteraction, syncToCustomerActivity, contextLineFor } from './lib/vert-sync.mjs';
+
 /* ===========================================================================
    Netlify Function — hortensia-chat
    2026-06-21
@@ -233,6 +235,31 @@ FORMATO DE SALIDA: solo el texto que dirías. Sin emojis (máximo 1: 🤍), sin 
 }
 
 export default async (request) => {
+
+
+  // [vert-sync hook] — Hortensia context injection
+  let vertContextLine = '';
+  try {
+    const isEn = false;
+    const lastUserMsg = Array.isArray(body?.messages)
+      ? [...body.messages].reverse().find((m) => m.role === 'user')?.content || ''
+      : (body?.message || body?.text || '');
+    const phone = detectPhone(String(lastUserMsg)) || body?.phone || null;
+    if (phone) {
+      const ctx = await lookupCustomerContext(phone);
+      vertContextLine = contextLineFor(ctx, isEn ? 'en' : 'es');
+      // mark inbound
+      await syncToCustomerActivity({ phone, name: ctx?.knownName, language: isEn ? 'en' : 'es', isInbound: true, tags: ['channel:hortensia'] });
+    }
+    await recordInteraction({
+      kind: 'chat_turn',
+      source: 'web',
+      phone,
+      sessionId: body?.session_id || body?.sessionId || null,
+      page: req.headers.get('referer') || null,
+      payload: { last_user_message: String(lastUserMsg).slice(0, 500), locale: isEn ? 'en' : 'es' },
+    });
+  } catch { /* never block the chat reply on sync */ }
   if (request.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: corsHeaders });
   }

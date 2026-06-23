@@ -20,6 +20,8 @@
  *   }
  */
 
+import { filterOptedIn, recordInteraction, normalizePhone } from './lib/vert-sync.mjs';
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -123,7 +125,7 @@ export default async (req) => {
   if (!title || !msgBody) return json({ error: 'title + body required' }, 400);
 
   // Query subscribers (filter by segments + locale if given)
-  let q = `${SUPABASE_URL}/rest/v1/el_sanatorio_push_subscribers?select=token&revoked_at=is.null&limit=10000`;
+  let q = `${SUPABASE_URL}/rest/v1/el_sanatorio_push_subscribers?select=token,phone,locale&revoked_at=is.null&limit=10000`;
   if (locale) q += `&locale=eq.${encodeURIComponent(locale)}`;
   if (Array.isArray(segments) && segments.length) {
     q += `&segments=cs.{${segments.join(',')}}`;
@@ -133,7 +135,20 @@ export default async (req) => {
   const subs = await subsRes.json();
   if (!subs.length) return json({ ok: true, sent: 0, target: 0 });
 
-  if (dry_run) return json({ ok: true, target: subs.length, dry_run: true });
+  // ── Vert OS opt-out filter ─────────────────────────────────────────
+  // Phones with brand=el_sanatorio OR null (global) in optouts are dropped.
+  let prunedByOptout = 0;
+  try {
+    const phones = Array.from(new Set(subs.map((s) => s.phone).filter(Boolean)));
+    if (phones.length) {
+      const optedIn = new Set(await filterOptedIn(phones));
+      const before = subs.length;
+      subs = subs.filter((s) => !s.phone || optedIn.has(normalizePhone(s.phone)));
+      prunedByOptout = before - subs.length;
+    }
+  } catch { /* permissive on filter failure */ }
+
+  if (dry_run) return json({ ok: true, target: subs.length, prunedByOptout, dry_run: true });
 
   // Mint OAuth token
   let sa;
@@ -174,5 +189,14 @@ export default async (req) => {
     }
   }
 
-  return json({ ok: true, sent, failed, target: subs.length, failureSample: failures.slice(0, 5) });
+  // ── Vert OS event log ──────────────────────────────────────────────
+  try {
+    await recordInteraction({
+      kind: 'push_send',
+      source: 'web',
+      payload: { title, body: msgBody, url, sent, failed, target: subs.length, prunedByOptout, segments, locale },
+    });
+  } catch { /* swallow */ }
+
+  return json({ ok: true, sent, failed, target: subs.length, prunedByOptout, failureSample: failures.slice(0, 5) });
 };

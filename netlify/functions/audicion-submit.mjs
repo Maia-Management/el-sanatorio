@@ -16,6 +16,8 @@
  *   - el_sanatorio_actor_applicants
  */
 
+import { syncToCustomerActivity } from './lib/vert-sync.mjs';
+
 const ALLOWED_TABLES = new Set([
   'el_sanatorio_launch_waitlist',
   'el_sanatorio_actor_applicants',
@@ -72,6 +74,20 @@ export default async (req) => {
     const txt = await r.text();
     return new Response(JSON.stringify({ error: 'Supabase error', detail: txt }), { status: 502 });
   }
+
+  // ── Vert OS sync — fire-and-forget upsert to customer_activity ───────────
+  // Phones land here from /lp/cuidadores + actor_applicants. Waitlist often
+  // has only email — syncToCustomerActivity is keyed on phone and silently
+  // skips when no phone is present, so this is safe to always call.
+  try {
+    await syncToCustomerActivity({
+      phone: clean.phone,
+      name: clean.name,
+      language: 'es',
+      tags: [`source:${clean.source || 'audicion-landing'}`, table === 'el_sanatorio_actor_applicants' ? 'role:actor' : 'role:guest'],
+    });
+  } catch { /* never block the user response on sync */ }
+
   return new Response(JSON.stringify({ ok: true }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },

@@ -23,6 +23,8 @@
  *   revoked_at timestamptz
  */
 
+import { syncToCustomerActivity, recordInteraction, geoFromRequest } from './lib/vert-sync.mjs';
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -52,6 +54,8 @@ export default async (req) => {
 
   const clean = {
     token,
+    phone: body.phone ? String(body.phone).slice(0, 30) : null,
+    name: body.name ? String(body.name).slice(0, 80) : null,
     locale: String(body.locale || '').slice(0, 16) || null,
     page: String(body.page || '').slice(0, 200) || null,
     utm: body.utm && typeof body.utm === 'object' ? body.utm : null,
@@ -75,5 +79,28 @@ export default async (req) => {
     const txt = await r.text();
     return json({ error: 'Supabase error', detail: txt.slice(0, 300) }, 502);
   }
+
+  // ── Vert OS sync (fire-and-forget) ─────────────────────────────────
+  try {
+    const geo = geoFromRequest(req);
+    if (clean.phone) {
+      await syncToCustomerActivity({
+        phone: clean.phone,
+        name: clean.name,
+        language: clean.locale === 'en' ? 'en' : 'es',
+        tags: ['channel:webpush', `source:${clean.page || 'unknown'}`],
+      });
+    }
+    await recordInteraction({
+      kind: 'push_subscribed',
+      source: 'web',
+      phone: clean.phone,
+      page: clean.page,
+      geo,
+      utm: clean.utm,
+      payload: { tz: clean.tz, ua: clean.ua },
+    });
+  } catch { /* never block user */ }
+
   return json({ ok: true });
 };

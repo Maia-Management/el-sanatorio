@@ -18,6 +18,8 @@
  *   META_CAPI_TEST_CODE       = optional, for Meta's "Test Events" tool
  */
 
+import { recordInteraction, geoFromRequest } from './lib/vert-sync.mjs';
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -126,6 +128,30 @@ export default async (req) => {
     } catch {}
   };
 
-  await Promise.allSettled([writeSupabase(), writeMeta()]);
+  // ── Vert OS canonical event log ─────────────────────────────────────
+  const writeVert = async () => {
+    try {
+      const geo = geoFromRequest(req);
+      await recordInteraction({
+        kind: name,
+        source: 'web',
+        sessionId: props?.session_id,
+        page: props?.page_location,
+        geo,
+        utm: {
+          utm_source: props?.utm_source,
+          utm_medium: props?.utm_medium,
+          utm_campaign: props?.utm_campaign,
+          utm_term: props?.utm_term,
+          utm_content: props?.utm_content,
+          fbclid: props?.fbclid,
+          gclid: props?.gclid,
+        },
+        payload: props || {},
+      });
+    } catch {}
+  };
+
+  await Promise.allSettled([writeSupabase(), writeMeta(), writeVert()]);
   return json({ ok: true });
 };

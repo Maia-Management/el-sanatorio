@@ -1,3 +1,4 @@
+import { recordInteraction, geoFromRequest } from './lib/vert-sync.mjs';
 /* ===========================================================================
  * qr-track.mjs · Netlify Function
  * ---------------------------------------------------------------------------
