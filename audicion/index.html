@@ -502,8 +502,8 @@ async function postLead(table, payload){
     if(!r.ok) throw new Error(`Supabase ${r.status}`);
     return true;
   }
-  /* Netlify Function relay */
-  const r = await fetch('/.netlify/functions/audicion-submit', {
+  /* Netlify Function relay (function configures path='/api/audicion-submit') */
+  const r = await fetch('/api/audicion-submit', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({table, payload})
