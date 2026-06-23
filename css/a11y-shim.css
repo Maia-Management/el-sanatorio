@@ -1,0 +1,47 @@
+/* a11y-shim.css — added 2026-06-23 Pass-4 audit
+ * Adds visible :focus-visible outline on all interactive elements (WCAG 2.4.7),
+ * and improves nav link touch targets on small screens (WCAG 2.5.5).
+ * Loaded after the page's main stylesheet so it overrides without specificity hacks.
+ */
+
+:focus-visible {
+  outline: 2px solid var(--accent, #c8a96e) !important;
+  outline-offset: 2px !important;
+  border-radius: 2px;
+}
+
+/* Nav text-only links: increase touch target by padding on mobile/tablet */
+@media (max-width: 900px) {
+  .cinema-nav__links a,
+  .nav__links a,
+  nav a {
+    padding: 12px 8px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .nav__mobile-menu a {
+    padding: 16px 12px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Buttons and inputs: ensure 44x44 on mobile */
+@media (max-width: 900px) {
+  .btn, button, .estimator__cta, .fpc__cta, [type=submit] {
+    min-height: 44px;
+  }
+}
+
+/* Hortensia bubble + close button always meet target */
+.hortensia__bubble {
+  min-width: 44px;
+  min-height: 44px;
+}
+.hortensia__close {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 6px;
+}
