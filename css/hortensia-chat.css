@@ -1,0 +1,230 @@
+/* hortensia-chat.css — extracted from cinematic-v2.css 2026-06-23
+ * Pass-4 audit: chat widget was JS-only on non-home pages because the
+ * CSS lived in cinematic-v2 which only the homepage loaded. This file
+ * contains the minimal Hortensia rules (plus the custom properties they
+ * reference) so any page can load it standalone.
+ */
+
+:root {
+  --ek-paper: #efe3c8;
+  --ek-amber: #c8843a;
+  --ek-rust:  #8b3a1e;
+  --ek-deep:  #1a1410;
+  --ek-cobalt:#0d1726;
+  --bg-base: #0a0806;
+  --bg-deep: #050402;
+  --ink-dim: rgba(239, 227, 200, 0.62);
+  --font-display: 'Fraunces', 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-typewriter: 'Courier New', 'Courier', monospace;
+  --ease-cinema: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+
+/* === HORTENSIA CHAT WIDGET ================================= */
+.hortensia {
+  position: fixed;
+  bottom: 22px; right: 22px;
+  z-index: 9300;
+  font-family: var(--font-body);
+}
+
+.hortensia__bubble {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--ek-rust);
+  color: var(--ek-paper);
+  display: grid; place-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 0 4px rgba(139, 58, 30, 0.2);
+  transition: transform 240ms var(--ease-cinema), background 240ms;
+  position: relative;
+}
+
+.hortensia__bubble:hover { transform: scale(1.06); background: var(--ek-amber); color: var(--ek-deep); }
+
+.hortensia__bubble svg { width: 28px; height: 28px; }
+
+.hortensia__bubble::after {
+  content: '';
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 12px; height: 12px;
+  background: var(--ek-amber);
+  border-radius: 50%;
+  border: 2px solid var(--bg-base);
+  animation: hortensiaPulse 2s infinite;
+}
+
+
+.hortensia__panel {
+  position: absolute;
+  bottom: 78px; right: 0;
+  width: min(380px, calc(100vw - 32px));
+  height: min(540px, calc(100vh - 120px));
+  background: var(--bg-deep);
+  border: 1px solid rgba(200, 132, 58, 0.4);
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.8);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hortensia.is-open .hortensia__panel { display: flex; animation: hortensiaIn 320ms var(--ease-cinema); }
+
+.hortensia.is-open .hortensia__bubble::after { display: none; }
+
+
+.hortensia__header {
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(184, 167, 139, 0.18);
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(20, 14, 10, 0.6);
+}
+
+.hortensia__avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--ek-cobalt);
+  display: grid; place-items: center;
+  color: var(--ek-paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  border: 1px solid var(--ek-amber);
+}
+
+.hortensia__who { flex: 1; }
+
+.hortensia__who strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ek-paper);
+  font-weight: 400;
+}
+
+.hortensia__who span {
+  display: block;
+  font-family: var(--font-typewriter);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ek-amber);
+  text-transform: uppercase;
+}
+
+.hortensia__close {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  color: var(--ink-dim);
+  display: grid; place-items: center;
+}
+
+.hortensia__close:hover { color: var(--ek-paper); background: rgba(255,255,255,0.05); }
+
+
+.hortensia__messages {
+  flex: 1;
+  padding: 18px 16px;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: 10px;
+  background: var(--bg-base);
+}
+
+.hortensia__msg {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.hortensia__msg--bot {
+  align-self: flex-start;
+  background: rgba(200, 132, 58, 0.15);
+  border: 1px solid rgba(200, 132, 58, 0.3);
+  color: var(--ek-paper);
+  border-bottom-left-radius: 4px;
+}
+
+.hortensia__msg--user {
+  align-self: flex-end;
+  background: var(--ek-rust);
+  color: var(--ek-paper);
+  border-bottom-right-radius: 4px;
+}
+
+.hortensia__typing {
+  align-self: flex-start;
+  display: inline-flex; gap: 4px;
+  padding: 12px 14px;
+  background: rgba(200, 132, 58, 0.15);
+  border: 1px solid rgba(200, 132, 58, 0.3);
+  border-radius: 12px;
+}
+
+.hortensia__typing span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--ek-paper);
+  opacity: 0.4;
+  animation: typingDot 1.2s infinite;
+}
+
+.hortensia__typing span:nth-child(2) { animation-delay: 0.15s; }
+
+.hortensia__typing span:nth-child(3) { animation-delay: 0.3s; }
+
+
+.hortensia__form {
+  display: flex; gap: 8px;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(184, 167, 139, 0.18);
+  background: rgba(20, 14, 10, 0.4);
+}
+
+.hortensia__form input {
+  flex: 1;
+  padding: 10px 14px;
+  background: rgba(239, 227, 200, 0.04);
+  border: 1px solid rgba(184, 167, 139, 0.2);
+  border-radius: 20px;
+  color: var(--ek-paper);
+  font-size: 14px;
+  outline: none;
+}
+
+.hortensia__form input:focus { border-color: var(--ek-amber); }
+
+.hortensia__form button {
+  padding: 0 14px;
+  background: var(--ek-amber);
+  color: var(--ek-deep);
+  border-radius: 20px;
+  font-family: var(--font-typewriter);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+.hortensia__transfer {
+  margin: 8px 14px 0;
+  padding: 8px 12px;
+  font-family: var(--font-typewriter);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  text-align: center;
+  border-top: 1px dashed rgba(184, 167, 139, 0.15);
+  padding-top: 12px;
+}
+
+.hortensia__transfer a {
+  color: #25d366;
+  text-decoration: underline;
+  text-decoration-color: rgba(37, 211, 102, 0.4);
+}
