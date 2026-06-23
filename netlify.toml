@@ -249,9 +249,16 @@
   status = 200
 
 
-# Removed /menu/tickets duplicate ticket page (Andrew 2026-06-23) � bookings live at /experience
+# Removed /menu/tickets duplicate ticket page (Andrew 2026-06-23) — bookings live at /experience
 [[redirects]]
   from = "/menu/tickets/*"
   to = "/experience"
   status = 301
   force = true
+
+# Pass-4 audit 2026-06-23: /api/* → /.netlify/functions/* rewrite
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = false
