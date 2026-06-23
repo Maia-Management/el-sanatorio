@@ -36,11 +36,11 @@ function json(body, status = 200) {
 const FALLBACK_REPLIES = {
   greeting: [
     "Aló cariño, soy Hortensia. Cuéntame, ¿reservación para cuántos y para qué noche?",
-    "Buenas mi amor, Doña Pilar al teléfono. Disculpa la demora — Don Hilario está dando pelea otra vez. Cuéntame.",
+    "Buenas mi amor, Hortensia al teléfono. Disculpa la demora — Don Hilario está dando pelea otra vez. Cuéntame.",
     "Aló querido, qué bueno que escribió. ¿En qué le ayudo?",
     "Aló mi vida, Hortensia al habla. Don Silvio está pasando ronda, déjeme apuntarle yo. ¿Qué necesita?",
     "Hola cariño, qué bueno oírlo. La casa está cordial esta semana — ¿reserva, info del menú, o vienen por la experiencia?",
-    "Aló, Sanatorio buenas. Aquí Doña Pilar — la enfermera vieja, no la nueva. Cuénteme con calma.",
+    "Aló, Sanatorio buenas. Aquí Hortensia — la enfermera vieja, no la nueva. Cuénteme con calma.",
     "Buenas mi amor. Antes que se me olvide: jueves a domingo abrimos. ¿En qué le ayudo?",
     "Aló querida, le contesto desde admisiones. Don Hilario me tiene el escritorio lleno de fichas — usted dirá."
   ],
@@ -87,7 +87,7 @@ const FALLBACK_REPLIES = {
 };
 
 // Receptionist personas — distinct from patient personas (no name overlap with Don Hilario / Don Bellasrio / Micaela / Don Aldo / Doña Eulalia).
-const NAMES = ['Hortensia', 'Doña Pilar', 'Soledad', 'Carmela', 'Doña Inés', 'La Niña Marta', 'Doña Rosalba'];
+const NAMES = ['Hortensia']; // Andrew lock 2026-06-22: Hortensia is the only canonical persona for El Sanatorio + Chuzo Tokyo + La Farmacia chat. Pool collapsed.
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 /**
