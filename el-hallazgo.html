@@ -845,8 +845,15 @@
           <textarea id="hz-gb-lead" name="hallazgo" rows="6" maxlength="2000" required placeholder="Una noche del 64, la niña…"></textarea>
         </div>
 
+        <div class="hz-guestbook__row" style="margin-top:8px;">
+          <label style="display:flex;gap:8px;align-items:flex-start;font-size:0.78rem;line-height:1.5;cursor:pointer;">
+            <input type="checkbox" id="hz-gb-consent" name="aviso-privacidad" value="aceptado" required style="margin-top:3px;flex-shrink:0;" />
+            <span>He leído y acepto la <a href="/privacidad" style="text-decoration:underline;">Política de Privacidad</a> (Ley 1581 de 2012). Mi nombre no se publica sin permiso. *</span>
+          </label>
+        </div>
+
         <button class="hz-guestbook__submit" type="submit">Mandar al expediente →</button>
-        <p class="hz-guestbook__legal">Al enviar aceptas que podamos contactarte. No publicamos nombres sin permiso. Leemos todo. Tarda un rato — somos solo nosotros dos.</p>
+        <p class="hz-guestbook__legal">No publicamos nombres sin permiso. Leemos todo. Tarda un rato — somos solo nosotros dos.</p>
       </form>
     </div>
   </section>
