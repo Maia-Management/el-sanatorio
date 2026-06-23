@@ -247,3 +247,11 @@
   from = "/gracias"
   to = "/gracias.html"
   status = 200
+
+
+# Removed /menu/tickets duplicate ticket page (Andrew 2026-06-23) — bookings live at /experience
+[[redirects]]
+  from = "/menu/tickets/*"
+  to = "/experience"
+  status = 301
+  force = true
