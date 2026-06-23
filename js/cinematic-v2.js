@@ -20,9 +20,9 @@
   const IS_TOUCH = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
   const WA_NUMBER = '19034598763';            // canonical Maia WhatsApp (BRAIN.md)
   const WA_BASE = `https://wa.me/${WA_NUMBER}`;
-  const TIER_PRICES = {                       // COP, locked per SANATORIO-PHASE-1-OPERATIONAL-PLAN-v2
-    standard: 50000,
-    vip: 75000
+  const TIER_PRICES = {                       // COP, locked per Andrew direct 2026-06-23
+    standard: 60000,
+    grupo: 48000        // 20% off Estandar for 4-8 person groups (advertised as discount)
   };
 
   /* ------------------------------------------------------------------
@@ -368,7 +368,7 @@
 
       if (!cat || cat === 'ninguno') {
         result.classList.add('is-ineligible');
-        result.innerHTML = `El 2 por 1 de Cuidadores no aplica en tu caso — pero la entrada estándar son <strong>$50.000 COP</strong> por persona, mesa para todos. <br><br>Te dejo el chat de Hortensia para reservar.`;
+        result.innerHTML = `El 2 por 1 de Cuidadores no aplica en tu caso — pero la entrada estándar son <strong>$60.000 COP</strong> por persona, mesa para todos. <br><br>Te dejo el chat de Hortensia para reservar.`;
         return;
       }
       if (size < 4 || size % 2 !== 0 || size > 8) {
@@ -475,7 +475,7 @@
       depEl.textContent = `Depósito 50%: $${deposit.toLocaleString('es-CO')}`;
       balEl.textContent = `Saldo en la noche: $${balance.toLocaleString('es-CO')}`;
 
-      const tierLabel = tier.value === 'vip' ? "Director's Cut VIP" : 'Entrada Estándar';
+      const tierLabel = tier.value === 'grupo' ? 'Grupo 4-8 (20% off)' : 'Entrada Estándar';
       const msg = encodeURIComponent(
         `Hola Hortensia, quisiera reservar El Sanatorio: ${n} personas, ${tierLabel} ($${t.toLocaleString('es-CO')}/p). Total estimado $${total.toLocaleString('es-CO')} COP. ¿Para qué noche tenemos cupo?`
       );
