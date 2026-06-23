@@ -45,3 +45,6 @@
   min-height: 32px;
   padding: 6px;
 }
+
+/* Consent-checkbox layout helper — applied on form check inputs that previously used inline style */
+input.consent-cbx { margin-top: 0.25rem; flex-shrink: 0; }
