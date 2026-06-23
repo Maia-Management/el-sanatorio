@@ -467,6 +467,20 @@
 
     function recalc() {
       const n = Math.max(1, Math.min(20, parseInt(size.value, 10) || 1));
+      // Q1 gate (Andrew 2026-06-23): Grupo 4-8 (20% off) only valid for parties of 4-8.
+      // Disable the Grupo option when size is outside that range, and bounce tier back
+      // to Standard if the user had it selected.
+      const grupoOpt = tier.querySelector('option[value="grupo"]');
+      const grupoValid = n >= 4 && n <= 8;
+      if (grupoOpt) {
+        grupoOpt.disabled = !grupoValid;
+        grupoOpt.textContent = grupoValid
+          ? 'Grupo 4-8 (20% off) — $48.000 c/u'
+          : 'Grupo 4-8 (20% off) — solo grupos de 4 a 8';
+      }
+      if (!grupoValid && tier.value === 'grupo') {
+        tier.value = 'standard';
+      }
       const t = TIER_PRICES[tier.value] || TIER_PRICES.standard;
       const total = n * t;
       const deposit = Math.round(total * 0.5);
