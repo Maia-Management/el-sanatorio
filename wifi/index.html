@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0806" />
+
+  <title>WiFi · El Sanatorio</title>
+  <meta name="description" content="Conéctate al WiFi de El Sanatorio — registra tu acceso y recibe la contraseña." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <!-- Brand tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Inter:wght@400;500;600;700&family=Special+Elite&display=swap" />
+  <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260623c" />
+
+  <style>
+    :root {
+      --gold: #b8960c;
+      --bone: #f5f5f0;
+      --ink: #0a0806;
+      --ink-soft: #15110d;
+      --line: rgba(184, 150, 12, 0.25);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--ink);
+      color: var(--bone);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wifi-shell {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background:
+        radial-gradient(ellipse at top, rgba(184, 150, 12, 0.08) 0%, transparent 55%),
+        var(--ink);
+    }
+    .wifi-card {
+      width: 100%;
+      max-width: 460px;
+      background: var(--ink-soft);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2rem 1.5rem 2.25rem;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+    .wifi-mark {
+      font-family: 'Special Elite', monospace;
+      letter-spacing: 0.25em;
+      font-size: 0.65rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+    .wifi-h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 5vw, 1.85rem);
+      line-height: 1.15;
+      margin: 0 0 0.4rem;
+      text-align: center;
+      color: var(--bone);
+    }
+    .wifi-sub {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: rgba(245, 245, 240, 0.6);
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0 0 1.75rem;
+    }
+    .field {
+      margin-bottom: 1.1rem;
+    }
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245, 245, 240, 0.7);
+      margin-bottom: 0.45rem;
+      font-weight: 500;
+    }
+    .field input[type="text"],
+    .field input[type="tel"],
+    .field input[type="email"] {
+      width: 100%;
+      height: 52px;
+      background: rgba(245, 245, 240, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 0 1rem;
+      color: var(--bone);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: border-color 120ms;
+    }
+    .field input:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(184, 150, 12, 0.06);
+    }
+    .field-hint {
+      font-size: 0.72rem;
+      color: rgba(245, 245, 240, 0.4);
+      margin-top: 0.35rem;
+    }
+    .consent {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+      margin: 1.25rem 0 1.5rem;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: rgba(245, 245, 240, 0.78);
+    }
+    .consent input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--gold);
+      flex-shrink: 0;
+    }
+    .consent a {
+      color: var(--gold);
+      text-decoration: underline;
+    }
+    .btn-submit {
+      width: 100%;
+      height: 56px;
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 120ms, transform 80ms;
+    }
+    .btn-submit:hover:not(:disabled) { background: #d6b219; }
+    .btn-submit:active:not(:disabled) { transform: translateY(1px); }
+    .btn-submit:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .error-msg {
+      color: #ff8a7a;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      text-align: center;
+      min-height: 1.2em;
+    }
+    .honey {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* success state */
+    .wifi-success { display: none; text-align: center; }
+    .wifi-success.is-on { display: block; }
+    .wifi-success .check {
+      width: 56px; height: 56px; margin: 0 auto 1rem;
+      border-radius: 50%; border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; color: var(--gold);
+    }
+    .wifi-success h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 1.4rem;
+      margin: 0 0 0.5rem;
+    }
+    .wifi-success p { color: rgba(245, 245, 240, 0.75); margin: 0 0 1.25rem; font-size: 0.9rem; }
+    .password-box {
+      background: rgba(184, 150, 12, 0.08);
+      border: 1px dashed var(--gold);
+      border-radius: 3px;
+      padding: 1rem;
+      margin: 0 0 1rem;
+    }
+    .password-box code {
+      font-family: 'Special Elite', monospace;
+      font-size: 1.5rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      word-break: break-all;
+    }
+    .btn-copy {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.65rem 1.25rem;
+      border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .btn-copy:hover { background: rgba(184, 150, 12, 0.12); }
+    .redirect-note {
+      font-size: 0.72rem;
+      color: rgba(245, 245, 240, 0.5);
+      margin-top: 1.25rem;
+    }
+
+    .wifi-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      color: rgba(245, 245, 240, 0.4);
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+  <main class="wifi-shell">
+    <div class="wifi-card">
+      <p class="wifi-mark">EXPEDIENTE · ACCESO RED</p>
+      <h1 class="wifi-h1">BIENVENIDO AL SANATORIO</h1>
+      <p class="wifi-sub">Conéctate a nuestra red</p>
+
+      <form id="wifi-form" novalidate>
+        <div class="field">
+          <label for="name">Nombre</label>
+          <input id="name" name="name" type="text" required autocomplete="name" maxlength="80" />
+        </div>
+
+        <div class="field">
+          <label for="phone">Celular</label>
+          <input id="phone" name="phone" type="tel" required autocomplete="tel" maxlength="20" value="+57" inputmode="tel" />
+          <p class="field-hint">Incluye el indicativo (Colombia: +57).</p>
+        </div>
+
+        <div class="field">
+          <label for="email">Correo <span style="opacity:.5;font-weight:400">(opcional)</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" maxlength="160" />
+        </div>
+
+        <!-- honeypot -->
+        <div class="honey" aria-hidden="true">
+          <label>Sitio web<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <label class="consent">
+          <input id="consent" type="checkbox" required />
+          <span>
+            Acepto recibir comunicaciones de El Sanatorio por WhatsApp y consiento el tratamiento de mis datos conforme a la
+            <a href="/privacidad" target="_blank" rel="noopener">Política de Privacidad</a>
+            (Ley 1581 de 2012 — Habeas Data).
+          </span>
+        </label>
+
+        <button class="btn-submit" type="submit" id="submit-btn">Conectarme al WiFi</button>
+        <p class="error-msg" id="error-msg" aria-live="polite"></p>
+      </form>
+
+      <section class="wifi-success" id="wifi-success" aria-live="polite">
+        <div class="check">✓</div>
+        <h2>Conexión autorizada</h2>
+        <p>Usa esta contraseña para entrar a la red <strong>El Sanatorio Wi-Fi</strong>:</p>
+        <div class="password-box">
+          <code id="password-out">—</code>
+        </div>
+        <button class="btn-copy" id="copy-btn" type="button">Copiar contraseña</button>
+        <p class="redirect-note">Te llevamos a la carta del bar en unos segundos…</p>
+      </section>
+
+      <p class="wifi-footer">EL SANATORIO S.A.S. · Santa Marta</p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const form = document.getElementById('wifi-form');
+      const errEl = document.getElementById('error-msg');
+      const successEl = document.getElementById('wifi-success');
+      const btn = document.getElementById('submit-btn');
+      const pwOut = document.getElementById('password-out');
+      const copyBtn = document.getElementById('copy-btn');
+
+      function fail(msg) {
+        errEl.textContent = msg;
+        btn.disabled = false;
+        btn.textContent = 'Conectarme al WiFi';
+      }
+
+      form.addEventListener('submit', async function (ev) {
+        ev.preventDefault();
+        errEl.textContent = '';
+
+        const name = form.name.value.trim();
+        const phone = form.phone.value.trim();
+        const email = form.email.value.trim();
+        const consent = form.consent.checked;
+        const website = form.website.value;
+
+        if (!name) return fail('Por favor escribe tu nombre.');
+        if (!phone || phone.length < 8) return fail('Por favor escribe tu celular.');
+        if (!consent) return fail('Necesitamos tu autorización para conectarte.');
+
+        btn.disabled = true;
+        btn.textContent = 'Conectando…';
+
+        try {
+          const res = await fetch('/api/wifi-signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name,
+              phone: phone,
+              email: email || null,
+              whatsapp_consent: true,
+              website: website,
+              ssid: 'El Sanatorio Wi-Fi'
+            })
+          });
+          const data = await res.json().catch(function () { return {}; });
+          if (!res.ok || !data.ok) {
+            return fail(data.error || 'No pudimos registrarte. Intenta de nuevo.');
+          }
+          if (data._spam) {
+            return fail('Hubo un problema. Refresca la página e intenta de nuevo.');
+          }
+
+          // Success
+          form.style.display = 'none';
+          pwOut.textContent = data.wifi_password || '—';
+          successEl.classList.add('is-on');
+
+          // Auto-copy to clipboard (best-effort, no error if blocked)
+          if (data.wifi_password && navigator.clipboard) {
+            navigator.clipboard.writeText(data.wifi_password).catch(function () {});
+          }
+
+          setTimeout(function () {
+            window.location.href = '/menu/bar/';
+          }, 8000);
+        } catch (e) {
+          fail('Conexión interrumpida. Intenta de nuevo.');
+        }
+      });
+
+      copyBtn.addEventListener('click', function () {
+        const txt = pwOut.textContent;
+        if (!txt || txt === '—') return;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(txt).then(function () {
+            copyBtn.textContent = '¡Copiado!';
+            setTimeout(function () { copyBtn.textContent = 'Copiar contraseña'; }, 2000);
+          });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
