@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <script src="/consent-banner.js?v=20260623" defer></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0806" />
+  <title>Reservar con Depósito 50% | El Sanatorio</title>
+  <meta name="description" content="Reserva tu mesa, ticket o evento privado en El Sanatorio con depósito en línea del 50%. Tickets de El Laberinto, cumpleaños y grupos. Santa Marta, Centro Histórico." />
+  <meta name="robots" content="noindex,follow" />
+  <link rel="canonical" href="https://el-sanatorio.com/reservar" />
+
+  <!-- Cohesion v2 brand tokens (loaded BEFORE style.css) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260623c" />
+  <link rel="stylesheet" href="/css/style.css?v=20260623" />
+  <link rel="stylesheet" href="/css/a11y-shim.css?v=20260623" />
+
+  <style>
+    .reservar-wrap { padding: 4rem 0; background: var(--black); min-height: 80vh; }
+    .reservar-card { background: var(--panel-dark); border: 1px solid var(--border-mid); padding: 2rem; max-width: 640px; margin: 0 auto; }
+    .exp-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem; }
+    @media (max-width: 480px) { .exp-options { grid-template-columns: 1fr; } }
+    .exp-pill { display: block; cursor: pointer; padding: 1rem; border: 1px solid var(--border-mid); background: var(--black); color: var(--off-white); text-align: left; transition: border-color .15s, background .15s; }
+    .exp-pill input { position: absolute; opacity: 0; pointer-events: none; }
+    .exp-pill:hover { border-color: var(--gold); }
+    .exp-pill.is-active { border-color: var(--crimson); background: rgba(185,28,28,0.08); }
+    .exp-pill .exp-name { font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.78rem; }
+    .exp-pill .exp-price { font-family: monospace; color: var(--gold); font-size: 0.72rem; margin-top: 0.25rem; }
+    .exp-pill .exp-desc { font-size: 0.74rem; color: var(--light-gray); margin-top: 0.35rem; line-height: 1.4; }
+    .summary { background: var(--black); border: 1px dashed var(--border-mid); padding: 1rem; margin-top: 1.5rem; font-family: monospace; font-size: 0.85rem; color: var(--light-gray); }
+    .summary .row { display: flex; justify-content: space-between; padding: 0.25rem 0; }
+    .summary .total { color: var(--gold); border-top: 1px solid var(--border-mid); margin-top: 0.5rem; padding-top: 0.5rem; }
+    .age-warning { background: rgba(185,28,28,0.08); border-left: 3px solid var(--crimson); padding: 0.85rem 1rem; margin-top: 1rem; font-size: 0.78rem; color: var(--off-white); display: none; }
+    .age-warning.is-visible { display: block; }
+    .wa-escape { display: inline-block; margin-top: 1.25rem; font-size: 0.75rem; color: var(--light-gray); text-decoration: underline; }
+    .wa-escape:hover { color: var(--gold); }
+    .submit-error { background: rgba(185,28,28,0.2); border: 1px solid var(--crimson); padding: 0.75rem 1rem; margin-top: 1rem; color: var(--off-white); font-size: 0.85rem; display: none; }
+    .submit-error.is-visible { display: block; }
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
+
+<nav class="nav" role="navigation" aria-label="Navegación principal">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">
+      <span class="nav__logo-num">PACIENTE 013</span>
+      <span class="nav__logo-name" data-glitch="EL SANATORIO">EL SANATORIO</span>
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/menu">Menú</a></li>
+      <li><a href="/experience">Experiencia</a></li>
+      <li><a href="/events">Eventos</a></li>
+      <li><a href="/historia">Historia</a></li>
+      <li><a href="/contact">Contacto</a></li>
+      <li><a href="/reservar" class="active">Reservar</a></li>
+    </ul>
+    <button type="button" class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main-content">
+<div class="nav__mobile-menu" id="mobile-menu" role="navigation" aria-label="Menú móvil">
+  <a href="/">Inicio</a>
+  <a href="/menu">Menú</a>
+  <a href="/experience">Experiencia</a>
+  <a href="/events">Eventos</a>
+  <a href="/historia">Historia</a>
+  <a href="/contact">Contacto</a>
+  <a href="/reservar">Reservar</a>
+</div>
+
+<section class="reservar-wrap">
+  <div class="container--sm">
+    <div class="section-label" style="justify-content:center;"><span>Sala de Admisiones</span></div>
+    <h1 class="section-title section-title--center neon-red" style="font-size: clamp(1.6rem, 4.5vw, 2.5rem); line-height: 1.2; margin-bottom: 1rem;">
+      Reservar con Depósito en Línea
+    </h1>
+    <p class="serif text-center" style="color: var(--light-gray); max-width: 520px; margin: 0 auto 2rem; font-size: 0.92rem;">
+      Aparta tu lugar con el 50% por adelantado vía Wompi.
+      El saldo se paga en la entrada (efectivo, Nequi o tarjeta).
+    </p>
+
+    <div class="reservar-card">
+      <form id="reservar-form" novalidate>
+        <!-- Honeypot -->
+        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;" aria-hidden="true">
+          <label>Sitio web <input type="text" name="website" autocomplete="off" tabindex="-1"></label>
+        </div>
+
+        <!-- Experiencia type -->
+        <fieldset style="border:0;padding:0;margin:0 0 1.25rem;">
+          <legend class="form-label" style="margin-bottom:0.5rem;">Tipo de experiencia *</legend>
+          <div class="exp-options" role="radiogroup" aria-label="Tipo de experiencia">
+            <label class="exp-pill is-active" data-pill="ticket">
+              <input type="radio" name="experience_type" value="ticket" checked />
+              <div class="exp-name">Ticket — El Laberinto</div>
+              <div class="exp-price">$45.000 COP / persona</div>
+              <div class="exp-desc">Acceso a la zona restringida. 1–8 personas.</div>
+            </label>
+            <label class="exp-pill" data-pill="birthday">
+              <input type="radio" name="experience_type" value="birthday" />
+              <div class="exp-name">Cumpleaños VIP</div>
+              <div class="exp-price">$75.000 COP / persona · 3–5</div>
+              <div class="exp-desc">Grupo VIP en zona restringida + brindis.</div>
+            </label>
+            <label class="exp-pill" data-pill="private">
+              <input type="radio" name="experience_type" value="private" />
+              <div class="exp-name">Evento privado</div>
+              <div class="exp-price">$480.000 COP grupo · hasta 15</div>
+              <div class="exp-desc">Privatización del Laberinto.</div>
+            </label>
+            <label class="exp-pill" data-pill="group">
+              <input type="radio" name="experience_type" value="group" />
+              <div class="exp-name">Reserva de grupo (mesa)</div>
+              <div class="exp-price">Sin depósito · 4–12</div>
+              <div class="exp-desc">Solo apartar mesa en el bar / patio.</div>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="r-date">Fecha *</label>
+            <input class="form-input" type="date" id="r-date" name="booking_date" required min="2026-07-30" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="r-time">Hora *</label>
+            <select class="form-select" id="r-time" name="time_slot" required>
+              <option value="">Seleccionar...</option>
+              <option value="19:00">7:00 PM</option>
+              <option value="20:30">8:30 PM</option>
+              <option value="22:00">10:00 PM</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="r-size">Personas *</label>
+            <select class="form-select" id="r-size" name="party_size" required>
+              <option value="">Seleccionar...</option>
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
+              <option value="7">7 personas</option>
+              <option value="8">8 personas</option>
+              <option value="10">10 personas</option>
+              <option value="12">12 personas</option>
+              <option value="15">15 personas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="r-name">Nombre completo *</label>
+            <input class="form-input" type="text" id="r-name" name="customer_name" required placeholder="Nombre y apellido" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="r-phone">WhatsApp *</label>
+            <input class="form-input" type="tel" id="r-phone" name="customer_whatsapp" required placeholder="+57 300 000 0000" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="r-email">Correo (opcional)</label>
+            <input class="form-input" type="email" id="r-email" name="customer_email" placeholder="correo@ejemplo.com" autocomplete="email" />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label class="form-label" for="r-notes">Notas (cumpleaños, alergias, idioma…)</label>
+            <textarea class="form-input" id="r-notes" name="notes" rows="2" placeholder="Opcional"></textarea>
+          </div>
+        </div>
+
+        <div class="age-warning" id="age-warning" role="alert">
+          ⚠ De 8:30 PM a 1 AM sólo entran mayores de 16. Adolescentes 13–16 deben venir con un adulto antes de las 8 PM. Menores de 13 no son admitidos en ningún horario.
+        </div>
+
+        <div class="summary" id="price-summary" aria-live="polite">
+          <div class="row"><span>Total</span><span id="sum-total">$45.000 COP</span></div>
+          <div class="row"><span>Depósito (50%)</span><span id="sum-deposit">$22.000 COP</span></div>
+          <div class="row total"><span>Saldo en la entrada</span><span id="sum-balance">$23.000 COP</span></div>
+        </div>
+
+        <div class="form-consent" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; align-items: flex-start;">
+          <input type="checkbox" id="r-consent" name="habeas_data" required class="consent-cbx" />
+          <label for="r-consent" class="mono" style="font-size: 0.72rem; color: var(--light-gray); line-height: 1.6; letter-spacing: 0.04em;">
+            He leído y acepto la <a href="/privacidad" style="color: var(--crimson); text-decoration: underline;">Política de Privacidad</a> (Ley 1581 de 2012). *
+          </label>
+        </div>
+
+        <div class="submit-error" id="submit-error" role="alert"></div>
+
+        <button type="submit" class="form-submit" id="r-submit" style="margin-top: 1.5rem;">
+          RESERVAR CON DEPÓSITO 50%
+        </button>
+
+        <div style="text-align:center;">
+          <a class="wa-escape" id="wa-escape" href="https://wa.me/19034598763?text=Hola%21%20Quiero%20reservar%20en%20El%20Sanatorio" target="_blank" rel="noopener noreferrer">
+            💬 Prefiero hablar por WhatsApp
+          </a>
+        </div>
+      </form>
+    </div><!-- /reservar-card -->
+
+    <p class="mono" style="font-size: 0.62rem; color: var(--gray); margin-top: 1rem; text-align: center; line-height: 1.7; letter-spacing: 0.08em;">
+      Calle 19 #4-23 · Centro Histórico · Santa Marta<br>
+      Depósito procesado por Wompi · Saldo en la puerta
+    </p>
+  </div>
+</section>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <p class="footer__logo">EL SANATORIO</p>
+        <p class="footer__tagline">"Ella siempre ha estado aquí."</p>
+        <address class="mono" style="font-size: 0.75rem; color: var(--gray); margin-top: 1rem; line-height: 1.8; font-style: normal;">
+          Calle 19 #4-23<br>Centro Histórico<br>Santa Marta, Magdalena, Colombia
+        </address>
+      </div>
+      <div>
+        <p class="footer__col-title">Instalaciones</p>
+        <ul class="footer__links" role="list">
+          <li><a href="/menu">El Menú / Expediente</a></li>
+          <li><a href="/experience">La Experiencia</a></li>
+          <li><a href="/events">Eventos</a></li>
+          <li><a href="/reservar">Reservar</a></li>
+          <li><a href="/contact">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Protocolo</p>
+        <ul class="footer__links" role="list">
+          <li><a href="https://wa.me/19034598763" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="https://instagram.com/elsanatorio.smr" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="/experience#rules">Normas del Laberinto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© 2026 El Sanatorio — Santa Marta, Colombia. | <a href="/privacidad" style="color:inherit;text-decoration:underline;">Privacidad</a> | <a href="/terminos" style="color:inherit;text-decoration:underline;">Términos</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // ─── Pricing table (mirrors lib/sanatorio/bookings-pricing.mjs) ──────────
+  const PRICES = {
+    ticket:   { perPerson: 45000,  flat: 0,      maxParty: 8,  zone: 'paciente_013', tier: 'standard' },
+    birthday: { perPerson: 75000,  flat: 0,      maxParty: 5,  zone: 'paciente_013', tier: 'vip' },
+    private:  { perPerson: 0,      flat: 480000, maxParty: 15, zone: 'paciente_013', tier: 'private' },
+    group:    { perPerson: 0,      flat: 0,      maxParty: 12, zone: 'cocktail_bar', tier: 'walkin_hold' },
+  };
+
+  // ─── URL params (source tracking) ───────────────────────────────────────
+  const qp = new URLSearchParams(location.search);
+  const source = qp.get('source') || 'direct';
+  const fakeMode = qp.get('fake') === '1';
+  const presetExp = qp.get('exp');
+  if (presetExp && PRICES[presetExp]) {
+    const radio = document.querySelector(`input[name="experience_type"][value="${presetExp}"]`);
+    if (radio) radio.checked = true;
+  }
+
+  // ─── Helpers ────────────────────────────────────────────────────────────
+  const $ = (s) => document.querySelector(s);
+  function fmtCop(n) { return '$' + Number(n || 0).toLocaleString('es-CO') + ' COP'; }
+
+  function pricePreview() {
+    const expType = document.querySelector('input[name="experience_type"]:checked')?.value || 'ticket';
+    const p = PRICES[expType];
+    const partyRaw = parseInt($('#r-size').value, 10);
+    const party = Number.isInteger(partyRaw) && partyRaw > 0 ? partyRaw : 1;
+
+    // Compute total
+    let total = p.flat > 0 ? p.flat : p.perPerson * party;
+    let deposit = Math.floor(total * 0.5 / 1000) * 1000;
+    if (total > 0 && deposit === 0) deposit = 1000;
+    if (deposit > total) deposit = total;
+    const balance = total - deposit;
+
+    if (expType === 'group') {
+      $('#sum-total').textContent   = 'Sin cobro online';
+      $('#sum-deposit').textContent = '$0 COP';
+      $('#sum-balance').textContent = 'Consumo en sitio';
+    } else {
+      $('#sum-total').textContent   = fmtCop(total);
+      $('#sum-deposit').textContent = fmtCop(deposit);
+      $('#sum-balance').textContent = fmtCop(balance);
+    }
+
+    // Update party max + warnings
+    const partySel = $('#r-size');
+    Array.from(partySel.options).forEach((opt) => {
+      const v = parseInt(opt.value, 10);
+      opt.disabled = Number.isInteger(v) && v > p.maxParty;
+    });
+    if (partyRaw > p.maxParty) {
+      partySel.value = '';
+    }
+  }
+
+  function updatePillUI() {
+    document.querySelectorAll('.exp-pill').forEach((pill) => {
+      const input = pill.querySelector('input');
+      pill.classList.toggle('is-active', input.checked);
+    });
+  }
+
+  function ageWarningCheck() {
+    const time = $('#r-time').value;
+    const visible = time === '20:30' || time === '22:00';
+    $('#age-warning').classList.toggle('is-visible', visible);
+  }
+
+  function updateWaEscape() {
+    const expType = document.querySelector('input[name="experience_type"]:checked')?.value || 'ticket';
+    const party = $('#r-size').value || '?';
+    const date  = $('#r-date').value  || '(fecha por definir)';
+    const time  = $('#r-time').value  || '(hora por definir)';
+    const expLabel = { ticket: 'Ticket El Laberinto', birthday: 'Cumpleaños VIP', private: 'Evento privado', group: 'Reserva de grupo' }[expType];
+    const text = `Hola! Quiero reservar en El Sanatorio.\n- ${expLabel}\n- ${party} personas\n- ${date} ${time}`;
+    $('#wa-escape').href = 'https://wa.me/19034598763?text=' + encodeURIComponent(text);
+  }
+
+  function refresh() { pricePreview(); ageWarningCheck(); updateWaEscape(); updatePillUI(); }
+
+  document.querySelectorAll('input[name="experience_type"]').forEach((r) => r.addEventListener('change', refresh));
+  ['#r-size', '#r-date', '#r-time'].forEach((sel) => $(sel).addEventListener('change', refresh));
+
+  // ─── Submit ─────────────────────────────────────────────────────────────
+  $('#reservar-form').addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    const btn = $('#r-submit');
+    const errBox = $('#submit-error');
+    errBox.classList.remove('is-visible');
+
+    // Honeypot
+    if (document.querySelector('input[name="website"]').value) {
+      errBox.textContent = 'Spam detected.';
+      errBox.classList.add('is-visible');
+      return;
+    }
+
+    const fd = new FormData(ev.target);
+    const expType = fd.get('experience_type');
+    const partySize = parseInt(fd.get('party_size'), 10);
+    if (!Number.isInteger(partySize) || partySize < 1) {
+      errBox.textContent = 'Selecciona el número de personas.';
+      errBox.classList.add('is-visible');
+      return;
+    }
+    if (!fd.get('booking_date') || !fd.get('time_slot')) {
+      errBox.textContent = 'Selecciona fecha y hora.';
+      errBox.classList.add('is-visible');
+      return;
+    }
+    if (!fd.get('habeas_data')) {
+      errBox.textContent = 'Debes aceptar la Política de Privacidad.';
+      errBox.classList.add('is-visible');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'PROCESANDO...';
+
+    const payload = {
+      experience_type:   expType,
+      party_size:        partySize,
+      booking_date:      fd.get('booking_date'),
+      time_slot:         fd.get('time_slot'),
+      customer_name:     (fd.get('customer_name') || '').toString().trim(),
+      customer_whatsapp: (fd.get('customer_whatsapp') || '').toString().trim(),
+      customer_email:    (fd.get('customer_email') || '').toString().trim() || undefined,
+      habeas_data:       true,
+      source,
+      notes:             (fd.get('notes') || '').toString().trim() || undefined,
+      fake:              fakeMode,
+    };
+
+    try {
+      const r = await fetch('/api/sanatorio-booking-create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const d = await r.json();
+      if (!r.ok) {
+        errBox.textContent = 'No pudimos procesar tu reserva (' + (d.error || 'error') + '). Intenta de nuevo o escribe por WhatsApp.';
+        errBox.classList.add('is-visible');
+        btn.disabled = false;
+        btn.textContent = 'RESERVAR CON DEPÓSITO 50%';
+        return;
+      }
+
+      // walkin/group: no Wompi, send WA handoff
+      if (d.status === 'no_deposit_needed') {
+        if (d.whatsapp_handoff_url) location.href = d.whatsapp_handoff_url;
+        return;
+      }
+
+      // Hand off to confirmation page (which polls /api/sanatorio-booking-status)
+      // and bounces to Wompi for the deposit.
+      const fakeQ = fakeMode ? '&fake=1' : '';
+      if (fakeMode) {
+        // Skip Wompi entirely, jump straight to the confirmation page in fake mode
+        location.href = `/booking-pay/${d.booking_id}?fake=1`;
+        return;
+      }
+      // Real flow: redirect to Wompi checkout
+      location.href = d.pay_url;
+    } catch (e) {
+      errBox.textContent = 'Error de conexión. Intenta de nuevo o escribe por WhatsApp.';
+      errBox.classList.add('is-visible');
+      btn.disabled = false;
+      btn.textContent = 'RESERVAR CON DEPÓSITO 50%';
+    }
+  });
+
+  // Init
+  refresh();
+})();
+</script>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/19034598763"
+   class="whatsapp-float"
+   target="_blank" rel="noopener" aria-label="Chatear por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+<style>
+.whatsapp-float { position: fixed; bottom: 24px; right: 24px; background-color: #25D366; border-radius: 50%; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.25); z-index: 9999; transition: transform 0.2s ease; text-decoration: none; }
+.whatsapp-float:hover { transform: scale(1.1); }
+</style>
+
+<script src="/js/main.js?v=20260623" defer></script>
+<script defer src="/js/maia-utm.js?v=20260623"></script>
+<script defer src="/js/maia-track.js?v=20260623"></script>
+</body>
+</html>

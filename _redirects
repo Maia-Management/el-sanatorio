@@ -18,6 +18,12 @@
 /pos/*                          https://maia-management.com/vert/restaurant/sanatorio/pos/:splat  200
 /pay/:order_id                  https://maia-management.com/vert/restaurant/sanatorio/pay/?order_id=:order_id  200
 /pay/:order_id/wompi            https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout?order_id=:order_id  200
+
+# Self-serve BOOKING flow (Phase A — Wompi 50% deposit) — added 2026-06-24 PM
+/booking-pay/:booking_id        https://maia-management.com/vert/restaurant/sanatorio/booking-pay/?booking_id=:booking_id  200
+/booking-pay                    https://maia-management.com/vert/restaurant/sanatorio/booking-pay/  200
+/booking-pay/                   https://maia-management.com/vert/restaurant/sanatorio/booking-pay/  200
+
 /dice                           https://maia-management.com/vert/restaurant/sanatorio/dice/  200
 /dice/                          https://maia-management.com/vert/restaurant/sanatorio/dice/  200
 /dice/:order_id                 https://maia-management.com/vert/restaurant/sanatorio/dice/?order_id=:order_id  200
@@ -41,18 +47,26 @@
 /api/sanatorio-wompi-checkout          https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout  200
 /api/sanatorio-wompi-webhook           https://maia-management.com/.netlify/functions/sanatorio-wompi-webhook  200
 
-# Shared PWA assets (CSS, JS, fonts, images used by pos/pay/kitchen/floor/dice)
-# REQUIRED — without this rule /pay and /dice render blank because brand.css +
+# Self-serve BOOKING API endpoints (Phase A — 2026-06-24 PM)
+/api/sanatorio-booking-create          https://maia-management.com/.netlify/functions/sanatorio-booking-create  200
+/api/sanatorio-booking-status          https://maia-management.com/.netlify/functions/sanatorio-booking-status  200
+/api/sanatorio-booking-fake-pay        https://maia-management.com/.netlify/functions/sanatorio-booking-fake-pay  200
+/api/sanatorio-booking-lookup          https://maia-management.com/.netlify/functions/sanatorio-booking-lookup  200
+/api/wompi-booking-webhook             https://maia-management.com/.netlify/functions/wompi-booking-webhook  200
+
+# Shared PWA assets (CSS, JS, fonts, images used by pos/pay/kitchen/floor/dice/booking-pay)
+# REQUIRED — without this rule /pay, /dice, /booking-pay render blank because brand.css +
 # menu.js are referenced as absolute /vert/restaurant/sanatorio/shared/* paths.
 # Fix landed 2026-06-24 PM.
 /vert/restaurant/sanatorio/shared/*  https://maia-management.com/vert/restaurant/sanatorio/shared/:splat  200
 
-# The proxied PWAs (pay/dice/pos/etc) make absolute fetch() calls to
+# The proxied PWAs (pay/dice/pos/booking-pay/etc) make absolute fetch() calls to
 # /.netlify/functions/sanatorio-* — proxy those to maia-management too,
 # otherwise /pay returns "Failed to execute 'json' on 'Response': Unexpected
 # end of JSON input" because the function path 404s on el-sanatorio.com.
 # Fix landed 2026-06-24 PM.
-/.netlify/functions/sanatorio-*  https://maia-management.com/.netlify/functions/sanatorio-:splat  200
+/.netlify/functions/sanatorio-*       https://maia-management.com/.netlify/functions/sanatorio-:splat  200
+/.netlify/functions/wompi-booking-webhook  https://maia-management.com/.netlify/functions/wompi-booking-webhook  200
 
 # ============================================================================
 # QR menu clean URLs (2026-06-21) — match the spec at /menu/chuzo, /menu/bar,
@@ -66,6 +80,12 @@
 /qr/chuzo          /menu/chuzo               301
 /qr/bar            /menu/bar                 301
 /qr/tickets        /menu/tickets             301
+
+# Self-serve booking clean URLs — 2026-06-24 PM
+# Note: keep these BEFORE the legacy /reserva and /booking 301 lines below so
+# they win the match-first rule.
+/reservar          /reservar/index.html      200
+/reservar/         /reservar/index.html      200
 
 # ============================================================================
 # Marketing-site redirects (pre-existing)
@@ -81,8 +101,9 @@
 /aviso-cuarentena/ /aviso-cuarentena.html  301
 /cuarentena        /aviso-cuarentena.html  301
 /reportar          /aviso-cuarentena.html  301
-/reserva       /contact.html                                     301
-/booking       /contact.html                                     301
+# /reserva and /booking now route to the self-serve form (was /contact.html)
+/reserva           /reservar/                                    301
+/booking           /reservar/                                    301
 /carta         /menu/                                            301
 /bebidas       /menu/bar                                         301
 /horario       /contact.html                                     301
@@ -92,4 +113,3 @@
 # === Cinematic v2 fallback ===
 /legacy   /index-legacy.html   200
 /legacy/  /index-legacy.html   200
-
