@@ -1630,3 +1630,14 @@ input, textarea, select { font: inherit; color: inherit; }
   /* Lift hero text above the scrim */
   .atrium__content { position: relative; z-index: 2; }
 }
+
+
+/* Pass-6 PM nav scrim — 2026-06-24
+ * Emulator audit revealed the .cinema-nav fixed bar was transparent,
+ * letting body text bleed through during scroll. Add a solid background
+ * + backdrop-filter blur so the nav properly occludes whatever is behind. */
+.cinema-nav {
+  background: linear-gradient(180deg, rgba(8,6,4,0.92) 0%, rgba(8,6,4,0.72) 75%, rgba(8,6,4,0) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
