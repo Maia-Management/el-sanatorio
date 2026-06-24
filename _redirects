@@ -47,6 +47,11 @@
 /api/sanatorio-wompi-checkout          https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout  200
 /api/sanatorio-wompi-webhook           https://maia-management.com/.netlify/functions/sanatorio-wompi-webhook  200
 
+# Reviews CTA (2026-06-24 PM) — public config + conversion-event sink.
+# Customer "¿Cómo te fue?" screen at end of dice/pay/booking journeys.
+/api/sanatorio-config                  https://maia-management.com/.netlify/functions/sanatorio-config  200
+/api/track-conversion                  https://maia-management.com/.netlify/functions/track-conversion  200
+
 # Self-serve BOOKING API endpoints (Phase A — 2026-06-24 PM)
 /api/sanatorio-booking-create          https://maia-management.com/.netlify/functions/sanatorio-booking-create  200
 /api/sanatorio-booking-status          https://maia-management.com/.netlify/functions/sanatorio-booking-status  200
