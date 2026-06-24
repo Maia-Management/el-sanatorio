@@ -41,6 +41,12 @@
 /api/sanatorio-wompi-checkout          https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout  200
 /api/sanatorio-wompi-webhook           https://maia-management.com/.netlify/functions/sanatorio-wompi-webhook  200
 
+# Shared PWA assets (CSS, JS, fonts, images used by pos/pay/kitchen/floor/dice)
+# REQUIRED — without this rule /pay and /dice render blank because brand.css +
+# menu.js are referenced as absolute /vert/restaurant/sanatorio/shared/* paths.
+# Fix landed 2026-06-24 PM.
+/vert/restaurant/sanatorio/shared/*  https://maia-management.com/vert/restaurant/sanatorio/shared/:splat  200
+
 # ============================================================================
 # QR menu clean URLs (2026-06-21) — match the spec at /menu/chuzo, /menu/bar,
 # /menu/tickets without trailing slash. The /menu/ index keeps serving the
