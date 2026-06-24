@@ -1596,3 +1596,20 @@ input, textarea, select { font: inherit; color: inherit; }
   object-fit: cover;
   object-position: center 38%;
 }
+
+
+/* Pass-6 PM 2026-06-24 — mobile hero gating
+ * The Dr. Silvio MP4 was locking up Chrome on mid-range Android devices.
+ * On mobile (<768px), hide the video element entirely and use the poster
+ * image as a background-image so the hero still renders the cinematic
+ * facade but without the codec overhead. Video continues to play on desktop.
+ */
+@media (max-width: 767px) {
+  .silvio-projection video { display: none; }
+  .silvio-projection {
+    background-image: url('/images/silvio-hero-poster.jpg');
+    background-size: cover;
+    background-position: center 38%;
+    filter: brightness(0.62) contrast(1.06) saturate(0.95);
+  }
+}
