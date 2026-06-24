@@ -1492,3 +1492,28 @@ input, textarea, select { font: inherit; color: inherit; }
   .hortensia__bubble { width: 54px; height: 54px; }
   .hortensia__panel { right: -6px; height: min(480px, calc(100vh - 100px)); }
 }
+
+
+/* ──────────────────────────────────────────────────────────────────────
+ * Mobile nav fix — 2026-06-23 PM emulator audit
+ * On Pixel-sized viewport (380px) "EXPERIENCIA" was clipping to "EXPERI"
+ * because the brand wordmark + 3 nav links + sound toggle exceeded width.
+ * Solution: drop brand wordmark and tighten gap/letter-spacing below 540px;
+ * subtitle wrap on "Casa del Terror" + "Santa Marta" also corrected.
+ * ────────────────────────────────────────────────────────────────────── */
+@media (max-width: 540px) {
+  .cinema-nav { padding: 12px 14px; font-size: 8.5px; letter-spacing: 0.18em; }
+  .cinema-nav__brand { display: none; }
+  .cinema-nav__links { gap: 10px; }
+  .cinema-nav__links a { white-space: nowrap; }
+  /* Hero subtitle tighter on small viewports to prevent "MARTA" wrap */
+  .hero-tagline, .hero-meta, .cinema-hero__tag {
+    letter-spacing: 0.08em !important;
+  }
+}
+@media (max-width: 420px) {
+  /* Below 420px, drop EXPERIENCIA (least essential, since whole-site nav
+   * is in section anchors below the fold) so ASILO + EL HALLAZGO render
+   * fully. */
+  .cinema-nav__links li:nth-child(3) { display: none; }
+}
