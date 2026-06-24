@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0806" />
+  <title>Conectando… · El Sanatorio</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Supabase config (anon key is safe to expose; RLS is the gate) -->
+  <meta name="supabase-url" content="https://nxgndsnxugcevwriljlv.supabase.co" />
+  <meta name="supabase-anon-key" content="REPLACE_WITH_ANON_KEY_OR_LEAVE_BLANK_IF_INJECTED_AT_DEPLOY" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Special+Elite&display=swap" />
+  <style>
+    :root { --gold:#b8960c; --bone:#f5f5f0; --ink:#0a0806; --ink-soft:#15110d; }
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin:0; padding:0; min-height:100vh; background:var(--ink); color:var(--bone); font-family:Inter,system-ui,sans-serif; }
+    main {
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      padding:24px;
+    }
+    .card {
+      width:min(420px,100%); background:var(--ink-soft); border:1px solid rgba(184,150,12,.25);
+      border-radius:12px; padding:32px; text-align:center;
+    }
+    h1 { font-family:'Special Elite',serif; color:var(--gold); letter-spacing:.06em; margin:0 0 12px; font-size:22px; }
+    p  { font-size:14px; line-height:1.6; color:rgba(245,245,240,.85); margin:0 0 8px; }
+    .spinner {
+      width:24px; height:24px; border:3px solid rgba(184,150,12,.2); border-top-color:var(--gold);
+      border-radius:50%; animation:spin 0.7s linear infinite; margin:16px auto;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .err { color:#ff8a8a; font-size:13px; margin-top:12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="card">
+      <h1 id="title">CONECTANDO…</h1>
+      <div class="spinner" id="spinner"></div>
+      <p id="msg">Te estamos reconociendo. Un segundo.</p>
+      <p class="err" id="err" hidden></p>
+    </div>
+  </main>
+
+  <script type="module">
+    // Inline because /js/account.js runs on every other page — here we need
+    // tighter control over the callback ↔ upsert sequence.
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm';
+
+    function metaContent(name) {
+      const el = document.querySelector(`meta[name="${name}"]`);
+      return el ? (el.getAttribute('content') || '').trim() : '';
+    }
+
+    async function computeFingerprint() {
+      try {
+        const s = [
+          navigator.userAgent || '',
+          navigator.language || '',
+          (screen.width || 0) + 'x' + (screen.height || 0),
+          String(new Date().getTimezoneOffset()),
+        ].join('|');
+        if (!window.crypto?.subtle) return null;
+        const enc = new TextEncoder().encode(s);
+        const buf = await window.crypto.subtle.digest('SHA-256', enc);
+        return Array.from(new Uint8Array(buf))
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join('');
+      } catch {
+        return null;
+      }
+    }
+
+    function fail(msg) {
+      document.getElementById('spinner').style.display = 'none';
+      document.getElementById('title').textContent = 'NO PUDIMOS COMPLETAR';
+      document.getElementById('msg').textContent = '';
+      const e = document.getElementById('err');
+      e.hidden = false;
+      e.textContent = msg;
+    }
+
+    (async () => {
+      const SUPABASE_URL = metaContent('supabase-url');
+      const SUPABASE_ANON_KEY = metaContent('supabase-anon-key');
+      if (!SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY.startsWith('REPLACE')) {
+        return fail('La página no está configurada. Avisa al equipo.');
+      }
+      const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+          storageKey: 'sb-nxgndsnxugcevwriljlv-auth-token',
+        },
+      });
+
+      // detectSessionInUrl swallows the ?code= and writes the session cookie.
+      const { data: sessRes, error: sessErr } = await supabase.auth.getSession();
+      if (sessErr || !sessRes?.session) {
+        return fail('La sesión no quedó establecida. Vuelve a intentar.');
+      }
+
+      // Pull pending consents that were captured in the modal pre-redirect.
+      let consents = {};
+      try {
+        const raw = sessionStorage.getItem('maia_pending_consents');
+        if (raw) consents = JSON.parse(raw);
+      } catch {}
+
+      const fingerprint = await computeFingerprint();
+      const token = sessRes.session.access_token;
+
+      const upsertResp = await fetch('/api/customer-account-upsert', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          habeas_data_consent: !!consents.habeas_data_consent,
+          terms_consent: !!consents.terms_consent,
+          device_fingerprint_hash: fingerprint,
+        }),
+      });
+
+      if (!upsertResp.ok) {
+        const text = await upsertResp.text().catch(() => '');
+        console.warn('upsert failed', upsertResp.status, text);
+        return fail('Conexión interrumpida. Refresca la página.');
+      }
+
+      const me = await upsertResp.json();
+      // Greeting
+      document.getElementById('title').textContent = me.is_returning
+        ? `BIENVENIDO DE VUELTA${me.display_name ? ', ' + me.display_name.toUpperCase() : ''}`
+        : `BIENVENIDO${me.display_name ? ', ' + me.display_name.toUpperCase() : ''}`;
+      document.getElementById('msg').textContent = me.is_returning
+        ? 'Te reconocemos. Cuenta lista.'
+        : 'Cuenta creada. ¡Bienvenido al Sanatorio!';
+      document.getElementById('spinner').style.display = 'none';
+
+      // Where should we send them next?
+      let dest = '/';
+      try {
+        const cached = sessionStorage.getItem('maia_post_signin_return');
+        if (cached && cached.startsWith('/') && !cached.startsWith('//')) dest = cached;
+        sessionStorage.removeItem('maia_post_signin_return');
+        sessionStorage.removeItem('maia_pending_consents');
+      } catch {}
+      // If they were trying to get on WiFi when they signed in, go there.
+      if (!dest || dest === '/auth/' || dest === '/auth/callback/') dest = '/wifi/';
+
+      setTimeout(() => { window.location.replace(dest); }, 1500);
+    })();
+  </script>
+</body>
+</html>

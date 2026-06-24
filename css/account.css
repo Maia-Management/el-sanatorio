@@ -1,0 +1,151 @@
+/* /css/account.css — modal + signed-in chip for MaiaAccount
+   Loaded alongside cohesion-v2-tokens. Uses existing gold/bone/ink palette. */
+
+:root {
+  --maia-gold: #b8960c;
+  --maia-bone: #f5f5f0;
+  --maia-ink: #0a0806;
+  --maia-ink-soft: #15110d;
+  --maia-line: rgba(184, 150, 12, 0.25);
+}
+
+.maia-modal[hidden] { display: none !important; }
+
+.maia-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.maia-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 6, 0.78);
+  backdrop-filter: blur(4px);
+}
+
+.maia-modal-card {
+  position: relative;
+  width: min(420px, 100%);
+  background: var(--maia-ink-soft);
+  color: var(--maia-bone);
+  border: 1px solid var(--maia-line);
+  border-radius: 12px;
+  padding: 32px 24px 24px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  text-align: center;
+}
+
+.maia-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: 0;
+  color: var(--maia-bone);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  opacity: 0.7;
+}
+.maia-modal-close:hover { opacity: 1; }
+
+.maia-modal-card h2 {
+  font-family: 'Special Elite', serif;
+  letter-spacing: 0.06em;
+  color: var(--maia-gold);
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+.maia-modal-sub {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 24px;
+  color: rgba(245, 245, 240, 0.8);
+}
+
+.maia-google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  background: var(--maia-bone);
+  color: #1a1a1a;
+  border: 0;
+  border-radius: 8px;
+  font: 500 15px/1 Inter, sans-serif;
+  cursor: pointer;
+  margin-bottom: 18px;
+  padding: 0 16px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.maia-google-btn:hover { box-shadow: 0 4px 12px rgba(184, 150, 12, 0.18); }
+.maia-google-btn:active { transform: scale(0.99); }
+.maia-google-icon {
+  display: inline-flex;
+  background: white;
+  padding: 2px;
+  border-radius: 2px;
+}
+
+.maia-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.45;
+  margin-bottom: 12px;
+  color: rgba(245, 245, 240, 0.85);
+}
+.maia-consent input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  margin-top: 2px;
+  accent-color: var(--maia-gold);
+}
+.maia-consent a { color: var(--maia-gold); text-decoration: underline; }
+
+.maia-modal-error {
+  color: #ff8a8a;
+  font-size: 13px;
+  min-height: 18px;
+  margin: 8px 0 0;
+}
+
+.maia-modal-footer {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  opacity: 0.5;
+  margin: 20px 0 0;
+}
+
+/* Signed-in chip — top-right corner on customer pages */
+.maia-account-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--maia-line);
+  border-radius: 999px;
+  font: 500 12px/1 Inter, sans-serif;
+  color: var(--maia-bone);
+  background: rgba(10, 8, 6, 0.4);
+  text-decoration: none;
+}
+.maia-account-chip img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.maia-account-chip[hidden] { display: none !important; }

@@ -17,6 +17,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Inter:wght@400;500;600;700&family=Special+Elite&display=swap" />
   <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260623c" />
+  <link rel="stylesheet" href="/css/account.css?v=20260624a" />
+
+  <!-- Customer-identity layer (Google SSO via Supabase Auth) -->
+  <meta name="supabase-url" content="https://nxgndsnxugcevwriljlv.supabase.co" />
+  <meta name="supabase-anon-key" content="REPLACE_WITH_ANON_KEY_AT_DEPLOY" />
 
   <style>
     :root {
@@ -242,6 +247,17 @@
       <h1 class="wifi-h1">BIENVENIDO AL SANATORIO</h1>
       <p class="wifi-sub">Conéctate a nuestra red</p>
 
+      <!-- Google fast-path: if signed in, this whole block hides and the success card auto-renders. -->
+      <section id="wifi-google-block">
+        <button class="btn-submit" id="google-signin-btn" type="button" style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;background:var(--bone);color:#1a1a1a;">
+          <span style="display:inline-flex;background:#fff;padding:2px;border-radius:2px;">
+            <svg viewBox="0 0 18 18" width="18" height="18" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+          </span>
+          <span>Continuar con Google · acceso instantáneo</span>
+        </button>
+        <p style="text-align:center;font-size:0.7rem;color:rgba(245,245,240,.45);letter-spacing:.1em;margin:8px 0 18px;">— O REGÍSTRATE MANUALMENTE —</p>
+      </section>
+
       <form id="wifi-form" novalidate>
         <div class="field">
           <label for="name">Nombre</label>
@@ -292,6 +308,9 @@
     </div>
   </main>
 
+  <!-- Customer-identity layer -->
+  <script src="/js/account.js?v=20260624a" defer></script>
+
   <script>
     (function () {
       const form = document.getElementById('wifi-form');
@@ -300,6 +319,75 @@
       const btn = document.getElementById('submit-btn');
       const pwOut = document.getElementById('password-out');
       const copyBtn = document.getElementById('copy-btn');
+      const googleBlock = document.getElementById('wifi-google-block');
+      const googleBtn = document.getElementById('google-signin-btn');
+
+      // Google fast-path: if a Supabase session already exists, skip the form
+      // and call /api/wifi-grant directly.
+      function showSuccess(password, displayName) {
+        if (googleBlock) googleBlock.style.display = 'none';
+        form.style.display = 'none';
+        if (displayName) {
+          const greet = document.createElement('p');
+          greet.style.cssText = 'text-align:center;font-family:Fraunces,serif;color:var(--gold);margin:0 0 12px;font-size:.95rem;';
+          greet.textContent = '¡Hola, ' + displayName + '!';
+          successEl.insertBefore(greet, successEl.firstChild);
+        }
+        pwOut.textContent = password || '—';
+        successEl.classList.add('is-on');
+        if (password && navigator.clipboard) {
+          navigator.clipboard.writeText(password).catch(function () {});
+        }
+        setTimeout(function () { window.location.href = '/menu/bar/'; }, 8000);
+      }
+
+      function tryAutoGrant() {
+        // Pull the access_token from supabase-js localStorage and send Authorization header.
+        let token = null;
+        try {
+          const raw = localStorage.getItem('sb-nxgndsnxugcevwriljlv-auth-token');
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            token = parsed && parsed.access_token ? parsed.access_token : null;
+          }
+        } catch (e) {}
+        if (!token) return Promise.resolve(false);
+        return fetch('/api/wifi-grant', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+          credentials: 'include',
+        })
+          .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, body: j }; }); })
+          .then(function (resp) {
+            if (resp.status === 200 && resp.body.ok) {
+              showSuccess(resp.body.wifi_password, resp.body.display_name);
+              return true;
+            }
+            return false;
+          })
+          .catch(function () { return false; });
+      }
+
+      // On Supabase init: if there's a session, auto-grant. Otherwise show both paths.
+      window.addEventListener('maia:ready', function (ev) {
+        if (ev.detail && ev.detail.has_session) {
+          tryAutoGrant();
+        }
+      });
+
+      if (googleBtn) {
+        googleBtn.addEventListener('click', function () {
+          if (!window.MaiaAccount) return;
+          // Stamp a session-storage flag so the callback page sends user back to /wifi/.
+          try { sessionStorage.setItem('maia_post_signin_return', '/wifi/'); } catch (e) {}
+          window.MaiaAccount.signInWithGoogle({
+            habeas_data_consent: true,
+            terms_consent: true,
+          }).catch(function (e) {
+            console.warn('Google signin failed', e);
+          });
+        });
+      }
 
       function fail(msg) {
         errEl.textContent = msg;
