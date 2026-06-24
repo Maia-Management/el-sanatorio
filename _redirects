@@ -43,6 +43,7 @@
 /api/sanatorio-fake-pay                https://maia-management.com/.netlify/functions/sanatorio-fake-pay  200
 /api/sanatorio-dice-roll               https://maia-management.com/.netlify/functions/sanatorio-dice-roll  200
 /api/sanatorio-dice-claim              https://maia-management.com/.netlify/functions/sanatorio-dice-claim  200
+/api/sanatorio-call-waiter             https://maia-management.com/.netlify/functions/sanatorio-call-waiter  200
 /api/sanatorio-dashboard-feed          https://maia-management.com/.netlify/functions/sanatorio-dashboard-feed  200
 /api/sanatorio-wompi-checkout          https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout  200
 /api/sanatorio-wompi-webhook           https://maia-management.com/.netlify/functions/sanatorio-wompi-webhook  200

@@ -33,6 +33,7 @@
 
 <link rel="stylesheet" href="/css/qr-menu.css?v=2026-06-21" />
 <script src="/consent-banner.js?v=20260623" defer></script>
+<script src="/js/sanatorio-buzzer.js?v=20260624" defer></script>
 
 <script type="application/ld+json">
 {
@@ -126,6 +127,11 @@
     <p class="qr-hero__tagline">Tres jeringas de la casa. Ocho prescripciones. Consumir según indicaciones.</p>
   </div>
 </section>
+
+<!-- Llamar al mesero/a buzzer — added 2026-06-24 PM (zone-dice-waiter spec) -->
+<div style="display:flex;justify-content:center;padding:12px 16px 0;">
+  <button data-sanatorio-buzzer data-buzzer-channel="bar">🛎 Llamar al mesero/a</button>
+</div>
 
 <nav class="qr-actions" aria-label="Acciones rápidas">
   <a class="qr-action qr-action--primary"

@@ -38,6 +38,7 @@
 
 <!-- Consent (inherits parent) -->
 <script src="/consent-banner.js?v=20260623" defer></script>
+<script src="/js/sanatorio-buzzer.js?v=20260624" defer></script>
 
 <!-- JSON-LD: Restaurant Menu (only Chuzo Tokyo section) -->
 <script type="application/ld+json">
@@ -134,6 +135,11 @@
     <p class="qr-hero__tagline">Empacado en papel kraft para caminar la Calle 19. Sin mesa requerida.</p>
   </div>
 </section>
+
+<!-- Llamar al mesero/a buzzer — added 2026-06-24 PM (zone-dice-waiter spec) -->
+<div style="display:flex;justify-content:center;padding:12px 16px 0;">
+  <button data-sanatorio-buzzer data-buzzer-channel="chuzo">🛎 Llamar al mesero/a</button>
+</div>
 
 <!-- Quick actions -->
 <nav class="qr-actions" aria-label="Acciones rápidas">
