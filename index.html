@@ -36,7 +36,7 @@
 
   <!-- Brand tokens + cinematic v2 styles -->
   <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260623c" />
-  <link rel="stylesheet" href="/css/cinematic-v2.css?v=20260623d" />
+  <link rel="stylesheet" href="/css/cinematic-v2.css?v=20260623e" />
 
   <!-- Schema.org graph -->
   <script type="application/ld+json">
@@ -142,18 +142,22 @@
 <header class="atrium" id="top">
   <div class="atrium__beam" aria-hidden="true"></div>
 
-  <div class="atrium__projector" aria-hidden="true">
-    <div class="silvio-projection" data-silvio>
-      <!-- DROP-IN SLOT: when NEW CLIP #1 (Dr. Silvio solo, ~10s loop) renders,
-           upload to /video/silvio-hero.{webm,mp4} (no audio) and the placeholder
-           below auto-hides via .is-loaded. -->
-      <video autoplay loop muted playsinline preload="auto" poster="/images/silvio-hero-poster.jpg">
-        <source src="/video/silvio-hero.webm" type="video/webm" />
-        <source src="/video/silvio-hero.mp4" type="video/mp4" />
-      </video>
-      <div class="silvio-placeholder" role="img" aria-label="Dr. Silvio, en silencio, le observa"></div>
+  <div class="atrium__projector" aria-hidden="false">
+    <div class="silvio-projection is-loaded" data-silvio>
+      <!-- Hero image: the venue facade. When Dr. Silvio video renders later,
+           upload to /video/silvio-hero.{webm,mp4} and swap the <img> below.
+           Until then this is the customer's first visual — it must read
+           as "a real bar exists here". -->
+      <picture class="atrium__hero-picture">
+        <source media="(min-width: 980px)" srcset="/images/sanatorio-fachada.webp" type="image/webp">
+        <source srcset="/images/sanatorio-bar-interior.webp" type="image/webp">
+        <img src="/images/sanatorio-fachada.webp"
+             alt="El Sanatorio — fachada del antiguo Hospital del T&oacute;rax, Centro Hist&oacute;rico Santa Marta"
+             width="1600" height="900" fetchpriority="high" decoding="async">
+      </picture>
     </div>
   </div>
+
 
   <div class="atrium__content">
     <p class="atrium__eyebrow"><span>Centro Histórico · Santa Marta</span></p>
