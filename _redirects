@@ -47,6 +47,13 @@
 # Fix landed 2026-06-24 PM.
 /vert/restaurant/sanatorio/shared/*  https://maia-management.com/vert/restaurant/sanatorio/shared/:splat  200
 
+# The proxied PWAs (pay/dice/pos/etc) make absolute fetch() calls to
+# /.netlify/functions/sanatorio-* — proxy those to maia-management too,
+# otherwise /pay returns "Failed to execute 'json' on 'Response': Unexpected
+# end of JSON input" because the function path 404s on el-sanatorio.com.
+# Fix landed 2026-06-24 PM.
+/.netlify/functions/sanatorio-*  https://maia-management.com/.netlify/functions/sanatorio-:splat  200
+
 # ============================================================================
 # QR menu clean URLs (2026-06-21) — match the spec at /menu/chuzo, /menu/bar,
 # /menu/tickets without trailing slash. The /menu/ index keeps serving the
