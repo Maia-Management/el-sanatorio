@@ -1603,13 +1603,30 @@ input, textarea, select { font: inherit; color: inherit; }
  * On mobile (<768px), hide the video element entirely and use the poster
  * image as a background-image so the hero still renders the cinematic
  * facade but without the codec overhead. Video continues to play on desktop.
+ * Background-position moved to "center 78%" so the EL SANATORIO sign in the
+ * photo doesn't collide with the EL SANATORIO title text overlaid on top.
+ * Added darker scrim via box-shadow inset so title remains legible.
  */
 @media (max-width: 767px) {
   .silvio-projection video { display: none; }
   .silvio-projection {
     background-image: url('/images/silvio-hero-poster.jpg');
     background-size: cover;
-    background-position: center 38%;
-    filter: brightness(0.62) contrast(1.06) saturate(0.95);
+    background-position: center 82%;
+    background-repeat: no-repeat;
+    filter: brightness(0.45) contrast(1.08) saturate(0.85);
   }
+  /* Scrim — radial darkening centered on title area so red Fraunces text reads */
+  .silvio-projection::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 35%, rgba(10,8,6,0.85) 0%, rgba(10,8,6,0.55) 35%, transparent 65%),
+      linear-gradient(180deg, rgba(10,8,6,0.6) 0%, transparent 25%, transparent 60%, rgba(10,8,6,0.8) 100%);
+    z-index: 1;
+  }
+  /* Lift hero text above the scrim */
+  .atrium__content { position: relative; z-index: 2; }
 }

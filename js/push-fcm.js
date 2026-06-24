@@ -1,4 +1,4 @@
-/* push-fcm.js — El Sanatorio web push subscriber
+﻿/* push-fcm.js — El Sanatorio web push subscriber
  *
  * PIVOTED 2026-06-23 PM from Firebase SDK to raw Web Push Protocol +
  * Service Worker. This implementation doesn't need Firebase SDK at all —
@@ -34,6 +34,11 @@
   } catch {}
 
   function consentGiven() {
+    // Pass-6 fix: also bail if the consent banner is still rendered + visible
+    // in DOM (means user hasn't interacted yet). Stops push prompt from firing
+    // ON TOP of the consent banner on first visit.
+    const banner = document.querySelector('.maia-consent, #consent-banner, .consent-banner');
+    if (banner && banner.offsetParent !== null) return false;
     if (typeof window.MaiaConsent === 'undefined') {
       return /maia_consent=(accepted|partial)/.test(document.cookie);
     }
