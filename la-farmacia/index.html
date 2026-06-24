@@ -666,6 +666,13 @@
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
     }
+    /* Pass-4 PM 2026-06-23 mobile fixes */
+    @media (max-width: 540px) {
+      .menu-nav__cta .cta-label { display: inline !important; }
+      .menu-nav__cta { padding: 12px 22px; min-height: 44px; }
+      .menu-jumps a { padding: 11px 16px !important; min-height: 44px; font-size: 0.78rem; }
+    }
+
   </style>
 <link rel="stylesheet" href="/css/hortensia-chat.css?v=20260623b" />
 
