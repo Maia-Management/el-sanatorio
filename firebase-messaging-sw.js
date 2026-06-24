@@ -1,60 +1,33 @@
-/* Firebase Cloud Messaging service worker — handles background push for El Sanatorio.
- * Must live at the site root so Chrome registers it with scope "/".
- * Reads Firebase config from /firebase-config.json (fetched once at install).
- *
- * Background message → shows themed notification with rust-orange brand color.
- * Click → opens the link from data.url (or homepage).
+/* Service worker for web push — El Sanatorio
+ * PIVOTED 2026-06-23 PM: doesn't use Firebase SDK anymore.
+ * Standard Web Push Protocol — listens for push events + shows notifications.
  */
 
-importScripts('https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.13.0/firebase-messaging-compat.js');
+self.addEventListener('install', (e) => { self.skipWaiting(); });
+self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
 
-const CONFIG_URL = '/firebase-config.json';
-
-// Fetched + cached at install
-let firebaseInited = false;
-
-async function initFromConfig() {
-  if (firebaseInited) return;
+self.addEventListener('push', (event) => {
+  let payload = {};
   try {
-    const res = await fetch(CONFIG_URL, { cache: 'no-store' });
-    if (!res.ok) throw new Error(`config fetch ${res.status}`);
-    const cfg = await res.json();
-    firebase.initializeApp(cfg.firebase);
-    const messaging = firebase.messaging();
-    messaging.onBackgroundMessage((payload) => {
-      const n = payload.notification || {};
-      const d = payload.data || {};
-      const title = n.title || d.title || 'El Sanatorio';
-      const opts = {
-        body: n.body || d.body || '',
-        icon: n.icon || '/favicon.svg',
-        badge: '/favicon.svg',
-        image: n.image || d.image,
-        tag: d.tag || 'sanatorio',
-        data: { url: d.url || n.click_action || '/', ...d },
-        actions: d.actions ? JSON.parse(d.actions) : undefined,
-        requireInteraction: d.requireInteraction === 'true',
-        vibrate: [200, 100, 200],
-      };
-      return self.registration.showNotification(title, opts);
-    });
-    firebaseInited = true;
-  } catch (e) {
-    // Silently fail — the page can still work without push.
-    console.warn('[sw] Firebase init failed:', e?.message || e);
+    payload = event.data ? event.data.json() : {};
+  } catch {
+    payload = { title: 'El Sanatorio', body: event.data?.text() || '' };
   }
-}
-
-// Initialize on install + activate so background messages can be received.
-self.addEventListener('install', (e) => {
-  e.waitUntil(initFromConfig().then(() => self.skipWaiting()));
+  const title = payload.title || 'El Sanatorio';
+  const opts = {
+    body: payload.body || '',
+    icon: payload.icon || '/favicon.svg',
+    badge: payload.badge || '/favicon.svg',
+    image: payload.image,
+    tag: payload.tag || 'sanatorio',
+    data: { url: payload.data?.url || payload.url || '/', ...(payload.data || {}) },
+    requireInteraction: payload.requireInteraction === true,
+    vibrate: payload.vibrate || [200, 100, 200],
+    actions: payload.actions,
+  };
+  event.waitUntil(self.registration.showNotification(title, opts));
 });
-self.addEventListener('activate', (e) => {
-  e.waitUntil(initFromConfig().then(() => self.clients.claim()));
-});
 
-// Click → navigate to data.url, focus existing tab if open.
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   const url = event.notification.data?.url || '/';

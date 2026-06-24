@@ -1,16 +1,21 @@
-/* push-fcm.js — El Sanatorio web push (Firebase Cloud Messaging)
+/* push-fcm.js — El Sanatorio web push subscriber
+ *
+ * PIVOTED 2026-06-23 PM from Firebase SDK to raw Web Push Protocol +
+ * Service Worker. This implementation doesn't need Firebase SDK at all —
+ * service-worker pushManager.subscribe + VAPID public key is sufficient.
  *
  * Flow:
- *   1. Page loads → check if consent banner has been accepted (Maia consent)
- *      AND the browser supports Notification API AND service workers
- *   2. After 25 sec on page OR after 50% scroll, surface a themed Hortensia
- *      prompt asking permission. Decline → store 7-day dismissal cookie.
- *   3. Accept → register /firebase-messaging-sw.js → get FCM token → POST to
- *      /api/push-subscribe with token + locale + page context + UTM (if any).
- *   4. Server stores the token in Supabase (el_sanatorio_push_subscribers).
+ *   1. Page loads → consent banner check
+ *   2. After 25s on page or 50% scroll → show Hortensia-themed prompt
+ *   3. Accept → register /firebase-messaging-sw.js → permission prompt →
+ *      pushManager.subscribe({ applicationServerKey: VAPID_PUB }) →
+ *      get subscription object (endpoint + p256dh + auth keys)
+ *   4. Soft phone capture
+ *   5. POST { endpoint, p256dh, auth, phone, name, locale, page, utm, ua, tz }
+ *      to /api/push-subscribe → stored in Supabase
  *
- * Loaded on every page after consent-banner.js. No-ops if consent not given,
- * permission denied, or Firebase config not present.
+ * The variable + file names retain "fcm" prefix for git history clarity,
+ * but the implementation no longer touches FCM — it's standard Web Push.
  */
 
 (() => {
@@ -22,31 +27,56 @@
   const NOW = Date.now();
   const DAY = 86400_000;
 
-  // Bail if already subscribed, or recently dismissed
   try {
     if (localStorage.getItem(SUB_KEY) === '1') return;
     const dismissed = parseInt(localStorage.getItem(DISMISS_KEY) || '0', 10);
     if (dismissed && dismissed > NOW) return;
   } catch {}
 
-  // Wait until consent banner has been accepted (or skipped); the global
-  // window.MaiaConsent is exposed by /consent-banner.js
   function consentGiven() {
-    if (typeof window.MaiaConsent === 'undefined') return false;
+    if (typeof window.MaiaConsent === 'undefined') {
+      return /maia_consent=(accepted|partial)/.test(document.cookie);
+    }
     if (typeof window.MaiaConsent.hasConsent === 'function') {
       return window.MaiaConsent.hasConsent('analytics') || window.MaiaConsent.hasConsent('marketing');
     }
-    // Fallback: cookie set by banner
-    return /maia_consent=(accepted|partial)/.test(document.cookie);
+    return true;
   }
 
-  // ──────────────────────────────────────────────────────────────────────
-  // Prompt UI — themed Hortensia voice; same rust-orange palette as bubble
-  // ──────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────
+  // VAPID + endpoint helpers
+  // ────────────────────────────────────────────────────────────────────
+  async function loadConfig() {
+    const res = await fetch('/firebase-config.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('config fetch failed');
+    const cfg = await res.json();
+    if (!cfg?.vapidKey || cfg.vapidKey === 'REPLACE_ME') throw new Error('VAPID key not provisioned');
+    return cfg;
+  }
+
+  function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) outputArray[i] = rawData.charCodeAt(i);
+    return outputArray;
+  }
+
+  function arrayBufferToBase64Url(buffer) {
+    const bytes = new Uint8Array(buffer);
+    let str = '';
+    for (const b of bytes) str += String.fromCharCode(b);
+    return btoa(str).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  }
+
+  // ────────────────────────────────────────────────────────────────────
+  // Prompt UI
+  // ────────────────────────────────────────────────────────────────────
   const isEnglish = (document.documentElement.lang || '').toLowerCase().startsWith('en');
   const STRINGS = isEnglish ? {
-    title: 'Want me to call you?',
-    body: 'Hortensia will ping your phone for the launch night, last-minute Friday cancellations, and the practice-nights invite. No spam — just the moments that matter.',
+    title: 'Want me to ping you?',
+    body: 'Hortensia will message your phone about launch night, last-minute Friday cancellations, and the practice-nights invite. No spam — just the moments that matter.',
     accept: 'Yes, ping me',
     decline: 'Not now'
   } : {
@@ -120,26 +150,13 @@
     });
   }
 
-  // ──────────────────────────────────────────────────────────────────────
-  // Subscribe flow
-  // ──────────────────────────────────────────────────────────────────────
-  async function loadConfig() {
-    const res = await fetch('/firebase-config.json', { cache: 'no-store' });
-    if (!res.ok) throw new Error('config fetch failed');
-    const cfg = await res.json();
-    if (!cfg?.firebase?.apiKey || cfg.firebase.apiKey === 'REPLACE_ME') {
-      throw new Error('Firebase config not provisioned');
-    }
-    return cfg;
-  }
-
+  // ────────────────────────────────────────────────────────────────────
+  // Subscribe — raw Web Push Protocol via pushManager
+  // ────────────────────────────────────────────────────────────────────
   async function subscribe() {
     let cfg;
     try { cfg = await loadConfig(); }
-    catch (e) {
-      console.warn('[push] config unavailable:', e.message);
-      return;
-    }
+    catch (e) { console.warn('[push] config unavailable:', e.message); return; }
 
     if (Notification.permission === 'denied') return;
     if (Notification.permission !== 'granted') {
@@ -150,26 +167,34 @@
       }
     }
 
-    // Register SW
     const reg = await navigator.serviceWorker.register('/firebase-messaging-sw.js', { scope: '/' });
     await navigator.serviceWorker.ready;
 
-    // Dynamic import the modular SDK on the page side
-    const [{ initializeApp }, { getMessaging, getToken }] = await Promise.all([
-      import('https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js'),
-      import('https://www.gstatic.com/firebasejs/10.13.0/firebase-messaging.js'),
-    ]);
-    const app = initializeApp(cfg.firebase);
-    const messaging = getMessaging(app);
-    const token = await getToken(messaging, { vapidKey: cfg.vapidKey, serviceWorkerRegistration: reg });
-    if (!token) return;
+    // Get or create the push subscription
+    let subscription = await reg.pushManager.getSubscription();
+    if (!subscription) {
+      subscription = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(cfg.vapidKey),
+      });
+    }
 
-    // Optional soft phone capture (improves Vert opt-out + WA cross-channel)
+    // Extract keys for server-side encryption
+    const subJson = subscription.toJSON();
+    const endpoint = subJson.endpoint;
+    const p256dh = subJson.keys?.p256dh;
+    const auth = subJson.keys?.auth;
+    if (!endpoint || !p256dh || !auth) {
+      console.warn('[push] subscription missing endpoint/keys');
+      return;
+    }
+
     const contactInfo = await askPhoneOptional();
 
-    // Persist + POST
     const payload = {
-      token,
+      endpoint,
+      p256dh,
+      auth,
       locale: isEnglish ? 'en' : 'es-CO',
       page: location.pathname,
       utm: readUtm(),
@@ -187,7 +212,6 @@
       });
       if (r.ok) {
         try { localStorage.setItem(SUB_KEY, '1'); } catch {}
-        // Fire conversion event if analytics bus is loaded
         try { window.maiaTrack?.('push_subscribed', { locale: payload.locale }); } catch {}
       }
     } catch (e) {
@@ -209,42 +233,9 @@
     return Object.keys(out).length ? out : null;
   }
 
-  // ──────────────────────────────────────────────────────────────────────
-  // Trigger — fire prompt on 25s OR 50% scroll, whichever first
-  // ──────────────────────────────────────────────────────────────────────
-  let triggered = false;
-  function trigger() {
-    if (triggered) return;
-    if (!consentGiven()) return;
-    triggered = true;
-    showPrompt();
-  }
-
-  // Time-based
-  setTimeout(() => trigger(), 25_000);
-  // Scroll-based
-  let lastScroll = 0;
-  function onScroll() {
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    if (h <= 0) return;
-    const pct = window.scrollY / h;
-    if (pct > 0.5) trigger();
-    lastScroll = NOW;
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  // If consent isn't given yet, poll for it (banner is deferred)
-  if (!consentGiven()) {
-    const poll = setInterval(() => {
-      if (consentGiven()) clearInterval(poll);
-    }, 2000);
-    setTimeout(() => clearInterval(poll), 120_000);
-  }
-
-  // ──────────────────────────────────────────────────────────────────────
-  // Optional soft phone capture — appears after the user accepted push.
-  // Pure UI-side; resolves with { phone, name } or { phone: '', name: '' }.
-  // ──────────────────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────
+  // Optional phone capture — appears after the user accepted push.
+  // ────────────────────────────────────────────────────────────────────
   function askPhoneOptional() {
     return new Promise((resolve) => {
       const ENG = isEnglish ? {
@@ -276,7 +267,6 @@
           <button class="hp-push__btn hp-push__btn--primary" type="button" data-save>${ENG.save}</button>
         </div>
       `;
-      // Add small extra styles for the field inputs
       if (!document.getElementById('hp-push-extra')) {
         const ex = document.createElement('style');
         ex.id = 'hp-push-extra';
@@ -303,8 +293,32 @@
         const name = root.querySelector('input[name=name]').value.trim();
         finish({ phone, name });
       });
-      // Auto-skip after 25 sec of no interaction
       setTimeout(() => finish({ phone: '', name: '' }), 25_000);
     });
+  }
+
+  // ────────────────────────────────────────────────────────────────────
+  // Trigger
+  // ────────────────────────────────────────────────────────────────────
+  let triggered = false;
+  function trigger() {
+    if (triggered) return;
+    if (!consentGiven()) return;
+    triggered = true;
+    showPrompt();
+  }
+  setTimeout(() => trigger(), 25_000);
+  let lastScroll = 0;
+  function onScroll() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    if (h <= 0) return;
+    const pct = window.scrollY / h;
+    if (pct > 0.5) trigger();
+    lastScroll = NOW;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  if (!consentGiven()) {
+    const poll = setInterval(() => { if (consentGiven()) clearInterval(poll); }, 2000);
+    setTimeout(() => clearInterval(poll), 120_000);
   }
 })();

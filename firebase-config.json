@@ -1,5 +1,5 @@
 {
-  "_comment": "El Sanatorio Web — Firebase Cloud Messaging config. Wired 2026-06-23 PM. Project myapplication-98481185 owned by maia-management.com org. VAPID key generated this session. Spark plan (free) — FCM web push runs on free tier.",
+  "_comment": "El Sanatorio Web — push config. PIVOTED 2026-06-23 PM from Firebase v1 HTTP API (blocked by org policy on service account keys) to pure Web Push Protocol with VAPID. The vapidKey below is the fresh keypair public — server-side has the matching private key as VAPID_PRIVATE_KEY env var. Firebase config block retained for future Firestore/Auth use but not required for push.",
   "firebase": {
     "apiKey": "AIzaSyDAGC8eSBFzYIAQWysbUdT38kHv7qx20Kw",
     "authDomain": "myapplication-98481185.firebaseapp.com",
@@ -8,5 +8,5 @@
     "messagingSenderId": "1020851538616",
     "appId": "1:1020851538616:web:afafc99dfcfb315ed3424d"
   },
-  "vapidKey": "BFUQ2MKsyBGnaNHaREkITI2P1NnlqrRG6H30rwK_vc9LqpGYi_tSKbMu8VuiyFoKixhrJ6H8hnE6J_NDtiYH43s"
+  "vapidKey": "BE58rk2vbyWwSBlRzUPgFHz2gmPBaLovf4hUpt64BHz8nL_l89oih7KRX0dbcIUJc55NbBw-74tHrUNx7DCxmwk"
 }
