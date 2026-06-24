@@ -1641,3 +1641,101 @@ input, textarea, select { font: inherit; color: inherit; }
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
+
+
+/* ─────────────────────────────────────────────────────────────────────────
+ * 2026-06-24 PM — P0 FIX styles for Hortensia WhatsApp handoff (Luz bug).
+ * Mirrors the same rules that live in css/hortensia-chat.css. Duplicated
+ * here because the homepage (index.html) loads cinematic-v2.css instead of
+ * the standalone hortensia file. Andrew's rule: ALL ROADS END IN WHATSAPP.
+ * ─────────────────────────────────────────────────────────────────────── */
+
+.hortensia__escape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #25d366;
+  color: #0a3a1c;
+  font-family: var(--font-typewriter);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  transition: background 180ms var(--ease-cinema);
+}
+.hortensia__escape:hover,
+.hortensia__escape:focus-visible {
+  background: #1ebe5b;
+  color: #0a2812;
+  outline: none;
+}
+.hortensia__escape svg { flex-shrink: 0; }
+
+.hortensia__handoff {
+  align-self: stretch;
+  margin-top: 4px;
+  padding: 14px 14px 12px;
+  background: linear-gradient(180deg, rgba(37, 211, 102, 0.16), rgba(37, 211, 102, 0.08));
+  border: 1px solid rgba(37, 211, 102, 0.5);
+  border-radius: 10px;
+  color: var(--ek-paper);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: hortensiaHandoffIn 280ms var(--ease-cinema);
+}
+.hortensia__handoff-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  line-height: 1.25;
+  color: #d6f5e3;
+}
+.hortensia__handoff-body {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(214, 245, 227, 0.86);
+}
+.hortensia__handoff-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 10px 14px;
+  background: #25d366;
+  color: #0a3a1c;
+  font-family: var(--font-typewriter);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 180ms var(--ease-cinema), transform 180ms var(--ease-cinema);
+}
+.hortensia__handoff-cta:hover,
+.hortensia__handoff-cta:focus-visible {
+  background: #1ebe5b;
+  color: #061a0c;
+  transform: translateY(-1px);
+  outline: none;
+}
+@keyframes hortensiaHandoffIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+  .hortensia__escape {
+    padding: 9px 12px;
+    font-size: 10.5px;
+    letter-spacing: 0.15em;
+  }
+  .hortensia__handoff { padding: 12px; }
+  .hortensia__handoff-title { font-size: 14px; }
+  .hortensia__handoff-body { font-size: 12.5px; }
+}
