@@ -392,6 +392,26 @@
   window.SANATORIO_PIXEL_ID = window.SANATORIO_PIXEL_ID || "";
   if (window.SANATORIO_PIXEL_ID) { fbq('init', window.SANATORIO_PIXEL_ID); fbq('track', 'PageView'); }
   </script>
+<!-- GA4 (consent-gated by maia-track + consent-banner) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JZGDBW5K7Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JZGDBW5K7Q');
+  </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "El Sanatorio Booking Calendar",
+  "description": "Public booking calendar for El Sanatorio reservations and practice nights.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "isPartOf": {"@type": "WebSite", "name": "El Sanatorio", "url": "https://el-sanatorio.com/"},
+  "publisher": {"@type": "Organization", "name": "El Sanatorio S.A.S."}
+}
+</script>
 </head>
 <body>
 <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
@@ -461,6 +481,7 @@
         <button class="modal-close" type="button" id="modal-close" aria-label="Cerrar">x</button>
       </div>
       <form class="booking-form" id="booking-form">
+  <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;" aria-hidden="true"><label>Sitio web <input type="text" name="website" autocomplete="off" tabindex="-1"></label></div>
         <label>Nombre
           <input id="guest-name" required autocomplete="name">
         </label>
@@ -701,5 +722,8 @@
 <script defer src="/js/push-fcm.js?v=20260623"></script>
 <script defer src="/js/maia-utm.js?v=20260623"></script>
 <script defer src="/js/maia-track.js?v=20260623"></script>
+
+<!-- privacy link for ad-policy compliance -->
+<div style="text-align:center;padding:8px;"><a href="/privacidad" class="footer-legal-link" style="opacity:0.6;font-size:0.7rem;">Política de Privacidad</a></div>
 </body>
 </html>

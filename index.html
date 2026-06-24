@@ -96,6 +96,14 @@
   window.SANATORIO_PIXEL_ID = window.SANATORIO_PIXEL_ID || "";
   if (window.SANATORIO_PIXEL_ID) { fbq('init', window.SANATORIO_PIXEL_ID); fbq('track', 'PageView'); }
   </script>
+<!-- GA4 (consent-gated by maia-track + consent-banner) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JZGDBW5K7Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JZGDBW5K7Q');
+  </script>
 </head>
 <body>
 <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
@@ -294,6 +302,7 @@
         </article>
 
         <form class="fpc fade-in-up" data-fpc-form aria-label="Calculadora Programa Cuidadores 2 por 1">
+  <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;" aria-hidden="true"><label>Sitio web <input type="text" name="website" autocomplete="off" tabindex="-1"></label></div>
           <h3 class="fpc__title">¿Califican para el 2 por 1 de Cuidadores?</h3>
           <div class="fpc__field">
             <label for="fpc-cat">Categoría de cuidador</label>
@@ -322,6 +331,7 @@
       <p class="section__lede fade-in-up">Escriba su nombre. La recepcionista revisa el expediente y le dice qué paciente es. Llévese su ficha al WhatsApp — el día que vengan, la mesera la verá colgada en la pared de expedientes.</p>
 
       <form class="fichapaciente__form fade-in-up" data-ficha-form>
+  <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;" aria-hidden="true"><label>Sitio web <input type="text" name="website" autocomplete="off" tabindex="-1"></label></div>
         <input type="text" placeholder="Su nombre completo" data-ficha-input maxlength="60" required aria-label="Su nombre" />
         <button type="submit">Asignar paciente</button>
       </form>

@@ -61,6 +61,37 @@
   window.SANATORIO_PIXEL_ID = window.SANATORIO_PIXEL_ID || "";
   if (window.SANATORIO_PIXEL_ID) { fbq('init', window.SANATORIO_PIXEL_ID); fbq('track', 'PageView'); }
   </script>
+<!-- GA4 (consent-gated by maia-track + consent-banner) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JZGDBW5K7Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JZGDBW5K7Q');
+  </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarOrPub",
+  "name": "La Farmacia at El Sanatorio",
+  "description": "Immersive bar in Santa Marta — yakitori, macabre cocktails, the Paciente 013 Horror House inside a 1957 hospital.",
+  "telephone": "+19034598763",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle 19 #4-23",
+    "addressLocality": "Santa Marta",
+    "addressRegion": "Magdalena",
+    "postalCode": "470004",
+    "addressCountry": "CO"
+  },
+  "url": "https://el-sanatorio.com/en/la-farmacia/",
+  "image": "https://el-sanatorio.com/images/og-image.jpg",
+  "priceRange": "$$",
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday","Friday","Saturday","Sunday"], "opens": "17:00", "closes": "01:00"}
+  ]
+}
+</script>
 </head>
 <body>
 <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Skip to main content</a>
@@ -120,5 +151,8 @@
 <script defer src="/js/push-fcm.js?v=20260623"></script>
 <script defer src="/js/maia-utm.js?v=20260623"></script>
 <script defer src="/js/maia-track.js?v=20260623"></script>
+
+<!-- privacy link for ad-policy compliance -->
+<div style="text-align:center;padding:8px;"><a href="/privacy" class="footer-legal-link" style="opacity:0.6;font-size:0.7rem;">Privacy Policy</a></div>
 </body>
 </html>

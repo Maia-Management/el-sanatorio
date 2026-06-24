@@ -1897,6 +1897,14 @@
   window.SANATORIO_PIXEL_ID = window.SANATORIO_PIXEL_ID || "";
   if (window.SANATORIO_PIXEL_ID) { fbq('init', window.SANATORIO_PIXEL_ID); fbq('track', 'PageView'); }
   </script>
+<!-- GA4 (consent-gated by maia-track + consent-banner) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JZGDBW5K7Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JZGDBW5K7Q');
+  </script>
 </head>
 
 <body>
