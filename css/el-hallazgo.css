@@ -1060,3 +1060,42 @@ button { cursor: pointer; font: inherit; color: inherit; background: transparent
     transition: none !important;
   }
 }
+
+
+/* Pass-6 PM 2026-06-24 — graceful degradation for missing archive documents
+ * The Hallazgo page references 11+ period-correct hospital documents
+ * (admisiones, diarios, actas) that haven't been generated yet. Until
+ * they are, the slots degrade to a sepia "expediente en archivo" card —
+ * fits the lore (archive incomplete = mystery preserved) and prevents
+ * broken-image icons. */
+.img-missing {
+  position: relative;
+  min-height: 240px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(200, 132, 58, 0.12) 0%, transparent 60%),
+    linear-gradient(135deg, #1a1208 0%, #2a1f15 60%, #15100a 100%);
+  border: 1px solid rgba(200, 132, 58, 0.2);
+  overflow: hidden;
+}
+.img-missing::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed rgba(200, 132, 58, 0.35);
+  pointer-events: none;
+}
+.img-missing::after {
+  content: 'EXPEDIENTE EN ARCHIVO';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(200, 132, 58, 0.7);
+  font-family: 'Special Elite', 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 18px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
