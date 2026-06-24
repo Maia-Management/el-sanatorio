@@ -3,8 +3,10 @@
  * ---------------------------------------------------------------------------
  * Loaded by /menu/chuzo, /menu/bar, /experience.
  * Adds: hero video safe-autoplay, WhatsApp pre-fill, sound toggle, language
- * toggle, cart accumulator, scan tracker (cookieless beacon, opt-in only).
- * No external deps. <8KB minified.
+ * toggle, cart accumulator, scan tracker (cookieless beacon, opt-in only),
+ * and (2026-06-24 P0 launch) the "Pagar en Línea" → Wompi flow that POSTs
+ * the cart to maia-management.com and redirects to /pay/<order_id>.
+ * No external deps. <10KB minified.
  * =========================================================================== */
 (function () {
   "use strict";
@@ -74,10 +76,21 @@
   // ── Cart accumulator (in-memory only — no storage APIs) ────────────
   var cart = [];
   function cartTotal() { return cart.reduce(function (s, it) { return s + (it.price || 0) * (it.qty || 1); }, 0); }
+  function cartCount() { return cart.reduce(function (s, c) { return s + c.qty; }, 0); }
   function cartHumanList() {
     return cart.map(function (it) {
       return it.qty + "x " + it.name + " (COP " + (it.price ? it.price.toLocaleString("es-CO") : "—") + ")";
     }).join(", ");
+  }
+  function cartToOrderItems() {
+    return cart.map(function (it) { return { sku: it.id, qty: it.qty }; });
+  }
+  function addToCart(item) {
+    var existing = cart.filter(function (c) { return c.id === item.id; })[0];
+    if (existing) existing.qty += 1;
+    else cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
+    updateOrderBar();
+    showToast("Agregado: " + item.name + " · " + cartCount() + " ítems");
   }
 
   // ── Toast ──────────────────────────────────────────────────────────
@@ -94,16 +107,13 @@
     showToast._t = setTimeout(function () { toast.classList.remove("shown"); }, 2400);
   }
 
-  // ── Per-item Order button → adds to cart, builds WA link ───────────
+  // ── Per-item Order buttons → adds to cart, builds WA link from cart ─
   function bootOrderButtons() {
+    // Legacy multi-add button (kept for any tile that still uses data-order)
     document.querySelectorAll("[data-order]").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.preventDefault();
-        var item = JSON.parse(btn.getAttribute("data-order"));
-        var existing = cart.filter(function (c) { return c.id === item.id; })[0];
-        if (existing) existing.qty += 1; else cart.push({ id: item.id, name: item.name, price: item.price, qty: 1 });
-        showToast("Agregado: " + item.name + " · " + cart.reduce(function (s, c) { return s + c.qty; }, 0) + " ítems");
-        updateOrderBar();
+        addToCart(JSON.parse(btn.getAttribute("data-order")));
       });
     });
   }
@@ -114,11 +124,13 @@
     if (!bar) return;
     if (cart.length === 0) { bar.hidden = true; return; }
     bar.hidden = false;
-    bar.querySelector("[data-cart-count]").textContent = cart.reduce(function (s, c) { return s + c.qty; }, 0);
-    bar.querySelector("[data-cart-total]").textContent = "COP " + cartTotal().toLocaleString("es-CO");
+    var cnt = bar.querySelector("[data-cart-count]");
+    var tot = bar.querySelector("[data-cart-total]");
+    if (cnt) cnt.textContent = cartCount();
+    if (tot) tot.textContent = "COP " + cartTotal().toLocaleString("es-CO");
   }
 
-  // ── Send-to-WhatsApp from cart ──────────────────────────────────────
+  // ── Send-to-WhatsApp from cart (escape hatch — big groups, takeout, special asks) ─
   function sendOrderToWhatsApp() {
     if (cart.length === 0) return;
     var tmpl = document.body.getAttribute("data-wa-order-template") ||
@@ -129,19 +141,81 @@
     window.open(url, "_blank", "noopener");
   }
 
+  // ── PAGAR EN LÍNEA — P0 2026-06-24 ──────────────────────────────────
+  // POSTs the cart to maia-management.com (proxied through Netlify), then
+  // redirects to /pay/<order_id> where Wompi takes over.
+  async function payOnline() {
+    if (cart.length === 0) return;
+    var btn = document.querySelector("[data-pay-online]");
+    if (!btn) return;
+    var oldLabel = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="qr-spinner" aria-hidden="true"></span> Procesando…';
+
+    // Channel = data-channel on <body> (bar | chuzo | menu) or derived from slug.
+    var channel = (document.body.getAttribute("data-channel") ||
+                   document.body.getAttribute("data-qr-slug") ||
+                   "menu").toLowerCase();
+    // Optional ?t=N on the URL (table number from the QR sticker).
+    var tableNumber = null;
+    try {
+      var t = new URLSearchParams(location.search).get("t");
+      if (t && /^\d+$/.test(t)) {
+        var n = parseInt(t, 10);
+        if (n >= 1 && n <= 12) tableNumber = n;
+      }
+    } catch (_) { /* noop */ }
+
+    // FCM token (optional Hortensia push receipt opt-in). Only present
+    // if push-fcm.js has cached one onto window.MAIA_FCM_TOKEN.
+    var fcmToken = (window.MAIA_FCM_TOKEN || "").toString() || null;
+
+    var payload = {
+      channel: channel,
+      table_number: tableNumber,
+      customer_phone: null,
+      fcm_token: fcmToken,
+      items: cartToOrderItems(),
+      notes: null,
+    };
+
+    try {
+      var r = await fetch("/api/sanatorio-create-order-v2", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      var d = await r.json();
+      if (!r.ok || !d.order_id) {
+        throw new Error(d.error || ("http_" + r.status));
+      }
+      // Redirect to the pay page → user picks Wompi/cash/dice.
+      // /pay/<order_id> is proxied (see _redirects) to the maia-management
+      // /vert/restaurant/sanatorio/pay/ page.
+      location.href = "/pay/" + d.order_id;
+    } catch (err) {
+      btn.disabled = false;
+      btn.innerHTML = oldLabel;
+      console.warn("[qr-menu] pay online failed:", err);
+      showToast("No pudimos procesar — usá WhatsApp ↘");
+      // Highlight the WhatsApp button so the customer has an obvious next step.
+      var wa = document.querySelector("[data-send-order]");
+      if (wa) wa.classList.add("qr-wa-emphasize");
+    }
+  }
+
   // ── Single-item Quick Order ("Pedir 1" inline) ─────────────────────
+  // P0 2026-06-24 change: NOW ADDS TO CART instead of opening WhatsApp.
+  // The customer can keep tapping items to build a cart; the floating
+  // bar at the bottom carries them to WhatsApp OR to Wompi self-serve.
   function bootQuickOrder() {
     document.querySelectorAll("[data-quick-order]").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.preventDefault();
-        var item = JSON.parse(btn.getAttribute("data-quick-order"));
-        var tmpl = document.body.getAttribute("data-wa-order-template") ||
-                   "Hola Doctor, quiero pedir: {ORDER} — Total: COP {TOTAL}. ¿Confirmo y pago por Wompi?";
-        var humanLine = "1x " + item.name + " (COP " + (item.price ? item.price.toLocaleString("es-CO") : "—") + ")";
-        var msg = tmpl.replace("{ORDER}", humanLine).replace("{TOTAL}", (item.price || 0).toLocaleString("es-CO"));
-        var wa = document.body.getAttribute("data-wa-link") || "https://wa.me/19034598763";
-        var url = wa + (wa.indexOf("?") >= 0 ? "&" : "?") + "text=" + encodeURIComponent(msg);
-        window.open(url, "_blank", "noopener");
+        var item;
+        try { item = JSON.parse(btn.getAttribute("data-quick-order")); }
+        catch (_) { return; }
+        addToCart(item);
       });
     });
   }
@@ -172,9 +246,12 @@
     bootQuickOrder();
     updateOrderBar();
     trackScan();
-    // Expose for the floating order bar button
+    // Cart bar: WhatsApp escape hatch
     var sendBtn = document.querySelector("[data-send-order]");
     if (sendBtn) sendBtn.addEventListener("click", function (e) { e.preventDefault(); sendOrderToWhatsApp(); });
+    // Cart bar: Pagar en Línea (NEW)
+    var payBtn = document.querySelector("[data-pay-online]");
+    if (payBtn) payBtn.addEventListener("click", function (e) { e.preventDefault(); payOnline(); });
     // Service worker for offline PWA (best-effort)
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/menu/sw.js").catch(function () { /* silent */ });

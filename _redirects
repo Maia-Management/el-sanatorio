@@ -29,10 +29,12 @@
 
 # Sanatorio POS API endpoints (used by the PWAs above)
 /api/sanatorio-create-order            https://maia-management.com/.netlify/functions/sanatorio-create-order  200
+/api/sanatorio-create-order-v2         https://maia-management.com/.netlify/functions/sanatorio-create-order-v2  200
 /api/sanatorio-print-ticket            https://maia-management.com/.netlify/functions/sanatorio-print-ticket  200
 /api/sanatorio-order-status            https://maia-management.com/.netlify/functions/sanatorio-order-status  200
 /api/sanatorio-update-order-status     https://maia-management.com/.netlify/functions/sanatorio-update-order-status  200
 /api/sanatorio-mark-paid-cash          https://maia-management.com/.netlify/functions/sanatorio-mark-paid-cash  200
+/api/sanatorio-fake-pay                https://maia-management.com/.netlify/functions/sanatorio-fake-pay  200
 /api/sanatorio-dice-roll               https://maia-management.com/.netlify/functions/sanatorio-dice-roll  200
 /api/sanatorio-dice-claim              https://maia-management.com/.netlify/functions/sanatorio-dice-claim  200
 /api/sanatorio-dashboard-feed          https://maia-management.com/.netlify/functions/sanatorio-dashboard-feed  200
