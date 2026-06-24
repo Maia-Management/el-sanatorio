@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+# Paid-social landing pages — direct URL only, not indexed
+Disallow: /lp/
 
 Sitemap: https://el-sanatorio.com/sitemap.xml
