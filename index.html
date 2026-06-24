@@ -142,19 +142,15 @@
 <header class="atrium" id="top">
   <div class="atrium__beam" aria-hidden="true"></div>
 
-  <div class="atrium__projector" aria-hidden="false">
+  <div class="atrium__projector" aria-hidden="true">
     <div class="silvio-projection is-loaded" data-silvio>
-      <!-- Hero image: the venue facade. When Dr. Silvio video renders later,
-           upload to /video/silvio-hero.{webm,mp4} and swap the <img> below.
-           Until then this is the customer's first visual — it must read
-           as "a real bar exists here". -->
-      <picture class="atrium__hero-picture">
-        <source media="(min-width: 980px)" srcset="/images/sanatorio-fachada.webp" type="image/webp">
-        <source srcset="/images/sanatorio-bar-interior.webp" type="image/webp">
-        <img src="/images/sanatorio-fachada.webp"
-             alt="El Sanatorio — fachada del antiguo Hospital del T&oacute;rax, Centro Hist&oacute;rico Santa Marta"
-             width="1600" height="900" fetchpriority="high" decoding="async">
-      </picture>
+      <!-- Dr. Silvio welcome loop, with cinematic facade photo as poster fallback -->
+      <video autoplay loop muted playsinline preload="auto"
+             poster="/images/silvio-hero-poster.jpg"
+             aria-label="Dr. Silvio les da la bienvenida al Sanatorio"
+             style="width:100%;height:100%;object-fit:cover;object-position:center 38%;filter:brightness(0.62) contrast(1.06) saturate(0.95);">
+        <source src="/video/silvio-hero.mp4" type="video/mp4" />
+      </video>
     </div>
   </div>
 
