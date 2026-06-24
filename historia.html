@@ -688,6 +688,36 @@
         .timeline {
             position: relative;
             padding-left: 48px;
+            display: block;
+            column-count: 1;
+        }
+
+        .timeline-item {
+            display: block;
+            break-inside: avoid;
+        }
+
+        .timeline-layout {
+            display: grid;
+            grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
+            gap: 80px;
+            align-items: start;
+        }
+
+        .timeline-sticky {
+            position: sticky;
+            top: 120px;
+            min-width: 0;
+        }
+
+        @media (max-width: 880px) {
+            .timeline-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .timeline-sticky {
+                position: static;
+            }
         }
 
         .timeline::before {
@@ -1326,8 +1356,8 @@
         <!-- ─── TIMELINE ─────────────────────────────────────────────────── -->
         <section class="timeline-section" aria-labelledby="timeline-heading">
             <div class="container">
-                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start;">
-                    <div style="position: sticky; top: 120px;">
+                <div class="timeline-layout">
+                    <div class="timeline-sticky">
                         <span class="section-label">Cronología</span>
                         <h2 class="section-heading" id="timeline-heading">
                             Cómo llegamos<br>
