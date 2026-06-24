@@ -435,6 +435,38 @@
         outline-offset: 2px;
       }
     }
+    /* Pass-4 PM 2026-06-23 mobile-jumps strip replaces hidden nav on small viewports */
+    .ct-mobile-jumps { display: none; }
+    @media (max-width: 860px) {
+      .ct-mobile-jumps {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 8px 14px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(0,0,0,0.85);
+        backdrop-filter: blur(8px);
+      }
+      .ct-mobile-jumps a {
+        flex: 0 0 auto;
+        min-height: 44px;
+        padding: 10px 14px;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ct-ash-cream);
+        border: 1px solid var(--ct-border);
+        border-radius: 999px;
+        text-decoration: none;
+        scroll-snap-align: start;
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+
 
 
   </style>
@@ -449,6 +481,7 @@
   </script>
 </head>
 <body>
+<nav class="ct-mobile-jumps" aria-label="Saltar a secci&oacute;n"><a href="#carta">Carta</a><a href="#dados">Dados</a><a href="#donde">D&oacute;nde</a><a href="https://wa.me/19034598763?text=Hola%20Hortensia%2C%20quiero%20reservar%20Chuzo%20Tokyo">WhatsApp</a></nav>
 <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
 
 <!-- Parent venue link bar -->
