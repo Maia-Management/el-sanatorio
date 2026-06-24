@@ -1,4 +1,4 @@
-/* hortensia-chat.css — extracted from cinematic-v2.css 2026-06-23
+﻿/* hortensia-chat.css â€” extracted from cinematic-v2.css 2026-06-23
  * Pass-4 audit: chat widget was JS-only on non-home pages because the
  * CSS lived in cinematic-v2 which only the homepage loaded. This file
  * contains the minimal Hortensia rules (plus the custom properties they
@@ -228,3 +228,103 @@
   text-decoration: underline;
   text-decoration-color: rgba(37, 211, 102, 0.4);
 }
+
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+ * MOBILE SAFE-ZONE for Hortensia bubble Ã¢â‚¬â€ 2026-06-23 PM emulator audit fix
+ *
+ * Discovered during live Android emulator drive (Pixel-sized viewport):
+ * the floating Hortensia bubble (`.hortensia` at position:fixed bottom-right)
+ * was obscuring the last word of EVERY body paragraph, every form CTA, and
+ * the Ley 1581 consent label on /lp/cuidadores Ã¢â‚¬â€ a legal compliance issue.
+ *
+ * Fix: reserve 96px at bottom of body on small viewports, and shrink the
+ * bubble itself to 52px so the safe-zone is smaller. Forms get an extra
+ * margin so the CONFIRMAR CTA sits above the bubble's keep-out box.
+ * Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Move to bottom-LEFT on mobile — verified via emulator drive 2026-06-23 PM
+   * that bottom-right collides with end-of-paragraph text, form CTA buttons,
+   * and the Ley 1581 consent label. Left side reading-flow only covers the
+   * FIRST word area, and centered CTAs read clearly past the bubble. */
+  .hortensia {
+    bottom: 14px;
+    left: 14px;
+    right: auto;
+  }
+  .hortensia__bubble {
+    width: 52px;
+    height: 52px;
+  }
+  .hortensia__bubble svg {
+    width: 22px;
+    height: 22px;
+  }
+  .hortensia__bubble::after {
+    width: 10px;
+    height: 10px;
+    top: 4px;
+    right: 4px;
+  }
+
+  /* Specific forms / CTA bands that need extra breathing room above the bubble */
+  .lp-form-card,
+  .audicion-form,
+  .hallazgo-form,
+  [data-bubble-clear],
+  main > section:last-of-type,
+  footer.menu-footer {
+    margin-bottom: 16px;
+  }
+
+  /* Open panel from bottom-left, full mobile width minus padding */
+  .hortensia__panel {
+    bottom: 64px;
+    left: 0;
+    right: auto;
+    max-height: calc(100vh - 96px);
+    width: min(360px, calc(100vw - 28px));
+  }
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+ * Consent banner mobile compact Ã¢â‚¬â€ Pass-4 PM 2026-06-23
+ * On 380px viewport the banner was taking ~40% of the visible viewport
+ * on first load, obscuring the hero ENTRE Ã¢â€ â€™ CTA AND the Hortensia button.
+ * Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
+@media (max-width: 768px) {
+  .maia-consent,
+  .maia-consent__panel,
+  .consent-banner,
+  #consent-banner {
+    padding: 12px 16px !important;
+    max-height: 38vh;
+    overflow-y: auto;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+  .maia-consent h2,
+  .maia-consent h3,
+  .consent-banner h2 {
+    font-size: 14px !important;
+    margin: 0 0 4px !important;
+  }
+  .maia-consent p,
+  .consent-banner p {
+    font-size: 11.5px !important;
+    margin: 0 0 8px !important;
+  }
+  .maia-consent button,
+  .consent-banner button {
+    min-height: 40px;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+  }
+}
+
