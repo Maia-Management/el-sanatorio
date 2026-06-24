@@ -2,19 +2,18 @@ import { detectPhone, lookupCustomerContext, recordInteraction, syncToCustomerAc
 
 /* ===========================================================================
    Netlify Function — hortensia-chat-en
-   2026-06-23
-   English-language receptionist chat for El Sanatorio. Mirrors the Spanish
-   hortensia-chat.mjs function but with English voice + system prompt.
-
-   Strategy:
-   - Same Hortensia persona (Andrew lock 2026-06-22), English voice
-   - If GEMINI_API_KEY is set: forward to Gemini with English system prompt
-   - If Gemini key missing or call fails: return a hand-crafted English fallback
-     so the widget never blocks
-
-   Env vars (set on Netlify):
-   - GEMINI_API_KEY        ← high-entropy → is_secret:true
+   2026-06-24 PM — P0 FIX (Luz's bug, EN twin):
+     1. Repaired the vert-sync hook which referenced undefined `body`/`req`
+        (silenced by try/catch — meant ZERO interactions/customer_activity
+        rows were ever written for EN turns). Wired to actual variables.
+     2. Server returns `wa_handoff` whenever a phone number is detected or
+        an escalation pattern is matched.
+     3. Phone-only user replies now route to the `phone_captured` bucket
+        instead of falling into the "default" loop.
    =========================================================================== */
+
+const WA_NUMBER = '19034598763';
+const WA_BASE = `https://wa.me/${WA_NUMBER}`;
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -32,7 +31,7 @@ function json(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: corsHeaders });
 }
 
-const NAMES = ['Hortensia']; // Andrew lock 2026-06-22.
+const NAMES = ['Hortensia'];
 
 const FALLBACK_REPLIES = {
   greeting: [
@@ -73,6 +72,12 @@ const FALLBACK_REPLIES = {
     "All right love, I'll write it down. Note: deposit is 50% and is refundable if cancelled with 48 hours notice.",
     "Perfect. Should I send the link here or confirm on WhatsApp at +1 903 459 8763 — whichever is easier for you?"
   ],
+  phone_captured: [
+    "All right love, your number is saved. Let me transfer you to WhatsApp with Luz to lock in the table — don't want anything to get lost in this chat.",
+    "Perfect dear, phone noted. To make sure nothing slips through, continue on WhatsApp — the full context goes with you and a human confirms the reservation.",
+    "All noted love — phone saved. Switch over to WhatsApp now so a real person finishes the booking with you.",
+    "Almost there dear, number is in. Hop over to WhatsApp so Luz or Andrew wraps up the table with you."
+  ],
   default: [
     "Tell me more dear — is it for a reservation, a menu question, or a special occasion?",
     "Sorry, I didn't follow — reservation, birthday, or something else?",
@@ -94,7 +99,6 @@ function newSessionId() {
   });
 }
 
-// Escalation patterns (English-aware)
 const ESCALATION_PATTERNS = [
   { rx: /\b(15|2[05]|30|50|100)\+?\s*(people|guests|persons)/i, reason: 'large_group' },
   { rx: /\b(press|journalist|interview|reporter|media|tv|television)/i, reason: 'press' },
@@ -107,6 +111,9 @@ function detectEscalation(text) {
   return null;
 }
 
+// Local phone regex (mirror of vert-sync detectPhone for early-decision use).
+const PHONE_RX = /(\+?\d[\d\s().\-]{7,15}\d)/;
+
 const STAGE_KEYWORDS = {
   greeting: /^(hi|hello|hey|good|evening|morning|afternoon)/i,
   party_size: /\b(how many|number|people|guests|pax|us|me and|for \d)/i,
@@ -115,8 +122,10 @@ const STAGE_KEYWORDS = {
 };
 
 function detectStage(history, userText) {
+  // 2026-06-24 PM FIX: phone detection FIRST so phone-only replies don't
+  // fall through to "default" and loop.
+  if (PHONE_RX.test(userText)) return 'phone_captured';
   const totalUser = (history || []).filter(m => m.who === 'user').length;
-  // If first user message
   if (totalUser <= 1) {
     if (STAGE_KEYWORDS.party_size.test(userText)) return 'party_size';
     return 'greeting';
@@ -125,6 +134,36 @@ function detectStage(history, userText) {
     if (rx.test(userText)) return stage;
   }
   return 'default';
+}
+
+// === Server-side WhatsApp handoff message builder ===
+function buildWAMessage({ reason, collected, history, userText, botName }) {
+  const lines = [];
+  const reasonLines = {
+    phone_capture: 'Hi, I came from the El Sanatorio chat. I left my phone — I prefer to continue here.',
+    escalate_large_group: "Hi, I came from the El Sanatorio chat. We're a large group and I need to talk to a human.",
+    escalate_press: 'Hi, I came from the El Sanatorio chat. I am press.',
+    escalate_complaint: 'Hi, I came from the El Sanatorio chat. I have a complaint to resolve.',
+    escalate_b2b: 'Hi, I came from the El Sanatorio chat. This is a B2B / vendor topic.',
+    escalate_accessibility: 'Hi, I came from the El Sanatorio chat. I need to coordinate accessibility.',
+  };
+  lines.push(reasonLines[reason] || reasonLines.phone_capture);
+  if (collected?.name) lines.push(`My name: ${collected.name}`);
+  if (collected?.phone) lines.push(`My phone: ${collected.phone}`);
+  if (collected?.partySize) lines.push(`Party size: ${collected.partySize}`);
+  if (collected?.dateText) lines.push(`Date: ${collected.dateText}`);
+  if (collected?.intent) lines.push(`Topic: ${collected.intent}`);
+  const tail = (history || []).slice(-3);
+  if (tail.length || userText) {
+    lines.push('—');
+    lines.push('Here is what we were talking about with the chat:');
+    tail.forEach((m) => {
+      const who = m.who === 'user' ? 'Me' : (botName || 'Hortensia');
+      lines.push(`${who}: ${String(m.text || '').slice(0, 160)}`);
+    });
+    if (userText) lines.push(`Me: ${userText.slice(0, 160)}`);
+  }
+  return lines.join('\n');
 }
 
 // === Gemini call (REST) ===
@@ -137,7 +176,6 @@ async function callGemini({ apiKey, systemPrompt, history, userText }) {
       parts: [{ text: systemPrompt + '\n\nUser: ' + userText }]
     }
   ];
-  // Add a few past turns for context
   for (const h of (history || []).slice(-6)) {
     contents.push({
       role: h.who === 'user' ? 'user' : 'model',
@@ -177,36 +215,12 @@ Key facts:
 
 Tone rules:
 - Be warm, brief, slightly theatrical. Mention patient names as background color.
+- If the user gives you a phone number: thank them, say it's noted, and tell them a human will take over via WhatsApp — the system shows them the link.
 - For complex requests (large groups 15+, press, complaints, B2B, accessibility), say you'll transfer them to WhatsApp.
 - Always speak English in this conversation.
 - Maximum 2-3 sentences per response.`;
 
 export default async (req) => {
-
-
-  // [vert-sync hook] — Hortensia context injection
-  let vertContextLine = '';
-  try {
-    const isEn = true;
-    const lastUserMsg = Array.isArray(body?.messages)
-      ? [...body.messages].reverse().find((m) => m.role === 'user')?.content || ''
-      : (body?.message || body?.text || '');
-    const phone = detectPhone(String(lastUserMsg)) || body?.phone || null;
-    if (phone) {
-      const ctx = await lookupCustomerContext(phone);
-      vertContextLine = contextLineFor(ctx, isEn ? 'en' : 'es');
-      // mark inbound
-      await syncToCustomerActivity({ phone, name: ctx?.knownName, language: isEn ? 'en' : 'es', isInbound: true, tags: ['channel:hortensia'] });
-    }
-    await recordInteraction({
-      kind: 'chat_turn',
-      source: 'web',
-      phone,
-      sessionId: body?.session_id || body?.sessionId || null,
-      page: req.headers.get('referer') || null,
-      payload: { last_user_message: String(lastUserMsg).slice(0, 500), locale: isEn ? 'en' : 'es' },
-    });
-  } catch { /* never block the chat reply on sync */ }
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders });
   if (req.method !== 'POST') return json({ error: 'POST only' }, 405);
 
@@ -217,17 +231,75 @@ export default async (req) => {
   const history = Array.isArray(body?.history) ? body.history.slice(-10) : [];
   const sessionId = body?.session_id || newSessionId();
   const botName = body?.bot_name || pick(NAMES);
+  const collected = (body && typeof body.collected === 'object' && body.collected) ? body.collected : {};
 
   const escalation = detectEscalation(userText);
+
+  // [vert-sync hook] — Hortensia context injection
+  // 2026-06-24 PM FIX: previously this block referenced undefined `body`
+  // (declared AFTER it) and `req.headers.get` without optional chaining.
+  // Now safely placed after parse with proper guards.
+  let vertContextLine = '';
+  let detectedPhone = null;
+  try {
+    detectedPhone = detectPhone(userText) || collected?.phone || null;
+    if (detectedPhone) {
+      const ctx = await lookupCustomerContext(detectedPhone);
+      vertContextLine = contextLineFor(ctx, 'en');
+      await syncToCustomerActivity({
+        phone: detectedPhone,
+        name: collected?.name || ctx?.knownName,
+        language: 'en',
+        isInbound: true,
+        tags: ['channel:hortensia'],
+      });
+    }
+    await recordInteraction({
+      kind: 'chat_turn',
+      source: 'web',
+      phone: detectedPhone,
+      sessionId,
+      page: req.headers?.get?.('referer') || null,
+      payload: { last_user_message: userText.slice(0, 500), locale: 'en', collected },
+    });
+  } catch { /* never block the chat reply on sync */ }
 
   const apiKey = env('GEMINI_API_KEY');
   let reply = null;
   if (apiKey) {
-    reply = await callGemini({ apiKey, systemPrompt: SYSTEM_PROMPT_EN, history, userText });
+    reply = await callGemini({
+      apiKey,
+      systemPrompt: SYSTEM_PROMPT_EN + (vertContextLine ? '\n\n' + vertContextLine : ''),
+      history,
+      userText,
+    });
   }
   if (!reply) {
     const stage = detectStage(history, userText);
     reply = pick(FALLBACK_REPLIES[stage] || FALLBACK_REPLIES.default);
+    if (escalation) {
+      reply = "Oh dear, this needs to go straight to Luz or Andrew — I'm passing you to WhatsApp now.";
+    }
+  } else if (escalation) {
+    reply += "\n\nLet me pass you straight to WhatsApp at +1 903 459 8763 so Luz can take over.";
+  }
+
+  // Server-side WhatsApp handoff payload
+  let wa_handoff = null;
+  if (detectedPhone || escalation) {
+    const reason = escalation ? `escalate_${escalation}` : 'phone_capture';
+    const message = buildWAMessage({
+      reason,
+      collected: { ...collected, phone: collected.phone || detectedPhone },
+      history,
+      userText,
+      botName,
+    });
+    wa_handoff = {
+      url: `${WA_BASE}?text=${encodeURIComponent(message)}`,
+      reason,
+      message,
+    };
   }
 
   return json({
@@ -237,5 +309,6 @@ export default async (req) => {
     escalate: !!escalation,
     escalation_reason: escalation || null,
     locale: 'en',
+    wa_handoff,
   });
 };

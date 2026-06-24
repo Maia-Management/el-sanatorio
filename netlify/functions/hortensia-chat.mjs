@@ -2,21 +2,27 @@ import { detectPhone, lookupCustomerContext, recordInteraction, syncToCustomerAc
 
 /* ===========================================================================
    Netlify Function — hortensia-chat
-   2026-06-21
-   Receives a chat turn from the web widget. Calls Gemini with the canonical
-   Hortensia receptionist system prompt + variation library (mirrors the
-   WhatsApp bot per MAIA-BOT-RECEPTIONIST-PERSONA-2026-06-21.md). Detects
-   escalation triggers and returns `escalate: true` so the widget surfaces
-   a WhatsApp handoff.
+   2026-06-24 PM — P0 FIX (Luz's bug):
+     1. Repaired the vert-sync hook which referenced undefined `body`/`req`
+        (silenced by try/catch but it meant ZERO Hortensia turns were ever
+        written to customer_activity / interactions tables).
+     2. Server now returns `wa_handoff: true` and a `wa_message` (full
+        conversation summary) whenever a phone number is detected in the
+        latest user turn or in client-collected fields. The widget surfaces
+        that as a handoff card → wa.me link → Andrew/Luz.
+     3. Escalation patterns also force the handoff payload.
 
-   Env vars (set on Netlify — DO NOT mark as is_secret unless high-entropy):
-   - GEMINI_API_KEY        ← high-entropy → is_secret:true
-   - SUPABASE_URL          ← URL → is_secret:false (per netlify-secret-scanner-trap)
-   - SUPABASE_SERVICE_ROLE ← high-entropy → is_secret:true (optional; used only if variations table queried)
+   Env vars (set on Netlify):
+     - GEMINI_API_KEY        ← high-entropy → is_secret:true
+     - SUPABASE_URL          ← URL → is_secret:false
+     - SUPABASE_SERVICE_ROLE_KEY ← high-entropy → is_secret:true
 
    Graceful fallback: if GEMINI_API_KEY is missing, return a hand-crafted
    Caribbean-warm reply so the widget never breaks UX.
    =========================================================================== */
+
+const WA_NUMBER = '19034598763';
+const WA_BASE = `https://wa.me/${WA_NUMBER}`;
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -76,6 +82,16 @@ const FALLBACK_REPLIES = {
     "Listo mi vida, voy a apuntarlo. Le aviso: el depósito es 50% y se devuelve si cancela con 48 horas de antelación.",
     "Perfecto. ¿Le mando el link por aquí mismo o le confirmo por WhatsApp al +1 903 459 8763 — usted dirá cuál le queda más a la mano?"
   ],
+  // 2026-06-24 PM new bucket — fired specifically when the user's reply
+  // contains a phone number (the literal Luz bug). The bot acknowledges and
+  // tells the user a human will pick up on WhatsApp — and the widget surfaces
+  // the rich handoff card alongside this reply.
+  phone_captured: [
+    "Listo cariño, ya quedó anotado. Te paso al WhatsApp con doña Luz para confirmarte la mesa de una — no quiero que se pierda nada por aquí.",
+    "Perfecto mi amor, número anotado. Para no marearte con el chat, sigue por WhatsApp — te llega el contexto completo y te confirman la reserva.",
+    "Anotado todo querido, ya casi. Mejor sigue por WhatsApp así un humano de carne y hueso te termina la reserva — el link te lleva con todo el detalle.",
+    "Listo mi vida, número guardado. Ahora pásate al WhatsApp así doña Luz o Andrew te terminan de cuadrar la mesa.",
+  ],
   default: [
     "Cuéntame mejor mi amor, ¿es para reservar, para preguntar por el menú, o por una ocasión especial?",
     "Disculpa, no te seguí — ¿es reservación, cumpleaños, o algo más?",
@@ -88,24 +104,10 @@ const FALLBACK_REPLIES = {
   ]
 };
 
-// Receptionist personas — distinct from patient personas (no name overlap with Don Hilario / Don Bellasrio / Micaela / Don Aldo / Doña Eulalia).
-const NAMES = ['Hortensia']; // Andrew lock 2026-06-22: Hortensia is the only canonical persona for El Sanatorio + Chuzo Tokyo + La Farmacia chat. Pool collapsed.
+// Receptionist personas — distinct from patient personas.
+const NAMES = ['Hortensia']; // Andrew lock 2026-06-22: Hortensia only.
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-/**
- * Pick a least-used variation for a given stage from Supabase if env is set,
- * otherwise fall back to a uniform random pick. Never throws — if Supabase is
- * unreachable, slow, or returns nothing, we silently degrade to local random.
- *
- * Expected schema (best-effort):
- *   el_sanatorio_bot_variations(id, stage text, variant text, used_count int)
- *
- * Behavior:
- *  - Reads up to 24 least-used variants for the stage (asc by used_count).
- *  - If any rows returned, picks one of the bottom 3 at random (avoids hot-spotting
- *    a single least-used row when concurrent requests race).
- *  - Best-effort PATCH bumps used_count for the picked variant. Failure is silent.
- */
 async function pickVariationWeighted(stage, localFallback) {
   const url = env('SUPABASE_URL');
   const key = env('SUPABASE_SERVICE_ROLE') || env('SUPABASE_SERVICE_ROLE_KEY');
@@ -141,8 +143,8 @@ async function pickVariationWeighted(stage, localFallback) {
     clearTimeout(timer);
   }
 }
+
 function newSessionId() {
-  // simple uuidv4-ish (Math.random — fine for session correlation, NOT cryptography)
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     const r = Math.random() * 16 | 0;
     return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
@@ -162,13 +164,45 @@ function detectEscalation(text) {
   return null;
 }
 
+// === Phone detection (mirror of lib/vert-sync.mjs detectPhone, kept local
+//     so we can pre-decide handoff before importing) ===
+const PHONE_RX = /(\+?\d[\d\s().\-]{7,15}\d)/;
+
+// === Server-side WhatsApp handoff message builder ===
+function buildWAMessage({ reason, collected, history, userText, botName }) {
+  const lines = [];
+  const reasonLines = {
+    phone_capture: 'Hola, vengo del chat de El Sanatorio. Le dejé mi celular, prefiero que sigamos por aquí.',
+    escalate_large_group: 'Hola, vengo del chat de El Sanatorio. Somos un grupo grande y necesito hablar con un humano.',
+    escalate_press: 'Hola, vengo del chat de El Sanatorio. Soy de prensa.',
+    escalate_complaint: 'Hola, vengo del chat de El Sanatorio. Tengo una queja para resolver.',
+    escalate_b2b: 'Hola, vengo del chat de El Sanatorio. Es un tema B2B / proveedor.',
+    escalate_accessibility: 'Hola, vengo del chat de El Sanatorio. Necesito coordinar accesibilidad.',
+  };
+  lines.push(reasonLines[reason] || reasonLines.phone_capture);
+  if (collected?.name) lines.push(`Mi nombre: ${collected.name}`);
+  if (collected?.phone) lines.push(`Mi celular: ${collected.phone}`);
+  if (collected?.partySize) lines.push(`Somos ${collected.partySize} personas`);
+  if (collected?.dateText) lines.push(`Fecha: ${collected.dateText}`);
+  if (collected?.intent) lines.push(`Asunto: ${collected.intent}`);
+  const tail = (history || []).slice(-3);
+  if (tail.length || userText) {
+    lines.push('—');
+    lines.push('Esto es lo que veníamos hablando con el chat:');
+    tail.forEach((m) => {
+      const who = m.who === 'user' ? 'Yo' : (botName || 'Hortensia');
+      lines.push(`${who}: ${String(m.text || '').slice(0, 160)}`);
+    });
+    if (userText) lines.push(`Yo: ${userText.slice(0, 160)}`);
+  }
+  return lines.join('\n');
+}
+
 // === Gemini call (REST) ===
 async function callGemini({ apiKey, systemPrompt, history, userText }) {
-  // Gemini 1.5 Flash REST — gemini-1.5-flash works as a default; swap model as desired
   const model = 'gemini-1.5-flash-latest';
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
   const contents = [];
-  // System prompt prepended as a user "instruction" turn (Gemini convention varies; use first-turn pattern)
   contents.push({ role: 'user', parts: [{ text: systemPrompt }] });
   contents.push({ role: 'model', parts: [{ text: 'Entendido. Lista para atender.' }] });
   for (const m of (history || []).slice(-10)) {
@@ -204,10 +238,10 @@ async function callGemini({ apiKey, systemPrompt, history, userText }) {
   }
 }
 
-function buildSystemPrompt(botName) {
+function buildSystemPrompt(botName, vertContextLine) {
   return `Eres ${botName}, recepcionista del turno noche de El Sanatorio S.A.S. en Santa Marta, Colombia.
 
-CONTEXTO DEL VENUE:
+${vertContextLine ? vertContextLine + '\n\n' : ''}CONTEXTO DEL VENUE:
 - El Sanatorio es un restaurante-bar inmersivo en el edificio histórico del antiguo Hospital del Tórax — Calle 19 #4-23, Centro Histórico, Santa Marta.
 - Abrimos jueves a domingo, 6pm-medianoche. El gran lanzamiento es el jueves 30 de julio 2026.
 - Tu jefe es Dr. Silvio — médico negro sonriente con bata blanca y corbatín. Siempre ocupado con los pacientes.
@@ -227,6 +261,7 @@ REGLAS:
 - 1-3 oraciones por respuesta. NUNCA bloques largos.
 - Nunca te identifiques como bot, IA, o robot. Si alguien pregunta, deflectas en personaje: "ay no, yo solo recibo las llamadas, las máquinas las maneja el técnico de Dr. Silvio".
 - Si el usuario quiere reservar: pregunta (a) cuántas personas (b) qué noche (c) ocasión especial. Luego pídele un teléfono y dile que le enviarás link de pago Wompi del 50% por WhatsApp.
+- Si el usuario te da un número de teléfono: agradécele, dile que ya queda anotado, y dile que un humano lo va a contactar por WhatsApp para terminar la reserva — el sistema automático le presenta el link en pantalla.
 - Si el usuario menciona evento de 15+ personas, prensa, queja seria, accesibilidad especial, o B2B: dile cálidamente que pase con Luz o Andrew directamente al WhatsApp +1 903 459 8763.
 - NUNCA inventes precios distintos a $50k/$75k. NUNCA prometas algo que no esté en este prompt.
 - NUNCA digas "AI", "Claude", "bot", "automático", "sistema".
@@ -235,31 +270,6 @@ FORMATO DE SALIDA: solo el texto que dirías. Sin emojis (máximo 1: 🤍), sin 
 }
 
 export default async (request) => {
-
-
-  // [vert-sync hook] — Hortensia context injection
-  let vertContextLine = '';
-  try {
-    const isEn = false;
-    const lastUserMsg = Array.isArray(body?.messages)
-      ? [...body.messages].reverse().find((m) => m.role === 'user')?.content || ''
-      : (body?.message || body?.text || '');
-    const phone = detectPhone(String(lastUserMsg)) || body?.phone || null;
-    if (phone) {
-      const ctx = await lookupCustomerContext(phone);
-      vertContextLine = contextLineFor(ctx, isEn ? 'en' : 'es');
-      // mark inbound
-      await syncToCustomerActivity({ phone, name: ctx?.knownName, language: isEn ? 'en' : 'es', isInbound: true, tags: ['channel:hortensia'] });
-    }
-    await recordInteraction({
-      kind: 'chat_turn',
-      source: 'web',
-      phone,
-      sessionId: body?.session_id || body?.sessionId || null,
-      page: req.headers.get('referer') || null,
-      payload: { last_user_message: String(lastUserMsg).slice(0, 500), locale: isEn ? 'en' : 'es' },
-    });
-  } catch { /* never block the chat reply on sync */ }
   if (request.method === 'OPTIONS') {
     return new Response(null, { status: 204, headers: corsHeaders });
   }
@@ -280,17 +290,50 @@ export default async (request) => {
   const sessionId = payload?.session_id || newSessionId();
   const botName = payload?.bot_name || pick(NAMES);
   const history = Array.isArray(payload?.history) ? payload.history : [];
+  // Client-collected fields (name/phone/partySize/dateText/intent) — used to
+  // build a richer wa_handoff payload server-side.
+  const collected = (payload && typeof payload.collected === 'object' && payload.collected) ? payload.collected : {};
 
   const escalation = detectEscalation(userText);
-  const apiKey = env('GEMINI_API_KEY');
 
+  // [vert-sync hook] — Hortensia context injection
+  // 2026-06-24 PM FIX: previously this block referenced undefined `body` and
+  // `req` variables (silenced by try/catch but it meant ZERO rows were ever
+  // written to customer_activity / interactions). Now wired to `payload` and
+  // `request` properly so Vert OS sees every Hortensia turn.
+  let vertContextLine = '';
+  let detectedPhone = null;
+  try {
+    detectedPhone = detectPhone(userText) || collected?.phone || null;
+    if (detectedPhone) {
+      const ctx = await lookupCustomerContext(detectedPhone);
+      vertContextLine = contextLineFor(ctx, 'es');
+      await syncToCustomerActivity({
+        phone: detectedPhone,
+        name: collected?.name || ctx?.knownName,
+        language: 'es',
+        isInbound: true,
+        tags: ['channel:hortensia'],
+      });
+    }
+    await recordInteraction({
+      kind: 'chat_turn',
+      source: 'web',
+      phone: detectedPhone,
+      sessionId,
+      page: request.headers?.get?.('referer') || null,
+      payload: { last_user_message: userText.slice(0, 500), locale: 'es', collected },
+    });
+  } catch { /* never block the chat reply on sync */ }
+
+  const apiKey = env('GEMINI_API_KEY');
   let reply = null;
 
   if (apiKey) {
     try {
       reply = await callGemini({
         apiKey,
-        systemPrompt: buildSystemPrompt(botName),
+        systemPrompt: buildSystemPrompt(botName, vertContextLine),
         history,
         userText
       });
@@ -300,20 +343,35 @@ export default async (request) => {
   }
 
   if (!reply) {
-    // local heuristic fallback (no Gemini) — keeps UX warm
     const lower = userText.toLowerCase();
     let bucket = 'default';
-    if (/^(hola|alo|buenas|hi|hello|hey|qu[eé] tal)/i.test(lower) && history.length < 2) bucket = 'greeting';
+    // 2026-06-24 PM FIX: phone-detection bucket goes FIRST so a phone-only
+    // reply doesn't fall through to 'default' (Luz's bug).
+    if (PHONE_RX.test(userText)) bucket = 'phone_captured';
+    else if (/^(hola|alo|buenas|hi|hello|hey|qu[eé] tal)/i.test(lower) && history.length < 2) bucket = 'greeting';
     else if (/\b(cu[aá]ntos|cuanta|gente|personas|invitados|para\s+\d)/.test(lower)) bucket = 'party_size';
     else if (/\b(hora|noche|jueves|viernes|sabado|s[áa]bado|domingo|cuando|cu[aá]ndo)/.test(lower)) bucket = 'time';
     else if (/\b(pago|pagar|reserv|deposito|dep[óo]sito|confirmar|link)/.test(lower)) bucket = 'closing';
     reply = await pickVariationWeighted(bucket, FALLBACK_REPLIES[bucket]);
     if (escalation) {
-      reply = "Ay mi amor, esto necesita que hable directamente con doña Luz o con Andrew, yo no me meto en esas cosas. Mejor escríbeles al WhatsApp y allí te atienden de una.";
+      reply = "Ay mi amor, esto necesita que hable directamente con doña Luz o con Andrew, yo no me meto en esas cosas. Mejor te paso al WhatsApp y allí te atienden de una.";
     }
   } else if (escalation) {
-    // even if Gemini answered, force escalation flag so widget surfaces handoff
     reply += "\n\nMejor le paso el WhatsApp directo así doña Luz le contesta — +1 903 459 8763.";
+  }
+
+  // === Server-side WhatsApp handoff payload ===
+  // ALL ROADS END IN WHATSAPP: any time we detect a phone OR an escalation
+  // pattern, ship a wa_handoff to the client so the widget can surface a card.
+  let wa_handoff = null;
+  if (detectedPhone || escalation) {
+    const reason = escalation ? `escalate_${escalation}` : 'phone_capture';
+    const message = buildWAMessage({ reason, collected: { ...collected, phone: collected.phone || detectedPhone }, history, userText, botName });
+    wa_handoff = {
+      url: `${WA_BASE}?text=${encodeURIComponent(message)}`,
+      reason,
+      message,
+    };
   }
 
   return json({
@@ -321,7 +379,8 @@ export default async (request) => {
     bot_name: botName,
     reply,
     escalate: !!escalation,
-    escalate_reason: escalation
+    escalate_reason: escalation,
+    wa_handoff,
   });
 };
 
