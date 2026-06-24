@@ -103,20 +103,20 @@
             <label class="exp-pill is-active" data-pill="ticket">
               <input type="radio" name="experience_type" value="ticket" checked />
               <div class="exp-name">Ticket — El Laberinto</div>
-              <div class="exp-price">$45.000 COP / persona</div>
-              <div class="exp-desc">Acceso a la zona restringida. 1–8 personas.</div>
+              <div class="exp-price">$60.000 COP / persona</div>
+              <div class="exp-desc">Acceso a la zona restringida. 20% descuento auto para grupos de 4 o más ($48.000/persona).</div>
             </label>
             <label class="exp-pill" data-pill="birthday">
               <input type="radio" name="experience_type" value="birthday" />
-              <div class="exp-name">Cumpleaños VIP</div>
-              <div class="exp-price">$75.000 COP / persona · 3–5</div>
-              <div class="exp-desc">Grupo VIP en zona restringida + brindis.</div>
+              <div class="exp-name">Cumpleaños</div>
+              <div class="exp-price">Habla con nosotros</div>
+              <div class="exp-desc">Cotización personalizada por WhatsApp. Cuéntanos cuántas personas y qué tipo de servicio quieres.</div>
             </label>
             <label class="exp-pill" data-pill="private">
               <input type="radio" name="experience_type" value="private" />
               <div class="exp-name">Evento privado</div>
-              <div class="exp-price">$480.000 COP grupo · hasta 15</div>
-              <div class="exp-desc">Privatización del Laberinto.</div>
+              <div class="exp-price">Habla con nosotros</div>
+              <div class="exp-desc">Privatización + servicios a medida. Cotización por WhatsApp.</div>
             </label>
             <label class="exp-pill" data-pill="group">
               <input type="radio" name="experience_type" value="group" />
@@ -181,9 +181,9 @@
         </div>
 
         <div class="summary" id="price-summary" aria-live="polite">
-          <div class="row"><span>Total</span><span id="sum-total">$45.000 COP</span></div>
-          <div class="row"><span>Depósito (50%)</span><span id="sum-deposit">$22.000 COP</span></div>
-          <div class="row total"><span>Saldo en la entrada</span><span id="sum-balance">$23.000 COP</span></div>
+          <div class="row"><span>Total</span><span id="sum-total">$60.000 COP</span></div>
+          <div class="row"><span>Depósito (50%)</span><span id="sum-deposit">$30.000 COP</span></div>
+          <div class="row total"><span>Saldo en la entrada</span><span id="sum-balance">$30.000 COP</span></div>
         </div>
 
         <div class="form-consent" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; align-items: flex-start;">
@@ -254,13 +254,25 @@
 (function () {
   'use strict';
 
-  // ─── Pricing table (mirrors lib/sanatorio/bookings-pricing.mjs) ──────────
+  // ─── Pricing table (CANONICAL per Andrew 2026-06-24 PM) ──────────
+  // $60k base per person. 20% off auto-applied when party >= 4 ($48k/person).
+  // Birthday / private / large groups → WhatsApp handoff (no online price).
+  // 50% off for nurses/police/locals = SOCIAL-MEDIA-ONLY, never shown here.
+  const TICKET_BASE = 60000;
+  const GROUP_DISCOUNT_THRESHOLD = 4;
+  const GROUP_DISCOUNT_RATE = 0.20;
   const PRICES = {
-    ticket:   { perPerson: 45000,  flat: 0,      maxParty: 8,  zone: 'paciente_013', tier: 'standard' },
-    birthday: { perPerson: 75000,  flat: 0,      maxParty: 5,  zone: 'paciente_013', tier: 'vip' },
-    private:  { perPerson: 0,      flat: 480000, maxParty: 15, zone: 'paciente_013', tier: 'private' },
-    group:    { perPerson: 0,      flat: 0,      maxParty: 12, zone: 'cocktail_bar', tier: 'walkin_hold' },
+    ticket:   { perPerson: TICKET_BASE, flat: 0, maxParty: 8,  zone: 'paciente_013', tier: 'standard' },
+    birthday: { perPerson: 0,           flat: 0, maxParty: 15, zone: 'paciente_013', tier: 'whatsapp' },
+    private:  { perPerson: 0,           flat: 0, maxParty: 40, zone: 'paciente_013', tier: 'whatsapp' },
+    group:    { perPerson: 0,           flat: 0, maxParty: 12, zone: 'cocktail_bar', tier: 'walkin_hold' },
   };
+  function perPersonFor(expType, party) {
+    if (expType !== 'ticket') return PRICES[expType].perPerson;
+    return party >= GROUP_DISCOUNT_THRESHOLD
+      ? Math.round(TICKET_BASE * (1 - GROUP_DISCOUNT_RATE))
+      : TICKET_BASE;
+  }
 
   // ─── URL params (source tracking) ───────────────────────────────────────
   const qp = new URLSearchParams(location.search);
@@ -282,8 +294,9 @@
     const partyRaw = parseInt($('#r-size').value, 10);
     const party = Number.isInteger(partyRaw) && partyRaw > 0 ? partyRaw : 1;
 
-    // Compute total
-    let total = p.flat > 0 ? p.flat : p.perPerson * party;
+    // Compute total — uses tier-aware pricing (handles 4+ group discount on ticket)
+    const perPerson = perPersonFor(expType, party);
+    let total = p.flat > 0 ? p.flat : perPerson * party;
     let deposit = Math.floor(total * 0.5 / 1000) * 1000;
     if (total > 0 && deposit === 0) deposit = 1000;
     if (deposit > total) deposit = total;
@@ -293,6 +306,11 @@
       $('#sum-total').textContent   = 'Sin cobro online';
       $('#sum-deposit').textContent = '$0 COP';
       $('#sum-balance').textContent = 'Consumo en sitio';
+    } else if (p.tier === 'whatsapp') {
+      // Cumpleaños + Evento privado → cotización personalizada por WhatsApp
+      $('#sum-total').textContent   = 'Cotización por WhatsApp';
+      $('#sum-deposit').textContent = '—';
+      $('#sum-balance').textContent = 'Te lo confirmamos al hablar';
     } else {
       $('#sum-total').textContent   = fmtCop(total);
       $('#sum-deposit').textContent = fmtCop(deposit);
