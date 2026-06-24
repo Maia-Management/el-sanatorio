@@ -1,12 +1,12 @@
 {
-  "_comment": "Paste your Firebase web app config + VAPID public key here. Get them from console.firebase.google.com → Project Settings → General (firebase object) + Cloud Messaging (Web push certificate). The service worker fetches this at install and the client reads it via /js/push-fcm.js.",
+  "_comment": "El Sanatorio Web — Firebase Cloud Messaging config. Wired 2026-06-23 PM. Project myapplication-98481185 owned by maia-management.com org. VAPID key generated this session. Spark plan (free) — FCM web push runs on free tier.",
   "firebase": {
-    "apiKey": "REPLACE_ME",
-    "authDomain": "REPLACE_ME.firebaseapp.com",
-    "projectId": "REPLACE_ME",
-    "storageBucket": "REPLACE_ME.appspot.com",
-    "messagingSenderId": "REPLACE_ME",
-    "appId": "REPLACE_ME"
+    "apiKey": "AIzaSyDAGC8eSBFzYIAQWysbUdT38kHv7qx20Kw",
+    "authDomain": "myapplication-98481185.firebaseapp.com",
+    "projectId": "myapplication-98481185",
+    "storageBucket": "myapplication-98481185.firebasestorage.app",
+    "messagingSenderId": "1020851538616",
+    "appId": "1:1020851538616:web:afafc99dfcfb315ed3424d"
   },
-  "vapidKey": "REPLACE_ME"
+  "vapidKey": "BFUQ2MKsyBGnaNHaREkITI2P1NnlqrRG6H30rwK_vc9LqpGYi_tSKbMu8VuiyFoKixhrJ6H8hnE6J_NDtiYH43s"
 }
