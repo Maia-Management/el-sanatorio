@@ -147,6 +147,12 @@
 # be a public web surface.
 # ============================================================================
 [[redirects]]
+  from = "/menu.html"
+  to = "/menu/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/index-legacy"
   to = "/404.html"
   status = 410
