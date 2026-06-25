@@ -608,19 +608,25 @@
       position: relative;
     }
 
+    /* Laura audit 2026-06-25 PM: previously this was an empty placeholder
+       (candle emoji + dark gradient). Now showing the real colonial
+       facade photo of the Sanatorio building. */
     .espacio-image-placeholder {
       width: 100%;
       aspect-ratio: 4/5;
       background:
+        linear-gradient(180deg, rgba(10,4,4,0.20) 0%, rgba(10,4,4,0.55) 65%, rgba(10,4,4,0.92) 100%),
+        url('/images/sanatorio-fachada.webp') center/cover no-repeat,
         linear-gradient(135deg, var(--humo) 0%, var(--carbon) 50%, #0a0000 100%);
       border: 1px solid var(--borde);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 1rem;
+      justify-content: flex-end;
+      gap: 0.5rem;
       position: relative;
       overflow: hidden;
+      padding: 2rem 1.5rem;
     }
 
     .espacio-image-placeholder::before {
@@ -628,26 +634,25 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 50% 50%, rgba(139,0,0,0.15) 0%, transparent 60%);
+        radial-gradient(circle at 60% 30%, rgba(139,0,0,0.18) 0%, transparent 55%);
+      pointer-events: none;
     }
 
     .img-glyph {
-      font-size: 4rem;
-      opacity: 0.15;
-      position: relative;
-      z-index: 1;
+      display: none; /* redundant with real image */
     }
 
     .img-caption {
       font-family: var(--font-lit);
       font-style: italic;
-      font-size: 0.85rem;
-      color: var(--gris-ceniza);
-      opacity: 0.5;
+      font-size: 0.9rem;
+      color: var(--ek-paper, #efe3c8);
+      opacity: 0.92;
       position: relative;
       z-index: 1;
       text-align: center;
-      padding: 0 2rem;
+      padding: 0 1rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.85);
     }
 
     .espacio-image-placeholder::after {
