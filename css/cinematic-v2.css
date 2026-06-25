@@ -484,11 +484,22 @@ input, textarea, select { font: inherit; color: inherit; }
 
 /* === SECTION 1: Asylum (lore) horizontal cinemagraph reel === */
 .asylum {
+  position: relative;
   background:
+    linear-gradient(180deg, rgba(10, 8, 6, 0.78) 0%, rgba(10, 8, 6, 0.92) 70%, rgba(10, 8, 6, 1) 100%),
     radial-gradient(ellipse at 20% 30%, rgba(74, 90, 62, 0.08) 0%, transparent 50%),
+    url('/images/asilo-corredor.jpg') center top / cover no-repeat,
     var(--bg-base);
   padding-bottom: 0;
 }
+.asylum::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,0.04) 3px 4px);
+  pointer-events: none;
+  z-index: 0;
+}
+.asylum > * { position: relative; z-index: 1; }
 .asylum__reel {
   position: relative;
   display: flex;
