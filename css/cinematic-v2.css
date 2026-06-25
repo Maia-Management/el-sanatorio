@@ -567,27 +567,32 @@ input, textarea, select { font: inherit; color: inherit; }
 @keyframes projectorPulse { 0%,100%{opacity:1;transform:translateX(-50%) scale(1);} 50%{opacity:0.7;transform:translateX(-50%) scale(1.04);} }
 
 .patient-card[data-patient="bellasrio"] .patient-card__media::before {
+  /* 2026-06-25 PM fix per Laura's eye-audit: the previous solid linear-gradient
+     was OPAQUE and totally obscured the underlying portrait. Replaced with
+     transparent + low-opacity decorative bands so the actual portrait shows. */
   content: ''; position: absolute; inset: 0;
   background:
     repeating-linear-gradient(90deg, transparent 0 7px, rgba(255, 200, 120, 0.18) 7px 8px, transparent 8px 15px),
-    linear-gradient(135deg, #1a1208 0%, #2a1a0a 100%);
+    linear-gradient(135deg, rgba(26, 18, 8, 0.35) 0%, rgba(42, 26, 10, 0.45) 100%);
   animation: telegraphPulse 1.6s infinite steps(8);
 }
 @keyframes telegraphPulse { 0%,100%{opacity:0.8;} 50%{opacity:1;} }
 
 .patient-card[data-patient="micaela"] .patient-card__media::before {
+  /* Same fix: transparent darken, portrait shows through. */
   content: ''; position: absolute; inset: 0;
   background:
     radial-gradient(circle at 30% 40%, rgba(255, 200, 150, 0.3) 0%, transparent 25%),
     repeating-linear-gradient(45deg, transparent 0 6px, rgba(200, 132, 58, 0.12) 6px 7px),
-    linear-gradient(180deg, #2a1a14 0%, #1a0e08 100%);
+    linear-gradient(180deg, rgba(42, 26, 20, 0.40) 0%, rgba(26, 14, 8, 0.55) 100%);
 }
 
 .patient-card[data-patient="straitjacket"] .patient-card__media::before {
+  /* Same fix: portrait shows through soft scratched-film overlay. */
   content: ''; position: absolute; inset: 0;
   background:
     repeating-linear-gradient(90deg, transparent 0 12px, rgba(180, 167, 139, 0.12) 12px 13px),
-    linear-gradient(180deg, #1a1408 0%, #2a1a10 50%, #0a0604 100%);
+    linear-gradient(180deg, rgba(26, 20, 8, 0.35) 0%, rgba(42, 26, 16, 0.45) 50%, rgba(10, 6, 4, 0.6) 100%);
 }
 .patient-card[data-patient="straitjacket"] .patient-card__media::after {
   content: ''; position: absolute; top: 35%; left: 50%;

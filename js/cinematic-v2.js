@@ -257,19 +257,31 @@
     toggle.classList.add('is-muted');
     let sound = null;
 
+    // 2026-06-25 PM fix per Laura's eye-audit: preload the Howl on init (not
+    // first click). Defer-loaded Howler may not have been available on first
+    // click, AND creating the Howl inside the click handler meant the audio
+    // had to load AFTER the user gesture — autoplay policies sometimes
+    // reject the resulting deferred play(). Now the audio is ready, click
+    // just toggles play/pause synchronously inside the user gesture.
+    function ensureSound() {
+      if (sound || !window.Howl) return;
+      sound = new Howl({
+        src: ['/audio/ambient-asilo.mp3', '/audio/ambient-asilo.ogg'],
+        loop: true, volume: 0.35, html5: true, preload: true,
+        onloaderror: (id, err) => console.warn('[ambient] load failed', err)
+      });
+    }
+    // Try now (in case Howler is already loaded), and again once the deferred
+    // Howler script fires its load event.
+    ensureSound();
+    if (!sound) window.addEventListener('load', ensureSound, { once: true });
+
     toggle.addEventListener('click', () => {
-      if (!sound && window.Howl) {
-        sound = new Howl({
-          // ambient hospital corridor murmur — base64 silence by default;
-          // when Andrew commissions the audio, drop file into /audio/ambient-asilo.mp3
-          src: ['/audio/ambient-asilo.mp3', '/audio/ambient-asilo.ogg'],
-          loop: true, volume: 0.35, html5: true,
-          onloaderror: () => { /* silent fallback */ }
-        });
-      }
+      ensureSound(); // safety: in case load event was missed
       isMuted = !isMuted;
       if (sound) {
-        if (isMuted) sound.pause(); else sound.play();
+        if (isMuted) sound.pause();
+        else sound.play();
       }
       toggle.classList.toggle('is-muted', isMuted);
     });
