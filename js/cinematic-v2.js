@@ -248,40 +248,46 @@
   }
 
   /* ------------------------------------------------------------------
-     5. AMBIENT SOUND (Howler) — opt-in
+     5. AMBIENT SOUND — opt-in (native <audio>, no Howler)
      ------------------------------------------------------------------ */
   function initSound() {
     const toggle = document.querySelector('.sound-toggle');
     if (!toggle) return;
     let isMuted = true;
     toggle.classList.add('is-muted');
-    let sound = null;
 
-    // 2026-06-25 PM fix per Laura's eye-audit: preload the Howl on init (not
-    // first click). Defer-loaded Howler may not have been available on first
-    // click, AND creating the Howl inside the click handler meant the audio
-    // had to load AFTER the user gesture — autoplay policies sometimes
-    // reject the resulting deferred play(). Now the audio is ready, click
-    // just toggles play/pause synchronously inside the user gesture.
-    function ensureSound() {
-      if (sound || !window.Howl) return;
-      sound = new Howl({
-        src: ['/audio/ambient-asilo.mp3', '/audio/ambient-asilo.ogg'],
-        loop: true, volume: 0.35, html5: true, preload: true,
-        onloaderror: (id, err) => console.warn('[ambient] load failed', err)
-      });
-    }
-    // Try now (in case Howler is already loaded), and again once the deferred
-    // Howler script fires its load event.
-    ensureSound();
-    if (!sound) window.addEventListener('load', ensureSound, { once: true });
+    // 2026-06-25 PM fix #3 per Laura's eye-audit:
+    //   Howler.js v2 with { html5: true } was creating an audio-node pool
+    //   that got locked by Chrome's autoplay policy BEFORE the user gesture,
+    //   surfacing as the warning "HTML5 Audio pool exhausted, returning
+    //   potentially locked audio object" and dropping playback entirely on
+    //   first click.
+    //   Dropping Howler entirely for a single ambient track. Plain
+    //   <audio> element + .play() inside the click handler is the simplest
+    //   reliable autoplay-policy-compliant pattern.
+    const audio = new Audio('/audio/ambient-asilo.mp3');
+    audio.loop = true;
+    audio.volume = 0.35;
+    audio.preload = 'auto';
+    audio.addEventListener('error', () => {
+      console.warn('[ambient] audio load failed', audio.error && audio.error.code, audio.error && audio.error.message);
+    });
 
     toggle.addEventListener('click', () => {
-      ensureSound(); // safety: in case load event was missed
       isMuted = !isMuted;
-      if (sound) {
-        if (isMuted) sound.pause();
-        else sound.play();
+      if (isMuted) {
+        audio.pause();
+      } else {
+        // play() returns a Promise on modern browsers — catch autoplay rejection
+        const p = audio.play();
+        if (p && typeof p.catch === 'function') {
+          p.catch((err) => {
+            console.warn('[ambient] play() rejected:', err && err.name, err && err.message);
+            // Fall back to muted so the UI stays consistent
+            isMuted = true;
+            toggle.classList.add('is-muted');
+          });
+        }
       }
       toggle.classList.toggle('is-muted', isMuted);
     });
