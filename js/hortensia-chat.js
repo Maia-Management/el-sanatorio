@@ -231,6 +231,13 @@
     root.appendChild(panel);
     document.body.appendChild(root);
     state.messagesEl = messagesEl;
+
+    // === A11Y: ESC closes the dialog (WCAG 2.1.2 dismissible) ===
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && root.classList.contains('is-open')) {
+        root.classList.remove('is-open');
+      }
+    });
   }
 
   function addMsg(text, who) {

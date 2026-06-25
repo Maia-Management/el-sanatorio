@@ -130,11 +130,11 @@
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="r-date">Fecha *</label>
-            <input class="form-input" type="date" id="r-date" name="booking_date" required min="2026-07-30" />
+            <input class="form-input" type="date" id="r-date" name="booking_date" required aria-required="true" min="2026-07-30" />
           </div>
           <div class="form-group">
             <label class="form-label" for="r-time">Hora *</label>
-            <select class="form-select" id="r-time" name="time_slot" required>
+            <select class="form-select" id="r-time" name="time_slot" required aria-required="true">
               <option value="">Seleccionar...</option>
               <option value="19:00">7:00 PM</option>
               <option value="20:30">8:30 PM</option>
@@ -143,7 +143,7 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="r-size">Personas *</label>
-            <select class="form-select" id="r-size" name="party_size" required>
+            <select class="form-select" id="r-size" name="party_size" required aria-required="true">
               <option value="">Seleccionar...</option>
               <option value="1">1 persona</option>
               <option value="2">2 personas</option>
@@ -160,11 +160,11 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="r-name">Nombre completo *</label>
-            <input class="form-input" type="text" id="r-name" name="customer_name" required placeholder="Nombre y apellido" autocomplete="name" />
+            <input class="form-input" type="text" id="r-name" name="customer_name" required aria-required="true" placeholder="Nombre y apellido" autocomplete="name" />
           </div>
           <div class="form-group">
             <label class="form-label" for="r-phone">WhatsApp *</label>
-            <input class="form-input" type="tel" id="r-phone" name="customer_whatsapp" required placeholder="+57 300 000 0000" autocomplete="tel" />
+            <input class="form-input" type="tel" id="r-phone" name="customer_whatsapp" required aria-required="true" placeholder="+57 300 000 0000" autocomplete="tel" />
           </div>
           <div class="form-group">
             <label class="form-label" for="r-email">Correo (opcional)</label>
@@ -187,7 +187,7 @@
         </div>
 
         <div class="form-consent" style="margin-top: 1.25rem; display: flex; gap: 0.5rem; align-items: flex-start;">
-          <input type="checkbox" id="r-consent" name="habeas_data" required class="consent-cbx" />
+          <input type="checkbox" id="r-consent" name="habeas_data" required aria-required="true" class="consent-cbx" />
           <label for="r-consent" class="mono" style="font-size: 0.72rem; color: var(--light-gray); line-height: 1.6; letter-spacing: 0.04em;">
             He leído y acepto la <a href="/privacidad" style="color: var(--crimson); text-decoration: underline;">Política de Privacidad</a> (Ley 1581 de 2012). *
           </label>
