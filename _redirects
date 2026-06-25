@@ -16,6 +16,8 @@
 /pos                            https://maia-management.com/vert/restaurant/sanatorio/pos/  200
 /pos/                           https://maia-management.com/vert/restaurant/sanatorio/pos/  200
 /pos/*                          https://maia-management.com/vert/restaurant/sanatorio/pos/:splat  200
+/pay                            https://maia-management.com/vert/restaurant/sanatorio/pay/  200
+/pay/                           https://maia-management.com/vert/restaurant/sanatorio/pay/  200
 /pay/:order_id                  https://maia-management.com/vert/restaurant/sanatorio/pay/?order_id=:order_id  200
 /pay/:order_id/wompi            https://maia-management.com/.netlify/functions/sanatorio-wompi-checkout?order_id=:order_id  200
 
