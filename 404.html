@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0806" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>404 · Expediente extraviado · El Sanatorio</title>
+  <meta name="description" content="No se encontró la sala que buscaba. El recorrido continúa por la puerta principal." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Share+Tech+Mono&display=swap" />
+
+  <style>
+    :root {
+      --bg-base:    #0a0806;
+      --ek-paper:   #efe3c8;
+      --ek-bone:    #d6c8a8;
+      --ek-amber:   #ffb450;
+      --ek-rust:    #c0392b;
+      --ink-dim:    #8a7e64;
+      --ink-faint:  #4a4332;
+      --font-display:    'Fraunces', Georgia, serif;
+      --font-typewriter: 'Share Tech Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { background: var(--bg-base); color: var(--ek-paper); font-family: var(--font-typewriter); }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(192,57,43,0.10) 0%, transparent 60%),
+        var(--bg-base);
+    }
+    .frame {
+      max-width: 640px;
+      width: 100%;
+      border: 1px solid rgba(184, 167, 139, 0.22);
+      padding: 56px 40px 48px;
+      text-align: center;
+      position: relative;
+      background: rgba(20, 16, 12, 0.4);
+    }
+    .frame::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(255, 180, 80, 0.10);
+      pointer-events: none;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ek-rust);
+      margin-bottom: 24px;
+    }
+    .code {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 14vw, 128px);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--ek-amber);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 400;
+      color: var(--ek-paper);
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+    h1 em { color: var(--ek-amber); font-style: italic; }
+    .lede {
+      font-family: var(--font-display);
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ek-bone);
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .stamp {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ek-rust);
+      border: 1px solid var(--ek-rust);
+      padding: 6px 14px;
+      margin-bottom: 32px;
+      transform: rotate(-2deg);
+      opacity: 0.85;
+    }
+    .ctas {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      font-family: var(--font-typewriter);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 220ms, border-color 220ms, transform 220ms;
+      min-width: 280px;
+      justify-content: center;
+    }
+    .cta--primary {
+      background: var(--ek-amber);
+      color: #0d0a06;
+      border: 1px solid var(--ek-amber);
+    }
+    .cta--primary:hover { transform: translateY(-2px); background: #ffc270; }
+    .cta--secondary {
+      background: transparent;
+      color: var(--ek-paper);
+      border: 1px solid rgba(184, 167, 139, 0.45);
+    }
+    .cta--secondary:hover { border-color: var(--ek-amber); color: var(--ek-amber); }
+    .cta--whatsapp {
+      background: #25d366;
+      color: #0a0806;
+      border: 1px solid #25d366;
+    }
+    .cta--whatsapp:hover { transform: translateY(-2px); background: #1eb858; }
+    footer {
+      margin-top: 40px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+    footer a { color: var(--ek-amber); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main class="frame" role="main">
+    <p class="eyebrow">Expediente Clínico</p>
+    <div class="code" aria-hidden="true">404</div>
+    <span class="stamp" aria-hidden="true">Sala no localizada</span>
+    <h1>La sala que busca <em>fue dada de alta.</em></h1>
+    <p class="lede">
+      El Doctor de Turno no encuentra esta ficha en el archivo. Puede que la
+      hayamos archivado, puede que nunca haya existido, o puede que usted la
+      esté soñando. De cualquier forma, la puerta principal sigue abierta.
+    </p>
+
+    <div class="ctas">
+      <a class="cta cta--primary" href="/">↩ Volver a Admisión</a>
+      <a class="cta cta--secondary" href="/menu">Ver el Menú</a>
+      <a class="cta cta--whatsapp" href="https://wa.me/19034598763?text=Hola%20Hortensia%2C%20me%20perd%C3%AD%20en%20la%20web%20del%20Sanatorio." target="_blank" rel="noopener">
+        Hablar con Hortensia (WhatsApp)
+      </a>
+    </div>
+
+    <footer>
+      El Sanatorio · Calle 19 #4-23 · Centro Histórico · Santa Marta<br/>
+      <a href="/">el-sanatorio.com</a>
+    </footer>
+  </main>
+</body>
+</html>

@@ -442,8 +442,8 @@
   <main id="main-content" class="booking-shell">
     <div class="container">
       <section class="fallback-panel" id="fallback-panel">
-        <h2>Calendar coming soon</h2>
-        <p id="fallback-message">Book directly by WhatsApp while the live calendar is being connected.</p>
+        <h2>Calendario próximamente</h2>
+        <p id="fallback-message">Reserva directamente por WhatsApp mientras conectamos el calendario en vivo.</p>
         <a href="https://wa.me/19034598763?text=Quiero%20reservar%20El%20Sanatorio" target="_blank" rel="noopener noreferrer">Reservar por WhatsApp</a>
       </section>
 
@@ -610,11 +610,11 @@
         const items = Array.isArray(payload) ? payload : payload.items || [];
         allEvents = items.map(toCalendarEvent);
         if (!Array.isArray(payload) && payload.configured === false) {
-          showFallback(payload.message || "Calendar coming soon - book via WhatsApp");
+          showFallback(payload.message || "Calendario próximamente — reserva por WhatsApp");
         }
       } catch (error) {
         allEvents = [];
-        showFallback("Calendar coming soon - book via WhatsApp");
+        showFallback("Calendario próximamente — reserva por WhatsApp");
       }
       renderCalendarEvents();
       renderEventCards();
@@ -711,7 +711,7 @@
 
     window.addEventListener("DOMContentLoaded", () => {
       if (!window.FullCalendar) {
-        showFallback("Calendar coming soon - book via WhatsApp");
+        showFallback("Calendario próximamente — reserva por WhatsApp");
         return;
       }
       initCalendar();
