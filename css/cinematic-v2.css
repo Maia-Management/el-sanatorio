@@ -1069,8 +1069,17 @@ input, textarea, select { font: inherit; color: inherit; }
   border-radius: 3px;
   color: var(--ek-paper);
   font-size: 15px;
-  width: 140px;
   text-align: right;
+}
+/* Number input narrow; select wider so "Entrada Estándar — $60.000"
+   isn't truncated to "Entrada Estánd…" (Laura audit 2026-06-25 PM) */
+.estimator__row input[type="number"] {
+  width: 140px;
+}
+.estimator__row select {
+  width: 240px;
+  max-width: 100%;
+  text-align-last: right;
 }
 .estimator__total {
   display: flex; justify-content: space-between; align-items: center;
@@ -1113,12 +1122,14 @@ input, textarea, select { font: inherit; color: inherit; }
   color: #0d0a06;
 }
 .estimator__cta--whatsapp:hover { transform: translateY(-2px); background: #1eb858; }
+/* Secondary action — outlined amber so it reads clickable next to the
+   green WhatsApp primary, not "disabled" (Laura audit 2026-06-25 PM). */
 .estimator__cta--wompi {
-  background: rgba(239, 227, 200, 0.08);
-  color: var(--ek-paper);
-  border: 1px solid var(--ink-faint);
+  background: rgba(255, 180, 80, 0.10);
+  color: var(--ek-amber);
+  border: 1px solid rgba(255, 180, 80, 0.55);
 }
-.estimator__cta--wompi:hover { background: rgba(239, 227, 200, 0.16); border-color: var(--ek-paper); }
+.estimator__cta--wompi:hover { background: rgba(255, 180, 80, 0.22); border-color: var(--ek-amber); color: var(--ek-paper); }
 
 .availability {
   background: rgba(10, 8, 6, 0.5);
