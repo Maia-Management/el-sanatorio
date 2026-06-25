@@ -140,6 +140,43 @@
   force = true
 
 # ============================================================================
+# RETIRED PAGES — 410 Gone (2026-06-25 PM, per Andrew Q1A)
+# index-legacy.html: stale pricing ($45.000) page from earlier draft.
+# /lp/cuidadores: Cuidadores 2-por-1 offer is SOCIAL-MEDIA-ONLY per
+# reference_el_sanatorio_pricing_canonical_2026_06_24_pm.md — must not
+# be a public web surface.
+# ============================================================================
+[[redirects]]
+  from = "/index-legacy"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/index-legacy.html"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/lp/cuidadores"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/lp/cuidadores/"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/lp/cuidadores/*"
+  to = "/404.html"
+  status = 410
+  force = true
+
+# ============================================================================
 # EL HALLAZGO — recovered-documents chronicle (2026-06-21)
 # Primary URL: /el-hallazgo  ·  Aliases: /chronicle, /cronica
 # Source file: /el-hallazgo.html  (static)
