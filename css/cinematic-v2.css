@@ -547,7 +547,7 @@ input, textarea, select { font: inherit; color: inherit; }
 }
 .patient-card[data-patient="hilario"]  .patient-card__media { background-image: url('/images/patients/hilario-portrait.jpg'); }
 .patient-card[data-patient="bellasrio"] .patient-card__media { background-image: url('/images/patients/bellasrio-portrait.webp'); }
-.patient-card[data-patient="micaela"]   .patient-card__media { background-image: url('/images/patients/micaela-portrait.png'); }
+.patient-card[data-patient="micaela"]   .patient-card__media { background-image: url('/images/patients/micaela-portrait.jpg'); }
 .patient-card[data-patient="straitjacket"] .patient-card__media { background-image: url('/images/patients/encadenado-portrait.webp'); }
 /* PAC. 047 El Observador — portrait TBD; CSS-only abstract treatment stays as fallback */
 .patient-card[data-patient="hilario"] .patient-card__media::before {
