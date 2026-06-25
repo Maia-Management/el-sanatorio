@@ -1217,41 +1217,67 @@ input, textarea, select { font: inherit; color: inherit; }
 .vintage-map {
   position: relative;
   aspect-ratio: 4 / 3;
-  background:
-    repeating-linear-gradient(45deg, transparent 0 8px, rgba(184, 167, 139, 0.08) 8px 9px),
-    radial-gradient(ellipse at 50% 50%, rgba(255, 200, 120, 0.06) 0%, transparent 60%),
-    linear-gradient(135deg, #1a1408 0%, #0a0604 100%);
+  background: #0a0604;
   border: 1px solid rgba(184, 167, 139, 0.22);
   border-radius: 4px;
   overflow: hidden;
 }
-.vintage-map::before {
-  content: '✛';
+.vintage-map__embed {
   position: absolute;
-  left: 56%; top: 48%;
-  transform: translate(-50%, -50%);
-  font-size: 32px;
-  color: var(--ek-rust);
-  text-shadow: 0 0 16px rgba(255, 39, 39, 0.5);
-  animation: mapPulse 2s infinite;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  /* Brand sepia / dark tone so Google Maps colours match the venue
+     aesthetic (Laura audit 2026-06-25 PM: previously an empty
+     stylised box, now a real map). */
+  filter: grayscale(0.55) sepia(0.6) brightness(0.75) contrast(1.05) hue-rotate(-8deg);
 }
-@keyframes mapPulse { 0%,100%{transform:translate(-50%,-50%) scale(1);} 50%{transform:translate(-50%,-50%) scale(1.18);} }
 .vintage-map__label {
   position: absolute;
-  left: 56%; top: 58%;
+  top: 14px; left: 18px;
   font-family: var(--font-typewriter);
   font-size: 10px;
   letter-spacing: 0.22em;
   color: var(--ek-amber);
   text-transform: uppercase;
+  background: rgba(10, 6, 4, 0.7);
+  padding: 4px 8px;
+  border-radius: 2px;
+  pointer-events: none;
 }
 .vintage-map__compass {
   position: absolute;
   top: 14px; right: 14px;
   font-family: var(--font-typewriter);
-  font-size: 18px;
+  font-size: 14px;
   color: var(--ek-bone);
-  opacity: 0.4;
+  background: rgba(10, 6, 4, 0.7);
+  padding: 4px 8px;
+  border-radius: 2px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.vintage-map__open {
+  position: absolute;
+  bottom: 14px; right: 14px;
+  font-family: var(--font-typewriter);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ek-amber);
+  background: rgba(10, 6, 4, 0.82);
+  border: 1px solid rgba(255, 180, 80, 0.35);
+  padding: 6px 10px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 220ms, border-color 220ms;
+}
+.vintage-map__open:hover,
+.vintage-map__open:focus-visible {
+  background: rgba(255, 180, 80, 0.18);
+  border-color: rgba(255, 180, 80, 0.7);
+  outline: none;
 }
 
 /* === SECTION 7: Hospital del Tórax (history) =============== */

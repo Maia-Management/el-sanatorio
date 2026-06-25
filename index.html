@@ -36,7 +36,7 @@
 
   <!-- Brand tokens + cinematic v2 styles -->
   <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260623c" />
-  <link rel="stylesheet" href="/css/cinematic-v2.css?v=20260625p4" />
+  <link rel="stylesheet" href="/css/cinematic-v2.css?v=20260625p5" />
   <link rel="stylesheet" href="/css/hortensia-chat.css?v=20260624p0" />
 
   <!-- Schema.org graph -->
@@ -396,8 +396,16 @@
         </article>
 
         <div class="vintage-map fade-in-up" role="img" aria-label="Mapa de ubicación de El Sanatorio en el Centro Histórico de Santa Marta">
-          <div class="vintage-map__compass">N ↑</div>
-          <div class="vintage-map__label">SANATORIO</div>
+          <iframe
+            class="vintage-map__embed"
+            src="https://www.google.com/maps?q=Calle+19+%234-23+Santa+Marta+Colombia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            title="El Sanatorio — Calle 19 #4-23, Centro Histórico, Santa Marta"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+          <div class="vintage-map__compass" aria-hidden="true">N ↑</div>
+          <div class="vintage-map__label" aria-hidden="true">SANATORIO</div>
+          <a class="vintage-map__open" href="https://maps.google.com/maps?q=Calle+19+%234-23+Santa+Marta+Colombia" target="_blank" rel="noopener" aria-label="Abrir ubicación en Google Maps">↗ Abrir en Maps</a>
         </div>
       </div>
     </div>
