@@ -51,9 +51,16 @@ export default async (request) => {
   const horizon = new Date(today); horizon.setDate(today.getDate() + 30);
 
   try {
-    // PostgREST select with date filter — aggregate by night_date
-    // (table per the persona spec — soft-fail if it doesn't exist yet)
-    const url = `${supaUrl.replace(/\/$/, '')}/rest/v1/el_sanatorio_bookings?select=night_date,party_size&night_date=gte.${today.toISOString().slice(0,10)}&night_date=lte.${horizon.toISOString().slice(0,10)}&status=in.(confirmed,paid)`;
+    // PostgREST select with date filter — aggregate by booking_date.
+    // Schema source-of-truth: 20260621000001_sanatorio_bookings_phase_a.sql
+    //   booking_date (DATE) + booking_status IN
+    //   ('pending_deposit','confirmed','arrived','completed','no_show',
+    //    'cancelled_by_guest','cancelled_by_venue').
+    // For the public busy-calendar we only count rows whose deposit has
+    // been paid (booking_status IN confirmed,arrived). 'completed' is
+    // past dates so it's filtered out by the date window anyway; we
+    // intentionally exclude it from the IN list to match the RLS policy.
+    const url = `${supaUrl.replace(/\/$/, '')}/rest/v1/el_sanatorio_bookings?select=booking_date,party_size&booking_date=gte.${today.toISOString().slice(0,10)}&booking_date=lte.${horizon.toISOString().slice(0,10)}&booking_status=in.(confirmed,arrived)`;
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 5000);
     const res = await fetch(url, {
@@ -73,7 +80,7 @@ export default async (request) => {
     const rows = await res.json();
     const totals = new Map();
     for (const r of rows) {
-      const key = r.night_date;
+      const key = r.booking_date;
       totals.set(key, (totals.get(key) || 0) + (parseInt(r.party_size, 10) || 0));
     }
     const busy_dates = [];
