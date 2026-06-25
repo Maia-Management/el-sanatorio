@@ -684,42 +684,58 @@ input, textarea, select { font: inherit; color: inherit; }
   background: #0a0806;
   transition: transform 380ms var(--ease-cinema), border-color 380ms;
 }
+/* Each tile gets a real venue photo as a base layer, then a colored
+   gradient overlay for mood + readability. The photo lives in the
+   ::before layer; gradient sits between the photo and text via
+   linear-gradient first in the background stack. Per Laura's
+   2026-06-25 PM audit — pre-image tiles looked like broken images. */
 .tile::before {
   content: '';
   position: absolute; inset: 0;
   z-index: -1;
-  opacity: 0.85;
+  opacity: 0.92;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+/* Bottom-to-top dark gradient for legibility goes on the ::after so
+   the text reads clearly over any photo. */
+.tile::after {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(10,8,6,0.15) 0%, rgba(10,8,6,0.55) 55%, rgba(5,4,2,0.85) 100%);
+  pointer-events: none;
 }
 .tile[data-tile="yakitori"]::before {
-  background:
-    radial-gradient(circle at 30% 40%, rgba(255, 100, 40, 0.35) 0%, transparent 50%),
-    radial-gradient(circle at 70% 70%, rgba(200, 132, 58, 0.25) 0%, transparent 40%),
-    linear-gradient(135deg, #2a1408 0%, #0a0604 100%);
+  background-image:
+    linear-gradient(135deg, rgba(255, 100, 40, 0.25) 0%, transparent 60%),
+    url('/images/sanatorio-yakitori-night.webp');
 }
 .tile[data-tile="syringe"]::before {
-  background:
-    radial-gradient(circle at 50% 30%, rgba(74, 90, 62, 0.4) 0%, transparent 50%),
-    linear-gradient(180deg, #1a1810 0%, #0a0806 100%);
+  background-image:
+    linear-gradient(135deg, rgba(74, 90, 62, 0.30) 0%, transparent 55%),
+    url('/images/sanatorio-cocktails.webp');
 }
 .tile[data-tile="maze"]::before {
-  background:
-    repeating-linear-gradient(45deg, transparent 0 30px, rgba(184, 167, 139, 0.06) 30px 31px),
-    linear-gradient(180deg, #0d1726 0%, #050402 100%);
+  background-image:
+    linear-gradient(135deg, rgba(13, 23, 38, 0.30) 0%, transparent 60%),
+    url('/images/asilo-corredor.jpg');
 }
 .tile[data-tile="paciente013"]::before {
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255, 39, 39, 0.18) 0%, transparent 60%),
-    linear-gradient(180deg, #1a0404 0%, #050202 100%);
+  background-image:
+    linear-gradient(135deg, rgba(255, 39, 39, 0.20) 0%, transparent 60%),
+    url('/images/sanatorio-paciente-013.webp');
 }
 .tile[data-tile="scarephoto"]::before {
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 200, 120, 0.12) 0%, transparent 40%),
-    linear-gradient(135deg, #14100a 0%, #050402 100%);
+  background-image:
+    linear-gradient(135deg, rgba(255, 200, 120, 0.18) 0%, transparent 55%),
+    url('/images/sanatorio-ella-patio.webp');
 }
 .tile[data-tile="bar"]::before {
-  background:
-    radial-gradient(circle at 50% 70%, rgba(255, 180, 80, 0.18) 0%, transparent 50%),
-    linear-gradient(180deg, #0a0806 0%, #050402 100%);
+  background-image:
+    linear-gradient(135deg, rgba(255, 180, 80, 0.22) 0%, transparent 55%),
+    url('/images/sanatorio-admisiones.webp');
 }
 
 .tile:hover { transform: translateY(-4px); border-color: rgba(255, 180, 80, 0.4); }
