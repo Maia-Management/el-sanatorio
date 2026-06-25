@@ -66,13 +66,16 @@
 # Fix landed 2026-06-24 PM.
 /vert/restaurant/sanatorio/shared/*  https://maia-management.com/vert/restaurant/sanatorio/shared/:splat  200
 
-# The proxied PWAs (pay/dice/pos/booking-pay/etc) make absolute fetch() calls to
-# /.netlify/functions/sanatorio-* — proxy those to maia-management too,
-# otherwise /pay returns "Failed to execute 'json' on 'Response': Unexpected
-# end of JSON input" because the function path 404s on el-sanatorio.com.
-# Fix landed 2026-06-24 PM.
-/.netlify/functions/sanatorio-*       https://maia-management.com/.netlify/functions/sanatorio-:splat  200
-/.netlify/functions/wompi-booking-webhook  https://maia-management.com/.netlify/functions/wompi-booking-webhook  200
+# NOTE 2026-06-24 PM (corrected): the /.netlify/* path prefix is RESERVED by
+# Netlify and cannot be the SOURCE of a custom redirect ("path field must not
+# start with /.netlify"). The original fallback proxy rules here were INVALID
+# and silently dropped at deploy time. All sanatorio functions are now reached
+# either via:
+#   (a) local function files in el-sanatorio/netlify/functions/* (e.g.
+#       sanatorio-availability.mjs) — served at /.netlify/functions/<name>
+#       directly without needing a redirect, OR
+#   (b) the /api/sanatorio-* aliases above which DO work as proxies.
+# So the catch-all /.netlify/* rules are removed. Do not re-add.
 
 # ============================================================================
 # QR menu clean URLs (2026-06-21) — match the spec at /menu/chuzo, /menu/bar,
