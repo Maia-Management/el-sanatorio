@@ -260,11 +260,19 @@
 
       <!-- Right: Map + Quick form -->
       <div class="fade-in-section">
-        <div class="map-container map-card" style="margin-bottom: 1.5rem;">
-          <a href="https://maps.google.com/?q=Calle+19+%234-23+Santa+Marta+Colombia" target="_blank" rel="noopener noreferrer">
-            <span class="map-card__label">Calle 19 #4-23, Centro Historico, Santa Marta</span>
-            <span class="map-card__cta">Abrir en Google Maps</span>
-          </a>
+        <!-- Laura audit 2026-06-25 PM: previously this was a label-only
+             placeholder with no real map. Now embeds Google Maps + keeps
+             the "Abrir en Google Maps" CTA as an overlay button. -->
+        <div class="map-container map-card" style="margin-bottom: 1.5rem; position: relative; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid rgba(192,57,43,0.35); border-radius: 4px; background: #0a0604;">
+          <iframe
+            src="https://www.google.com/maps?q=Calle+19+%234-23+Santa+Marta+Colombia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            title="El Sanatorio — Calle 19 #4-23, Centro Histórico, Santa Marta"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            style="position:absolute; inset:0; width:100%; height:100%; border:0; filter: grayscale(0.55) sepia(0.6) brightness(0.75) contrast(1.05) hue-rotate(-8deg);"></iframe>
+          <span style="position:absolute; top:14px; left:14px; font-family: var(--font-mono, monospace); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--crimson, #c0392b); background: rgba(10,4,4,0.82); padding: 6px 10px; border-radius: 2px; pointer-events: none; z-index: 2;">Calle 19 #4-23 · Centro Histórico</span>
+          <a href="https://maps.google.com/?q=Calle+19+%234-23+Santa+Marta+Colombia" target="_blank" rel="noopener noreferrer" style="position:absolute; bottom:14px; right:14px; font-family: var(--font-mono, monospace); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--crimson, #c0392b); background: rgba(10,4,4,0.85); border: 1px solid rgba(192,57,43,0.55); padding: 6px 10px; border-radius: 2px; text-decoration: none; z-index: 2;" aria-label="Abrir ubicación en Google Maps">↗ Abrir en Google Maps</a>
         </div>
 
         <p class="mono" style="font-size: 0.72rem; color: var(--light-gray); margin-bottom: 2rem; letter-spacing: 0.08em; line-height: 1.8;">
