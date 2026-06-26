@@ -214,8 +214,10 @@
 
   /* ── 5. CSS INJECTION ── */
   function injectStyles() {
-    var css = '#maia-consent-overlay{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;background:rgba(27,42,74,0.55);z-index:2147483646;display:flex;align-items:flex-end;justify-content:center;font-family:Arial,Helvetica,sans-serif}' +
-      '#maia-consent-banner{background:#1B2A4A;color:#fff;width:100%;max-width:900px;max-height:calc(100vh - 24px);max-height:calc(100svh - 24px);overflow-y:auto;border-radius:12px 12px 0 0;padding:24px 28px 20px;box-shadow:0 -4px 32px rgba(0,0,0,0.35);box-sizing:border-box;font-size:14px;line-height:1.55}' +
+    var css = 'body.mcb-banner-visible{padding-bottom:260px}' +
+      '@media(max-width:600px){body.mcb-banner-visible{padding-bottom:320px}}' +
+      '#maia-consent-overlay{position:fixed;left:0;right:0;bottom:0;background:transparent;z-index:2147483646;display:flex;align-items:flex-end;justify-content:center;font-family:Arial,Helvetica,sans-serif;pointer-events:none}' +
+      '#maia-consent-banner{background:#1B2A4A;color:#fff;width:100%;max-width:900px;max-height:calc(100vh - 24px);max-height:calc(100svh - 24px);overflow-y:auto;border-radius:12px 12px 0 0;padding:24px 28px 20px;box-shadow:0 -4px 32px rgba(0,0,0,0.35);box-sizing:border-box;font-size:14px;line-height:1.55;pointer-events:auto}' +
       '#maia-consent-banner .mcb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}' +
       '#maia-consent-banner .mcb-title{font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.25;font-weight:700;color:#fff;margin:0;letter-spacing:0;text-transform:none}' +
       '#maia-consent-banner .mcb-logo{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#8fa3c0;text-align:right;line-height:1.3;letter-spacing:0;text-transform:none}' +
@@ -271,7 +273,8 @@
 
   function injectHTML() {
     var overlay = document.createElement('div'); overlay.id = 'maia-consent-overlay';
-    overlay.setAttribute('role','dialog'); overlay.setAttribute('aria-modal','true'); overlay.setAttribute('aria-label','Preferencias de cookies');
+    overlay.setAttribute('role','region'); overlay.setAttribute('aria-label','Preferencias de cookies');
+    try { document.body.classList.add('mcb-banner-visible'); } catch (e) {}
     var banner = document.createElement('div'); banner.id = 'maia-consent-banner';
     var header = document.createElement('div'); header.className = 'mcb-header';
     var title = document.createElement('h2'); title.className = 'mcb-title'; title.textContent = 'Preferencias de cookies';
@@ -332,6 +335,7 @@
     },
     hideBanner: function () {
       var overlay = this.overlay;
+      try { document.body.classList.remove('mcb-banner-visible'); } catch (e) {}
       if (!overlay) return;
       overlay.style.transition = 'opacity .3s ease';
       overlay.style.opacity = '0';
@@ -339,7 +343,11 @@
     },
     showBanner: function () {
       var existing = document.getElementById('maia-consent-overlay');
-      if (!existing) { injectHTML(); this.init(); } else { existing.style.opacity = '1'; existing.style.display = 'flex'; }
+      if (!existing) { injectHTML(); this.init(); }
+      else {
+        existing.style.opacity = '1'; existing.style.display = 'flex';
+        try { document.body.classList.add('mcb-banner-visible'); } catch (e) {}
+      }
     }
   };
 
