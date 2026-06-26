@@ -48,3 +48,63 @@
 
 /* Consent-checkbox layout helper — applied on form check inputs that previously used inline style */
 input.consent-cbx { margin-top: 0.25rem; flex-shrink: 0; }
+
+/* === Skip-link clip-rect override (phone-audit 2026-06-26) ===========
+   Every page inlines a skip-link with style="position:absolute;left:-9999px;..."
+   plus onfocus/onblur JS. The off-screen pattern fails screen-reader cursor
+   parity and some Windows narrators announce empty regions. Override with
+   the canonical visually-hidden clip-rect pattern; !important is required
+   because the existing markup uses inline style attrs.
+   ==================================================================== */
+.skip-link {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed !important;
+  top: 16px !important;
+  left: 16px !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 10px 14px !important;
+  margin: 0 !important;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  background: #000 !important;
+  color: #fff !important;
+  z-index: 99999 !important;
+  font-family: system-ui, sans-serif !important;
+  font-size: 14px !important;
+  text-decoration: none !important;
+  outline: 2px solid #fff !important;
+  outline-offset: 2px !important;
+}
+
+/* === Footer legal — WCAG min touch target + contrast (phone-audit 2026-06-26)
+   .cinema-footer__legal in cinematic-v2.css uses color: var(--ink-faint)
+   which is rgba(239,227,200,0.32) on --bg-deep #050402 (~2.3:1 — fails 4.5:1).
+   Lift the color opacity on that one rule and add 44px tap target on its
+   anchor children. We do NOT change the global --ink-faint token because
+   it's used in 4 other places where smaller copy is fine on lighter surfaces.
+   ==================================================================== */
+.cinema-footer__legal {
+  color: rgba(239, 227, 200, 0.78) !important;
+}
+.cinema-footer__legal a,
+.cinema-footer ul a {
+  min-height: 44px;
+  padding-block: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
