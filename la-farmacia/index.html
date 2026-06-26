@@ -676,6 +676,11 @@
   </style>
 
 <link rel="stylesheet" href="/css/a11y-shim.css?v=20260623" />
+<!-- Vert OS sub-brand tag — picked up by maia-track.js and propagated to every event (page_view, wa_clicked, etc.) so La Farmacia events are filterable in Vert. -->
+  <script>
+    window.MAIA_SUB_BRAND = 'la_farmacia';
+    window.MAIA_SURFACE   = 'la_farmacia_es';
+  </script>
 <!-- Meta Pixel — no-ops until SANATORIO_PIXEL_ID is set -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -1225,6 +1230,8 @@
 
 <script defer src="/js/push-fcm.js?v=20260624b"></script>
 <script defer src="/js/maia-utm.js?v=20260623"></script>
-<script defer src="/js/maia-track.js?v=20260623"></script>
+<script defer src="/js/maia-track.js?v=20260626lf"></script>
+<!-- La Farmacia · Vert OS instrumentation (section views + order intent) — 2026-06-26 -->
+<script defer src="/js/la-farmacia-track.js?v=20260626"></script>
 </body>
 </html>

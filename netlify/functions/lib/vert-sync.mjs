@@ -198,7 +198,21 @@ export async function recordReservation({ name, phone, partySize, date, time, so
   }
 }
 
-/** Append to the canonical Vert interactions event log. Fire-and-forget. */
+/** Append to the canonical Vert interactions event log. Fire-and-forget.
+ *
+ *  brand override: when the calling page is a sub-brand surface (e.g.
+ *  /la-farmacia/ is a sub-brand of el_sanatorio), pass `brand` explicitly
+ *  to route the event under that sub-brand bucket. The interactions table's
+ *  brand CHECK constraint allows 'la_farmacia', 'chuzo_tokyo', etc.
+ *  Anything else falls back to the file-level BRAND constant.
+ */
+const VALID_INTERACTION_BRANDS = new Set([
+  'el_sanatorio', 'sushi_pop', 'chuzo_tokyo', 'la_farmacia',
+  'maia_recruitment', 'maia_botanicas', 'maia_management',
+  'maia_legal', 'maia_contable', 'maia_realty', 'maia_masters',
+  'cross_brand',
+]);
+
 export async function recordInteraction({
   kind,
   source = 'web',
@@ -209,14 +223,16 @@ export async function recordInteraction({
   utm,                  // { utm_source, utm_medium, utm_campaign, utm_term, utm_content, fbclid, gclid }
   amount_cop,
   payload,
+  brand,                // optional override (must be in VALID_INTERACTION_BRANDS)
 } = {}) {
   if (!kind) return { error: 'kind required' };
   const { url } = getCfg();
   const e164 = phone ? normalizePhone(phone) : null;
   const u = utm || {};
   const g = geo || {};
+  const finalBrand = (brand && VALID_INTERACTION_BRANDS.has(brand)) ? brand : BRAND;
   const row = {
-    brand: BRAND,
+    brand: finalBrand,
     kind,
     source,
     phone: e164 || null,

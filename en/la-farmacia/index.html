@@ -4,11 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a0806" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="El Sanatorio Santa Marta" />
+  <meta name="geo.region" content="CO-MAG" />
+  <meta name="geo.placename" content="Centro Histórico, Santa Marta, Colombia" />
   <script src="/consent-banner.js?v=20260623" defer></script>
 <title>La Farmacia — El Sanatorio's Bar — Santa Marta, Colombia</title>
   <meta property="og:image" content="https://el-sanatorio.com/images/og-la-farmacia.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@MaiaGroupCO" />
+  <meta name="twitter:creator" content="@MaiaGroupCO" />
   <meta name="twitter:title" content="La Farmacia — El Sanatorio's Bar" />
   <meta name="twitter:description" content="Charcoal yakitori, compounded cocktails, sushi. Thu–Sun." />
   <meta name="twitter:image" content="https://el-sanatorio.com/images/og-image.jpg" />
@@ -54,6 +59,11 @@
   .en-foot { margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(184, 167, 139, 0.08); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(225, 219, 200, 0.5); text-align: center; }
 </style>
 <link rel="stylesheet" href="/css/a11y-shim.css?v=20260623" />
+<!-- Vert OS sub-brand tag — picked up by maia-track.js and propagated to every event (page_view, wa_clicked, etc.) so La Farmacia events are filterable in Vert. -->
+  <script>
+    window.MAIA_SUB_BRAND = 'la_farmacia';
+    window.MAIA_SURFACE   = 'la_farmacia_en';
+  </script>
 <!-- Meta Pixel — no-ops until SANATORIO_PIXEL_ID is set -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -148,7 +158,9 @@
 </main>
 <script defer src="/js/push-fcm.js?v=20260624b"></script>
 <script defer src="/js/maia-utm.js?v=20260623"></script>
-<script defer src="/js/maia-track.js?v=20260623"></script>
+<script defer src="/js/maia-track.js?v=20260626lf"></script>
+<!-- La Farmacia · Vert OS instrumentation (section views + order intent) — 2026-06-26 -->
+<script defer src="/js/la-farmacia-track.js?v=20260626"></script>
 
 <!-- privacy link for ad-policy compliance -->
 <div style="text-align:center;padding:8px;"><a href="/privacidad" class="footer-legal-link" style="opacity:0.6;font-size:0.7rem;">Privacy Policy</a></div>

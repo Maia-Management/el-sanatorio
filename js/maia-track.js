@@ -70,6 +70,20 @@
       locale: (document.documentElement.lang || 'es-CO'),
       ts: new Date().toISOString(),
     };
+    // Vert OS sub-brand tagging (2026-06-26 — La Farmacia launch).
+    // Any page that wants its events bucketed under a sub-brand sets
+    // window.MAIA_SUB_BRAND (and optionally MAIA_SURFACE) before this
+    // script loads. Tags are merged into EVERY outbound event so the
+    // canonical event log can filter by sub_brand without rewriting it
+    // per-event at the call site.
+    try {
+      if (window.MAIA_SUB_BRAND && !eventProps.sub_brand) {
+        eventProps.sub_brand = String(window.MAIA_SUB_BRAND).slice(0, 32);
+      }
+      if (window.MAIA_SURFACE && !eventProps.surface) {
+        eventProps.surface = String(window.MAIA_SURFACE).slice(0, 64);
+      }
+    } catch {}
     const utm = readUtm();
     if (utm) Object.assign(eventProps, utm);
 

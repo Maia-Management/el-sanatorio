@@ -129,9 +129,22 @@ export default async (req) => {
   };
 
   // ── Vert OS canonical event log ─────────────────────────────────────
+  // When the client-side tag identifies a sub-brand surface (e.g.
+  // /la-farmacia/ sets MAIA_SUB_BRAND='la_farmacia'), route the
+  // interaction under that sub-brand bucket so Vert dashboards and
+  // cross-brand attribution see it as a first-class brand surface.
+  // The interactions table's brand CHECK constraint allows the sub-brand.
+  const SUB_BRAND_TO_INTERACTION_BRAND = {
+    la_farmacia:   'la_farmacia',
+    chuzo_tokyo:   'chuzo_tokyo',
+  };
   const writeVert = async () => {
     try {
       const geo = geoFromRequest(req);
+      const subBrand = typeof props?.sub_brand === 'string' ? props.sub_brand : null;
+      const brandOverride = subBrand && SUB_BRAND_TO_INTERACTION_BRAND[subBrand]
+        ? SUB_BRAND_TO_INTERACTION_BRAND[subBrand]
+        : undefined;
       await recordInteraction({
         kind: name,
         source: 'web',
@@ -148,6 +161,7 @@ export default async (req) => {
           gclid: props?.gclid,
         },
         payload: props || {},
+        brand: brandOverride,
       });
     } catch {}
   };
