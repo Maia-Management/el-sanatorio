@@ -8,10 +8,13 @@
    - SUPABASE_URL          (is_secret: false — URLs are not secret)
    - SUPABASE_ANON_KEY     (is_secret: true — high-entropy)
 
-   Reads from public.el_sanatorio_bookings — table per
-   MAIA-BOT-RECEPTIONIST-PERSONA-2026-06-21.md §implementation. If the
-   table doesn't exist yet, returns empty busy_dates so UI still renders
-   all nights as available (degraded but functional).
+   Reads from public.el_sanatorio_busy_nights — a security-barrier VIEW
+   (migration 20260625220000) that exposes ONLY booking_date + party_size
+   + zone for confirmed/arrived future bookings. The base table
+   el_sanatorio_bookings is service_role-only because it holds PII
+   (customer_name, whatsapp, email, notes, total_cop, etc.).
+   If the view doesn't exist yet, returns empty busy_dates so UI still
+   renders all nights as available (degraded but functional).
 
    Bucket logic: a night is BUSY when confirmed bookings reach the 30%
    capacity tier from SANATORIO-PHASE-1-OPERATIONAL-PLAN-v2 §4.4 (30/100
@@ -51,16 +54,13 @@ export default async (request) => {
   const horizon = new Date(today); horizon.setDate(today.getDate() + 30);
 
   try {
-    // PostgREST select with date filter — aggregate by booking_date.
-    // Schema source-of-truth: 20260621000001_sanatorio_bookings_phase_a.sql
-    //   booking_date (DATE) + booking_status IN
-    //   ('pending_deposit','confirmed','arrived','completed','no_show',
-    //    'cancelled_by_guest','cancelled_by_venue').
-    // For the public busy-calendar we only count rows whose deposit has
-    // been paid (booking_status IN confirmed,arrived). 'completed' is
-    // past dates so it's filtered out by the date window anyway; we
-    // intentionally exclude it from the IN list to match the RLS policy.
-    const url = `${supaUrl.replace(/\/$/, '')}/rest/v1/el_sanatorio_bookings?select=booking_date,party_size&booking_date=gte.${today.toISOString().slice(0,10)}&booking_date=lte.${horizon.toISOString().slice(0,10)}&booking_status=in.(confirmed,arrived)`;
+    // PostgREST select against the SECURITY-BARRIER VIEW (no PII).
+    // Migration source-of-truth: 20260625220000_sanatorio_bookings_security_barrier_view.sql
+    //   el_sanatorio_busy_nights (booking_date, party_size, zone)
+    // The view's WHERE clause already restricts to
+    // booking_status IN ('confirmed','arrived') AND booking_date >= current_date,
+    // so we only need to add the upper-bound date filter for the 30-day horizon.
+    const url = `${supaUrl.replace(/\/$/, '')}/rest/v1/el_sanatorio_busy_nights?select=booking_date,party_size&booking_date=lte.${horizon.toISOString().slice(0,10)}`;
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 5000);
     const res = await fetch(url, {
