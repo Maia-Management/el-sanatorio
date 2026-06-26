@@ -6,17 +6,27 @@
  * maia-management/netlify/functions/lib/cross-brand-feeders/rules.mjs
  * (rule v1-sanatorio-to-sushipop listens for event_type=wifi_portal_signup).
  *
+ * Architecture (corrected 2026-06-26 PM):
+ *   El Sanatorio Wi-Fi is OPEN — no WPA2 password. Like McDonald's / airport.
+ *   Guest connects to SSID "El Sanatorio Wi-Fi" → captive portal redirects to /wifi/
+ *   → submits name + phone + email + Habeas Data consent → we capture the lead
+ *   into Vert OS → return { ok:true, redirect:"/menu/" } and the router-side
+ *   captive portal (UniFi/MikroTik/whatever venue uses) authorizes their MAC.
+ *
+ *   Therefore: NO WIFI_GUEST_PASSWORD env var required. No password is ever
+ *   shown to guests. The router-side network grant is a separate venue config
+ *   (not handled in this function).
+ *
  * Flow:
  *   1. Validate body + honeypot.
  *   2. syncToCustomerActivity → upsert into customer_activity (brand=el_sanatorio).
  *   3. recordInteraction(kind=wifi_portal_signup) → insert into interactions.
  *      This is the canonical signal the cross-brand feeder cron reads.
- *   4. Return { ok:true, wifi_password } so the page can display it.
+ *   4. Return { ok:true, redirect:"/menu/" } so the page advances the guest.
  *
  * Required env vars on the el-sanatorio Netlify site:
  *   SUPABASE_URL
  *   SUPABASE_SERVICE_ROLE_KEY
- *   WIFI_GUEST_PASSWORD       ← the actual WPA2 PSK shown to guests
  */
 
 import {
@@ -42,10 +52,9 @@ export default async (req) => {
   }
 
   // Required env — must be set on Netlify project.
-  const wifiPassword = env('WIFI_GUEST_PASSWORD');
-  if (!wifiPassword) {
-    return json({ error: 'Server misconfigured: WIFI_GUEST_PASSWORD not set' }, 500);
-  }
+  // NOTE: WIFI_GUEST_PASSWORD is intentionally NOT required. The Wi-Fi network
+  // is open (captive-portal pattern). Router-side MAC authorization is a
+  // separate venue config and is not handled by this function.
   if (!env('SUPABASE_URL') || !env('SUPABASE_SERVICE_ROLE_KEY')) {
     return json({ error: 'Server misconfigured: Supabase env missing' }, 500);
   }
@@ -117,7 +126,9 @@ export default async (req) => {
 
   return json({
     ok: true,
-    wifi_password: wifiPassword,
+    redirect: '/menu/',
+    ssid: ssid,
+    message: '¡Listo! Estás conectado. Disfruta el menú.',
   });
 };
 

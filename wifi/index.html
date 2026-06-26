@@ -21,7 +21,7 @@
 
   <!-- Customer-identity layer (Google SSO via Supabase Auth) -->
   <meta name="supabase-url" content="https://nxgndsnxugcevwriljlv.supabase.co" />
-  <meta name="supabase-anon-key" content="REPLACE_WITH_ANON_KEY_AT_DEPLOY" />
+  <meta name="supabase-anon-key" content="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54Z25kc254dWdjZXZ3cmlsamx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MTYzNzMsImV4cCI6MjA5NTI5MjM3M30.Zyn34zkO2-EAkA7EUMQ6wSwJ5oRnrF0BKtibIec4dpk" />
 
   <style>
     :root {
@@ -295,13 +295,9 @@
 
       <section class="wifi-success" id="wifi-success" aria-live="polite">
         <div class="check">✓</div>
-        <h2>Conexión autorizada</h2>
-        <p>Usa esta contraseña para entrar a la red <strong>El Sanatorio Wi-Fi</strong>:</p>
-        <div class="password-box">
-          <code id="password-out">—</code>
-        </div>
-        <button class="btn-copy" id="copy-btn" type="button">Copiar contraseña</button>
-        <p class="redirect-note">Te llevamos a la carta del bar en unos segundos…</p>
+        <h2>¡Estás conectado!</h2>
+        <p>Bienvenido a <strong>El Sanatorio Wi-Fi</strong>. Ya puedes navegar.</p>
+        <p class="redirect-note">Te llevamos a la carta del bar…</p>
       </section>
 
       <p class="wifi-footer">EL SANATORIO S.A.S. · Santa Marta</p>
@@ -317,14 +313,12 @@
       const errEl = document.getElementById('error-msg');
       const successEl = document.getElementById('wifi-success');
       const btn = document.getElementById('submit-btn');
-      const pwOut = document.getElementById('password-out');
-      const copyBtn = document.getElementById('copy-btn');
       const googleBlock = document.getElementById('wifi-google-block');
       const googleBtn = document.getElementById('google-signin-btn');
 
-      // Google fast-path: if a Supabase session already exists, skip the form
-      // and call /api/wifi-grant directly.
-      function showSuccess(password, displayName) {
+      // Open captive-portal pattern — no static password. Capture the lead,
+      // show success, redirect to menu.
+      function showSuccess(redirectUrl, displayName) {
         if (googleBlock) googleBlock.style.display = 'none';
         form.style.display = 'none';
         if (displayName) {
@@ -333,12 +327,9 @@
           greet.textContent = '¡Hola, ' + displayName + '!';
           successEl.insertBefore(greet, successEl.firstChild);
         }
-        pwOut.textContent = password || '—';
         successEl.classList.add('is-on');
-        if (password && navigator.clipboard) {
-          navigator.clipboard.writeText(password).catch(function () {});
-        }
-        setTimeout(function () { window.location.href = '/menu/bar/'; }, 8000);
+        const dest = redirectUrl || '/menu/bar/';
+        setTimeout(function () { window.location.href = dest; }, 3000);
       }
 
       function tryAutoGrant() {
@@ -360,7 +351,7 @@
           .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, body: j }; }); })
           .then(function (resp) {
             if (resp.status === 200 && resp.body.ok) {
-              showSuccess(resp.body.wifi_password, resp.body.display_name);
+              showSuccess(resp.body.redirect, resp.body.display_name);
               return true;
             }
             return false;
@@ -433,34 +424,20 @@
             return fail('Hubo un problema. Refresca la página e intenta de nuevo.');
           }
 
-          // Success
+          // Success — open captive-portal flow, no password to display.
           form.style.display = 'none';
-          pwOut.textContent = data.wifi_password || '—';
           successEl.classList.add('is-on');
 
-          // Auto-copy to clipboard (best-effort, no error if blocked)
-          if (data.wifi_password && navigator.clipboard) {
-            navigator.clipboard.writeText(data.wifi_password).catch(function () {});
-          }
-
+          const dest = data.redirect || '/menu/bar/';
           setTimeout(function () {
-            window.location.href = '/menu/bar/';
-          }, 8000);
+            window.location.href = dest;
+          }, 3000);
         } catch (e) {
           fail('Conexión interrumpida. Intenta de nuevo.');
         }
       });
 
-      copyBtn.addEventListener('click', function () {
-        const txt = pwOut.textContent;
-        if (!txt || txt === '—') return;
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(txt).then(function () {
-            copyBtn.textContent = '¡Copiado!';
-            setTimeout(function () { copyBtn.textContent = 'Copiar contraseña'; }, 2000);
-          });
-        }
-      });
+      // Legacy copy button removed from DOM — open-portal flow doesn't need it.
     })();
   </script>
 </body>
