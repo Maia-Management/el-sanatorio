@@ -62,6 +62,9 @@
 /api/sanatorio-booking-lookup          https://maia-management.com/.netlify/functions/sanatorio-booking-lookup  200
 /api/wompi-booking-webhook             https://maia-management.com/.netlify/functions/wompi-booking-webhook  200
 
+# Post-visit feedback submit endpoint (2026-06-26) — backs /feedback page.
+/api/sanatorio-feedback-submit         https://maia-management.com/.netlify/functions/sanatorio-feedback-submit  200
+
 # Shared PWA assets (CSS, JS, fonts, images used by pos/pay/kitchen/floor/dice/booking-pay)
 # REQUIRED — without this rule /pay, /dice, /booking-pay render blank because brand.css +
 # menu.js are referenced as absolute /vert/restaurant/sanatorio/shared/* paths.

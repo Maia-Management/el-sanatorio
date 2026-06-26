@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0806" />
+
+  <title>¿Cómo te fue? · El Sanatorio</title>
+  <meta name="description" content="Cuéntanos cómo te fue anoche en El Sanatorio. 30 segundos." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Inter:wght@400;500;600;700&family=Special+Elite&display=swap" />
+  <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260626a" />
+
+  <style>
+    :root {
+      --gold: #b8960c;
+      --gold-bright: #d9b020;
+      --bone: #f5f5f0;
+      --ink: #0a0806;
+      --ink-soft: #15110d;
+      --line: rgba(184, 150, 12, 0.25);
+      --line-strong: rgba(184, 150, 12, 0.55);
+      --rose: #c47a7a;
+      --green: #6e8e5b;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--ink);
+      color: var(--bone);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .shell {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      background:
+        radial-gradient(ellipse at top, rgba(184, 150, 12, 0.08) 0%, transparent 55%),
+        var(--ink);
+    }
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: var(--ink-soft);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1.75rem 1.25rem 2rem;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+    .mark {
+      font-family: 'Special Elite', monospace;
+      letter-spacing: 0.25em;
+      font-size: 0.65rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(1.6rem, 5.5vw, 2rem);
+      line-height: 1.15;
+      margin: 0 0 0.4rem;
+      text-align: center;
+      color: var(--bone);
+    }
+    .sub {
+      font-family: 'Special Elite', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: rgba(245, 245, 240, 0.62);
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0 0 1.5rem;
+    }
+    /* ---- STAR GRID ---- */
+    .stars {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.45rem;
+      margin: 0.5rem 0 1.25rem;
+    }
+    .star-btn {
+      appearance: none;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 80px;
+      width: 100%;
+      background: rgba(245, 245, 240, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: var(--gold);
+      font-size: 2.1rem;
+      font-family: 'Fraunces', serif;
+      line-height: 1;
+      padding: 0;
+      cursor: pointer;
+      transition: background 120ms, border-color 120ms, transform 80ms;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .star-btn:active {
+      transform: scale(0.96);
+      background: rgba(184, 150, 12, 0.18);
+      border-color: var(--line-strong);
+    }
+    .star-btn.selected {
+      background: rgba(184, 150, 12, 0.22);
+      border-color: var(--gold);
+      color: var(--gold-bright);
+    }
+    .star-label {
+      display: block;
+      font-family: 'Special Elite', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      color: rgba(245, 245, 240, 0.5);
+      text-align: center;
+      margin-top: -0.35rem;
+      margin-bottom: 1rem;
+    }
+    /* ---- COMMENT ---- */
+    .field {
+      margin: 0 0 1rem;
+    }
+    .field label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245, 245, 240, 0.68);
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      background: rgba(245, 245, 240, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 0.75rem 0.9rem;
+      color: var(--bone);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      resize: vertical;
+      transition: border-color 120ms;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(184, 150, 12, 0.06);
+    }
+    /* ---- BUTTONS ---- */
+    .btn {
+      display: block;
+      width: 100%;
+      min-height: 56px;
+      padding: 1rem 1.25rem;
+      background: var(--gold);
+      color: var(--ink);
+      border: 0;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 120ms, transform 80ms;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn:hover { background: var(--gold-bright); }
+    .btn[disabled] {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .btn.secondary {
+      background: transparent;
+      color: var(--bone);
+      border: 1px solid var(--line-strong);
+    }
+    .btn.secondary:hover {
+      background: rgba(184, 150, 12, 0.08);
+    }
+    .btn + .btn { margin-top: 0.7rem; }
+    /* ---- STATES ---- */
+    .hidden { display: none !important; }
+    .state-message {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      color: var(--bone);
+      text-align: center;
+      margin: 0.5rem 0 1.5rem;
+    }
+    .state-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: rgba(245, 245, 240, 0.7);
+      text-align: center;
+      margin: 0 0 1.25rem;
+    }
+    .err {
+      color: var(--rose);
+      font-size: 0.85rem;
+      text-align: center;
+      margin: 0.4rem 0 0;
+      min-height: 1.1rem;
+    }
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(10, 8, 6, 0.25);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: -3px;
+      margin-right: 0.5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="card">
+
+      <!-- ===== STATE 1: rating picker ===== -->
+      <section id="state-rate">
+        <div class="mark">El Sanatorio · 30 seg</div>
+        <h1>¿Cómo te fue?</h1>
+        <p class="sub">Hortensia te pregunta</p>
+
+        <div class="stars" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
+          <button type="button" class="star-btn" data-rating="1" aria-label="1 estrella">★</button>
+          <button type="button" class="star-btn" data-rating="2" aria-label="2 estrellas">★★</button>
+          <button type="button" class="star-btn" data-rating="3" aria-label="3 estrellas">★★★</button>
+          <button type="button" class="star-btn" data-rating="4" aria-label="4 estrellas">★★★★</button>
+          <button type="button" class="star-btn" data-rating="5" aria-label="5 estrellas">★★★★★</button>
+        </div>
+        <div class="star-label" id="rating-label">Toca una estrella</div>
+
+        <div class="field">
+          <label for="comment">¿Algo más? (opcional)</label>
+          <textarea id="comment" maxlength="2000" placeholder="Cuéntanos en una línea…"></textarea>
+        </div>
+
+        <button type="button" class="btn" id="btn-submit" disabled>
+          Enviar
+        </button>
+        <p class="err" id="form-err"></p>
+      </section>
+
+      <!-- ===== STATE 2: 4-5 star → GBP review CTA ===== -->
+      <section id="state-positive" class="hidden">
+        <div class="mark" style="color: var(--green);">Gracias · Thank you</div>
+        <h1>¡Mil gracias!</h1>
+        <p class="state-sub">¿Nos ayudas con una reseña en Google? Toma 20 segundos y vale oro para nosotros.</p>
+        <a id="gbp-link" class="btn" href="#" target="_blank" rel="noopener">
+          Dejar reseña en Google
+        </a>
+        <a class="btn secondary" href="/">Volver a El Sanatorio</a>
+      </section>
+
+      <!-- ===== STATE 3: 1-3 star → contact CTA ===== -->
+      <section id="state-negative" class="hidden">
+        <div class="mark" style="color: var(--rose);">Gracias por contarnos</div>
+        <h1>Lo sentimos.</h1>
+        <p class="state-sub">Andrew o Luz te van a contactar pronto para resolver lo que pasó. Si quieres, escríbenos ya por WhatsApp.</p>
+        <a id="wa-link" class="btn" href="https://wa.me/19034598763" target="_blank" rel="noopener">
+          Hablar ya por WhatsApp
+        </a>
+        <a class="btn secondary" href="/">Volver a El Sanatorio</a>
+      </section>
+
+      <!-- ===== STATE 4: error fallback ===== -->
+      <section id="state-error" class="hidden">
+        <div class="mark" style="color: var(--rose);">Algo falló</div>
+        <h1>No pudimos guardar tu mensaje.</h1>
+        <p class="state-sub">Cuéntanoslo directamente por WhatsApp — Hortensia o Andrew te contestan.</p>
+        <a class="btn" href="https://wa.me/19034598763" target="_blank" rel="noopener">
+          Escribir por WhatsApp
+        </a>
+        <a class="btn secondary" href="/feedback">Reintentar</a>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // -------- read booking_ref from ?b=... --------
+      var qs = new URLSearchParams(window.location.search);
+      var bookingRef = (qs.get('b') || '').trim();
+
+      var sections = {
+        rate: document.getElementById('state-rate'),
+        positive: document.getElementById('state-positive'),
+        negative: document.getElementById('state-negative'),
+        error: document.getElementById('state-error')
+      };
+      function show(name) {
+        Object.keys(sections).forEach(function (k) {
+          sections[k].classList.toggle('hidden', k !== name);
+        });
+      }
+
+      var ratingButtons = Array.prototype.slice.call(document.querySelectorAll('.star-btn'));
+      var ratingLabel = document.getElementById('rating-label');
+      var submitBtn = document.getElementById('btn-submit');
+      var commentEl = document.getElementById('comment');
+      var errEl = document.getElementById('form-err');
+      var gbpLink = document.getElementById('gbp-link');
+
+      var selectedRating = null;
+      var sending = false;
+
+      var labelMap = {
+        1: '★ Muy mal — gracias por contarnos',
+        2: '★★ Mal — vamos a revisar',
+        3: '★★★ Regular',
+        4: '★★★★ Bien',
+        5: '★★★★★ Excelente'
+      };
+
+      ratingButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var r = Number(btn.getAttribute('data-rating'));
+          selectedRating = r;
+          ratingButtons.forEach(function (b) {
+            var bv = Number(b.getAttribute('data-rating'));
+            b.classList.toggle('selected', bv <= r);
+          });
+          ratingLabel.textContent = labelMap[r] || 'Toca una estrella';
+          submitBtn.disabled = false;
+          errEl.textContent = '';
+        });
+      });
+
+      submitBtn.addEventListener('click', function () {
+        if (sending) return;
+        if (!selectedRating) {
+          errEl.textContent = 'Toca una estrella primero.';
+          return;
+        }
+        if (!bookingRef) {
+          errEl.textContent = 'Falta tu código de reserva. Abre el link desde el mensaje de Hortensia.';
+          return;
+        }
+        sending = true;
+        var originalLabel = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="spinner"></span>Enviando…';
+        submitBtn.disabled = true;
+
+        var body = {
+          booking_ref: bookingRef,
+          rating_1_5: selectedRating,
+          comment_text: commentEl.value.trim() || null
+        };
+
+        fetch('/api/sanatorio-feedback-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        })
+          .then(function (res) {
+            return res.json().then(function (data) {
+              return { ok: res.ok, status: res.status, data: data };
+            });
+          })
+          .then(function (result) {
+            sending = false;
+            submitBtn.innerHTML = originalLabel;
+            if (!result.ok || !result.data || !result.data.ok) {
+              throw new Error(result.data && result.data.error || 'submit_failed');
+            }
+            if (selectedRating >= 4) {
+              if (result.data.redirect) {
+                gbpLink.setAttribute('href', result.data.redirect);
+              }
+              show('positive');
+            } else {
+              show('negative');
+            }
+          })
+          .catch(function (err) {
+            console.warn('[feedback] submit failed:', err && err.message);
+            sending = false;
+            submitBtn.innerHTML = originalLabel;
+            submitBtn.disabled = false;
+            show('error');
+          });
+      });
+
+      // If no booking_ref at all, leave the form alive but warn on submit.
+      // The link should normally include ?b=SAN-XXXX.
+    })();
+  </script>
+</body>
+</html>
