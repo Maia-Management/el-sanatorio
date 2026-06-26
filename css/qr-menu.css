@@ -547,6 +547,40 @@ body[data-theme="bar"] .qr-hero {
   background-image: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
 }
 
+/* ── Mobile touch targets (≥44×44px, P0 single-thumb ordering) ───
+   Per mobile UX audit 2026-06-25 PM. The .qr-item__order "Pedir 1"
+   buttons were measured at 83×24px which fails WCAG/Apple/Google
+   minimum target size (44×44px). Triggers on coarse pointers OR
+   ≤768px viewport. Also bumps secondary tap targets and respects
+   iPhone safe-area-inset for the floating WA + sticky cart. */
+@media (pointer: coarse), (max-width: 768px) {
+  .qr-item__order {
+    padding: 12px 18px;
+    font-size: 0.72rem;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .qr-menu__add, .qr-menu__remove {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 14px;
+  }
+  /* Secondary tap targets that were sub-44px */
+  .qr-top__sound {
+    width: 44px; height: 44px;
+  }
+  .qr-top__lang {
+    padding: 10px 14px;
+    min-height: 44px;
+    display: inline-flex; align-items: center;
+  }
+  /* sticky cart bar + floating WA respect iPhone safe area */
+  .qr-cart, .qr-wa-float {
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    right: calc(16px + env(safe-area-inset-right, 0px));
+  }
+}
+
 /* ── Mobile tuning (≤480px) ──────────────────────────────────────── */
 @media (max-width: 480px) {
   .qr-item { grid-template-columns: auto 1fr; }
