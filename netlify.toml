@@ -145,13 +145,9 @@
 # /lp/cuidadores: Cuidadores 2-por-1 offer is SOCIAL-MEDIA-ONLY per
 # reference_el_sanatorio_pricing_canonical_2026_06_24_pm.md — must not
 # be a public web surface.
+# Duplicate /menu.html → /menu/ rule removed 2026-06-25 PM SEO sweep
+# (shadowed by earlier /menu.html → /menu rule at top of file)
 # ============================================================================
-[[redirects]]
-  from = "/menu.html"
-  to = "/menu/"
-  status = 301
-  force = true
-
 [[redirects]]
   from = "/index-legacy"
   to = "/404.html"
@@ -288,7 +284,7 @@
 
 [[redirects]]
   from = "/privacy"
-  to = "/privacidad"
+  to = "/privacidad.html"
   status = 301
   force = true
 
