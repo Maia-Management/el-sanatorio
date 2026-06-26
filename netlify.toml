@@ -2,6 +2,17 @@
   publish = "."
   functions = "netlify/functions"
 
+[build.environment]
+  # Firebase Web API key (apiKey "AIzaSy..." in /firebase-config.json) is a
+  # PUBLISHABLE client-side key — restricted server-side by Firebase Security
+  # Rules + HTTP referrer locks, not by secrecy. Netlify's enhanced secret
+  # scanner flags every AIza* prefix as a leak; whitelist the file to unblock
+  # builds. Hardened 2026-06-26 (PR #31 was failing on this).
+  SECRETS_SCAN_OMIT_PATHS = "firebase-config.json,**/firebase-config.json"
+  # Also omit the apiKey value itself in case it ends up in build artifacts
+  # (compiled bundles inlining the config). Safe — same publishable key.
+  SECRETS_SCAN_OMIT_KEYS = "apiKey,FIREBASE_API_KEY"
+
 [functions]
   node_bundler = "esbuild"
 
