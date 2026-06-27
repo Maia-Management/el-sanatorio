@@ -4,13 +4,18 @@
  *
  * Signed-in fast-path for the WiFi captive portal. Skips the phone+name form
  * entirely — the customer already authenticated via Google + Supabase Auth,
- * so we just record the grant and return the password.
+ * so we record the grant and return success. The Wi-Fi network is open
+ * (captive-portal pattern, no static password) — router-side MAC
+ * authorization is a separate venue config.
  *
  * Replaces the form POST for authenticated users. The phone-form fallback at
  * /api/wifi-signup is still wired for users who decline Google.
  *
  * Required env:
- *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_JWT_SECRET, WIFI_GUEST_PASSWORD
+ *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_JWT_SECRET
+ *
+ * NOTE: WIFI_GUEST_PASSWORD is intentionally NOT required (architecture
+ * corrected 2026-06-26 PM).
  */
 
 import { readCustomerSession, jsonResponse } from './lib/customer-session.mjs';
@@ -39,8 +44,7 @@ export default async (req) => {
     return jsonResponse({ error: 'method_not_allowed' }, 405);
   }
 
-  const wifiPassword = env('WIFI_GUEST_PASSWORD');
-  if (!wifiPassword) return jsonResponse({ error: 'wifi_not_configured' }, 500);
+  // WIFI_GUEST_PASSWORD intentionally not required — open captive-portal pattern.
   if (!env('SUPABASE_URL') || !env('SUPABASE_SERVICE_ROLE_KEY')) {
     return jsonResponse({ error: 'server_misconfigured' }, 500);
   }
@@ -60,7 +64,7 @@ export default async (req) => {
       {
         method: 'PATCH',
         body: JSON.stringify({
-          wifi_password: wifiPassword,
+          wifi_granted_at: now,
           last_seen_at: now,
           updated_at: now,
         }),
@@ -94,9 +98,10 @@ export default async (req) => {
 
   return jsonResponse({
     ok: true,
-    wifi_password: wifiPassword,
+    redirect: '/menu/',
     ssid: 'El Sanatorio Wi-Fi',
     display_name: customer.display_name,
+    message: `¡Listo, ${customer.display_name || 'bienvenido'}! Estás conectado.`,
   });
 };
 

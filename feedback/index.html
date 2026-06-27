@@ -89,7 +89,7 @@
     /* ---- STAR GRID ---- */
     .stars {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 0.45rem;
       margin: 0.5rem 0 1.25rem;
     }
@@ -111,6 +111,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
     .star-btn:active {
       transform: scale(0.96);
@@ -248,10 +249,10 @@
 
         <div class="stars" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
           <button type="button" class="star-btn" data-rating="1" aria-label="1 estrella">★</button>
-          <button type="button" class="star-btn" data-rating="2" aria-label="2 estrellas">★★</button>
-          <button type="button" class="star-btn" data-rating="3" aria-label="3 estrellas">★★★</button>
-          <button type="button" class="star-btn" data-rating="4" aria-label="4 estrellas">★★★★</button>
-          <button type="button" class="star-btn" data-rating="5" aria-label="5 estrellas">★★★★★</button>
+          <button type="button" class="star-btn" data-rating="2" aria-label="2 estrellas">★</button>
+          <button type="button" class="star-btn" data-rating="3" aria-label="3 estrellas">★</button>
+          <button type="button" class="star-btn" data-rating="4" aria-label="4 estrellas">★</button>
+          <button type="button" class="star-btn" data-rating="5" aria-label="5 estrellas">★</button>
         </div>
         <div class="star-label" id="rating-label">Toca una estrella</div>
 
