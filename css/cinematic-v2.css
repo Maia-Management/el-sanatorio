@@ -507,10 +507,35 @@ input, textarea, select { font: inherit; color: inherit; }
   padding: 40px var(--gutter) 80px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 180, 80, 0.35) transparent;
+  /* Right-edge gradient signals scrollable content (otherwise users
+     never realise the reel scrolls and the cards look like they're
+     falling off the screen — caught 2026-06-27). */
+  -webkit-mask-image: linear-gradient(to right, black 0%, black calc(100% - 64px), transparent 100%);
+          mask-image: linear-gradient(to right, black 0%, black calc(100% - 64px), transparent 100%);
 }
-.asylum__reel::-webkit-scrollbar { display: none; }
+.asylum__reel::-webkit-scrollbar { height: 6px; }
+.asylum__reel::-webkit-scrollbar-track { background: transparent; }
+.asylum__reel::-webkit-scrollbar-thumb {
+  background: rgba(255, 180, 80, 0.35);
+  border-radius: 3px;
+}
+.asylum__reel::-webkit-scrollbar-thumb:hover { background: rgba(255, 180, 80, 0.55); }
+
+/* On wide desktop, drop the rail entirely and lay 4 cards as a grid
+   so nothing overflows. Keep the rail behavior below 1200px. */
+@media (min-width: 1200px) {
+  .asylum__reel {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    overflow-x: visible;
+    scroll-snap-type: none;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .asylum__reel > .patient-card { flex: initial; }
+}
 
 .patient-card {
   flex: 0 0 clamp(280px, 40vw, 460px);
