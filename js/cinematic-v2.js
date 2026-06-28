@@ -592,8 +592,9 @@
     // mark loaded only if at least one source resolves
     video.addEventListener('canplay', () => projection.classList.add('is-loaded'), { once: true });
     video.addEventListener('error', () => {
-      // keep placeholder
-      console.info('[Sanatorio] Dr. Silvio hero clip not yet commissioned — using Ektachrome placeholder.');
+      // hero clip not yet commissioned — silently fall back to the Ektachrome
+      // placeholder. Don't log to console; any visitor opening DevTools would
+      // see internal production notes.
     });
   }
 
