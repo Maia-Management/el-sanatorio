@@ -17,6 +17,6 @@
   "shortcuts": [
     {"name": "Chuzo Tokyo", "url": "/menu/chuzo", "description": "Yakitori para caminar"},
     {"name": "Barra del Sanatorio", "url": "/menu/bar", "description": "Cócteles y jeringas"},
-    {"name": "Admisiones", "url": "/menu/tickets", "description": "Reservar entrada"}
+    {"name": "Admisiones", "url": "/reservar", "description": "Reservar entrada"}
   ]
 }
