@@ -34,3 +34,12 @@ index.html.bak-*
 .gitignore.audit-tmp
 
 .audit-shots-*/
+
+# Playwright MCP runtime artifacts + ad-hoc agent screenshots
+.playwright-mcp/
+*-en-desktop.png
+*-en-mobile.png
+sanatorio-en-desktop.jpg
+sanatorio-en-mobile.jpg
+en-reservar-desktop.png
+la-farmacia-en-*.jpeg
