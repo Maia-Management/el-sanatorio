@@ -1,0 +1,2808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="/consent-banner.js?v=20260623" defer></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0806" />
+  <meta name="description" content="Host your private event at Santa Marta&rsquo;s immersive horror bar. Yakitori, macabre cocktails and a horror-soaked atmosphere. Intimate 22–28 capacity. Book now." />
+  <meta name="robots" content="index, follow" />
+  <title>Horror &amp; Private Events in Santa Marta | El Sanatorio</title>
+  <meta property="og:site_name" content="El Sanatorio" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Horror &amp; Private Events in Santa Marta | El Sanatorio" />
+  <meta property="og:description" content="Host your private event at Santa Marta&rsquo;s horror bar. Yakitori, macabre cocktails and a horror-soaked atmosphere. Groups from 10 people. Book now." />
+  <meta property="og:url"         content="https://el-sanatorio.com/en/events/" />
+  <meta property="og:image"       content="https://el-sanatorio.com/images/og-image.jpg" />
+  <meta property="og:image:alt"   content="El Sanatorio — Yakitori bar and horror experience in Santa Marta" />
+  <meta property="og:locale"      content="en_US"
+  <meta property="og:locale:alternate" content="es_CO" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@MaiaGroupCO" />
+  <meta name="twitter:creator"     content="@MaiaGroupCO" />
+  <meta name="twitter:image"       content="https://el-sanatorio.com/images/og-image.jpg" />
+  <link rel="canonical" href="https://el-sanatorio.com/en/events/" />
+  <link rel="author" href="https://el-sanatorio.com" />
+
+  <!-- Fonts — matching main site design system -->
+  <!-- Cohesion v2 brand tokens (loaded BEFORE style.css — non-destructive shim per EL-SANATORIO-BRAND-APPLICATION-SETUP-GUIDE-2026-06-01-PM.md §5) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260623c" />
+
+  <link rel="stylesheet" href="/css/style.css?v=20260623" />
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["LocalBusiness", "EventVenue", "BarOrPub"],
+        "@id": "https://el-sanatorio.com/#establishment",
+        "name": "El Sanatorio",
+        "description": "Horror bar, yakitori gastronomy and private-event space in the Centro Histórico of Santa Marta, Colombia.",
+        "url": "https://el-sanatorio.com",
+        "telephone": "+19034598763",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Calle 19 #4-23",
+          "addressLocality": "Santa Marta",
+          "addressRegion": "Magdalena",
+          "postalCode": "470001",
+          "addressCountry": "CO"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "11.2408",
+          "longitude": "-74.2110"
+        },
+        "image": "https://el-sanatorio.com/images/og-image.jpg",
+        "sameAs": ["https://www.instagram.com/elsanatorio.smr/"]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://el-sanatorio.com/en/events/#eventos-privados",
+        "name": "Private & Corporate Events at El Sanatorio",
+        "description": "El Sanatorio offers its horror and yakitori venue for private events, corporate gatherings and celebrations inside the former Hospital del Tórax (annex of the old Hospital San Juan de Dios) in the Centro Histórico of Santa Marta. A unique atmosphere of binchotan coals, signature cocktails and the horror labyrinth.",
+        "url": "https://el-sanatorio.com/en/events/",
+        "serviceType": "Private & Corporate Event Venue Hire",
+        "areaServed": {
+          "@type": "City",
+          "name": "Santa Marta"
+        },
+        "provider": {
+          "@type": "Organization",
+          "name": "El Sanatorio",
+          "url": "https://el-sanatorio.com"
+        },
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "url": "https://wa.me/19034598763",
+          "priceCurrency": "COP"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --negro:        #080808;
+      --negro-suave:  #0f0f0f;
+      --carbon:       #141414;
+      --humo:         #1a1a1a;
+      --sangre:       #b91c1c;
+      --sangre-viva:  #e05243;
+      --sangre-glow:  #e74c3c;
+      --oro-viejo:    #b8960c;
+      --oro:          #d4a017;
+      --oro-claro:    #e8c44a;
+      --marfil:       #f5f0e8;
+      --gris-ceniza:  #9a9a9a;
+      --gris-oscuro:  #3a3a3a;
+      --borde:        rgba(184, 150, 12, 0.25);
+      --borde-sangre: rgba(139, 0, 0, 0.4);
+      --font-titulo:  'Playfair Display', serif;
+      --font-subtit:  'Share Tech Mono', monospace;
+      --font-cuerpo:  'IM Fell English', serif;
+      --font-lit:     'IM Fell English', serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--negro);
+      color: var(--marfil);
+      font-family: var(--font-cuerpo);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--sangre);
+      color: var(--marfil);
+    }
+
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--negro); }
+    ::-webkit-scrollbar-thumb { background: var(--sangre); border-radius: 3px; }
+
+    /* ============================================================
+       TEXTURES & OVERLAYS
+    ============================================================ */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px 180px;
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.85) 70%, transparent 100%);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .nav-logo {
+      font-family: var(--font-titulo);
+      font-size: 1.1rem;
+      color: var(--oro);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-shadow: 0 0 20px rgba(212, 160, 23, 0.4);
+      transition: color 0.3s;
+    }
+
+    .nav-logo:hover { color: var(--oro-claro); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-subtit);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris-ceniza);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--oro);
+    }
+
+    .nav-links a.active {
+      border-bottom: 1px solid var(--sangre);
+      padding-bottom: 2px;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(139,0,0,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(8,8,8,0) 0%, var(--negro) 85%),
+        linear-gradient(180deg, var(--negro) 0%, #0a0000 50%, var(--negro) 100%);
+      z-index: 0;
+    }
+
+    /* Decorative candles glow */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle 150px at 15% 70%, rgba(212,160,23,0.07) 0%, transparent 100%),
+        radial-gradient(circle 150px at 85% 70%, rgba(212,160,23,0.07) 0%, transparent 100%);
+    }
+
+    .hero-ornament {
+      position: relative;
+      z-index: 1;
+      font-size: 1.4rem;
+      color: var(--sangre-viva);
+      letter-spacing: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.7;
+      text-shadow: 0 0 15px rgba(192,57,43,0.6);
+    }
+
+    .hero-eyebrow {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-subtit);
+      font-size: 0.65rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-titulo);
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--marfil);
+      text-shadow:
+        0 0 60px rgba(139,0,0,0.5),
+        0 0 120px rgba(139,0,0,0.2),
+        2px 2px 0 rgba(0,0,0,0.8);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero h1 span {
+      color: var(--sangre-viva);
+      text-shadow:
+        0 0 30px rgba(192,57,43,0.8),
+        0 0 60px rgba(192,57,43,0.4);
+    }
+
+    .hero-divider {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem auto;
+      width: min(500px, 90%);
+    }
+
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--oro-viejo), transparent);
+    }
+
+    .hero-divider-icon {
+      color: var(--sangre-viva);
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .hero-desc {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      color: var(--gris-ceniza);
+      max-width: 680px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta-group {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1rem 2.2rem;
+      background: var(--sangre);
+      color: var(--marfil);
+      font-family: var(--font-subtit);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--sangre-viva);
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--sangre-viva);
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+    }
+
+    .btn-primary:hover::before { transform: translateX(0); }
+    .btn-primary span { position: relative; z-index: 1; }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 30px rgba(192,57,43,0.5), 0 0 60px rgba(139,0,0,0.3);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1rem 2.2rem;
+      background: transparent;
+      color: var(--oro);
+      font-family: var(--font-subtit);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--borde);
+      transition: all 0.35s ease;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--oro);
+      color: var(--oro-claro);
+      box-shadow: 0 0 25px rgba(184,150,12,0.2);
+      background: rgba(184,150,12,0.05);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.5;
+    }
+
+    .scroll-indicator span {
+      font-family: var(--font-subtit);
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gris-ceniza);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(180deg, var(--oro-viejo), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 0.8; transform: scaleY(1.1); }
+    }
+
+    /* ============================================================
+       SECTION BASE
+    ============================================================ */
+    section {
+      padding: 7rem 2rem;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-subtit);
+      font-size: 0.6rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--sangre-viva);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--sangre-viva);
+    }
+
+    .section-title {
+      font-family: var(--font-titulo);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--marfil);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 0 40px rgba(139,0,0,0.3);
+    }
+
+    .section-title em {
+      color: var(--oro);
+      font-style: normal;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gris-ceniza);
+      max-width: 600px;
+      margin-bottom: 4rem;
+      line-height: 1.8;
+    }
+
+    .ornament-line {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .ornament-line::before,
+    .ornament-line::after {
+      content: '';
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: var(--borde);
+    }
+
+    .ornament-line-glyph {
+      color: var(--sangre-viva);
+      font-size: 1rem;
+      opacity: 0.6;
+    }
+
+    /* ============================================================
+       ABOUT SECTION (ESPACIO)
+    ============================================================ */
+    .espacio-section {
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(139,0,0,0.06) 0%, transparent 70%),
+        var(--negro-suave);
+      border-top: 1px solid var(--borde);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .espacio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .espacio-text p {
+      color: var(--gris-ceniza);
+      font-size: 0.95rem;
+      margin-bottom: 1.4rem;
+      line-height: 1.9;
+    }
+
+    .espacio-text p strong {
+      color: var(--marfil);
+      font-weight: 600;
+    }
+
+    .espacio-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .stat-card {
+      padding: 1.8rem 1.5rem;
+      border: 1px solid var(--borde);
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--sangre), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--borde-sangre);
+      background: rgba(139,0,0,0.04);
+    }
+
+    .stat-card:hover::before { opacity: 1; }
+
+    .stat-number {
+      font-family: var(--font-titulo);
+      font-size: 2.4rem;
+      color: var(--sangre-viva);
+      display: block;
+      text-shadow: 0 0 20px rgba(192,57,43,0.4);
+    }
+
+    .stat-label {
+      font-family: var(--font-subtit);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gris-ceniza);
+      display: block;
+      margin-top: 0.4rem;
+    }
+
+    .espacio-image-area {
+      position: relative;
+    }
+
+    /* Laura audit 2026-06-25 PM: previously this was an empty placeholder
+       (candle emoji + dark gradient). Now showing the real colonial
+       facade photo of the Sanatorio building. */
+    .espacio-image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background:
+        linear-gradient(180deg, rgba(10,4,4,0.20) 0%, rgba(10,4,4,0.55) 65%, rgba(10,4,4,0.92) 100%),
+        url('/images/sanatorio-fachada.webp') center/cover no-repeat,
+        linear-gradient(135deg, var(--humo) 0%, var(--carbon) 50%, #0a0000 100%);
+      border: 1px solid var(--borde);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 1.5rem;
+    }
+
+    .espacio-image-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 60% 30%, rgba(139,0,0,0.18) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .img-glyph {
+      display: none; /* redundant with real image */
+    }
+
+    .img-caption {
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--ek-paper, #efe3c8);
+      opacity: 0.92;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 1rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.85);
+    }
+
+    .espacio-image-placeholder::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(184,150,12,0.1);
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       PACKAGES SECTION
+    ============================================================ */
+    .packages-section {
+      background: var(--negro);
+    }
+
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--borde);
+      border: 1px solid var(--borde);
+    }
+
+    .package-card {
+      background: var(--negro);
+      padding: 3rem 2.5rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+    }
+
+    .package-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139,0,0,0.08) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .package-card:hover {
+      background: var(--carbon);
+    }
+
+    .package-card:hover::before { opacity: 1; }
+
+    .package-card.featured {
+      background: linear-gradient(180deg, #0d0000 0%, var(--carbon) 100%);
+    }
+
+    .package-card.featured::before { opacity: 1; }
+
+    .featured-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--sangre);
+      color: var(--marfil);
+      font-family: var(--font-subtit);
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid rgba(192,57,43,0.5);
+    }
+
+    .package-icon {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(139,0,0,0.5));
+    }
+
+    .package-name {
+      font-family: var(--font-titulo);
+      font-size: 1.2rem;
+      color: var(--oro);
+      margin-bottom: 0.4rem;
+      text-shadow: 0 0 15px rgba(184,150,12,0.3);
+    }
+
+    .package-tagline {
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--gris-ceniza);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .package-capacity {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--borde-sangre);
+      background: rgba(139,0,0,0.05);
+    }
+
+    .capacity-icon { font-size: 1rem; }
+
+    .capacity-text {
+      font-family: var(--font-subtit);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris-ceniza);
+    }
+
+    .capacity-text strong {
+      color: var(--marfil);
+      font-size: 0.8rem;
+    }
+
+    .package-includes {
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+
+    .package-includes li {
+      font-size: 0.88rem;
+      color: var(--gris-ceniza);
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      line-height: 1.5;
+    }
+
+    .package-includes li::before {
+      content: '·';
+      color: var(--sangre-viva);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .package-includes li:last-child { border-bottom: none; }
+
+    .package-price {
+      border-top: 1px solid var(--borde);
+      padding-top: 1.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .price-label {
+      font-family: var(--font-subtit);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gris-ceniza);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-value {
+      font-family: var(--font-titulo);
+      font-size: 1.5rem;
+      color: var(--marfil);
+    }
+
+    .price-unit {
+      font-family: var(--font-subtit);
+      font-size: 0.65rem;
+      color: var(--gris-ceniza);
+      margin-left: 0.4rem;
+      letter-spacing: 0.1em;
+    }
+
+    .package-cta {
+      display: block;
+      text-align: center;
+      padding: 0.9rem;
+      background: transparent;
+      border: 1px solid var(--borde);
+      color: var(--gris-ceniza);
+      font-family: var(--font-subtit);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.35s;
+    }
+
+    .package-cta:hover {
+      border-color: var(--sangre);
+      color: var(--marfil);
+      background: rgba(139,0,0,0.15);
+      box-shadow: 0 0 20px rgba(139,0,0,0.2);
+    }
+
+    .package-cta.primary-cta {
+      background: var(--sangre);
+      border-color: var(--sangre-viva);
+      color: var(--marfil);
+    }
+
+    .package-cta.primary-cta:hover {
+      background: var(--sangre-viva);
+      box-shadow: 0 0 30px rgba(192,57,43,0.5);
+    }
+
+    /* ============================================================
+       COCKTAIL MENU SECTION
+    ============================================================ */
+    .cocktails-section {
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(139,0,0,0.07) 0%, transparent 60%),
+        var(--negro-suave);
+      border-top: 1px solid var(--borde);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .cocktails-intro {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+      margin-bottom: 5rem;
+    }
+
+    .cocktails-menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--borde);
+    }
+
+    .cocktail-item {
+      padding: 2rem 2rem 1.8rem;
+      border-right: 1px solid var(--borde);
+      border-bottom: 1px solid var(--borde);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .cocktail-item:nth-child(even) { border-right: none; }
+    .cocktail-item:nth-last-child(-n+2) { border-bottom: none; }
+
+    .cocktail-item:hover { background: rgba(139,0,0,0.04); }
+
+    .cocktail-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--sangre);
+      transition: height 0.4s ease;
+    }
+
+    .cocktail-item:hover::before { height: 100%; }
+
+    .cocktail-emoji {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .cocktail-name {
+      font-family: var(--font-subtit);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: var(--oro);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .cocktail-desc {
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--gris-ceniza);
+      line-height: 1.6;
+    }
+
+    .cocktails-custom {
+      padding: 3rem;
+      border: 1px solid var(--borde);
+      background: rgba(139,0,0,0.04);
+      position: relative;
+    }
+
+    .cocktails-custom::before {
+      content: '"';
+      position: absolute;
+      top: -1.5rem;
+      left: 2rem;
+      font-family: var(--font-lit);
+      font-size: 6rem;
+      color: var(--sangre-viva);
+      opacity: 0.15;
+      line-height: 1;
+    }
+
+    .custom-title {
+      font-family: var(--font-titulo);
+      font-size: 1.3rem;
+      color: var(--marfil);
+      margin-bottom: 1rem;
+    }
+
+    .custom-desc {
+      font-size: 0.9rem;
+      color: var(--gris-ceniza);
+      line-height: 1.8;
+      margin-bottom: 1.8rem;
+    }
+
+    .custom-options {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+    }
+
+    .custom-options li {
+      font-size: 0.82rem;
+      color: var(--gris-ceniza);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .custom-options li::before {
+      content: '◆';
+      color: var(--sangre-viva);
+      font-size: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       YAKITORI / FOOD SECTION
+    ============================================================ */
+    .food-section {
+      background: var(--negro);
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--borde);
+      border: 1px solid var(--borde);
+      margin-bottom: 3rem;
+    }
+
+    .food-card {
+      background: var(--negro);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background 0.3s;
+    }
+
+    .food-card:hover { background: var(--carbon); }
+
+    .food-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .food-title {
+      font-family: var(--font-subtit);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 0.7rem;
+    }
+
+    .food-desc {
+      font-size: 0.82rem;
+      color: var(--gris-ceniza);
+      line-height: 1.7;
+    }
+
+    .food-note {
+      text-align: center;
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--gris-ceniza);
+    }
+
+    /* ============================================================
+       EXPERIENCE TIMELINE
+    ============================================================ */
+    .experience-section {
+      background:
+        radial-gradient(ellipse 60% 70% at 50% 50%, rgba(139,0,0,0.05) 0%, transparent 70%),
+        var(--negro-suave);
+      border-top: 1px solid var(--borde);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 2.5rem;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--sangre), var(--sangre), transparent);
+      opacity: 0.3;
+    }
+
+    .timeline-item {
+      text-align: center;
+      padding: 0 1.5rem 3rem;
+      position: relative;
+    }
+
+    .timeline-dot {
+      width: 5rem;
+      height: 5rem;
+      border: 1px solid var(--borde-sangre);
+      border-radius: 50%;
+      background: var(--carbon);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      border-color: var(--sangre);
+      background: rgba(139,0,0,0.1);
+    }
+
+    .timeline-step {
+      font-family: var(--font-subtit);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sangre-viva);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .timeline-title {
+      font-family: var(--font-subtit);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--marfil);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.8rem;
+      color: var(--gris-ceniza);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    .testimonials-section {
+      background: var(--negro);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--borde);
+      background: rgba(255,255,255,0.01);
+      position: relative;
+      transition: border-color 0.3s;
+    }
+
+    .testimonial-card::before {
+      content: '❝';
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 2.5rem;
+      color: var(--sangre-viva);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    .testimonial-card:hover { border-color: var(--borde-sangre); }
+
+    .testimonial-text {
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--gris-ceniza);
+      line-height: 1.8;
+      margin-bottom: 1.8rem;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .author-avatar {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--carbon);
+      border: 1px solid var(--borde-sangre);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-family: var(--font-subtit);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--marfil);
+      display: block;
+    }
+
+    .author-role {
+      font-size: 0.72rem;
+      color: var(--gris-ceniza);
+      display: block;
+    }
+
+    .stars {
+      color: var(--oro-viejo);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    .faq-section {
+      background: var(--negro-suave);
+      border-top: 1px solid var(--borde);
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .faq-item {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .faq-question {
+      font-family: var(--font-subtit);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--oro);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      line-height: 1.5;
+    }
+
+    .faq-question::before {
+      content: '?';
+      background: var(--sangre);
+      color: var(--marfil);
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .faq-answer {
+      font-size: 0.88rem;
+      color: var(--gris-ceniza);
+      line-height: 1.8;
+      padding-left: 2.1rem;
+    }
+
+    /* ============================================================
+       BOOKING / CTA SECTION
+    ============================================================ */
+    .booking-section {
+      background: var(--negro);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(139,0,0,0.12) 0%, transparent 70%);
+    }
+
+    .booking-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .booking-crown {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 20px rgba(212,160,23,0.4));
+    }
+
+    .booking-section .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1.5rem;
+    }
+
+    .booking-desc {
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gris-ceniza);
+      max-width: 550px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    .booking-cta-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.4rem 3rem;
+      background: var(--sangre);
+      color: var(--marfil);
+      font-family: var(--font-subtit);
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--sangre-viva);
+      margin-bottom: 2rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-cta-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--sangre-viva);
+      transform: translateX(-100%);
+      transition: transform 0.4s;
+    }
+
+    .booking-cta-main:hover::before { transform: translateX(0); }
+    .booking-cta-main span { position: relative; z-index: 1; }
+
+    .booking-cta-main:hover {
+      box-shadow:
+        0 0 40px rgba(192,57,43,0.6),
+        0 0 80px rgba(139,0,0,0.3);
+    }
+
+    .whatsapp-icon {
+      width: 1.4rem;
+      height: 1.4rem;
+      fill: currentColor;
+    }
+
+    .booking-meta {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-subtit);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris-ceniza);
+    }
+
+    .meta-icon {
+      font-size: 0.9rem;
+      color: var(--oro-viejo);
+    }
+
+    .booking-divider {
+      margin: 2rem auto;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: 400px;
+    }
+
+    .booking-divider::before,
+    .booking-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--borde);
+    }
+
+    .booking-or {
+      font-family: var(--font-subtit);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gris-ceniza);
+    }
+
+    .booking-alt {
+      font-size: 0.88rem;
+      color: var(--gris-ceniza);
+    }
+
+    .booking-alt a {
+      color: var(--oro);
+      text-decoration: none;
+      border-bottom: 1px solid var(--borde);
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .booking-alt a:hover {
+      color: var(--oro-claro);
+      border-color: var(--oro);
+    }
+
+    /* ============================================================
+       LOCATION SECTION
+    ============================================================ */
+    .location-section {
+      background: var(--negro-suave);
+      border-top: 1px solid var(--borde);
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .location-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .location-detail {
+      padding: 1.5rem;
+      border: 1px solid var(--borde);
+      background: rgba(255,255,255,0.01);
+    }
+
+    .detail-icon { font-size: 1.4rem; display: block; margin-bottom: 0.7rem; }
+
+    .detail-label {
+      font-family: var(--font-subtit);
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sangre-viva);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .detail-value {
+      font-size: 0.85rem;
+      color: var(--gris-ceniza);
+      line-height: 1.5;
+    }
+
+    /* Laura audit 2026-06-25 PM: previously a stylised empty box with
+       a pin emoji. Now a real Google Maps embed of the venue, with
+       brand sepia/grayscale filter so the colours match. */
+    .map-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--carbon);
+      border: 1px solid var(--borde);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-placeholder__embed {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(0.55) sepia(0.6) brightness(0.75) contrast(1.05) hue-rotate(-8deg);
+    }
+
+    .map-label {
+      position: absolute;
+      top: 14px; left: 14px;
+      font-family: var(--font-subtit);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--oro, #b8960c);
+      background: rgba(10, 4, 4, 0.78);
+      padding: 6px 10px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .map-placeholder__open {
+      position: absolute;
+      bottom: 14px; right: 14px;
+      font-family: var(--font-subtit);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--oro, #b8960c);
+      background: rgba(10, 4, 4, 0.82);
+      border: 1px solid rgba(184, 150, 12, 0.45);
+      padding: 6px 10px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 220ms, border-color 220ms;
+      z-index: 2;
+    }
+    .map-placeholder__open:hover,
+    .map-placeholder__open:focus-visible {
+      background: rgba(184, 150, 12, 0.18);
+      border-color: var(--oro, #b8960c);
+      outline: none;
+    }
+
+    /* Legacy class — kept hidden in case future templates reference it */
+    .map-pin { display: none; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: #050505;
+      border-top: 1px solid var(--borde);
+      padding: 4rem 2rem 2rem;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--borde);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand-logo {
+      font-family: var(--font-titulo);
+      font-size: 1.4rem;
+      color: var(--oro);
+      text-shadow: 0 0 20px rgba(212,160,23,0.3);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand-desc {
+      font-family: var(--font-lit);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--gris-ceniza);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.7rem;
+    }
+
+    .social-btn {
+      width: 2.2rem;
+      height: 2.2rem;
+      border: 1px solid var(--borde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--gris-ceniza);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .social-btn:hover {
+      border-color: var(--sangre);
+      color: var(--marfil);
+      background: rgba(139,0,0,0.1);
+    }
+
+    .footer-col-title {
+      font-family: var(--font-subtit);
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--oro-viejo);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .footer-col-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--borde);
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--gris-ceniza);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-links a::before {
+      content: '›';
+      color: var(--sangre-viva);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover { color: var(--marfil); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--gris-oscuro);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal a {
+      font-size: 0.72rem;
+      color: var(--gris-oscuro);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .footer-legal a:hover { color: var(--gris-ceniza); }
+
+    /* ============================================================
+       FLOATING WHATSAPP
+    ============================================================ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+    }
+
+    .wa-bubble {
+      background: #128C7E;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      font-family: var(--font-subtit);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.3s;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .whatsapp-float:hover .wa-bubble {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .wa-btn {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: waBounce 3s ease-in-out infinite;
+    }
+
+    .whatsapp-float:hover .wa-btn {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37,211,102,0.6);
+    }
+
+    @keyframes waBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* ============================================================
+       DECORATIVE ELEMENTS
+    ============================================================ */
+    .section-deco {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .section-deco::before,
+    .section-deco::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--borde), transparent);
+    }
+
+    .deco-glyph {
+      color: var(--sangre-viva);
+      font-size: 1.2rem;
+      opacity: 0.5;
+    }
+
+    /* Drip effect top border */
+    .drip-top {
+      position: relative;
+    }
+
+    .drip-top::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--sangre) 20%, var(--sangre-viva) 50%, var(--sangre) 80%, transparent);
+      box-shadow: 0 0 15px rgba(139,0,0,0.5);
+    }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .food-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before { display: none; }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cocktails-intro {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+
+      .nav-links { display: none; }
+
+      .espacio-grid,
+      .location-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .espacio-stats { grid-template-columns: 1fr 1fr; }
+
+      .cocktails-menu { grid-template-columns: 1fr; }
+      .cocktail-item:nth-child(even) { border-right: 1px solid var(--borde); }
+      .cocktail-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--borde); }
+      .cocktail-item:last-child { border-bottom: none; }
+
+      .food-grid { grid-template-columns: 1fr 1fr; }
+
+      .booking-meta { gap: 1.5rem; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      section { padding: 5rem 1.5rem; }
+
+      .timeline {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .location-details { grid-template-columns: 1fr; }
+
+      .custom-options { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .espacio-stats { grid-template-columns: 1fr; }
+      .food-grid { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: 1fr; }
+      .hero-cta-group { flex-direction: column; }
+      .btn-primary, .btn-outline { text-align: center; justify-content: center; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* ── Mobile nav ────────────────────────────────────────────── */
+    .ham-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      min-height: 44px;
+      min-width: 44px;
+      align-items: center;
+      justify-content: center;
+      color: var(--oro-claro, #c9a84c);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: #1a1208;
+      border-top: 1px solid var(--oro-claro, #c9a84c);
+      padding: 0.5rem 0;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      z-index: 9998;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--font-ui, sans-serif);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--crema, #f5f5f0);
+      text-decoration: none;
+      padding: 14px 24px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .mobile-nav a:hover { color: var(--oro-claro, #c9a84c); }
+    @media (max-width: 768px) {
+      .ham-btn { display: flex; }
+    }
+  </style>
+
+<link rel="stylesheet" href="/css/a11y-shim.css?v=20260623" />
+<!-- Meta Pixel — no-ops until SANATORIO_PIXEL_ID is set -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  window.SANATORIO_PIXEL_ID = window.SANATORIO_PIXEL_ID || "";
+  if (window.SANATORIO_PIXEL_ID) { fbq('init', window.SANATORIO_PIXEL_ID); fbq('track', 'PageView'); }
+  </script>
+<!-- GA4 (consent-gated by maia-track + consent-banner) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JZGDBW5K7Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JZGDBW5K7Q');
+  </script>
+
+<!-- Plausible Analytics — privacy-friendly metrics. Activates when "el-sanatorio.com" is added in your Plausible dashboard at plausible.io. -->
+  <script defer data-domain="el-sanatorio.com" src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+
+<!-- Hotjar — heatmaps + session recording. Paste your Hotjar Site ID below, then redeploy. (No-op while empty.) -->
+  <script>
+    window.HOTJAR_SITE_ID = window.HOTJAR_SITE_ID || ""; /* ← paste your Hotjar Site ID here (e.g. 5347789), then redeploy */
+    if (window.HOTJAR_SITE_ID) {
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:window.HOTJAR_SITE_ID,hjsv:6};
+        a=o.getElementsByTagName("head")[0];
+        r=o.createElement("script");r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
+    }
+  </script>
+</head>
+
+<body>
+<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Skip to main content</a>
+
+  <!-- Grain Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/19034598763?text=Hi%2C%20I%27d%20like%20to%20book%20an%20event%20at%20El%20Sanatorio"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="whatsapp-float">
+    <span class="wa-bubble">Book Event</span>
+    <span class="wa-btn" aria-hidden="true">🟢</span>
+  </a>
+
+<!-- ── Navigation ────────────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Primary navigation">
+  <div class="nav__inner">
+    <a href="/en/" class="nav__logo">
+      <span class="nav__logo-num"><span lang="es">PACIENTE 013</span></span>
+      <span class="nav__logo-name" data-glitch="EL SANATORIO"><span lang="es">EL SANATORIO</span></span>
+    </a>
+
+    <!-- Heart monitor -->
+    <div class="nav__monitor" aria-hidden="true">
+      <svg viewBox="0 0 300 36" preserveAspectRatio="none">
+        <path class="ekg-line" d="M 0,18 L 30,18 L 45,12 L 60,27 L 66,0 L 75,34 L 90,18 L 120,18 L 135,12 L 150,27 L 156,0 L 165,34 L 180,18 L 300,18" />
+      </svg>
+    </div>
+
+    <ul class="nav__links" role="list">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/menu/">Menu</a></li>
+      <li><a href="/en/experience/">Experience</a></li>
+      <li><a href="/en/events/" aria-current="page">Events</a></li>
+      <li><a href="/en/tours/">Tours</a></li>
+      <li><a href="/en/history/">History</a></li>
+      <li><a href="/en/contact/">Contact</a></li>
+      <li><a href="#reservar">Book</a></li>
+      <li><a href="/events" hreflang="es" lang="es">ES</a></li>
+    </ul>
+
+    <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<main id="main-content">
+
+<!-- Mobile menu -->
+<div class="nav__mobile-menu" id="nav-mobile-menu" role="navigation" aria-label="Mobile menu">
+  <a href="/en/">Home</a>
+  <a href="/en/menu/">Menu</a>
+  <a href="/en/experience/">Experience</a>
+  <a href="/en/events/">Events</a>
+  <a href="/en/tours/">Tours</a>
+  <a href="/en/history/">History</a>
+  <a href="/en/contact/">Contact</a>
+  <a href="#reservar">Book</a>
+</div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <p class="hero-ornament" aria-hidden="true">✦ ✦ ✦</p>
+    <p class="hero-eyebrow"><span lang="es">Centro Histórico</span> · Santa Marta · Colombia</p>
+
+    <h1 id="hero-heading">
+      Eventos<br /><span>Privados</span><br />&amp; Corporativos
+    </h1>
+
+    <div class="hero-divider" aria-hidden="true">
+      <span class="hero-divider-icon">☽</span>
+    </div>
+
+    <p class="hero-desc">
+      Where darkness has a taste. Celebrate inside the former <span lang="es">Hospital del Tórax</span> (annex of the old <span lang="es">Hospital San Juan de Dios</span>) — between yakitori coals, signature cocktails, and an atmosphere you won&rsquo;t forget.
+    </p>
+
+    <div class="hero-cta-group">
+      <a href="https://wa.me/19034598763?text=I%27d%20like%20info%20about%20private%20events%20at%20El%20Sanatorio"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn-primary">
+        <span>💬 Book on WhatsApp</span>
+      </a>
+      <a href="#paquetes" class="btn-outline">View Packages</a>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Descend</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ESPACIO SECTION
+  ============================================================ -->
+  <section class="espacio-section" id="espacio" aria-labelledby="espacio-heading">
+    <div class="container">
+      <div class="espacio-grid">
+
+        <div class="espacio-text">
+          <p class="section-label">The Space</p>
+          <h2 class="section-title" id="espacio-heading">
+            A Sanatorium<br />for your <em>Celebrations</em>
+          </h2>
+
+          <p>
+            Set in the heart of the <strong><span lang="es">Centro Histórico</span> of Santa Marta</strong>, <span lang="es">El Sanatorio</span> occupies the former <span lang="es">Hospital del Tórax</span> (annex of the old <span lang="es">Hospital San Juan de Dios</span>) — coral-stone walls, century-old arches, high ceilings that hold decades of clinical secrets.
+          </p>
+          <p>
+            The space has been designed to create <strong>unique experiences</strong>: the calculated dimness, the smoke from the coals, the ambient sound design and the curated horror staging turn every event into something between memorable and unsettling.
+          </p>
+          <p>
+            Ideal for <strong>high-impact birthdays</strong>, corporate dinners with character, bachelor/ette parties, brand launches, creative sessions, and any event that refuses to be ordinary.
+          </p>
+
+          <div class="espacio-stats">
+            <div class="stat-card">
+              <span class="stat-number">22–28</span>
+              <span class="stat-label">Intimate capacity</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">4</span>
+              <span class="stat-label">Zones (bar · patio · street · labyrinth)</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">S.XX</span>
+              <span class="stat-label">Former Hospital del Tórax</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">24h</span>
+              <span class="stat-label">Customisation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="espacio-image-area">
+          <div class="espacio-image-placeholder" role="img" aria-label="Interior of El Sanatorio — a colonial building with a horror-soaked atmosphere">
+            <span class="img-glyph" aria-hidden="true">🕯️</span>
+            <p class="img-caption">Coral-stone walls. Living shadows. <span lang="es">Centro Histórico</span>, Santa Marta.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PACKAGES SECTION
+  ============================================================ -->
+  <section class="packages-section drip-top" id="paquetes" aria-labelledby="paquetes-heading">
+    <div class="container">
+      <p class="section-label">Packages</p>
+      <h2 class="section-title" id="paquetes-heading">
+        Choose your <em>Sentence</em>
+      </h2>
+      <p class="section-subtitle">
+        Three rituals designed for different souls. Each includes the essence of <span lang="es">El Sanatorio</span>: darkness, fire and flavour.
+      </p>
+
+      <div class="packages-grid" role="list">
+
+        <!-- Package 1 -->
+        <article class="package-card" role="listitem">
+          <span class="package-icon" aria-hidden="true">🦇</span>
+          <h3 class="package-name"><span lang="es">La Cripta</span></h3>
+          <p class="package-tagline">
+            For intimate groups that want the experience in its purest form. Darkness on a human scale.
+          </p>
+
+          <div class="package-capacity">
+            <span class="capacity-icon" aria-hidden="true">👥</span>
+            <span class="capacity-text">
+              <strong>8 to 12 people</strong> · Bar Zone or Patio reserved
+            </span>
+          </div>
+
+          <ul class="package-includes" aria-label="Incluye">
+            <li>Exclusive Bar or Patio (3 hours)</li>
+            <li>Welcome shot of black sake per guest</li>
+            <li>Shared yakitori board — 6 skewers per guest</li>
+            <li>Themed welcome cocktail (1 per guest)</li>
+            <li>Basic dark décor included</li>
+            <li>Horror soundtrack curated by our resident</li>
+            <li>Dedicated event coordinator</li>
+          </ul>
+
+          <div class="package-price">
+            <span class="price-label">Desde</span>
+            <span class="price-value">Consultar<span class="price-unit">/ cotización personalizada</span></span>
+          </div>
+
+          <a href="https://wa.me/19034598763?text=I%27d%20like%20a%20quote%20for%20the%20La%20Cripta%20package%20at%20El%20Sanatorio"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="package-cta">
+            Request a Quote
+          </a>
+        </article>
+
+        <!-- Package 2 - Featured -->
+        <article class="package-card featured" role="listitem">
+          <span class="featured-badge">Más Solicitado</span>
+          <span class="package-icon" aria-hidden="true">💀</span>
+          <h3 class="package-name"><span lang="es">El Purgatorio</span></h3>
+          <p class="package-tagline">
+            The full experience. The perfect balance of refined horror, yakitori cuisine and liquid alchemy.
+          </p>
+
+          <div class="package-capacity">
+            <span class="capacity-icon" aria-hidden="true">👥</span>
+            <span class="capacity-text">
+              <strong>14 to 20 people</strong> · Bar + Patio + Street (3 zones)
+            </span>
+          </div>
+
+          <ul class="package-includes" aria-label="Incluye">
+            <li>Exclusive Bar + Patio + Street (4 hours)</li>
+            <li>Custom welcome cocktail + sake tasting menu</li>
+            <li>5-course yakitori menu — full skewer selection</li>
+            <li>Themed open cocktail bar (2 hours)</li>
+            <li>Custom horror staging built around your theme</li>
+            <li>Candle installation and dark floral arrangements</li>
+            <li>Professional sound system + DJ or curated playlist</li>
+            <li>30-min photo session with our photographer</li>
+            <li>Event coordinator + dedicated service staff</li>
+            <li>Printed menu personalised with the event name</li>
+          </ul>
+
+          <div class="package-price">
+            <span class="price-label">Desde</span>
+            <span class="price-value">Consultar<span class="price-unit">/ cotización personalizada</span></span>
+          </div>
+
+          <a href="https://wa.me/19034598763?text=I%27d%20like%20a%20quote%20for%20the%20El%20Purgatorio%20package%20at%20El%20Sanatorio"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="package-cta primary-cta">
+            💬 Book Now
+          </a>
+        </article>
+
+        <!-- Package 3 -->
+        <article class="package-card" role="listitem">
+          <span class="package-icon" aria-hidden="true">🕷️</span>
+          <h3 class="package-name"><span lang="es">El Infierno Total</span></h3>
+          <p class="package-tagline">
+            The full takeover of the Sanatorium. For those who recognise no limits and no budgets. Maximum experience.
+          </p>
+
+          <div class="package-capacity">
+            <span class="capacity-icon" aria-hidden="true">👥</span>
+            <span class="capacity-text">
+              <strong>22 to 28 people</strong> · 4 zones (Bar · Patio · Street · Labyrinth) — full capacity
+            </span>
+          </div>
+
+          <ul class="package-includes" aria-label="Incluye">
+            <li>Full exclusive buy-out of the Sanatorium — capacity 28 (5 hours + setup)</li>
+            <li>7-course tasting yakitori menu — curated selection</li>
+            <li>Unlimited open bar — cocktails + sake + craft beer</li>
+            <li>Signature cocktail created exclusively for your event</li>
+            <li>Full production design: lighting, décor, sound</li>
+            <li>Live themed horror actor or performer</li>
+            <li>Full photo + video coverage of the event</li>
+            <li>Personalised dark dessert table</li>
+            <li>Event branding: menus, signage, backdrops</li>
+            <li>Event manager + full service team</li>
+            <li>Extra hours available at additional cost</li>
+          </ul>
+
+          <div class="package-price">
+            <span class="price-label">Desde</span>
+            <span class="price-value">Consultar<span class="price-unit">/ cotización a medida</span></span>
+          </div>
+
+          <a href="https://wa.me/19034598763?text=I%27d%20like%20a%20quote%20for%20the%20El%20Infierno%20Total%20package%20at%20El%20Sanatorio"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="package-cta">
+            Request a Quote
+          </a>
+        </article>
+
+      </div>
+
+      <p style="text-align:center; margin-top:2.5rem; font-size:0.82rem; color:var(--gris-ceniza); font-family:var(--font-lit); font-style:italic;">
+        * All packages are customisable. Get in touch to adapt any ritual to your specific needs.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COCKTAIL SECTION
+  ============================================================ -->
+  <section class="cocktails-section" id="cocktails" aria-labelledby="cocktails-heading">
+    <div class="container">
+
+      <div class="cocktails-intro">
+        <div>
+          <p class="section-label">Cocktail Programme</p>
+          <h2 class="section-title" id="cocktails-heading">
+            Liquid<br /><em>Alchemy</em>
+          </h2>
+          <p class="section-subtitle">
+            Andrew, the doctor on shift behind the bar, prescribes potions designed to alter the senses. Every drink carries a dark story.
+          </p>
+
+          <div class="cocktails-custom">
+            <h3 class="custom-title">Custom Cocktail Menu</h3>
+            <p class="custom-desc">
+              For private events we design an exclusive cocktail menu carrying your event name, theme, and even your guests&rsquo; names if you like. We work with hand-picked spirits, house infusions, and avant-garde technique.
+            </p>
+            <ul class="custom-options" aria-label="Opciones de personalización">
+              <li>Signature cocktail named after the event</li>
+              <li>Selection of alcoholic and non-alcoholic bases</li>
+              <li>House botanical infusions</li>
+              <li>Sculpted-ice presentation</li>
+              <li>Themed horror garnish</li>
+              <li>Printed cocktail menu</li>
+            </ul>
+            <a href="https://wa.me/19034598763?text=I%27d%20like%20a%20custom%20cocktail%20menu%20for%20my%20event"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-primary">
+              <span>Design my menu</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="cocktails-menu" role="list">
+
+            <article class="cocktail-item" role="listitem">
+              <span class="cocktail-emoji" aria-hidden="true">🩸</span>
+              <h3 class="cocktail-name"><span lang="es">Sangre de Bruja</span></h3>
+              <p class="cocktail-desc">
+                Artisanal mezcal, hibiscus reduction, black chile, worm salt, passion-fruit foam. Fire without warning.
+              </p>
+            </article>
+
+            <article class="cocktail-item" role="listitem">
+              <span class="cocktail-emoji" aria-hidden="true">☠️</span>
+              <h3 class="cocktail-name"><span lang="es">Veneno del Pacífico</span></h3>
+              <p class="cocktail-desc">
+                Japanese gin, aloe, charred mint, sea water, caviar pearls. Elegant and lethal.
+              </p>
+            </article>
+
+            <article class="cocktail-item" role="listitem">
+              <span class="cocktail-emoji" aria-hidden="true">🕯️</span>
+              <h3 class="cocktail-name"><span lang="es">Exorcismo Blanco</span></h3>
+              <p class="cocktail-desc">
+                Jasmine-infused vodka, junmai sake, black lemon, egg white, activated charcoal. The dark hiding inside the pure.
+              </p>
+            </article>
+
+            <article class="cocktail-item" role="listitem">
+              <span class="cocktail-emoji" aria-hidden="true">🌑</span>
+              <h3 class="cocktail-name">Eclipse Negroni</h3>
+              <p class="cocktail-desc">
+                Aged gin, black Campari, coffee vermouth, burnt-orange twist. A classic, corrupted.
+              </p>
+            </article>
+
+            <article class="cocktail-item" role="listitem">
+              <span class="cocktail-emoji" aria-hidden="true">🔮</span>
+              <h3 class="cocktail-name"><span lang="es">Visión del Abismo</span></h3>
+              <p class="cocktail-desc">
+                Japanese whisky, truffle honey, black ginger, limoncello and mesquite smoke. To see the future.
+              </p>
+            </article>
+
+            <article class="cocktail-item" role="listitem">
+              <span class="cocktail-emoji" aria-hidden="true">🦇</span>
+              <h3 class="cocktail-name">No-Alcohol: <span lang="es">La Sombra</span></h3>
+              <p class="cocktail-desc">
+                Tamarind water, beet reduction, ginger, black kombucha, coconut foam. The full ritual, zero alcohol.
+              </p>
+            </article>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOD / YAKITORI SECTION
+  ============================================================ -->
+  <section class="food-section" id="menu" aria-labelledby="food-heading">
+    <div class="container">
+      <p class="section-label">Cuisine</p>
+      <h2 class="section-title" id="food-heading">
+        Yakitori from the <em>Darkness</em>
+      </h2>
+      <p class="section-subtitle">
+        Skewers over <span lang="es">binchotan</span> coals. Japanese technique, Caribbean soul, presentation that unsettles.
+      </p>
+
+      <div class="food-grid" role="list">
+
+        <article class="food-card" role="listitem">
+          <span class="food-icon" aria-hidden="true">🔥</span>
+          <h3 class="food-title">Coal-Grilled Skewers</h3>
+          <p class="food-desc">
+            Chicken thigh in black <span lang="es">tare</span>, miso pork belly, Colombian wagyu, ash tofu. Slow-cooked over Japanese white charcoal.
+          </p>
+        </article>
+
+        <article class="food-card" role="listitem">
+          <span class="food-icon" aria-hidden="true">🦑</span>
+          <h3 class="food-title">Caribbean Seafood</h3>
+          <p class="food-desc">
+            Black gulf shrimp, sake-braised octopus, chili-ink squid, glazed oysters. The Santa Marta sea in every bite.
+          </p>
+        </article>
+
+        <article class="food-card" role="listitem">
+          <span class="food-icon" aria-hidden="true">🥢</span>
+          <h3 class="food-title">Dark Sides</h3>
+          <p class="food-desc">
+            Black bamboo rice, squid-ink onigiri, edamame with black rock salt, miso soup with Caribbean shiitake.
+          </p>
+        </article>
+
+        <article class="food-card" role="listitem">
+          <span class="food-icon" aria-hidden="true">🌿</span>
+          <h3 class="food-title">Vegetarian Options</h3>
+          <p class="food-desc">
+            Portobello in <span lang="es">tare</span>, asparagus with miso butter, glazed select tofu, caramelised Padrón peppers.
+          </p>
+        </article>
+
+      </div>
+
+      <p class="food-note">
+        Event menus are tailored to the chosen package and can be customised for dietary restrictions, allergies and group preferences. Consultation is free.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIENCE TIMELINE
+  ============================================================ -->
+  <section class="experience-section" aria-labelledby="experience-heading">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:4rem;">
+        <p class="section-label" style="justify-content:center;">El Ritual</p>
+        <h2 class="section-title" id="experience-heading">
+          How Your <em>Event</em> Works
+        </h2>
+        <p class="section-subtitle" style="margin:0 auto; text-align:center;">
+          From first enquiry to last cocktail. This is how an event is born at <span lang="es">El Sanatorio</span>.
+        </p>
+      </div>
+
+      <div class="timeline" role="list">
+
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true">💬</div>
+          <span class="timeline-step">01</span>
+          <h3 class="timeline-title">Consultation</h3>
+          <p class="timeline-desc">
+            Reach us on WhatsApp. We talk through your vision,
+            headcount, date and budget.
+          </p>
+        </div>
+
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true">📋</div>
+          <span class="timeline-step">02</span>
+          <h3 class="timeline-title">Proposal</h3>
+          <p class="timeline-desc">
+            Within 24 hours you receive a custom quote
+            with menu, staging and package details.
+          </p>
+        </div>
+
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true">✍️</div>
+          <span class="timeline-step">03</span>
+          <h3 class="timeline-title">Confirmation</h3>
+          <p class="timeline-desc">
+            A 50% deposit holds the date. Production
+            and personalisation begin.
+          </p>
+        </div>
+
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true">🎭</div>
+          <span class="timeline-step">04</span>
+          <h3 class="timeline-title">Setup</h3>
+          <p class="timeline-desc">
+            On the day, our team transforms the space
+            2 hours before your guests arrive.
+          </p>
+        </div>
+
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true">🔥</div>
+          <span class="timeline-step">05</span>
+          <h3 class="timeline-title">The Experience</h3>
+          <p class="timeline-desc">
+            Your event begins. We run everything.
+            You just enjoy the ritual.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS
+  ============================================================ -->
+  <section class="testimonials-section" aria-labelledby="testimonials-heading">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:4rem;">
+        <p class="section-label" style="justify-content:center;">Testimonios</p>
+        <h2 class="section-title" id="testimonials-heading">
+          Voices of the <em>Survivors</em>
+        </h2>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <article class="testimonial-card">
+          <div class="stars" role="img" aria-label="5 de 5 estrellas"><span aria-hidden="true">★★★★★</span></div>
+          <p class="testimonial-text">
+            &ldquo;We launched our new collection here and it was absolutely perfect. The atmosphere is unmatched in Santa Marta. Our clients still talk about the event months later. The team was impeccable and the personalised cocktails carrying the brand name were a touch no one expected.&rdquo;
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">👁️</div>
+            <div>
+              <span class="author-name">Valentina Restrepo</span>
+              <span class="author-role">Creative Director · Bogotá</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="stars" role="img" aria-label="5 de 5 estrellas"><span aria-hidden="true">★★★★★</span></div>
+          <p class="testimonial-text">
+            &ldquo;My 30th birthday at <span lang="es">El Sanatorio</span> was the best decision I&rsquo;ve made. We chose the Purgatorio package for 18 people. The yakitori was on another level, the cocktails were a work of art, and the staging transported us. Hard to believe this exists on the Colombian Caribbean.&rdquo;
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">🕷️</div>
+            <div>
+              <span class="author-name">Sebastián Morales</span>
+              <span class="author-role">Architect · Barranquilla</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="stars" role="img" aria-label="5 de 5 estrellas"><span aria-hidden="true">★★★★★</span></div>
+          <p class="testimonial-text">
+            &ldquo;We held our company&rsquo;s annual dinner here and broke the mould. The Sanatorio team coordinated everything with surprising professionalism. The yakitori menu was a revelation for many of our team. We&rsquo;ll definitely be back.&rdquo;
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">🦇</div>
+            <div>
+              <span class="author-name">Carolina Jiménez</span>
+              <span class="author-role">HR Manager · Santa Marta</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+  ============================================================ -->
+  <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+    <div class="container">
+      <div style="text-align:left; margin-bottom:4rem;">
+        <p class="section-label">Questions</p>
+        <h2 class="section-title" id="faq-heading">
+          Everything you Need to <em>Know</em>
+        </h2>
+      </div>
+
+      <div class="faq-grid">
+
+        <div class="faq-item">
+          <h3 class="faq-question">How far in advance should I book?</h3>
+          <p class="faq-answer">
+            We recommend reaching out at least <strong>2 weeks in advance</strong> for small groups (up to 12) and at least <strong>4 weeks</strong> for a full buy-out (22–28). For high-end corporate events, a month or more guarantees the best possible experience.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Can I bring my own DJ or musician?</h3>
+          <p class="faq-answer">
+            Yes, with prior agreement. The space has a professional sound system built in. Your artist must work with our system and the <span lang="es">Centro Histórico</span> volume limits. We also offer resident DJs with curated set lists.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Do you offer non-alcoholic options?</h3>
+          <p class="faq-answer">
+            Absolutely. Our cocktail programme includes a full line of <strong>signature mocktails</strong> with the same complexity and presentation as the alcoholic cocktails. No one will notice the difference — except for the absence of a hangover.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Is the space accessible for guests with reduced mobility?</h3>
+          <p class="faq-answer">
+            Because the building is the former <span lang="es">Hospital del Tórax</span> (annex of the old <span lang="es">Hospital San Juan de Dios</span>), some areas have architectural limitations. The main floor area is accessible. Get in touch ahead of time so we can adapt the layout to all your guests&rsquo; needs.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Can I decorate the space with my own items?</h3>
+          <p class="faq-answer">
+            Yes, within agreed limits. We work with you to integrate your items into our aesthetic. We don&rsquo;t accept anything that damages the heritage building, or open-flame items outside our safety setup.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">What if I need to cancel or reschedule?</h3>
+          <p class="faq-answer">
+            Cancellations more than 15 days out receive an 80% refund on the deposit. Between 7 and 14 days, 50%. Less than 7 days, the deposit isn&rsquo;t refundable but can be used as credit for a reschedule. Every case is reviewed flexibly.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Do you offer options for formal corporate events?</h3>
+          <p class="faq-answer">
+            Yes. Although our identity is dark and irreverent, we adapt the thematic intensity to the context. We&rsquo;ve hosted everything from board meetings to product launches with an elegant, minimalist look within our aesthetic.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="faq-question">Do you accept themed events (Halloween, etc.)?</h3>
+          <p class="faq-answer">
+            <span lang="es">El Sanatorio</span> is the most natural place in the world for Halloween and horror-themed events. We also host vampires, witches, noir, dark cyberpunk, elegant gore, and any theme that lives in the shadows. Tell us your vision.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LOCATION SECTION
+  ============================================================ -->
+  <section class="location-section" id="ubicacion" aria-labelledby="location-heading">
+    <div class="container">
+      <div class="location-grid">
+
+        <div>
+          <p class="section-label">Location</p>
+          <h2 class="section-title" id="location-heading">
+            Find us in the<br /><em><span lang="es">Centro Histórico</span></em>
+          </h2>
+          <p style="color:var(--gris-ceniza); font-size:0.9rem; line-height:1.8; margin-bottom:2rem;">
+            A few steps from the cathedral, between cobbled streets and colonial façades. <span lang="es">El Sanatorio</span> lives where Santa Marta keeps its oldest mysteries.
+          </p>
+
+          <div class="location-details">
+
+            <div class="location-detail">
+              <span class="detail-icon" aria-hidden="true">📍</span>
+              <span class="detail-label">Address</span>
+              <span class="detail-value">Centro Histórico<br />Santa Marta, Colombia</span>
+            </div>
+
+            <div class="location-detail">
+              <span class="detail-icon" aria-hidden="true">🕰️</span>
+              <span class="detail-label">Event Hours</span>
+              <span class="detail-value">Jue – Dom<br />Previa reserva</span>
+            </div>
+
+            <div class="location-detail">
+              <span class="detail-icon" aria-hidden="true">📞</span>
+              <span class="detail-label">WhatsApp</span>
+              <span class="detail-value">
+                <a href="https://wa.me/19034598763"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="color:var(--oro); text-decoration:none;">
+                  +1 (903) 459-8763
+                </a>
+              </span>
+            </div>
+
+            <div class="location-detail">
+              <span class="detail-icon" aria-hidden="true">🌐</span>
+              <span class="detail-label">Web</span>
+              <span class="detail-value">
+                <a href="https://el-sanatorio.com"
+                   style="color:var(--oro); text-decoration:none;">
+                  el-sanatorio.com
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="map-placeholder" role="img" aria-label="Mapa — El Sanatorio, Centro Histórico, Santa Marta">
+          <iframe
+            class="map-placeholder__embed"
+            src="https://www.google.com/maps?q=Calle+19+%234-23+Santa+Marta+Colombia&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            title="El Sanatorio — Calle 19 #4-23, Centro Histórico, Santa Marta"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+          <span class="map-label" aria-hidden="true"><span lang="es">Centro Histórico</span> · Santa Marta</span>
+          <a class="map-placeholder__open" href="https://maps.google.com/maps?q=Calle+19+%234-23+Santa+Marta+Colombia" target="_blank" rel="noopener" aria-label="Abrir ubicación en Google Maps">↗ Open in Maps</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BOOKING CTA
+  ============================================================ -->
+  <section class="booking-section" id="reservar" aria-labelledby="booking-heading">
+    <div class="container">
+      <div class="booking-inner">
+        <span class="booking-crown" aria-hidden="true">👑</span>
+
+        <h2 class="section-title" id="booking-heading">
+          Begin your <em>Ritual</em>
+        </h2>
+
+        <p class="booking-desc">
+          Every great event begins with a message in the dark. Ours. Tell us your vision and we&rsquo;ll build the experience you deserve.
+        </p>
+
+        <a href="/en/reservar/?source=event"
+           class="booking-cta-main"
+           style="background: linear-gradient(135deg, var(--sangre-viva), var(--sangre)); margin-bottom: 1rem;">
+          <span style="font-size: 1.5rem; margin-right: 0.5rem;">🎟️</span>
+          <span class="booking-cta-text">
+            Book online with a 50% deposit
+            <span class="booking-cta-sub">Instant confirmation · Balance at the door</span>
+          </span>
+        </a>
+
+        <a href="https://wa.me/19034598763?text=Hi%2C%20I%27d%20like%20to%20book%20a%20private%20event%20at%20El%20Sanatorio%20in%20Santa%20Marta.%20Could%20you%20send%20me%20info%3F"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="booking-cta-main">
+          <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          <span>Book on WhatsApp</span>
+        </a>
+
+        <div class="booking-meta" role="list">
+          <div class="meta-item" role="listitem">
+            <span class="meta-icon" aria-hidden="true">⚡</span>
+            Reply in under 2 hours
+          </div>
+          <div class="meta-item" role="listitem">
+            <span class="meta-icon" aria-hidden="true">🎯</span>
+            No-obligation quote
+          </div>
+          <div class="meta-item" role="listitem">
+            <span class="meta-icon" aria-hidden="true">🔒</span>
+            Secure booking with deposit
+          </div>
+        </div>
+
+        <div class="booking-divider" aria-hidden="true">
+          <span class="booking-or">o</span>
+        </div>
+
+        <p class="booking-alt">
+          Write to us directly at
+          <a href="mailto:eventos@el-sanatorio.com">eventos@el-sanatorio.com</a>
+          or visit us in the <span lang="es">Centro Histórico</span> of Santa Marta.
+        </p>
+      </div>
+    </div>
+  </section>
+
+<!-- ── Footer ─────────────────────────────────────────────────── -->
+</main>
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__inner">
+      <div>
+        <p class="footer__logo"><span lang="es">EL SANATORIO</span></p>
+        <p class="footer__tagline"><span lang="es">&ldquo;Ella siempre ha estado aquí.&rdquo;</span></p>
+        <address class="mono" style="font-size: 0.75rem; color: var(--gray); margin-top: 1rem; line-height: 1.8; font-style: normal;">
+          <span lang="es">Calle 19 #4-23</span><br>
+          <span lang="es">Centro Histórico</span><br>
+          Santa Marta, Magdalena, Colombia
+        </address>
+      </div>
+      <div>
+        <p class="footer__col-title">The House</p>
+        <ul class="footer__links" role="list">
+          <li><a href="/en/menu/">The Menu / Patient File</a></li>
+          <li><a href="/en/experience/">The Experience</a></li>
+          <li><a href="/en/tours/">Historical Tours</a></li>
+          <li><a href="/en/contact/">Contact</a></li>
+          <li><a href="/en/reservar/">Book a Table</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Protocol</p>
+        <ul class="footer__links" role="list">
+          <li><a href="https://wa.me/19034598763?text=Hi%2C%20I%27d%20like%20info%20about%20El%20Sanatorio" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="https://instagram.com/elsanatorio.smr" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="/en/history/">The Story</a></li>
+          <li><a href="/en/experience/#rules">Labyrinth Rules</a></li>
+        </ul>
+        <p class="mono" style="font-size: 0.62rem; color: var(--gray); margin-top: 1.5rem; line-height: 1.8;">
+          The Grill (street): every day<br>
+          Bar · Patio · Labyrinth: Thu – Sun<br>
+          5:00 PM – 1:00 AM
+        </p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2026 <span lang="es">El Sanatorio</span> — Santa Marta, Colombia. All rights reserved. | <a href="/en/privacy/" style="color:inherit;text-decoration:underline;">Privacy</a> | <a href="/en/terms/" style="color:inherit;text-decoration:underline;">Terms</a> | <button type="button" onclick="if(window.MaiaConsent)window.MaiaConsent.reopenBanner();" style="color:inherit;background:none;border:0;padding:0;font:inherit;cursor:pointer;text-decoration:underline;">Manage cookies</button></p>
+      <p class="footer__patient"><span lang="es">PACIENTE 013 — DESCONOCIDA — ACTIVA</span></p>
+      <p style="font-size:0.75rem;color:var(--gray);margin-top:0.5rem;">Operational enquiries: WhatsApp El Sanatorio +1 903 459 8763</p>
+    </div>
+  </div>
+</footer>
+
+  <script src="/js/main.js?v=20260623" defer></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    "name": "El Sanatorio",
+    "description": "Horror-themed yakitori bar with private and corporate event service in the Centro Histórico of Santa Marta, Colombia.",
+    "url": "https://el-sanatorio.com/en/events/",
+    "telephone": "+19034598763",
+    "email": "eventos@el-sanatorio.com",
+    "servesCuisine": ["Japanese", "Yakitori", "Cocktail Bar"],
+    "priceRange": "$$-$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Santa Marta",
+      "addressRegion": "Magdalena",
+      "addressCountry": "CO"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "11.2408",
+      "longitude": "-74.2110"
+    },
+    "amenityFeature": [
+      {"@type": "LocationFeatureSpecification", "name": "Private Events", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Corporate Events", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Cocktail Bar", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Colonial Building", "value": true}
+    ],
+    "maximumAttendeeCapacity": 28
+  }
+  </script>
+
+
+<script defer src="/js/push-fcm.js?v=20260624b"></script>
+<script defer src="/js/maia-utm.js?v=20260623"></script>
+<script defer src="/js/maia-track.js?v=20260623"></script>
+</body>
+</html>
