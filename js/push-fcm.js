@@ -1,4 +1,4 @@
-﻿/* push-fcm.js — El Sanatorio web push subscriber
+/* push-fcm.js — El Sanatorio web push subscriber
  *
  * PIVOTED 2026-06-23 PM from Firebase SDK to raw Web Push Protocol +
  * Service Worker. This implementation doesn't need Firebase SDK at all —
