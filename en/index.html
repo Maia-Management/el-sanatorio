@@ -134,9 +134,44 @@
     gtag('js', new Date());
     gtag('config', 'G-JZGDBW5K7Q');
   </script>
+
+<!-- Plausible Analytics — privacy-friendly metrics. Activates when "el-sanatorio.com" is added in your Plausible dashboard at plausible.io. -->
+  <script defer data-domain="el-sanatorio.com" src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+
+<!-- Hotjar — heatmaps + session recording. Paste your Hotjar Site ID below, then redeploy. (No-op while empty.) -->
+  <script>
+    window.HOTJAR_SITE_ID = window.HOTJAR_SITE_ID || ""; /* ← paste your Hotjar Site ID here (e.g. 5347789), then redeploy */
+    if (window.HOTJAR_SITE_ID) {
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:window.HOTJAR_SITE_ID,hjsv:6};
+        a=o.getElementsByTagName("head")[0];
+        r=o.createElement("script");r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
+    }
+  </script>
+
+  <!-- Unified spine nav + cohesion-sweep components -->
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Skip to main content</a>
+
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth across 20 spine pages) -->
+<div id="site-nav" data-active=""></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Essential navigation">
+    <a href="/en/">EL SANATORIO</a>
+    <a href="/en/menu/">MENU</a>
+    <a href="/en/reservar/">BOOK</a>
+    <a href="/">ES</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</noscript>
 
 <!-- Cinematic effect layers (visual overlay, all fixed-position) -->
 <canvas class="cinema-grain" aria-hidden="true"></canvas>
@@ -150,21 +185,6 @@
   <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/><path d="M19.07 4.93a10 10 0 010 14.14"/></svg>
   <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
 </button>
-
-<!-- Nav (minimal cinema-style) -->
-<nav class="cinema-nav" role="navigation" aria-label="Primary navigation">
-  <div class="cinema-nav__brand"><span lang="es">EL SANATORIO</span></div>
-  <ul class="cinema-nav__links" role="list">
-    <li><a href="#asylum">The Asylum</a></li>
-    <li><a href="/el-hallazgo" hreflang="es">The Finding</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#ficha">Your File</a></li>
-    <li><a href="#admision">Book</a></li>
-    <li><a href="/en/menu/">Menu</a></li>
-    <li><a href="#findus">Find Us</a></li>
-    <li><a href="/" hreflang="es" lang="es" aria-label="Sitio en español">ES</a></li>
-  </ul>
-</nav>
 
 <!-- ────────────────────────────────────────────────────────────────────── -->
 <!-- HERO — ATRIUM (Dr. Silvio projection)                                  -->
@@ -188,13 +208,25 @@
     <h1 class="atrium__title"><span lang="es">EL<br/>SANATORIO</span></h1>
     <p class="atrium__sub">Yakitori · Macabre cocktails · Horror&nbsp;House</p>
     <p class="atrium__quote">&ldquo;<span lang="es">Don Silvio</span> sends his regards. The house is expecting you tonight.&rdquo;</p>
-    <aside class="atrium__launch" role="note" aria-label="Opening dates" style="margin:28px auto 18px;max-width:480px;padding:14px 18px;background:linear-gradient(135deg,rgba(200,132,58,0.16),rgba(139,0,0,0.10));border:1px dashed rgba(200,132,58,0.65);border-radius:6px;font-family:var(--font-typewriter,'Courier New',monospace);font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ek-cream,#efe3c8);line-height:1.7;text-align:center;">
+
+    <p class="atrium__pitch">Charcoal yakitori, macabre cocktails and a horror house &mdash; inside the old <span lang="es">Hospital del Tórax</span>. <strong>Opens 30 July.</strong></p>
+
+    <aside class="atrium__launch" role="note" aria-label="Opening dates" style="margin:24px auto 18px;max-width:480px;padding:14px 18px;background:linear-gradient(135deg,rgba(200,132,58,0.16),rgba(139,0,0,0.10));border:1px dashed rgba(200,132,58,0.65);border-radius:6px;font-family:var(--font-typewriter,'Courier New',monospace);font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ek-cream,#efe3c8);line-height:1.7;text-align:center;">
       <span style="display:block;font-size:0.66rem;letter-spacing:0.28em;color:var(--ek-amber,#c8843a);margin-bottom:4px;">Opening</span>
       <strong style="display:block;font-family:'Fraunces',serif;font-size:1.05rem;letter-spacing:0.08em;text-transform:none;color:#fff;">Thursday, 30 July 2026</strong>
       <span style="display:block;margin-top:6px;font-size:0.62rem;color:rgba(239,227,200,0.78);">Rehearsal nights · 23&ndash;29 July · invited guests only</span>
     </aside>
+
     <a class="atrium__enter" href="#asylum">Enter &nbsp;&rarr;</a>
-    <a class="atrium__sub-link" href="/el-hallazgo" hreflang="es" style="display:block;margin-top:22px;font-family:var(--font-typewriter,'Courier New',monospace);font-size:11px;letter-spacing:0.22em;color:var(--ek-bone,rgba(239,227,200,0.55));text-decoration:none;text-transform:uppercase;border-bottom:1px dotted rgba(200,132,58,0.35);padding-bottom:3px;display:inline-block;">Want to know what we found?</a>
+
+    <!-- Primary CTA row (added 2026-06-28 cohesion sweep — above-the-fold info card per brief) -->
+    <ul class="hero-ctas" role="list" aria-label="Next steps">
+      <li><a class="hero-cta hero-cta--primary" href="/en/reservar/"><span class="hero-cta__chev" aria-hidden="true">▶</span> BUY TICKET <span class="hero-cta__price">$60,000 COP</span></a></li>
+      <li><a class="hero-cta hero-cta--secondary" href="/en/menu/"><span class="hero-cta__chev" aria-hidden="true">▶</span> SEE MENU</a></li>
+      <li><a class="hero-cta hero-cta--secondary" href="/en/contact/"><span class="hero-cta__chev" aria-hidden="true">▶</span> FIND US</a></li>
+    </ul>
+
+    <a class="atrium__sub-link hero-lore-link" href="/en/the-finding/">Want to know what we found?</a>
   </div>
 
   <div class="atrium__scroll-hint" aria-hidden="true">
@@ -472,20 +504,20 @@
       <h3>The Site</h3>
       <ul>
         <li><a href="#asylum">The Asylum</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#admision">Book</a></li>
+        <li><a href="/en/experience/">Experience</a></li>
+        <li><a href="/en/reservar/">Book</a></li>
         <li><a href="/en/menu/">Menu</a></li>
-        <li><a href="/historia" hreflang="es">History (ES)</a></li>
+        <li><a href="/en/history/">History</a></li>
       </ul>
     </div>
     <div>
       <h3>The House</h3>
       <ul>
         <li><a href="/audicion" hreflang="es">Actor auditions (ES)</a></li>
-        <li><a href="/contact" hreflang="es">Contact / Press</a></li>
+        <li><a href="/en/contact/">Contact / Press</a></li>
         <li><a href="https://www.instagram.com/elsanatorio.smr/" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a href="/privacidad" hreflang="es">Privacy</a></li>
-        <li><a href="/terminos" hreflang="es">Terms</a></li>
+        <li><a href="/en/privacy/">Privacy</a></li>
+        <li><a href="/en/terms/">Terms</a></li>
       </ul>
     </div>
     <div>

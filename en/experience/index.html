@@ -104,49 +104,25 @@
       })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
     }
   </script>
+<!-- Unified spine nav + cohesion-sweep components (added 2026-06-28 cohesion sweep) -->
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Skip to main content</a>
 
-<nav class="nav" role="navigation" aria-label="Primary navigation">
-  <div class="nav__inner">
-    <a href="/en/" class="nav__logo">
-      <span class="nav__logo-num"><span lang="es">PACIENTE 013</span></span>
-      <span class="nav__logo-name" data-glitch="EL SANATORIO"><span lang="es">EL SANATORIO</span></span>
-    </a>
-    <div class="nav__monitor" aria-hidden="true">
-      <svg viewBox="0 0 300 36" preserveAspectRatio="none">
-        <path class="ekg-line" d="M 0,18 L 30,18 L 45,12 L 60,27 L 66,0 L 75,34 L 90,18 L 120,18 L 135,12 L 150,27 L 156,0 L 165,34 L 180,18 L 300,18" />
-      </svg>
-    </div>
-    <ul class="nav__links" role="list">
-      <li><a href="/en/">Home</a></li>
-      <li><a href="/en/menu/">Menu</a></li>
-      <li><a href="/en/experience/" class="active">Experience</a></li>
-      <li><a href="/en/events/">Events</a></li>
-      <li><a href="/en/tours/">Tours</a></li>
-      <li><a href="/en/history/">History</a></li>
-      <li><a href="/en/contact/">Contact</a></li>
-      <li><a href="#booking">Book</a></li>
-      <li><a href="/experience" hreflang="es" lang="es">ES</a></li>
-    </ul>
-    <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth, replaces ad-hoc per-page nav 2026-06-28) -->
+<div id="site-nav" data-active="experiencia"></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Essential navigation">
+    <a href="/en/">EL SANATORIO</a>
+    <a href="/en/menu/">MENU</a>
+    <a href="/en/reservar/">BOOK</a>
+    <a href="/">ES</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</noscript>
 <main id="main-content">
-<div class="nav__mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile menu">
-  <a href="/en/">Home</a>
-  <a href="/en/menu/">Menu</a>
-  <a href="/en/experience/">Experience</a>
-  <a href="/en/events/">Events</a>
-  <a href="/en/tours/">Tours</a>
-  <a href="/en/history/">History</a>
-  <a href="/en/contact/">Contact</a>
-  <a href="#booking">Book</a>
-  <a href="/experience" hreflang="es" lang="es">ES</a>
-</div>
 
 <div class="exp-hero">
   <div class="container--sm text-center">
@@ -432,6 +408,80 @@
       No advance payment required · Settled the day of the experience<br>
       16+ years · Not suitable for guests with heart conditions or epilepsy
     </p>
+  </div>
+</section>
+
+<!-- ─── BRANDS OF THE SANATORIO — brand-hierarchy explainer (cohesion sweep 2026-06-28) ─── -->
+<section class="marcas-section" id="brands" aria-labelledby="brands-title">
+  <div class="marcas-section__inner">
+    <p class="marcas-section__eyebrow">WHAT'S INSIDE · BRAND MAP</p>
+    <h2 class="marcas-section__title" id="brands-title">The Brands of <span lang="es">El Sanatorio</span></h2>
+    <p class="marcas-section__lede"><span lang="es">El Sanatorio</span> is the place. Inside live seven different things — a bar, a grill, a kitchen, a horror house, two characters. This is which one is which.</p>
+
+    <div class="marcas-grid">
+      <a class="marca-card" href="/en/" data-marca="sanatorio">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name"><span lang="es">El Sanatorio</span></h3>
+          <span class="marca-card__role">THE PLACE</span>
+        </div>
+        <p class="marca-card__desc">The building itself. Former <span lang="es">Hospital del Tórax</span> (annex of the old <span lang="es">Hospital San Juan de Dios</span>). Four zones under one roof · intimate capacity 22–28 · Calle 19 #4-23 · Centro Histórico.</p>
+        <span class="marca-card__link">Go to home</span>
+      </a>
+
+      <a class="marca-card" href="/en/chuzo-tokyo/" data-marca="chuzo">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">Chuzo Tokyo</h3>
+          <span class="marca-card__role">STREETSIDE GRILL</span>
+        </div>
+        <p class="marca-card__desc">Charcoal yakitori served at the streetside counter. Davis on the coals, paper plate, cash or QR. The only zone you can enter without a ticket.</p>
+        <span class="marca-card__link">See Chuzo Tokyo</span>
+      </a>
+
+      <a class="marca-card" href="/en/menu/" data-marca="sushipop">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">Cocina Sushi Pop</h3>
+          <span class="marca-card__role">ROLLS INSIDE</span>
+        </div>
+        <p class="marca-card__desc">Sister kitchen. Five fixed rolls — Mango Tango, <span lang="es">Pollo Yoyó</span>, <span lang="es">Cerdo Gordo</span>, <span lang="es">Vaca Loca</span>, <span lang="es">Salmón Patrón</span> (cooked). 50 g per roll · 20 g per POP.</p>
+        <span class="marca-card__link">See menu</span>
+      </a>
+
+      <a class="marca-card" href="/en/la-farmacia/" data-marca="farmacia">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name"><span lang="es">La Farmacia</span></h3>
+          <span class="marca-card__role">COCKTAIL BAR</span>
+        </div>
+        <p class="marca-card__desc">An autopsy slab for a counter, noble gases on the back wall, house syringe shots. Five exclusive prescriptions: <span lang="es">La Morfina</span>, Patient's Blood. Andrew pours · <span lang="es">Luz</span> checks you in.</p>
+        <span class="marca-card__link">See <span lang="es">La Farmacia</span></span>
+      </a>
+
+      <a class="marca-card" href="/en/reservar/" data-marca="paciente013">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">Horror House · <span lang="es">Paciente 013</span></h3>
+          <span class="marca-card__role">THE LABYRINTH</span>
+        </div>
+        <p class="marca-card__desc">11 rooms, 25 minutes. <span lang="es">Don Hilario</span>, the electrical ward, surgery, the morgue, the chained finale. Ticket $60,000 COP (or $48k in groups of 4+). 50% deposit via Wompi.</p>
+        <span class="marca-card__link">Book ticket</span>
+      </a>
+
+      <a class="marca-card" href="https://wa.me/19034598763" target="_blank" rel="noopener" data-marca="hortensia">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name"><span lang="es">Hortensia</span></h3>
+          <span class="marca-card__role">THE RECEPTIONIST</span>
+        </div>
+        <p class="marca-card__desc">The one who answers WhatsApp. Knows every patient by name, assigns your ward, pins your file to the records wall. Ask her anything.</p>
+        <span class="marca-card__link">Message on WhatsApp</span>
+      </a>
+
+      <a class="marca-card" href="/en/history/" data-marca="silvio">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name"><span lang="es">Don Silvio</span></h3>
+          <span class="marca-card__role">THE HOST</span>
+        </div>
+        <p class="marca-card__desc">The doctor on duty. Tends the atrium, assigns wards, hands you the lens cloth. Lives in the wall and in the building's memory. Has been here since day one.</p>
+        <span class="marca-card__link">Read the story</span>
+      </a>
+    </div>
   </div>
 </section>
 

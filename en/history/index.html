@@ -1109,54 +1109,24 @@
       })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
     }
   </script>
+<!-- Unified spine nav + cohesion-sweep components (added 2026-06-28 cohesion sweep) -->
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Skip to main content</a>
 
-<!-- ── Navigation ────────────────────────────────────────────── -->
-<nav class="nav" role="navigation" aria-label="Primary navigation">
-  <div class="nav__inner">
-    <a href="/en/" class="nav__logo">
-      <span class="nav__logo-num"><span lang="es">PACIENTE 013</span></span>
-      <span class="nav__logo-name" data-glitch="EL SANATORIO"><span lang="es">EL SANATORIO</span></span>
-    </a>
-
-    <!-- Heart monitor -->
-    <div class="nav__monitor" aria-hidden="true">
-      <svg viewBox="0 0 300 36" preserveAspectRatio="none">
-        <path class="ekg-line" d="M 0,18 L 30,18 L 45,12 L 60,27 L 66,0 L 75,34 L 90,18 L 120,18 L 135,12 L 150,27 L 156,0 L 165,34 L 180,18 L 300,18" />
-      </svg>
-    </div>
-
-    <ul class="nav__links" role="list">
-      <li><a href="/en/">Home</a></li>
-      <li><a href="/en/menu/">Menu</a></li>
-      <li><a href="/en/experience/">Experience</a></li>
-      <li><a href="/en/events/">Events</a></li>
-      <li><a href="/en/tours/">Tours</a></li>
-      <li><a href="/en/history/" aria-current="page">History</a></li>
-      <li><a href="/en/contact/">Contact</a></li>
-      <li><a href="/en/reservar/">Book</a></li>
-      <li><a href="/historia" hreflang="es" lang="es">ES</a></li>
-    </ul>
-
-    <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- Mobile menu -->
-<div class="nav__mobile-menu" id="nav-mobile-menu" role="navigation" aria-label="Mobile menu">
-  <a href="/en/">Home</a>
-  <a href="/en/menu/">Menu</a>
-  <a href="/en/experience/">Experience</a>
-  <a href="/en/events/">Events</a>
-  <a href="/en/tours/">Tours</a>
-  <a href="/en/history/">History</a>
-  <a href="/en/contact/">Contact</a>
-  <a href="/en/reservar/">Book</a>
-</div>
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth, replaces ad-hoc per-page nav 2026-06-28) -->
+<div id="site-nav" data-active="historia"></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Essential navigation">
+    <a href="/en/">EL SANATORIO</a>
+    <a href="/en/menu/">MENU</a>
+    <a href="/en/reservar/">BOOK</a>
+    <a href="/">ES</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</noscript>
 
     <!-- ─── HERO ────────────────────────────────────────────────────────── -->
     <header class="hero" role="banner">

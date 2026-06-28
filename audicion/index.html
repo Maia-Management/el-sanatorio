@@ -225,19 +225,43 @@ footer{background:var(--charcoal);color:var(--ash-cream);padding:50px 0 30px}
     gtag('js', new Date());
     gtag('config', 'G-JZGDBW5K7Q');
   </script>
+
+<!-- Plausible Analytics — privacy-friendly metrics. Activates when "el-sanatorio.com" is added in your Plausible dashboard at plausible.io. -->
+  <script defer data-domain="el-sanatorio.com" src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+
+<!-- Hotjar — heatmaps + session recording. Paste your Hotjar Site ID below, then redeploy. (No-op while empty.) -->
+  <script>
+    window.HOTJAR_SITE_ID = window.HOTJAR_SITE_ID || ""; /* ← paste your Hotjar Site ID here (e.g. 5347789), then redeploy */
+    if (window.HOTJAR_SITE_ID) {
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:window.HOTJAR_SITE_ID,hjsv:6};
+        a=o.getElementsByTagName("head")[0];
+        r=o.createElement("script");r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
+    }
+  </script>
+<!-- Unified spine nav + cohesion-sweep components (added 2026-06-28 cohesion sweep) -->
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
 
-<header class="nav" id="nav">
-  <a href="https://el-sanatorio.com" class="nav-mark">EL&nbsp;<b>SANATORIO</b></a>
-  <nav class="nav-links">
-    <a href="#concepto">El experimento</a>
-    <a href="#aviso">Aviso de apertura</a>
-    <a href="#audicion">Audición</a>
-    <a href="#audicion" class="nav-cta">Postúlate</a>
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth, replaces ad-hoc per-page nav 2026-06-28) -->
+<div id="site-nav" data-active=""></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Navegación esencial">
+    <a href="/">EL SANATORIO</a>
+    <a href="/menu/">MENÚ</a>
+    <a href="/reservar/">RESERVAR</a>
+    <a href="/en/">EN</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
   </nav>
-</header>
+</noscript>
 
 <main id="main-content">
 <section class="hero">
@@ -490,11 +514,11 @@ footer{background:var(--charcoal);color:var(--ash-cream);padding:50px 0 30px}
 <div class="sticky-note" id="stickyNote">25 vacantes · admisiones abiertas</div>
 
 <script>
-const nav=document.getElementById('nav');
+const nav=document.getElementById('nav'); /* bespoke nav removed in 2026-06-28 cohesion sweep; guard kept so scroll handler stays safe */
 const note=document.getElementById('stickyNote');
 addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled',scrollY>40);
-  note.classList.toggle('show',scrollY>320&&scrollY<document.body.scrollHeight-1200);
+  if(nav)nav.classList.toggle('scrolled',scrollY>40);
+  if(note)note.classList.toggle('show',scrollY>320&&scrollY<document.body.scrollHeight-1200);
 });
 
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
@@ -590,6 +614,4 @@ document.getElementById('auditionForm').addEventListener('submit', async (e)=>{
 
 <script defer src="/js/push-fcm.js?v=20260624b"></script>
 <script defer src="/js/maia-utm.js?v=20260623"></script>
-<script defer src="/js/maia-track.js?v=20260623"></script>
-</body>
-</html>
+<script defer src="/js/maia-track.js?v=20260623">

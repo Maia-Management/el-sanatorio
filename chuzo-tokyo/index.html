@@ -41,6 +41,9 @@
   <!-- Cohesion v2 tokens -->
   <link rel="stylesheet" href="/css/chuzo-tokyo-tokens.css?v=20260625" />
 
+  <!-- Cohesion sweep — only loads chuzo-spine-mark component, NOT the dark spine nav (brief: bright stays) -->
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+
   <!-- Consent banner (inherited from el-sanatorio parent) -->
   <script src="/consent-banner.js?v=20260623" defer></script>
 
@@ -486,17 +489,41 @@
     gtag('js', new Date());
     gtag('config', 'G-JZGDBW5K7Q');
   </script>
+
+<!-- Plausible Analytics — privacy-friendly metrics. Activates when "el-sanatorio.com" is added in your Plausible dashboard at plausible.io. -->
+  <script defer data-domain="el-sanatorio.com" src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+
+<!-- Hotjar — heatmaps + session recording. Paste your Hotjar Site ID below, then redeploy. (No-op while empty.) -->
+  <script>
+    window.HOTJAR_SITE_ID = window.HOTJAR_SITE_ID || ""; /* ← paste your Hotjar Site ID here (e.g. 5347789), then redeploy */
+    if (window.HOTJAR_SITE_ID) {
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:window.HOTJAR_SITE_ID,hjsv:6};
+        a=o.getElementsByTagName("head")[0];
+        r=o.createElement("script");r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
+    }
+  </script>
 </head>
 <body>
-<nav class="ct-mobile-jumps" aria-label="Saltar a secci&oacute;n"><a href="#menu">Carta</a><a href="#dados">Dados</a><a href="#visit">D&oacute;nde</a><a href="https://wa.me/19034598763?text=Hola%20Hortensia%2C%20quiero%20reservar%20Chuzo%20Tokyo">WhatsApp</a></nav>
 <a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
 
-<!-- Parent venue link bar -->
-<div class="ct-bar">
-  <div class="container">
-    <a href="/">← El Sanatorio · Calle 19 #4-23 · Santa Marta</a>
-  </div>
+<!-- Chuzo spine mark — small EL SANATORIO brand top-left + Volver link top-right
+     (cohesion brief 2026-06-28: bright Japanese aesthetic STAYS — only add brand-mark + Volver) -->
+<div class="chuzo-spine-mark" role="banner">
+  <a class="chuzo-spine-mark__brand" href="/" aria-label="Ir a El Sanatorio">
+    <span class="chuzo-spine-mark__brand-mark" aria-hidden="true">✚</span>
+    <span>EL SANATORIO</span>
+  </a>
+  <a class="chuzo-spine-mark__back" href="/" aria-label="Volver al sitio de El Sanatorio">↩ Volver al Sanatorio</a>
 </div>
+
+<!-- Carta jumps (preserved bright aesthetic) -->
+<nav class="ct-mobile-jumps" aria-label="Saltar a sección"><a href="#menu">Carta</a><a href="#dados">Dados</a><a href="#visit">Dónde</a><a href="https://wa.me/19034598763?text=Hola%20Hortensia%2C%20quiero%20reservar%20Chuzo%20Tokyo">WhatsApp</a></nav>
 
 <main id="main-content">
 

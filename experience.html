@@ -126,48 +126,25 @@
       })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
     }
   </script>
+<!-- Unified spine nav + cohesion-sweep components (added 2026-06-28 cohesion sweep) -->
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
 
-<!-- ── Navigation ──────────────────────────────────────────── -->
-<nav class="nav" role="navigation" aria-label="Navegación principal">
-  <div class="nav__inner">
-    <a href="/" class="nav__logo">
-      <span class="nav__logo-num">PACIENTE 013</span>
-      <span class="nav__logo-name" data-glitch="EL SANATORIO">EL SANATORIO</span>
-    </a>
-    <div class="nav__monitor" aria-hidden="true">
-      <svg viewBox="0 0 300 36" preserveAspectRatio="none">
-        <path class="ekg-line" d="M 0,18 L 30,18 L 45,12 L 60,27 L 66,0 L 75,34 L 90,18 L 120,18 L 135,12 L 150,27 L 156,0 L 165,34 L 180,18 L 300,18" />
-      </svg>
-    </div>
-    <ul class="nav__links" role="list">
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/menu">Menú</a></li>
-      <li><a href="/experience" class="active">Experiencia</a></li>
-      <li><a href="/events">Eventos</a></li>
-      <li><a href="/tours">Tours</a></li>
-      <li><a href="/historia">Historia</a></li>
-      <li><a href="/contact">Contacto</a></li>
-      <li><a href="#booking">Reservar</a></li>
-    </ul>
-    <button type="button" class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth, replaces ad-hoc per-page nav 2026-06-28) -->
+<div id="site-nav" data-active="experiencia"></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Navegación esencial">
+    <a href="/">EL SANATORIO</a>
+    <a href="/menu/">MENÚ</a>
+    <a href="/reservar/">RESERVAR</a>
+    <a href="/en/">EN</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</noscript>
 <main id="main-content">
-<div class="nav__mobile-menu" id="mobile-menu" role="navigation" aria-label="Menú móvil">
-  <a href="/">Inicio</a>
-  <a href="/menu">Menú</a>
-  <a href="/experience">Experiencia</a>
-  <a href="/events">Eventos</a>
-  <a href="/tours">Tours</a>
-  <a href="/historia">Historia</a>
-  <a href="/contact">Contacto</a>
-  <a href="#booking">Reservar</a>
-</div>
 
 <!-- ── Hero ──────────────────────────────────────────────────── -->
 <div class="exp-hero">
@@ -456,6 +433,80 @@
       No se requiere pago por adelantado · Pago el día de la experiencia<br>
       Mayores de 16 años · No apto para personas con problemas cardíacos o epilepsia
     </p>
+  </div>
+</section>
+
+<!-- ─── LAS MARCAS DEL SANATORIO — brand-hierarchy explainer (cohesion sweep 2026-06-28) ─── -->
+<section class="marcas-section" id="marcas" aria-labelledby="marcas-title">
+  <div class="marcas-section__inner">
+    <p class="marcas-section__eyebrow">QUÉ HAY DENTRO · MAPA DE MARCAS</p>
+    <h2 class="marcas-section__title" id="marcas-title">Las Marcas del Sanatorio</h2>
+    <p class="marcas-section__lede">El Sanatorio es el lugar. Dentro viven siete cosas distintas — un bar, una parrilla, una cocina, una casa del terror, dos personajes. Esto es cuál es cuál.</p>
+
+    <div class="marcas-grid">
+      <a class="marca-card" href="/" data-marca="sanatorio">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">El Sanatorio</h3>
+          <span class="marca-card__role">EL LUGAR</span>
+        </div>
+        <p class="marca-card__desc">El edificio. Antiguo Hospital del Tórax (anexo del antiguo San Juan de Dios). Cuatro zonas bajo un mismo techo · aforo íntimo 22–28 · Calle 19 #4-23 · Centro Histórico.</p>
+        <span class="marca-card__link">Ir al inicio</span>
+      </a>
+
+      <a class="marca-card" href="/chuzo-tokyo/" data-marca="chuzo">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">Chuzo Tokyo</h3>
+          <span class="marca-card__role">PARRILLA EN LA CALLE</span>
+        </div>
+        <p class="marca-card__desc">Yakitori a la brasa servido en la barra que da a la calle. Davis al carbón, paper plate, plata o QR. Es la única zona donde no necesitas boleto para entrar.</p>
+        <span class="marca-card__link">Ver Chuzo Tokyo</span>
+      </a>
+
+      <a class="marca-card" href="/menu/" data-marca="sushipop">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">Cocina Sushi Pop</h3>
+          <span class="marca-card__role">ROLLS ADENTRO</span>
+        </div>
+        <p class="marca-card__desc">Cocina hermana. Cinco rolls fijos — Mango Tango, Pollo Yoyó, Cerdo Gordo, Vaca Loca, Salmón Patrón (cocido). 50 g por rollo · 20 g por POP.</p>
+        <span class="marca-card__link">Ver menú</span>
+      </a>
+
+      <a class="marca-card" href="/la-farmacia/" data-marca="farmacia">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">La Farmacia</h3>
+          <span class="marca-card__role">BAR DE CÓCTELES</span>
+        </div>
+        <p class="marca-card__desc">Mostrador de autopsia, gases nobles atrás, syringe shots de la casa. Cinco prescripciones exclusivas: La Morfina, Sangre de Paciente. Andrew prepara · Luz recibe.</p>
+        <span class="marca-card__link">Ver La Farmacia</span>
+      </a>
+
+      <a class="marca-card" href="/reservar/" data-marca="paciente013">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">Casa del Terror · Paciente 013</h3>
+          <span class="marca-card__role">EL LABERINTO</span>
+        </div>
+        <p class="marca-card__desc">11 salas, 25 minutos. Don Hilario, sala eléctrica, cirugía, morgue, encadenado al final. Boleto $60.000 (o $48k en grupos 4+). 50% depósito vía Wompi.</p>
+        <span class="marca-card__link">Reservar boleto</span>
+      </a>
+
+      <a class="marca-card" href="https://wa.me/19034598763" target="_blank" rel="noopener" data-marca="hortensia">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">Hortensia</h3>
+          <span class="marca-card__role">LA RECEPCIONISTA</span>
+        </div>
+        <p class="marca-card__desc">La que contesta el WhatsApp. Conoce a cada paciente por su nombre, te asigna sala, te pone tu ficha en la pared de expedientes. Pregúntale lo que sea.</p>
+        <span class="marca-card__link">Escribir por WhatsApp</span>
+      </a>
+
+      <a class="marca-card" href="/historia" data-marca="silvio">
+        <div class="marca-card__head">
+          <h3 class="marca-card__name">Don Silvio</h3>
+          <span class="marca-card__role">EL ANFITRIÓN</span>
+        </div>
+        <p class="marca-card__desc">El doctor de turno. Atiende el atrio, asigna salas, pasa el trapo de la lente. Vive en la pared y en la memoria del edificio. Lleva aquí desde el primer día.</p>
+        <span class="marca-card__link">Leer la historia</span>
+      </a>
+    </div>
   </div>
 </section>
 
