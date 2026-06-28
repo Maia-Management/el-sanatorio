@@ -1,0 +1,606 @@
+/**
+ * cohesion-sweep.css — El Sanatorio cohesion sweep 2026-06-28
+ *
+ * New components introduced by the cohesion sweep:
+ *   .hero-ctas               — primary CTA row on home (Boleto / Menú / Dónde)
+ *   .hero-info-card          — above-the-fold info card on spine pages
+ *                              (hours · address · price · primary CTA)
+ *   .reservar-cards          — 3-card reservation layout (Boleto / Mesa / Evento)
+ *   .marcas-grid             — Las Marcas del Sanatorio explainer (7 cards)
+ *   .chuzo-spine-mark        — brand-mark + Volver link injected on Chuzo
+ *   .lore-spine-strip        — slim spine-escape strip on lore pages
+ *
+ * All components honor cohesion-v2-tokens.css and the existing
+ * cinematic-v2 / style.css dark spine. Mobile-first 380px.
+ */
+
+/* ─────────────────────────────────────────────────────────────────────
+   HERO CTA ROW (home pages)
+   Renders below "ENTRE →" — 3 buttons stacked on mobile, row on desktop.
+   ───────────────────────────────────────────────────────────────────── */
+.atrium__pitch {
+  margin: 18px auto 12px;
+  max-width: 520px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(232, 225, 210, 0.86);
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+.atrium__pitch strong {
+  color: #F08543;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hero-ctas {
+  list-style: none;
+  margin: 24px auto 18px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 360px;
+  align-items: stretch;
+}
+.hero-ctas li { display: block; }
+
+.hero-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 22px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+  white-space: nowrap;
+}
+.hero-cta:hover { transform: translateY(-1px); }
+.hero-cta:focus-visible {
+  outline: 2px solid #D9621E;
+  outline-offset: 3px;
+}
+.hero-cta__chev {
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.8;
+}
+.hero-cta__price {
+  margin-left: 6px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.92);
+  padding-left: 8px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+.hero-cta--primary {
+  background: linear-gradient(180deg, #C8421A 0%, #8A2A12 100%);
+  color: #fff;
+  border-color: rgba(255, 200, 120, 0.45);
+  box-shadow: 0 1px 0 rgba(255, 200, 120, 0.20) inset, 0 8px 24px rgba(139, 30, 10, 0.42);
+}
+.hero-cta--primary:hover {
+  background: linear-gradient(180deg, #D85024 0%, #A03318 100%);
+  border-color: rgba(255, 200, 120, 0.70);
+}
+.hero-cta--secondary {
+  background: rgba(15, 13, 11, 0.45);
+  color: rgba(232, 225, 210, 0.92);
+  border-color: rgba(217, 98, 30, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.hero-cta--secondary:hover {
+  background: rgba(217, 98, 30, 0.16);
+  color: #fff;
+  border-color: rgba(217, 98, 30, 0.85);
+}
+
+.hero-lore-link {
+  display: inline-block !important;
+  margin-top: 18px !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.22em !important;
+  color: rgba(239, 227, 200, 0.45) !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  border-bottom: 1px dotted rgba(200, 132, 58, 0.28) !important;
+  padding-bottom: 3px !important;
+  transition: color 160ms ease, border-color 160ms ease !important;
+}
+.hero-lore-link:hover {
+  color: rgba(239, 227, 200, 0.85) !important;
+  border-bottom-color: rgba(200, 132, 58, 0.75) !important;
+}
+
+@media (min-width: 640px) {
+  .hero-ctas {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 720px;
+    gap: 12px;
+  }
+  .hero-ctas li { flex: 0 1 auto; }
+  .hero-cta { min-width: 200px; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   ABOVE-THE-FOLD INFO CARD (spine pages other than home)
+   Single card under hero with hours · address · price · primary CTA.
+   Renders as a compact horizontal panel on desktop, stacked on mobile.
+   ───────────────────────────────────────────────────────────────────── */
+.hero-info-card {
+  margin: 24px auto 32px;
+  max-width: 720px;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, rgba(15, 13, 11, 0.68) 0%, rgba(8, 6, 5, 0.82) 100%);
+  border: 1px solid rgba(217, 98, 30, 0.32);
+  border-radius: 6px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: rgba(232, 225, 210, 0.92);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.38);
+}
+.hero-info-card__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.hero-info-card__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-info-card__label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #D9621E;
+  opacity: 0.85;
+}
+.hero-info-card__value {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.35;
+  color: rgba(232, 225, 210, 0.96);
+}
+.hero-info-card__value a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(217, 98, 30, 0.45);
+}
+.hero-info-card__value a:hover { color: #F08543; }
+.hero-info-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  background: linear-gradient(180deg, #C8421A 0%, #8A2A12 100%);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 200, 120, 0.45);
+  margin-top: 6px;
+}
+.hero-info-card__cta:hover { background: linear-gradient(180deg, #D85024 0%, #A03318 100%); }
+
+@media (min-width: 720px) {
+  .hero-info-card__inner {
+    grid-template-columns: 1fr 1.2fr 0.8fr auto;
+    align-items: center;
+    gap: 22px;
+  }
+  .hero-info-card__cta { margin-top: 0; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   RESERVAR — 3-CARD LAYOUT
+   BOLETO AL LABERINTO · APARTAR MESA · CUMPLEAÑOS / EVENTO PRIVADO
+   ───────────────────────────────────────────────────────────────────── */
+.reservar-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 760px) {
+  .reservar-cards { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+}
+
+.reservar-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 28px 24px;
+  background: linear-gradient(180deg, rgba(15, 13, 11, 0.72) 0%, rgba(8, 6, 5, 0.88) 100%);
+  border: 1px solid rgba(217, 98, 30, 0.28);
+  border-radius: 8px;
+  color: rgba(232, 225, 210, 0.95);
+  font-family: 'Inter', system-ui, sans-serif;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.42);
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+.reservar-card:hover {
+  border-color: rgba(240, 133, 67, 0.65);
+  transform: translateY(-2px);
+}
+.reservar-card--primary {
+  border-color: rgba(217, 98, 30, 0.72);
+  background: linear-gradient(180deg, rgba(40, 18, 10, 0.78) 0%, rgba(8, 6, 5, 0.92) 100%);
+}
+.reservar-card__stamp {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  color: rgba(217, 98, 30, 0.75);
+  border: 1px solid rgba(217, 98, 30, 0.45);
+  padding: 3px 7px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.reservar-card__eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  color: #D9621E;
+  text-transform: uppercase;
+  margin: 0;
+}
+.reservar-card__title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.18;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.005em;
+}
+.reservar-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: 'Fraunces', Georgia, serif;
+  color: #F08543;
+  letter-spacing: 0.02em;
+}
+.reservar-card__price strong {
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: #F08543;
+}
+.reservar-card__price-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(232, 225, 210, 0.62);
+}
+.reservar-card__lede {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(232, 225, 210, 0.84);
+  margin: 0;
+}
+.reservar-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: rgba(232, 225, 210, 0.86);
+}
+.reservar-card__list li {
+  position: relative;
+  padding-left: 18px;
+}
+.reservar-card__list li::before {
+  content: '✚';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(185, 28, 28, 0.85);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.reservar-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  min-height: 48px;
+  padding: 12px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.reservar-card__cta--primary {
+  background: linear-gradient(180deg, #C8421A 0%, #8A2A12 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 200, 120, 0.55);
+}
+.reservar-card__cta--primary:hover { background: linear-gradient(180deg, #D85024 0%, #A03318 100%); }
+.reservar-card__cta--secondary {
+  background: rgba(217, 98, 30, 0.08);
+  color: #F08543;
+  border: 1px solid rgba(217, 98, 30, 0.55);
+}
+.reservar-card__cta--secondary:hover {
+  background: rgba(217, 98, 30, 0.18);
+  border-color: rgba(217, 98, 30, 0.85);
+}
+.reservar-card__cta--wa {
+  background: rgba(37, 211, 102, 0.12);
+  color: #4ee695;
+  border: 1px solid rgba(37, 211, 102, 0.55);
+}
+.reservar-card__cta--wa:hover {
+  background: rgba(37, 211, 102, 0.22);
+  color: #5fff9c;
+  border-color: rgba(37, 211, 102, 0.85);
+}
+.reservar-card__note {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(232, 225, 210, 0.55);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.04em;
+  margin-top: -4px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   LAS MARCAS DEL SANATORIO — brand-hierarchy explainer
+   7-card grid: El Sanatorio · Chuzo Tokyo · Cocina Sushi Pop · La Farmacia
+                · Casa del Terror P013 · Hortensia · Don Silvio
+   ───────────────────────────────────────────────────────────────────── */
+.marcas-section {
+  padding: 64px 16px 72px;
+  background: linear-gradient(180deg, rgba(8, 6, 5, 0.0) 0%, rgba(15, 13, 11, 0.5) 50%, rgba(8, 6, 5, 0.0) 100%);
+}
+.marcas-section__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.marcas-section__eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  color: #D9621E;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  text-align: center;
+}
+.marcas-section__title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.75rem, 3vw + 1rem, 2.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: #F2EBE0;
+  text-align: center;
+  margin: 0 0 8px;
+  letter-spacing: 0.005em;
+}
+.marcas-section__lede {
+  max-width: 640px;
+  margin: 0 auto 36px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(232, 225, 210, 0.78);
+  text-align: center;
+}
+.marcas-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 600px) { .marcas-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 920px) { .marcas-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+
+.marca-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 18px 22px;
+  background: rgba(15, 13, 11, 0.72);
+  border: 1px solid rgba(217, 98, 30, 0.22);
+  border-radius: 6px;
+  text-decoration: none;
+  color: rgba(232, 225, 210, 0.92);
+  font-family: 'Inter', sans-serif;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+.marca-card:hover {
+  border-color: rgba(240, 133, 67, 0.55);
+  transform: translateY(-2px);
+}
+.marca-card__head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.marca-card__name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 1.18;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.005em;
+}
+.marca-card__role {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #D9621E;
+}
+.marca-card__desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(232, 225, 210, 0.82);
+  margin: 0;
+}
+.marca-card__link {
+  margin-top: auto;
+  padding-top: 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(240, 133, 67, 0.85);
+}
+.marca-card__link::after {
+  content: ' →';
+  display: inline-block;
+  margin-left: 4px;
+  transition: transform 160ms ease;
+}
+.marca-card:hover .marca-card__link::after { transform: translateX(3px); }
+
+/* ─────────────────────────────────────────────────────────────────────
+   CHUZO SPINE MARK — preserves bright Japanese aesthetic, adds only
+   the El Sanatorio brand-mark top-left + ↩ Volver al Sanatorio top-right
+   per brief's STRICT rule: bright stays.
+   ───────────────────────────────────────────────────────────────────── */
+.chuzo-spine-mark {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #0F0D0B;
+  position: sticky;
+  top: 0;
+  z-index: 998;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.chuzo-spine-mark__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0F0D0B;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 12px;
+  min-height: 44px;
+  padding: 4px 0;
+}
+.chuzo-spine-mark__brand-mark {
+  color: #B91C1C;
+  font-size: 14px;
+  line-height: 1;
+}
+.chuzo-spine-mark__brand:hover { color: #B91C1C; }
+.chuzo-spine-mark__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #FFD24D;
+  color: #1A1614;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-size: 11.5px;
+  border: 1px solid #1A1614;
+  border-radius: 0;
+  box-shadow: 2px 2px 0 #1A1614;
+  min-height: 36px;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.chuzo-spine-mark__back:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 #1A1614;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   LORE SPINE STRIP — slim top strip on /el-hallazgo and /en/the-finding
+   gives users a one-tap escape back into the spine without breaking the
+   bespoke hz-nav case-file aesthetic.
+   ───────────────────────────────────────────────────────────────────── */
+.lore-spine-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(8, 6, 5, 0.92);
+  border-bottom: 1px solid rgba(217, 98, 30, 0.22);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(232, 225, 210, 0.82);
+  position: sticky;
+  top: 0;
+  z-index: 998;
+}
+.lore-spine-strip__brand,
+.lore-spine-strip__back,
+.lore-spine-strip__lang {
+  color: rgba(232, 225, 210, 0.82);
+  text-decoration: none;
+  padding: 6px 8px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+.lore-spine-strip__brand:hover,
+.lore-spine-strip__back:hover,
+.lore-spine-strip__lang:hover {
+  color: #F08543;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   ANCHOR OFFSET — when sticky nav is in play, ensure anchor jumps
+   don't hide the section title behind the nav.
+   ───────────────────────────────────────────────────────────────────── */
+[id]:not(html):not(body) { scroll-margin-top: 80px; }
+
+/* Honor reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta, .reservar-card, .marca-card, .chuzo-spine-mark__back { transition: none !important; }
+  .marca-card:hover .marca-card__link::after { transform: none !important; }
+}

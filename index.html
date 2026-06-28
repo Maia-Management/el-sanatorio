@@ -34,9 +34,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;700&display=swap" />
 
-  <!-- Brand tokens + cinematic v2 styles -->
+  <!-- Brand tokens + cinematic v2 styles + unified spine nav + cohesion-sweep components -->
   <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260623c" />
   <link rel="stylesheet" href="/css/cinematic-v2.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 
   <!-- Schema.org graph -->
   <script type="application/ld+json">
@@ -150,34 +153,31 @@
   </script>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
 
-<!-- "€"€ Cinematic effect layers (visual overlay, all fixed-position) "€"€"€"€"€ -->
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth across 20 spine pages) -->
+<div id="site-nav" data-active=""></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Navegación esencial">
+    <a href="/">EL SANATORIO</a>
+    <a href="/menu/">MENÚ</a>
+    <a href="/reservar/">RESERVAR</a>
+    <a href="/en/">EN</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</noscript>
+
+<!-- ───── Cinematic effect layers (visual overlay, all fixed-position) ───── -->
 <canvas class="cinema-grain" aria-hidden="true"></canvas>
 <div class="cinema-vignette" aria-hidden="true"></div>
 <div class="cinema-gate" aria-hidden="true"></div>
 <div class="cinema-sprockets" aria-hidden="true"></div>
 <div class="cinema-stamp" aria-hidden="true">OCT 1968 · ROLL 7</div>
 
-<!-- "€"€ Sound toggle "€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€ -->
+<!-- ───── Sound toggle ───── -->
 <button class="sound-toggle" type="button" aria-label="Activar sonido ambiente">
   <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/><path d="M19.07 4.93a10 10 0 010 14.14"/></svg>
   <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
 </button>
-
-<!-- "€"€ Nav (minimal cinema-style) "€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€ -->
-<nav class="cinema-nav" role="navigation" aria-label="Navegación">
-  <div class="cinema-nav__brand">EL SANATORIO</div>
-  <ul class="cinema-nav__links" role="list">
-    <li><a href="#asylum">Asilo</a></li>
-    <li><a href="/el-hallazgo">El Hallazgo</a></li>
-    <li><a href="#experience">Experiencia</a></li>
-    <li><a href="#ficha">Tu Ficha</a></li>
-    <li><a href="#admision">Reservar</a></li>
-    <li><a href="/menu">Menú</a></li>
-    <li><a href="#findus">Dónde</a></li>
-  </ul>
-</nav>
 
 <!-- "€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€"€ -->
 <!-- HERO — ATRIO (Dr. Silvio projection)                                  -->
@@ -203,13 +203,25 @@
     <h1 class="atrium__title">EL<br/>SANATORIO</h1>
     <p class="atrium__sub">Yakitori · Cócteles macabros · Casa&nbsp;del&nbsp;Terror</p>
     <p class="atrium__quote">"Don Silvio les manda saludos. Esta noche la casa los espera."</p>
-    <aside class="atrium__launch" role="note" aria-label="Fechas de apertura" style="margin:28px auto 18px;max-width:480px;padding:14px 18px;background:linear-gradient(135deg,rgba(200,132,58,0.16),rgba(139,0,0,0.10));border:1px dashed rgba(200,132,58,0.65);border-radius:6px;font-family:var(--font-typewriter,'Courier New',monospace);font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ek-cream,#efe3c8);line-height:1.7;text-align:center;">
+
+    <p class="atrium__pitch">Yakitori al carbón, cócteles macabros y casa del terror — en el viejo Hospital del Tórax. <strong>Abre 30 de julio.</strong></p>
+
+    <aside class="atrium__launch" role="note" aria-label="Fechas de apertura" style="margin:24px auto 18px;max-width:480px;padding:14px 18px;background:linear-gradient(135deg,rgba(200,132,58,0.16),rgba(139,0,0,0.10));border:1px dashed rgba(200,132,58,0.65);border-radius:6px;font-family:var(--font-typewriter,'Courier New',monospace);font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ek-cream,#efe3c8);line-height:1.7;text-align:center;">
       <span style="display:block;font-size:0.66rem;letter-spacing:0.28em;color:var(--ek-amber,#c8843a);margin-bottom:4px;">Apertura</span>
       <strong style="display:block;font-family:'Fraunces',serif;font-size:1.05rem;letter-spacing:0.08em;text-transform:none;color:#fff;">Jueves 30 de julio 2026</strong>
       <span style="display:block;margin-top:6px;font-size:0.62rem;color:rgba(239,227,200,0.78);">Noches de práctica · 23–29 de julio · solo invitados</span>
     </aside>
+
     <a class="atrium__enter" href="#asylum">Entre &nbsp;→</a>
-    <a class="atrium__sub-link" href="/el-hallazgo" style="display:block;margin-top:22px;font-family:var(--font-typewriter,'Courier New',monospace);font-size:11px;letter-spacing:0.22em;color:var(--ek-bone,rgba(239,227,200,0.55));text-decoration:none;text-transform:uppercase;border-bottom:1px dotted rgba(200,132,58,0.35);padding-bottom:3px;display:inline-block;">¿Quieres saber qué encontramos?</a>
+
+    <!-- Primary CTA row (added 2026-06-28 cohesion sweep — above-the-fold info card per brief) -->
+    <ul class="hero-ctas" role="list" aria-label="Próximos pasos">
+      <li><a class="hero-cta hero-cta--primary" href="/reservar/"><span class="hero-cta__chev" aria-hidden="true">▶</span> COMPRAR BOLETO <span class="hero-cta__price">$60.000</span></a></li>
+      <li><a class="hero-cta hero-cta--secondary" href="/menu/"><span class="hero-cta__chev" aria-hidden="true">▶</span> VER MENÚ</a></li>
+      <li><a class="hero-cta hero-cta--secondary" href="/contact"><span class="hero-cta__chev" aria-hidden="true">▶</span> DÓNDE ESTAMOS</a></li>
+    </ul>
+
+    <a class="atrium__sub-link hero-lore-link" href="/el-hallazgo">¿Quieres saber qué encontramos?</a>
   </div>
 
   <div class="atrium__scroll-hint" aria-hidden="true">
