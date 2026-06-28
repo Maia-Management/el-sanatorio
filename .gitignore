@@ -32,3 +32,5 @@ FINAL-AUDIT*.md
 *.bak
 index.html.bak-*
 .gitignore.audit-tmp
+
+.audit-shots-*/
