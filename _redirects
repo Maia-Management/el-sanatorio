@@ -90,11 +90,13 @@
 # ============================================================================
 /menu/chuzo        /menu/chuzo/index.html    200
 /menu/bar          /menu/bar/index.html      200
-/menu/tickets      /menu/tickets/index.html  200
+# /menu/tickets target page does not exist — redirect to the reservar flow
+# instead so old QR stickers don't hit a 404 (2026-06-27 fix).
+/menu/tickets      /reservar                 301
 /qr                /menu/                    301
 /qr/chuzo          /menu/chuzo               301
 /qr/bar            /menu/bar                 301
-/qr/tickets        /menu/tickets             301
+/qr/tickets        /reservar                 301
 
 # Self-serve booking clean URLs — 2026-06-24 PM
 # Note: keep these BEFORE the legacy /reserva and /booking 301 lines below so
