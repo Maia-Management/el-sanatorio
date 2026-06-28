@@ -32,10 +32,13 @@
   <!-- Cohesion v2 brand tokens (loaded BEFORE style.css) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap">
   <link rel="stylesheet" href="/css/cohesion-v2-tokens.css?v=20260623c" />
   <link rel="stylesheet" href="/css/style.css?v=20260623" />
   <link rel="stylesheet" href="/css/a11y-shim.css?v=20260623" />
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 
   <style>
     .reservar-wrap { padding: 6rem 0 4rem; background: var(--black); min-height: 80vh; }
@@ -62,87 +65,125 @@
   </style>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
 
-<nav class="nav" role="navigation" aria-label="Navegación principal">
-  <div class="nav__inner">
-    <a href="/" class="nav__logo">
-      <span class="nav__logo-num">PACIENTE 013</span>
-      <span class="nav__logo-name" data-glitch="EL SANATORIO">EL SANATORIO</span>
-    </a>
-    <ul class="nav__links" role="list">
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/menu">Menú</a></li>
-      <li><a href="/experience">Experiencia</a></li>
-      <li><a href="/events">Eventos</a></li>
-      <li><a href="/historia">Historia</a></li>
-      <li><a href="/contact">Contacto</a></li>
-      <li><a href="/reservar" class="active">Reservar</a></li>
-    </ul>
-    <button type="button" class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth, replaces ad-hoc per-page nav 2026-06-28) -->
+<div id="site-nav" data-active="reservar"></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Navegación esencial">
+    <a href="/">EL SANATORIO</a>
+    <a href="/menu/">MENÚ</a>
+    <a href="/reservar/">RESERVAR</a>
+    <a href="/en/">EN</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</noscript>
 
 <main id="main-content">
-<div class="nav__mobile-menu" id="mobile-menu" role="navigation" aria-label="Menú móvil">
-  <a href="/">Inicio</a>
-  <a href="/menu">Menú</a>
-  <a href="/experience">Experiencia</a>
-  <a href="/events">Eventos</a>
-  <a href="/historia">Historia</a>
-  <a href="/contact">Contacto</a>
-  <a href="/reservar">Reservar</a>
-</div>
 
-<section class="reservar-wrap">
+<section class="reservar-wrap" style="padding-top: 3.5rem;">
   <div class="container--sm">
-    <div class="section-label" style="justify-content:center;"><span>Sala de Admisiones</span></div>
-    <h1 class="section-title section-title--center neon-red" style="font-size: clamp(1.6rem, 4.5vw, 2.5rem); line-height: 1.2; margin-bottom: 1rem;">
-      Reservar con Depósito en Línea
+    <div class="section-label" style="justify-content:center;"><span>Sala de Admisiones · Jueves a Domingo</span></div>
+    <h1 class="section-title section-title--center neon-red" style="font-size: clamp(1.6rem, 4.5vw, 2.5rem); line-height: 1.2; margin-bottom: 0.75rem;">
+      Reservar
     </h1>
-    <p class="serif text-center" style="color: var(--light-gray); max-width: 520px; margin: 0 auto 2rem; font-size: 0.92rem;">
-      Aparta tu lugar con el 50% por adelantado vía Wompi.
+    <p class="serif text-center" style="color: var(--light-gray); max-width: 580px; margin: 0 auto 2.5rem; font-size: 0.95rem;">
+      Tres formas de venir al Sanatorio. Elige la tuya.
+    </p>
+
+    <!-- ─── 3-CARD RESERVAR LAYOUT (cohesion sweep 2026-06-28 brief) ─── -->
+    <div class="reservar-cards" aria-label="Tipos de reserva">
+      <article class="reservar-card reservar-card--primary" data-card="boleto">
+        <span class="reservar-card__stamp">EXP. PAC-013</span>
+        <p class="reservar-card__eyebrow">Para entrar al laberinto</p>
+        <h2 class="reservar-card__title">Boleto al Laberinto</h2>
+        <div class="reservar-card__price">
+          <strong>$60.000</strong>
+          <span class="reservar-card__price-sub">/ persona</span>
+        </div>
+        <p class="reservar-card__lede">11 salas · 25 minutos · Don Hilario, sala eléctrica, cirugía, morgue, encadenado al final.</p>
+        <ul class="reservar-card__list">
+          <li>$48.000 / persona en grupos de 4+ (20% off automático)</li>
+          <li>Depósito 50% en línea · Saldo en la puerta</li>
+          <li>Pago seguro vía Wompi (Nequi · PSE · tarjeta)</li>
+          <li>Confirmación inmediata por WhatsApp</li>
+        </ul>
+        <a class="reservar-card__cta reservar-card__cta--primary" href="?exp=ticket#booking-form" data-preset="ticket">RESERVAR BOLETO →</a>
+        <p class="reservar-card__note">Solo +16 después de las 8:30 PM</p>
+      </article>
+
+      <article class="reservar-card" data-card="mesa">
+        <span class="reservar-card__stamp">EXP. BAR</span>
+        <p class="reservar-card__eyebrow">Para venir a comer o tomar</p>
+        <h2 class="reservar-card__title">Apartar Mesa</h2>
+        <div class="reservar-card__price">
+          <strong style="color:#E8E1D2;font-size:1.25rem;">Sin depósito</strong>
+        </div>
+        <p class="reservar-card__lede">Aparta mesa en el bar o el patio. Sin compromiso online — pagas tu consumo en sitio.</p>
+        <ul class="reservar-card__list">
+          <li>Grupos de 4 a 12 personas</li>
+          <li>Cocteles, yakitori, syringe shots</li>
+          <li>No incluye acceso al laberinto (eso es boleto aparte)</li>
+          <li>Capacidad limitada — recomendado reservar</li>
+        </ul>
+        <a class="reservar-card__cta reservar-card__cta--secondary" href="?exp=group#booking-form" data-preset="group">APARTAR MESA →</a>
+        <p class="reservar-card__note">Sin cobro online · solo asegura tu lugar</p>
+      </article>
+
+      <article class="reservar-card" data-card="evento">
+        <span class="reservar-card__stamp">EXP. PRIVADO</span>
+        <p class="reservar-card__eyebrow">Para grupos grandes o privados</p>
+        <h2 class="reservar-card__title">Cumpleaños / Evento Privado</h2>
+        <div class="reservar-card__price">
+          <strong style="color:#4ee695;font-size:1.25rem;">Cotización personal</strong>
+        </div>
+        <p class="reservar-card__lede">Cumpleaños VIP, despedidas, privatización del laberinto, cenas corporativas. Te armamos el plan a medida.</p>
+        <ul class="reservar-card__list">
+          <li>Grupos hasta 40 personas</li>
+          <li>Privatización total disponible</li>
+          <li>Servicios a medida (chef, bartender, foto)</li>
+          <li>Respuesta el mismo día por WhatsApp</li>
+        </ul>
+        <a class="reservar-card__cta reservar-card__cta--wa"
+           href="https://wa.me/19034598763?text=Hola%21%20Quiero%20cotizar%20un%20evento%20privado%2Fcumplea%C3%B1os%20en%20El%20Sanatorio.%0A-%20Personas%3A%20%0A-%20Fecha%20tentativa%3A%20%0A-%20Tipo%20%28cumple%2Fcorpo%2Fdespedida%29%3A%20"
+           target="_blank" rel="noopener">CHATEAR POR WHATSAPP →</a>
+        <p class="reservar-card__note">Respondemos en horario hábil (10am–8pm)</p>
+      </article>
+    </div>
+
+    <!-- ─── BOOKING FORM (preserved — anchored from cards above) ─── -->
+    <h2 id="booking-form" style="font-family:'Fraunces',serif;font-size:clamp(1.3rem,3vw,1.75rem);color:#F2EBE0;text-align:center;margin:3.5rem auto 0.75rem;letter-spacing:0.01em;">
+      Formulario de reserva
+    </h2>
+    <p class="serif text-center" style="color: var(--light-gray); max-width: 520px; margin: 0 auto 2rem; font-size: 0.88rem;">
+      Aparta tu boleto o mesa con el 50% por adelantado vía Wompi.
       El saldo se paga en la entrada (efectivo, Nequi o tarjeta).
     </p>
 
-    <div class="reservar-card">
+    <div class="reservar-card" style="max-width:640px;margin:0 auto;background:rgba(15,13,11,0.72);border-color:rgba(217,98,30,0.32);border-radius:8px;padding:2rem;">
       <form id="reservar-form" novalidate>
         <!-- Honeypot -->
         <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;" aria-hidden="true">
           <label>Sitio web <input type="text" name="website" autocomplete="off" tabindex="-1"></label>
         </div>
 
-        <!-- Experiencia type -->
+        <!-- Tipo de experiencia (consolidated 2026-06-28 — 4 → 2 since cumpleaños/evento privado now route directly to WhatsApp from the upper Evento card) -->
         <fieldset style="border:0;padding:0;margin:0 0 1.25rem;">
-          <legend class="form-label" style="margin-bottom:0.5rem;">Tipo de experiencia *</legend>
-          <div class="exp-options" role="radiogroup" aria-label="Tipo de experiencia">
+          <legend class="form-label" style="margin-bottom:0.5rem;">Tipo de reserva *</legend>
+          <div class="exp-options" role="radiogroup" aria-label="Tipo de reserva">
             <label class="exp-pill is-active" data-pill="ticket">
               <input type="radio" name="experience_type" value="ticket" checked />
-              <div class="exp-name">Ticket — El Laberinto</div>
+              <div class="exp-name">Boleto · El Laberinto</div>
               <div class="exp-price">$60.000 COP / persona</div>
-              <div class="exp-desc">Acceso a la zona restringida. 20% descuento auto para grupos de 4 o más ($48.000/persona).</div>
-            </label>
-            <label class="exp-pill" data-pill="birthday">
-              <input type="radio" name="experience_type" value="birthday" />
-              <div class="exp-name">Cumpleaños</div>
-              <div class="exp-price">Habla con nosotros</div>
-              <div class="exp-desc">Cotización personalizada por WhatsApp. Cuéntanos cuántas personas y qué tipo de servicio quieres.</div>
-            </label>
-            <label class="exp-pill" data-pill="private">
-              <input type="radio" name="experience_type" value="private" />
-              <div class="exp-name">Evento privado</div>
-              <div class="exp-price">Habla con nosotros</div>
-              <div class="exp-desc">Privatización + servicios a medida. Cotización por WhatsApp.</div>
+              <div class="exp-desc">Acceso al laberinto. 20% off automático para grupos de 4+ ($48.000/persona).</div>
             </label>
             <label class="exp-pill" data-pill="group">
               <input type="radio" name="experience_type" value="group" />
-              <div class="exp-name">Reserva de grupo (mesa)</div>
-              <div class="exp-price">Sin depósito · 4–12</div>
-              <div class="exp-desc">Solo apartar mesa en el bar / patio.</div>
+              <div class="exp-name">Apartar mesa</div>
+              <div class="exp-price">Sin depósito · 4–12 pers.</div>
+              <div class="exp-desc">Solo asegurar mesa en bar / patio (sin acceso al laberinto).</div>
             </label>
           </div>
+          <p class="mono" style="font-size:0.68rem;color:var(--gray);margin-top:0.6rem;letter-spacing:0.08em;">Cumpleaños o evento privado: <a href="https://wa.me/19034598763?text=Hola%21%20Quiero%20cotizar%20un%20evento%20privado%20en%20El%20Sanatorio" target="_blank" rel="noopener" style="color:var(--ember,#D9621E);text-decoration:underline;">cotiza por WhatsApp ↗</a></p>
         </fieldset>
 
         <div class="form-grid">
