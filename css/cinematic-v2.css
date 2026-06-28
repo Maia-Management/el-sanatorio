@@ -226,10 +226,38 @@ input, textarea, select { font: inherit; color: inherit; }
 .cinema-nav__links li:first-child a::before { content: none; }
 
 @media (max-width: 880px) {
-  .cinema-nav { padding: 14px 18px; font-size: 9px; letter-spacing: 0.24em; }
-  .cinema-nav__links { gap: 14px; }
+  .cinema-nav {
+    padding: 14px 18px 14px 14px;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    align-items: center;
+    gap: 10px;
+  }
+  .cinema-nav__brand {
+    flex-shrink: 0;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+  }
+  /* Horizontal scrollable nav — keep all 7 items reachable on mobile
+     (was hiding 4 of 7 via :nth-child(n+4) which hid Reservar/Menú/Dónde —
+     the most important CTAs on a launch site). 2026-06-28 fix. */
+  .cinema-nav__links {
+    gap: 14px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    white-space: nowrap;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-right: 12px;
+    -webkit-mask-image: linear-gradient(to right, black 0%, black calc(100% - 24px), transparent 100%);
+            mask-image: linear-gradient(to right, black 0%, black calc(100% - 24px), transparent 100%);
+  }
+  .cinema-nav__links::-webkit-scrollbar { display: none; }
+  .cinema-nav__links li { flex-shrink: 0; }
   .cinema-nav__links a::before { display: none; }
-  .cinema-nav__links li:nth-child(n+4) { display: none; }
 }
 
 /* === Section base ============================================ */
