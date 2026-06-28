@@ -247,7 +247,10 @@
       '.mcb-toggle input:disabled+.mcb-toggle-slider{opacity:.55;cursor:not-allowed}' +
       '.mcb-always-on{font-size:11px;color:#8fa3c0;margin-left:8px;white-space:nowrap}' +
       '#maia-consent-banner .mcb-footer-note{font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.45;color:#BFD2EA;margin-top:10px;overflow-wrap:anywhere;letter-spacing:0;text-transform:none}' +
-      '@media(max-width:600px){#maia-consent-banner{width:calc(100% - 24px);max-width:none;max-height:calc(100vh - 16px);max-height:calc(100svh - 16px);margin:0 12px;padding:16px 14px 12px;border-radius:10px 10px 0 0;font-size:13px;line-height:1.45}#maia-consent-banner .mcb-title{font-size:16px}#maia-consent-banner .mcb-body{font-size:13px;line-height:1.45}#maia-consent-banner .mcb-header{flex-direction:column;align-items:flex-start;gap:4px}#maia-consent-banner .mcb-actions{flex-direction:column}#maia-consent-banner .mcb-btn{width:100%;text-align:center;padding:9px 16px;white-space:normal}}';
+      /* Mobile compaction (2026-06-27 fix — banner was eating 60-70% of viewport on phones,
+         blocking the actual page below). Hide the redundant footer note (NIT + address already
+         in the logo block; full text is on /privacidad). Tighter padding, smaller body font. */
+      '@media(max-width:600px){#maia-consent-banner{width:calc(100% - 16px);max-width:none;max-height:calc(100vh - 12px);max-height:calc(100svh - 12px);margin:0 8px;padding:14px 14px 10px;border-radius:10px 10px 0 0;font-size:12.5px;line-height:1.4}#maia-consent-banner .mcb-title{font-size:15px}#maia-consent-banner .mcb-body{font-size:12.5px;line-height:1.4;margin:0 0 12px}#maia-consent-banner .mcb-header{flex-direction:row;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}#maia-consent-banner .mcb-logo{font-size:10px;line-height:1.2}#maia-consent-banner .mcb-actions{flex-direction:column;gap:8px}#maia-consent-banner .mcb-btn{width:100%;text-align:center;padding:9px 14px;white-space:normal;font-size:13.5px}#maia-consent-banner .mcb-footer-note{display:none}}';
     var style = document.createElement('style');
     style.id = 'maia-consent-styles';
     style.appendChild(document.createTextNode(css));
@@ -281,7 +284,7 @@
     var logo = document.createElement('div'); logo.className = 'mcb-logo'; logo.innerHTML = 'EL SANATORIO S.A.S.<br>NIT 902.051.563-5';
     header.appendChild(title); header.appendChild(logo);
     var body = document.createElement('p'); body.className = 'mcb-body';
-    body.innerHTML = 'Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el tr\u00e1fico y personalizar el contenido y la publicidad. Conforme a la <strong>Ley 1581 de 2012</strong> (Colombia), puedes aceptar todas las cookies, rechazar las opcionales o personalizar tu elecci\u00f3n. Consulta nuestra <a href="' + CONFIG.privacyPolicyUrl + '" target="_blank" rel="noopener noreferrer">Pol\u00edtica de Privacidad</a> para m\u00e1s informaci\u00f3n.';
+    body.innerHTML = 'Usamos cookies propias y de terceros para mejorar tu experiencia, analizar el tr\u00e1fico y personalizar el contenido. Conforme a la <strong>Ley 1581/2012</strong>, puedes aceptar, rechazar o personalizar. Detalles en nuestra <a href="' + CONFIG.privacyPolicyUrl + '" target="_blank" rel="noopener noreferrer">Pol\u00edtica de Privacidad</a>.';
     var actions = document.createElement('div'); actions.className = 'mcb-actions';
     var btnAccept = document.createElement('button'); btnAccept.className = 'mcb-btn mcb-btn-accept'; btnAccept.id = 'mcb-accept-all'; btnAccept.type = 'button'; btnAccept.textContent = 'Aceptar todo';
     var btnReject = document.createElement('button'); btnReject.className = 'mcb-btn mcb-btn-reject'; btnReject.id = 'mcb-reject-all'; btnReject.type = 'button'; btnReject.textContent = 'Rechazar';
