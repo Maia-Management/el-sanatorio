@@ -126,48 +126,25 @@
       })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
     }
   </script>
+<!-- Unified spine nav + cohesion-sweep components (added 2026-06-28 cohesion sweep) -->
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Saltar al contenido</a>
 
-<!-- ── Navigation ──────────────────────────────────────────── -->
-<nav class="nav" role="navigation" aria-label="Navegación principal">
-  <div class="nav__inner">
-    <a href="/" class="nav__logo">
-      <span class="nav__logo-num">PACIENTE 013</span>
-      <span class="nav__logo-name" data-glitch="EL SANATORIO">EL SANATORIO</span>
-    </a>
-    <div class="nav__monitor" aria-hidden="true">
-      <svg viewBox="0 0 300 36" preserveAspectRatio="none">
-        <path class="ekg-line" d="M 0,18 L 30,18 L 45,12 L 60,27 L 66,0 L 75,34 L 90,18 L 120,18 L 135,12 L 150,27 L 156,0 L 165,34 L 180,18 L 300,18" />
-      </svg>
-    </div>
-    <ul class="nav__links" role="list">
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/menu">Menú</a></li>
-      <li><a href="/experience" class="active">Experiencia</a></li>
-      <li><a href="/events">Eventos</a></li>
-      <li><a href="/tours">Tours</a></li>
-      <li><a href="/historia">Historia</a></li>
-      <li><a href="/contact">Contacto</a></li>
-      <li><a href="#booking">Reservar</a></li>
-    </ul>
-    <button type="button" class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth, replaces ad-hoc per-page nav 2026-06-28) -->
+<div id="site-nav" data-active="experiencia"></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Navegación esencial">
+    <a href="/">EL SANATORIO</a>
+    <a href="/menu/">MENÚ</a>
+    <a href="/reservar/">RESERVAR</a>
+    <a href="/en/">EN</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</noscript>
 <main id="main-content">
-<div class="nav__mobile-menu" id="mobile-menu" role="navigation" aria-label="Menú móvil">
-  <a href="/">Inicio</a>
-  <a href="/menu">Menú</a>
-  <a href="/experience">Experiencia</a>
-  <a href="/events">Eventos</a>
-  <a href="/tours">Tours</a>
-  <a href="/historia">Historia</a>
-  <a href="/contact">Contacto</a>
-  <a href="#booking">Reservar</a>
-</div>
 
 <!-- ── Hero ──────────────────────────────────────────────────── -->
 <div class="exp-hero">

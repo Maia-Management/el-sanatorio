@@ -80,32 +80,24 @@
       })(window,document,"https://static.hotjar.com/c/hotjar-",".js?sv=");
     }
   </script>
+<!-- Unified spine nav + cohesion-sweep components (added 2026-06-28 cohesion sweep) -->
+  <link rel="stylesheet" href="/css/site-nav.css?v=20260628a" />
+  <link rel="stylesheet" href="/css/cohesion-sweep.css?v=20260628a" />
+  <script src="/js/site-nav.js?v=20260628a" defer></script>
 </head>
 <body>
-<a href="#main-content" class="skip-link" style="position:absolute;left:-9999px;top:0;background:#000;color:#fff;padding:8px 16px;z-index:99999;font-family:system-ui,sans-serif;font-size:14px;text-decoration:none;" onfocus="this.style.left='8px';" onblur="this.style.left='-9999px';">Skip to main content</a>
 
-<nav class="nav" role="navigation" aria-label="Primary navigation">
-  <div class="nav__inner">
-    <a class='nav__logo' href='/en/'>
-      <span class="nav__logo-num"><span lang="es">PACIENTE 013</span></span>
-      <span class="nav__logo-name"><span lang="es">EL SANATORIO</span></span>
-    </a>
-    <ul class="nav__links" role="list">
-      <li><a href='/en/'>Home</a></li>
-      <li><a href='/en/menu/'>Menu</a></li>
-      <li><a href='/en/experience/'>Experience</a></li>
-      <li><a href='/en/events/'>Events</a></li>
-      <li><a href='/en/tours/'>Tours</a></li>
-      <li><a href='/en/history/'>History</a></li>
-      <li><a href='/en/contact/'>Contact</a></li>
-      <li><a href='/en/reservar/'>Book</a></li>
-      <li><a href='/privacidad' hreflang='es' lang='es'>ES</a></li>
-    </ul>
-    <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+<!-- Unified spine nav (rendered by /js/site-nav.js — single source of truth, replaces ad-hoc per-page nav 2026-06-28) -->
+<div id="site-nav" data-active=""></div>
+<noscript>
+  <nav class="site-nav-fallback" aria-label="Essential navigation">
+    <a href="/en/">EL SANATORIO</a>
+    <a href="/en/menu/">MENU</a>
+    <a href="/en/reservar/">BOOK</a>
+    <a href="/">ES</a>
+    <a href="https://wa.me/19034598763" target="_blank" rel="noopener">WhatsApp</a>
+  </nav>
+</noscript>
 
 <main id="main-content" class="legal-page">
 
