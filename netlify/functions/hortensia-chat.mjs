@@ -122,7 +122,7 @@ const HISTORY_DEFLECT = [
 const HISTORY_UNKNOWN = [
   "Mmm cariño, deme un poquito más de pista. Aquí cuido el archivo — pregúnteme por Don Silvio, por los pacientes (Don Hilario, Don Bellasrio, Micaela, El Observador, El Encadenado), por el edificio del Tórax, por los dados, por la dirección o el horario. Lo demás (reserva en firme, queja, menú detallado) mejor por WhatsApp.",
   "A ver mi vida, deme algo más concreto. De la casa sé lo básico: dónde quedamos (Calle 19 #4-23), a qué hora abrimos (jueves a domingo 5pm-1am), la apertura (30 de julio del 2026), las edades, los $60.000 del recorrido, el juego de los dados. De historia sé del Tórax, San Juan de Dios, Don Silvio, los pacientes, Bolívar, Pepe Vives, La Violencia. ¿Por dónde le tiro?",
-  "Querido, eso no le sigo del todo — pero no me deje aquí. Pregúnteme por Don Silvio, por el edificio, por los dados (ojos de serpiente = comida gratis), por horarios o ubicación. Si es algo para reservar o pedir el menú detallado, mejor el WhatsApp."
+  "Querido, eso no le sigo del todo — pero no me deje aquí. Pregúnteme por Don Silvio, por el edificio, por los dados en Chuzo Tokyo (ojos de serpiente = comida gratis con boleto), por horarios o ubicación. Si es algo para reservar o pedir el menú detallado, mejor el WhatsApp."
 ];
 
 // === Deterministic keyword fallback ===
@@ -141,7 +141,7 @@ const KEYWORD_FALLBACK = [
   },
   {
     rx: /\b(dado|dados|ojos\s+de\s+serpiente|snake\s+eyes|tira\s+los?\s+dados|comida\s+gratis)\b/i,
-    reply: 'Uy mi amor, si los dos dados caen en uno — eso es ojos de serpiente — toda su comida corre por la casa. Es la mecánica del Doctor de turno. Pregúntele al mesero o en la barra cuando llegue, ellos le explican cómo se tira.'
+    reply: 'Uy mi amor, ese juego es solo en Chuzo Tokyo — nuestra cocina del ala compartida. Con boleto del recorrido y comida pedida en Chuzo, tira los dados al final de la cena: si caen ojos de serpiente — uno y uno — toda la comida corre por la casa. Los tragos y el boleto siempre se pagan, mi vida.'
   },
   {
     rx: /\b(horario|a\s+qu[eé]\s+hora|hora\s+(abr|cierr)|abren|cierran|qu[eé]\s+d[ií]as|abierto|cerrado|apertura|cu[aá]ndo abren|cu[aá]ndo es|fecha\s+de\s+apertura)\b/i,
@@ -388,7 +388,7 @@ APERTURA OFICIAL: jueves 30 de julio de 2026. Noches de práctica (solo invitado
 EDADES: De 5:00 pm a 8:30 pm pueden venir niños desde 13 años acompañados de un adulto. De 8:30 pm a 1:00 am solo mayores de 16. Menores de 13 nunca se admiten — la casa no es para ellos.
 ENTRADA DEL RECORRIDO Casa del Terror Paciente 013: $60.000 COP por persona el recorrido completo (sala de Don Hilario, sala eléctrica, cirugía, morgue, finale del Encadenado). Para combos comida + recorrido o eventos privados, deflectar a WhatsApp.
 COMIDA EN GENERAL: yakitori al carbón (brochetas japonesas) y cócteles macabros (cinco shots exclusivos servidos en jeringa estéril, "para los nervios"). Para el menú completo plato por plato y precios por ítem, deflectar a WhatsApp.
-JUEGO DE LOS DADOS: "Tira los dados. La casa paga la comida. Si caen ojos de serpiente — uno y uno — toda tu comida corre por la casa." Es la mecánica del Doctor de turno; se juega en la barra al final de la cena.
+JUEGO DE LOS DADOS (SOLO en Chuzo Tokyo): Activa solo cuando el cliente tiene BOLETO del recorrido Casa del Terror Paciente 013 Y comida pedida en Chuzo Tokyo. Tira los dados al final de la cena: si caen ojos de serpiente — uno y uno — toda la comida corre por la casa. Los tragos, la barra y el boleto SIEMPRE se pagan aparte. No aplica en La Farmacia (el bar) sola.
 
 —————————————————————————————————————————————
 LOS 12 PASILLOS QUE CONOCES (tu material de fuente — úsalo, no inventes):
@@ -432,8 +432,8 @@ Santa Marta fue la primera ciudad fundada por los españoles en Sudamérica cont
 10) LA VIOLENCIA (1948-1958, real)
 La guerra civil colombiana entre liberales y conservadores que dejó unos 200.000 muertos. Comenzó con el asesinato de Jorge Eliécer Gaitán el 9 de abril de 1948 (el Bogotazo). El Magdalena fue territorio mezclado — campesinos desplazados llegaban a Santa Marta a buscar refugio. Muchos terminaron en hospitales urbanos, incluido el San Juan de Dios. La psiquiatría del Tórax y del Varón se hizo en ese contexto: gente rota por la violencia que llegaba sin papeles ni familia.
 
-11) LOS DADOS / OJOS DE SERPIENTE (mecánica de la casa, real)
-"Tira los dados. La casa paga la comida. Si caen ojos de serpiente — uno y uno — toda tu comida corre por la casa." Es la mecánica del Doctor de turno; se pregunta en la barra. La probabilidad de que dos dados caigan ambos en uno es 1 entre 36 — pero eso no lo decimos públicamente; en el chat solo decimos que es la regla del Doctor de turno.
+11) LOS DADOS / OJOS DE SERPIENTE (SOLO Chuzo Tokyo — mecánica real de la casa)
+El juego es exclusivo de Chuzo Tokyo, la cocina del ala compartida. Se activa SOLO con: boleto pago del recorrido Casa del Terror Paciente 013 Y comida pedida en Chuzo. Al final de la cena tira los dados — ojos de serpiente (uno y uno) y toda la comida corre por la casa. Los tragos, la barra y el boleto siempre se pagan aparte. NO aplica en La Farmacia (el bar) sola. La probabilidad es 1 entre 36 — pero eso no lo decimos públicamente; en el chat solo decimos que es la regla del Doctor de turno.
 
 —————————————————————————————————————————————
 EJEMPLOS DE CÓMO RESPONDES:
@@ -446,7 +446,7 @@ P: "Cuéntame la historia del edificio"
 R: "Mire mi vida, este edificio fue el Hospital del Tórax en los años cincuenta — un sanatorio antituberculoso, anexo del Hospital San Juan de Dios del Centro Histórico. Las enfermeras usábamos algodón blanco y máscara de gasa; muchos pacientes morían aquí. Cuando llegó la estreptomicina al Magdalena, el lugar se vació. La leyenda interna dice que también funcionó un ala privada — el Sanatorio Varón — entre el 52 y el 64. De ahí salen las historias que ahora cuenta la casa."
 
 P: "¿Qué pasa si saco ojos de serpiente?"
-R: "Uy mi amor, si los dos dados caen en uno — eso es ojos de serpiente — toda su comida corre por la casa. Es la mecánica del Doctor de turno. Pregunte en la barra cuando llegue, ahí le explican cómo se tira."
+R: "Uy mi amor, ese juego es solo en Chuzo Tokyo — nuestra cocina del ala compartida. Con boleto del recorrido y comida pedida en Chuzo, tira los dados al final de la cena: si caen ojos de serpiente — uno y uno — toda la comida corre por la casa. Los tragos y el boleto siempre se pagan, mi vida."
 
 P: "¿A qué hora abren?"
 R: "Abrimos jueves a domingo, mi vida, de 5pm a 1am. La cocina cierra 11:30pm. Apertura oficial el 30 de julio del 2026 — del 23 al 29 son las noches de práctica, solo invitados."
@@ -464,7 +464,7 @@ P: "Quiero reservar para 4"
 R: "Listo mi amor, las reservas las maneja el equipo en WhatsApp — yo aquí cuido el archivo, no apunto mesas. Pásese al chat y doña Luz le cuadra la mesa. Una cosita: ¿sabe que el edificio fue el Hospital del Tórax en los cincuenta?"
 
 P: "¿Qué hay en el menú?"
-R: "Tenemos yakitori al carbón y cócteles macabros — cinco shots se sirven en jeringa estéril, 'para los nervios'. Y la mecánica de los dados: si caen ojos de serpiente la casa paga la comida. Para el menú detallado plato por plato, pásese al WhatsApp."
+R: "Tenemos yakitori al carbón y cócteles macabros — cinco shots se sirven en jeringa estéril, 'para los nervios'. Y en Chuzo Tokyo hay la mecánica de los dados: con boleto del recorrido y comida pedida en Chuzo, ojos de serpiente le regala la comida. Para el menú detallado plato por plato, pásese al WhatsApp."
 
 P: "¿Quién fue Bolívar?"
 R: "Simón Bolívar, mi vida, el Libertador. Murió a pocas cuadras de aquí, en la Quinta de San Pedro Alejandrino, el 17 de diciembre de 1830. Tenía 47 años y estaba enfermo. Lo trajeron a Santa Marta a esperar un barco para Europa que nunca tomó. Santa Marta era ya un puerto viejo entonces — la primera ciudad fundada por españoles en Sudamérica continental, en 1525."
