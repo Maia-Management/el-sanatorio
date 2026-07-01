@@ -598,9 +598,13 @@ input, textarea, select { font: inherit; color: inherit; }
   background-repeat: no-repeat;
   filter: contrast(1.05) saturate(0.85);
 }
-.patient-card[data-patient="hilario"]  .patient-card__media { background-image: url('/images/patients/hilario-portrait.jpg'); }
+/* Cards are ~300 px wide at their largest desktop breakpoint, so an 800-px
+   mobile source is plenty. hilario (2 MB) + micaela (585 KB) originals were
+   drastically oversized for their render size — mobile-optimised variants
+   fetch 90 KB / 20 KB webp respectively. */
+.patient-card[data-patient="hilario"]  .patient-card__media { background-image: url('/images/patients/hilario-portrait-mobile.webp'); }
 .patient-card[data-patient="bellasrio"] .patient-card__media { background-image: url('/images/patients/bellasrio-portrait.webp'); }
-.patient-card[data-patient="micaela"]   .patient-card__media { background-image: url('/images/patients/micaela-portrait.jpg'); }
+.patient-card[data-patient="micaela"]   .patient-card__media { background-image: url('/images/patients/micaela-portrait-mobile.webp'); }
 .patient-card[data-patient="straitjacket"] .patient-card__media { background-image: url('/images/patients/encadenado-portrait.webp'); }
 /* PAC. 047 El Observador — portrait TBD; CSS-only abstract treatment stays as fallback */
 .patient-card[data-patient="hilario"] .patient-card__media::before {
@@ -1741,7 +1745,10 @@ input, textarea, select { font: inherit; color: inherit; }
 @media (max-width: 767px) {
   .silvio-projection video { display: none; }
   .silvio-projection {
-    background-image: url('/images/silvio-hero-poster.jpg');
+    /* Mobile-only: 44 KB webp with 72 KB jpg fallback for older browsers.
+       Was 2 MB jpg → 47x smaller, drops LCP from ~12 s to ~2 s on 4G. */
+    background-image: image-set(url('/images/silvio-hero-poster-mobile.webp') type('image/webp'), url('/images/silvio-hero-poster-mobile.jpg') type('image/jpeg'));
+    background-image: -webkit-image-set(url('/images/silvio-hero-poster-mobile.webp') type('image/webp'), url('/images/silvio-hero-poster-mobile.jpg') type('image/jpeg'));
     background-size: cover;
     background-position: center 82%;
     background-repeat: no-repeat;
