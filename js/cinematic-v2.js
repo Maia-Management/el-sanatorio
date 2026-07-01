@@ -265,10 +265,14 @@
     //   Dropping Howler entirely for a single ambient track. Plain
     //   <audio> element + .play() inside the click handler is the simplest
     //   reliable autoplay-policy-compliant pattern.
+    // preload='none' — the 353 KB MP3 was being fetched on every page load
+    // and dragging LCP by ~1.5 s on mobile. Now it only fetches on user
+    // gesture (first click of the sound toggle), which is the correct
+    // behaviour for opt-in ambient audio anyway.
     const audio = new Audio('/audio/ambient-asilo.mp3');
     audio.loop = true;
     audio.volume = 0.35;
-    audio.preload = 'auto';
+    audio.preload = 'none';
     audio.addEventListener('error', () => {
       console.warn('[ambient] audio load failed', audio.error && audio.error.code, audio.error && audio.error.message);
     });
